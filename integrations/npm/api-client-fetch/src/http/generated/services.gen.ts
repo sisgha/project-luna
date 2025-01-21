@@ -3587,15 +3587,15 @@ export class DiariosPreferenciaAgrupamentoService {
   /**
    * Sem descrição.
    * @param data The data for the request.
-   * @param data.filterDiarioId
    * @param data.page Página de consulta.
    * @param data.limit Limite da quantidade de resultados por página.
    * @param data.search Busca textual.
    * @param data.sortBy Ordenação.
+   * @param data.filterDiarioId
    * @returns DiarioPreferenciaAgrupamentoListResultView Resultados da busca de DiarioPreferenciaAgrupamentos.
    * @throws ApiError
    */
-  public diarioPreferenciaAgrupamentoList(data: DiarioPreferenciaAgrupamentoListData): CancelablePromise<DiarioPreferenciaAgrupamentoListResponse> {
+  public diarioPreferenciaAgrupamentoList(data: DiarioPreferenciaAgrupamentoListData = {}): CancelablePromise<DiarioPreferenciaAgrupamentoListResponse> {
     return this.httpRequest.request({
       method: "GET",
       url: "/diarios-preferencia-agrupamento",
@@ -3604,7 +3604,7 @@ export class DiariosPreferenciaAgrupamentoService {
         limit: data.limit,
         search: data.search,
         sortBy: data.sortBy,
-        filter_diario_id: data.filterDiarioId,
+        "filter.diario.id": data.filterDiarioId,
       },
       errors: {
         403: "O solicitante não tem permissão para executar esta ação.",
@@ -3706,15 +3706,15 @@ export class TurmasDisponibilidadesService {
   /**
    * Sem descrição.
    * @param data The data for the request.
-   * @param data.filterTurmaId
    * @param data.page Página de consulta.
    * @param data.limit Limite da quantidade de resultados por página.
    * @param data.search Busca textual.
    * @param data.sortBy Ordenação.
+   * @param data.filterTurmaId
    * @returns TurmaDisponibilidadeListResultView Resultados da busca a TurmaDisponibilidades.
    * @throws ApiError
    */
-  public turmaDisponibilidadeList(data: TurmaDisponibilidadeListData): CancelablePromise<TurmaDisponibilidadeListResponse> {
+  public turmaDisponibilidadeList(data: TurmaDisponibilidadeListData = {}): CancelablePromise<TurmaDisponibilidadeListResponse> {
     return this.httpRequest.request({
       method: "GET",
       url: "/turmas-disponibilidades",
@@ -3723,7 +3723,7 @@ export class TurmasDisponibilidadesService {
         limit: data.limit,
         search: data.search,
         sortBy: data.sortBy,
-        filter_turma_id: data.filterTurmaId,
+        "filter.turma.id": data.filterTurmaId,
       },
       errors: {
         403: "O solicitante não tem permissão para executar esta ação.",
@@ -3825,15 +3825,15 @@ export class ProfessoresDisponibilidadesService {
   /**
    * Sem descrição.
    * @param data The data for the request.
-   * @param data.filterProfessorId
    * @param data.page Página de consulta.
    * @param data.limit Limite da quantidade de resultados por página.
    * @param data.search Busca textual.
    * @param data.sortBy Ordenação.
+   * @param data.filterProfessorId
    * @returns ProfessorDisponibilidadeListResultView Resultados da busca a ProfessorDisponibilidades.
    * @throws ApiError
    */
-  public professorDisponibilidadeList(data: ProfessorDisponibilidadeListData): CancelablePromise<ProfessorDisponibilidadeListResponse> {
+  public professorDisponibilidadeList(data: ProfessorDisponibilidadeListData = {}): CancelablePromise<ProfessorDisponibilidadeListResponse> {
     return this.httpRequest.request({
       method: "GET",
       url: "/professores-disponibilidades",
@@ -3842,7 +3842,7 @@ export class ProfessoresDisponibilidadesService {
         limit: data.limit,
         search: data.search,
         sortBy: data.sortBy,
-        filter_professor_id: data.filterProfessorId,
+        "filter.professor.id": data.filterProfessorId,
       },
       errors: {
         403: "O solicitante não tem permissão para executar esta ação.",
