@@ -19,7 +19,7 @@ jobs:
       name: docs-npm-client-fetch
 
     concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}-build
+      group: cd-${{ github.ref }}-build
       cancel-in-progress: false
 
     steps:
