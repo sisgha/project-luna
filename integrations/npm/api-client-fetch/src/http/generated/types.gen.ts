@@ -4562,7 +4562,7 @@ export type DisponibilidadeDeleteOneByIdData = {
 export type DisponibilidadeDeleteOneByIdResponse = boolean;
 
 export type DiarioPreferenciaAgrupamentoListData = {
-  filterDiarioId: Array<string>;
+  filterDiarioId?: Array<string>;
   /**
    * Limite da quantidade de resultados por página.
    */
@@ -4624,7 +4624,7 @@ export type DiarioPreferenciaAgrupamentoDeleteOneByIdData = {
 export type DiarioPreferenciaAgrupamentoDeleteOneByIdResponse = boolean;
 
 export type TurmaDisponibilidadeListData = {
-  filterTurmaId: Array<string>;
+  filterTurmaId?: Array<string>;
   /**
    * Limite da quantidade de resultados por página.
    */
@@ -4686,7 +4686,7 @@ export type TurmaDisponibilidadeDeleteOneByIdData = {
 export type TurmaDisponibilidadeDeleteOneByIdResponse = boolean;
 
 export type ProfessorDisponibilidadeListData = {
-  filterProfessorId: Array<string>;
+  filterProfessorId?: Array<string>;
   /**
    * Limite da quantidade de resultados por página.
    */

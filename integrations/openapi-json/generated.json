@@ -8536,8 +8536,8 @@
             }
           },
           {
-            "name": "filter_diario_id",
-            "required": true,
+            "name": "filter.diario.id",
+            "required": false,
             "in": "query",
             "kind": "schema",
             "schema": {
@@ -8837,8 +8837,8 @@
             }
           },
           {
-            "name": "filter_turma_id",
-            "required": true,
+            "name": "filter.turma.id",
+            "required": false,
             "in": "query",
             "kind": "schema",
             "schema": {
@@ -9138,8 +9138,8 @@
             }
           },
           {
-            "name": "filter_professor_id",
-            "required": true,
+            "name": "filter.professor.id",
+            "required": false,
             "in": "query",
             "kind": "schema",
             "schema": {
