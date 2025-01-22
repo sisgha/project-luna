@@ -11,6 +11,27 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
+  test:
+    name: "test"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: determine infisical env-slug
+        id: infisical-env-slug
+        env:
+          SLUG_DEV: d
+          SLUG_PROD: p
+        run: |
+          if [[ $GITHUB_REF_NAME == 'production' ]]; then
+            echo "env-slug=${SLUG_DEV}" >> "$GITHUB_ENV"
+          else
+            echo "env-slug=${SLUG_PROD}" >> "$GITHUB_ENV"
+          fi
+
+      - run: echo $ENV_SLUG
+        env:
+          ENV_SLUG: ${{ steps.infisical-env-slug.outputs.env-slug }}
+
   cd_build_push:
     name: "Build and Push"
     runs-on: ubuntu-latest
