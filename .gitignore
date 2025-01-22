@@ -1,6 +1,8 @@
 volumes
 .pnpm-store
 
+output
+
 # compiled output
 dist
 node_modules

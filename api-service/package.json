@@ -4,8 +4,8 @@
   "private": true,
   "files": ["**/*"],
   "scripts": {
-    "build": "nx build",
-    "generate:openapi": "nx generate:openapi",
+    "build": "nest build",
+    "generate:openapi": "node --experimental-require-module dist/scripts/codegen-openapi-json",
     "check:static": "tsc --noEmit",
     "start": "nest start -e 'node --experimental-require-module --trace-warnings'",
     "start:dev": "GIT_COMMIT_HASH=local nest start --watch -e 'node --experimental-require-module --trace-warnings'",
@@ -73,7 +73,7 @@
     "valibot": "1.0.0-beta.12"
   },
   "devDependencies": {
-    "@nestjs/cli": "^11.0.1",
+    "@nestjs/cli": "^11.0.2",
     "@nestjs/schematics": "^11.0.0",
     "@nestjs/testing": "^11.0.3",
     "@swc/cli": "0.6.0",
