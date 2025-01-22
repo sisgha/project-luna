@@ -11,27 +11,6 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
-  test:
-    name: "test"
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: determine infisical env-slug
-        id: infisical-env-slug
-        env:
-          SLUG_DEV: d
-          SLUG_PROD: p
-        run: |
-          if [[ $GITHUB_REF_NAME == 'production' ]]; then
-            echo "env-slug=${SLUG_DEV}" >> "$GITHUB_ENV"
-          else
-            echo "env-slug=${SLUG_PROD}" >> "$GITHUB_ENV"
-          fi
-
-      - run: echo $ENV_SLUG
-        env:
-          ENV_SLUG: ${{ steps.infisical-env-slug.outputs.env-slug }}
-
   cd_build_push:
     name: "Build and Push"
     runs-on: ubuntu-latest
@@ -48,9 +27,9 @@ jobs:
           SLUG_PROD: ${{ secrets.INFISICAL_ENV_SLUG_PROD }}
         run: |
           if [[ $GITHUB_REF_NAME == 'production' ]]; then
-            echo "env-slug=${SLUG_DEV}" >> "$GITHUB_ENV"
+            echo "INFISICAL_ENV_SLUG=${SLUG_PROD}" >> "$GITHUB_ENV"
           else
-            echo "env-slug=${SLUG_PROD}" >> "$GITHUB_ENV"
+            echo "INFISICAL_ENV_SLUG=${SLUG_DEV}" >> "$GITHUB_ENV"
           fi
 
       - uses: Infisical/secrets-action@v1.0.7
@@ -60,7 +39,7 @@ jobs:
           client-secret: ${{ secrets.INFISICAL_MACHINE_IDENTITY_CLIENT_SECRET }}
           project-slug: ${{ secrets.INFISICAL_API_PROJECT_SLUG }}
           secret-path: ${{ secrets.INFISICAL_SECRET_PATH_API_BUILD_PUSH }}
-          env-slug: ${{ steps.infisical-env-slug.outputs.env-slug }}
+          env-slug: ${{ env.INFISICAL_ENV_SLUG }}
 
       - uses: ladesa-ro/esteira-ci-cd/actions/prepare-images-builder@main
         with:
@@ -101,9 +80,9 @@ jobs:
           SLUG_PROD: ${{ secrets.INFISICAL_ENV_SLUG_PROD }}
         run: |
           if [[ $GITHUB_REF_NAME == 'production' ]]; then
-            echo "env-slug=${SLUG_DEV}" >> "$GITHUB_ENV"
+            echo "INFISICAL_ENV_SLUG=${SLUG_PROD}" >> "$GITHUB_ENV"
           else
-            echo "env-slug=${SLUG_PROD}" >> "$GITHUB_ENV"
+            echo "INFISICAL_ENV_SLUG=${SLUG_DEV}" >> "$GITHUB_ENV"
           fi
 
       - uses: Infisical/secrets-action@v1.0.7
@@ -113,7 +92,7 @@ jobs:
           client-secret: ${{ secrets.INFISICAL_MACHINE_IDENTITY_CLIENT_SECRET }}
           project-slug: ${{ secrets.INFISICAL_API_PROJECT_SLUG }}
 
-          env-slug: ${{ steps.infisical-env-slug.outputs.env-slug }}
+          env-slug: ${{ env.INFISICAL_ENV_SLUG }}
           secret-path: ${{ secrets.INFISICAL_SECRET_PATH_API_DEPLOY }}
 
       - uses: ladesa-ro/esteira-ci-cd/actions/deploy-k8s-stakater-application@main
