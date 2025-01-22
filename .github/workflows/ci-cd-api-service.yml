@@ -133,7 +133,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: generated-openapi-json
-          path: integrations/openapi-json/generated.json
+          path: integrations/openapi-json
 
       - name: Display structure of downloaded files
         run: |
