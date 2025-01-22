@@ -38,7 +38,7 @@ jobs:
 
           project-slug: ${{ secrets.INFISICAL_API_PROJECT_SLUG }}
           secret-path: ${{ secrets.INFISICAL_SECRET_API_PATH_BUILD_PUSH }}
-          env-slug: ${{ steps.infisical-env-slug.outputs.env-slug }}
+          env-slug: dev
 
       - uses: ladesa-ro/esteira-ci-cd/actions/prepare-images-builder@main
         with:
