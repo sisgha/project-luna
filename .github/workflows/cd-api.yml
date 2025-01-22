@@ -22,23 +22,24 @@ jobs:
     steps:
       - name: determine infisical env-slug
         id: infisical-env-slug
+        env:
+          SLUG_DEV: ${{ secrets.INFISICAL_ENV_SLUG_DEV }}
+          SLUG_PROD: ${{ secrets.INFISICAL_ENV_SLUG_PROD }}
         run: |
           if [[ $GITHUB_REF_NAME == 'production' ]]; then
-            echo "env-slug=${{ secrets.INFISICAL_ENV_SLUG_PROD }}" >> "$GITHUB_ENV"
+            echo "env-slug=${SLUG_DEV}" >> "$GITHUB_ENV"
           else
-            echo "env-slug=${{ secrets.INFISICAL_ENV_SLUG_DEV }}" >> "$GITHUB_ENV"
+            echo "env-slug=${SLUG_PROD}" >> "$GITHUB_ENV"
           fi
 
       - uses: Infisical/secrets-action@v1.0.7
         with:
           domain: ${{ secrets.INFISICAL_DOMAIN }}
-
           client-id: ${{ secrets.INFISICAL_MACHINE_IDENTITY_CLIENT_ID }}
           client-secret: ${{ secrets.INFISICAL_MACHINE_IDENTITY_CLIENT_SECRET }}
-
           project-slug: ${{ secrets.INFISICAL_API_PROJECT_SLUG }}
-          secret-path: ${{ secrets.INFISICAL_SECRET_API_PATH_BUILD_PUSH }}
-          env-slug: dev
+          secret-path: ${{ secrets.INFISICAL_SECRET_PATH_API_BUILD_PUSH }}
+          env-slug: ${{ steps.infisical-env-slug.outputs.env-slug }}
 
       - uses: ladesa-ro/esteira-ci-cd/actions/prepare-images-builder@main
         with:
@@ -62,7 +63,6 @@ jobs:
           push-image-registry-url: ${{ env.REGISTRY_URL }}
 
   cd_deploy:
-    if: 1 == 2
     name: Deploy to Cluster @ladesa-ro/api.service
 
     runs-on: deploy
@@ -70,10 +70,30 @@ jobs:
 
     environment:
       name: ${{ github.ref_name == 'development' && 'development' || 'production' }}
-      url: ${{ env.DEPLOY_URL }}
+      url: ${{ vars.DEPLOY_URL }}
 
     steps:
-      - uses: actions/checkout@v4
+      - name: determine infisical env-slug
+        id: infisical-env-slug
+        env:
+          SLUG_DEV: ${{ secrets.INFISICAL_ENV_SLUG_DEV }}
+          SLUG_PROD: ${{ secrets.INFISICAL_ENV_SLUG_PROD }}
+        run: |
+          if [[ $GITHUB_REF_NAME == 'production' ]]; then
+            echo "env-slug=${SLUG_DEV}" >> "$GITHUB_ENV"
+          else
+            echo "env-slug=${SLUG_PROD}" >> "$GITHUB_ENV"
+          fi
+
+      - uses: Infisical/secrets-action@v1.0.7
+        with:
+          domain: ${{ secrets.INFISICAL_DOMAIN }}
+          client-id: ${{ secrets.INFISICAL_MACHINE_IDENTITY_CLIENT_ID }}
+          client-secret: ${{ secrets.INFISICAL_MACHINE_IDENTITY_CLIENT_SECRET }}
+          project-slug: ${{ secrets.INFISICAL_API_PROJECT_SLUG }}
+
+          env-slug: ${{ steps.infisical-env-slug.outputs.env-slug }}
+          secret-path: ${{ secrets.INFISICAL_SECRET_PATH_API_DEPLOY }}
 
       - uses: ladesa-ro/esteira-ci-cd/actions/deploy-k8s-stakater-application@main
         with:
@@ -81,4 +101,4 @@ jobs:
           deployment: ${{ env.K8S_DEPLOYMENT }}
           namespace: ${{ env.K8S_NAMESPACE }}
           helm-release-name: ${{ env.K8S_DEPLOYMENT }}
-          helm-release-extra-options: "--values=./api-service/examples/k8s/helm/values.common.yml"
+          helm-release-extra-options: ${{ env.DEPLOY_HELM_EXTRA_OPTIONS }}
