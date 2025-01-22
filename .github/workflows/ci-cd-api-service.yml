@@ -146,6 +146,12 @@ jobs:
             echo "no_changes=false" >> $GITHUB_ENV
           fi
 
+      - name: Set up Git
+        if: env.no_changes == 'false'
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
       - name: Commit and push
         if: env.no_changes == 'false'
         run: |
