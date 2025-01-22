@@ -11,7 +11,18 @@ async function setupApp() {
   const app = await NestFactory.create(AppModule);
 
   //
+
   const configService = app.get(AppConfigService);
+
+  //
+
+  app.use(
+    helmet({
+      crossOriginResourcePolicy: false,
+    }),
+  );
+  app.enableCors();
+
   //
 
   const prefix = configService.getRuntimePrefix();
@@ -19,10 +30,6 @@ async function setupApp() {
   if (prefix) {
     app.setGlobalPrefix(prefix, { exclude: ["health"] });
   }
-
-  //
-
-  app.use(helmet());
 
   //
 
@@ -34,8 +41,6 @@ async function setupApp() {
   //
   SwaggerModule.setup(`${prefix ?? ""}doc-api`, app, document);
   //
-
-  app.enableCors();
 
   return app;
 }
