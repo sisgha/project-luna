@@ -127,13 +127,18 @@ jobs:
       pull-requests: write
 
     steps:
+      - uses: actions/checkout@v4
+
       - name: Download a single artifact
         uses: actions/download-artifact@v4
         with:
           name: generated-openapi-json
+          path: integrations/openapi-json/generated.json
 
       - name: Display structure of downloaded files
-        run: ls -R
+        run: |
+          ls -R integrations/openapi-json
+          git status
 
       - name: pull-request-action
         uses: vsoch/pull-request-action@1.1.1
