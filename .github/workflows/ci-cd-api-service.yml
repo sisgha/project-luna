@@ -140,9 +140,22 @@ jobs:
           ls -R integrations/openapi-json
           git status
 
+      - name: Commit and push
+        continue-on-error: true
+        run: |
+          git branch -D automated-ci/codegen-openapi;
+          git checkout -b automated-ci/codegen-openapi;
+
+          git add integrations/openapi-json/generated.json;
+          git commit -m "chore(integrations/openapi-json): update generated.json";
+
+          git push -f automated-ci/codegen-openapi;
+
       - name: pull-request-action
         uses: vsoch/pull-request-action@1.1.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH_PREFIX: "ci/codegen-openapi"
+          PULL_REQUEST_UPDATE: true
+          PULL_REQUEST_FROM_BRANCH: "automated-ci/codegen-openapi"
           PULL_REQUEST_BRANCH: "development"
+          PULL_REQUEST_TITLE: "chore(integrations/openapi-json): update generated.json"
