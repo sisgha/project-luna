@@ -129,33 +129,43 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Download a single artifact
+      - name: "Download artifacts: Generated OpenAPI JSON artifact"
         uses: actions/download-artifact@v4
         with:
           name: generated-openapi-json
-          path: integrations/openapi-json
+          path: /tmp/artifacts/generated-openapi-json
 
-      - name: Display structure of downloaded files
+      - name: Move Generated OpenAPI JSON artifact into integrations/openapi-json/generated.json
+        run: mv /tmp/artifacts/generated-openapi-json/generated.json ./integrations/openapi-json/generated.json
+
+      - name: Check if has changes
         run: |
-          ls -R integrations/openapi-json
-          git status
+          if git diff --quiet HEAD -- integrations/openapi-json/generated.json; then
+            echo "no_changes=true" >> $GITHUB_ENV
+          else
+            echo "no_changes=false" >> $GITHUB_ENV
+          fi
 
       - name: Commit and push
-        continue-on-error: true
+        if: env.no_changes == 'false'
         run: |
-          git branch -D automated-ci/codegen-openapi;
-          git checkout -b automated-ci/codegen-openapi;
+          GENERATED_OPENAPI_JSON_FILE=integrations/openapi-json/generated.json
 
-          git add integrations/openapi-json/generated.json;
-          git commit -m "chore(integrations/openapi-json): update generated.json";
+          git add ${GENERATED_OPENAPI_JSON_FILE};
+          git commit -m "chore(integrations/openapi-json): automated update";
 
-          git push -f automated-ci/codegen-openapi;
+          if git show-ref --verify --quiet refs/heads/automated-ci/codegen-openapi-json; then
+            git branch -D automated-ci/codegen-openapi-json
+          fi
+
+          git checkout -b automated-ci/codegen-openapi-json
+          git push origin automated-ci/codegen-openapi-json --force
 
       - name: pull-request-action
         uses: vsoch/pull-request-action@1.1.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PULL_REQUEST_UPDATE: true
-          PULL_REQUEST_FROM_BRANCH: "automated-ci/codegen-openapi"
+          PULL_REQUEST_FROM_BRANCH: "automated-ci/codegen-openapi-json"
           PULL_REQUEST_BRANCH: "development"
           PULL_REQUEST_TITLE: "chore(integrations/openapi-json): update generated.json"
