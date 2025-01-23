@@ -127,8 +127,19 @@ jobs:
       pull-requests: write
       contents: write
 
+    env:
+      PR_TARGET_BRANCH: development
+      BRANCH_GENERATED: automated-ci/codegen-openapi-json
+      GENERATED_FILE_IN_REPOSITORY: integrations/openapi-json/generated.json
+      GENERATED_COMMIT_MESSAGE: "chore(integrations/openapi-json): automated update"
+
     steps:
       - uses: actions/checkout@v4
+
+      - name: Install dependencies
+        uses: ./.github/actions/prepare/install
+        with:
+          install-node: "true"
 
       - name: "Download artifacts: Generated OpenAPI JSON artifact"
         uses: actions/download-artifact@v4
@@ -136,43 +147,81 @@ jobs:
           name: generated-openapi-json
           path: /tmp/artifacts/generated-openapi-json
 
-      - name: Move Generated OpenAPI JSON artifact into integrations/openapi-json/generated.json
-        run: mv /tmp/artifacts/generated-openapi-json/generated.json ./integrations/openapi-json/generated.json
+      - name: Move Generated OpenAPI JSON artifact into ${{ env.GENERATED_FILE_IN_REPOSITORY }}
+        run: mv /tmp/artifacts/generated-openapi-json/generated.json ./${GENERATED_FILE_IN_REPOSITORY}
+
+      - name: Format generated JSON
+        run: pnpm run format:fix ./${GENERATED_FILE_IN_REPOSITORY}
 
       - name: Check if has changes
         run: |
-          if git diff --quiet HEAD -- integrations/openapi-json/generated.json; then
-            echo "no_changes=true" >> $GITHUB_ENV
+          if git diff --quiet HEAD -- ${GENERATED_FILE_IN_REPOSITORY}; then
+            echo "has_changes=true" >> $GITHUB_ENV
           else
-            echo "no_changes=false" >> $GITHUB_ENV
+            echo "has_changes=false" >> $GITHUB_ENV
           fi
 
       - name: Set up Git
-        if: env.no_changes == 'false'
+        if: env.has_changes == 'true'
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
       - name: Commit and push
-        if: env.no_changes == 'false'
+        if: env.has_changes == 'true'
         run: |
-          GENERATED_OPENAPI_JSON_FILE=integrations/openapi-json/generated.json
+          git add ${GENERATED_FILE_IN_REPOSITORY};
+          git commit -m "${GENERATED_COMMIT_MESSAGE}";
 
-          git add ${GENERATED_OPENAPI_JSON_FILE};
-          git commit -m "chore(integrations/openapi-json): automated update";
-
-          if git show-ref --verify --quiet refs/heads/automated-ci/codegen-openapi-json; then
-            git branch -D automated-ci/codegen-openapi-json
+          if git show-ref --verify --quiet refs/heads/${BRANCH_GENERATED}; then
+            git branch -D ${BRANCH_GENERATED}
           fi
 
-          git checkout -b automated-ci/codegen-openapi-json
-          git push origin automated-ci/codegen-openapi-json --force
+          git checkout -b ${BRANCH_GENERATED}
+          git push origin ${BRANCH_GENERATED} --force
 
-      - name: pull-request-action
-        uses: vsoch/pull-request-action@1.1.1
+      - name: Create or update pull request
+        if: env.has_changes == 'true'
+        run: |
+          # source: https://github.com/cli/cli/discussions/5792#discussioncomment-10410197
+          PR_URL="$(gh pr list -B "${PR_TARGET_BRANCH}" -H "${BRANCH_GENERATED}" --state open --json url --jq .[].url)"
+
+          NOW=$(date +'%Y-%m-%dT%H:%M:%S')
+
+          PR_TITLE="${GENERATED_COMMIT_MESSAGE}"
+          PR_BODY="**Job**: ${{ github.job }}.\n**Run number**: ${{ github.run_number }}.\nUpdated at: ${NOW}."
+          PR_BODY_FILE="/tmp/pr-body.txt"
+
+          echo -e "${PR_BODY}" > ${PR_BODY_FILE}
+
+          if [[ -n "${PR_URL}" ]]; then
+              echo "PR already exists -> ${PR_URL}"
+              gh pr edit \
+                "${PR_URL}" \
+                --title "${PR_TITLE}" \
+                --body-file "${PR_BODY_FILE}" \
+              ;
+          else
+            gh pr create \
+              -B "${{ env.target-branch }}" \
+              -H "${{ env.generated-branch }}" \
+              --title "${PR_TITLE}" \
+              --body-file "${PR_BODY_FILE}" \
+            ;
+          fi
+
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PULL_REQUEST_UPDATE: true
-          PULL_REQUEST_FROM_BRANCH: "automated-ci/codegen-openapi-json"
-          PULL_REQUEST_BRANCH: "development"
-          PULL_REQUEST_TITLE: "chore(integrations/openapi-json): update generated.json"
+
+      - name: Delete branch and pull request if has no changes
+        if: env.has_changes == 'false'
+        run: |
+          # source: https://github.com/cli/cli/discussions/5792#discussioncomment-10410197
+          PR_URL="$(gh pr list -B "${PR_TARGET_BRANCH}" -H "${BRANCH_GENERATED}" --state open --json url --jq .[].url)"
+
+          if [[ -n "${PR_URL}" ]]; then
+            gh pr close "${PR_URL}" -d;
+          fi
+
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
