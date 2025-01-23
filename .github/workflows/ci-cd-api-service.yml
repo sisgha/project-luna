@@ -159,10 +159,10 @@ jobs:
 
       - name: Check if has changes
         run: |
-          if git status --porcelain | grep -q -E "^?? integrations/openapi-json/generated.json|^ M integrations/openapi-json/generated.json"; then
-            echo "has_changes=true"
+          if git status --porcelain | grep -q -E "^\?\? ${GENERATED_FILE_IN_REPOSITORY}|^ M ${GENERATED_FILE_IN_REPOSITORY}"; then
+            echo "has_changes=true" >> $GITHUB_ENV
           else
-            echo "has_changes=false"
+            echo "has_changes=false" >> $GITHUB_ENV
           fi
 
       - name: Set up Git
