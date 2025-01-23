@@ -4,7 +4,7 @@
   "private": true,
   "files": ["**/*"],
   "scripts": {
-    "build:nest": "nest build",
+    "build:nest": "nx build",
     "build:openapi-json": "OUT_FILE=./dist/generated.json pnpm run generate:openapi",
     "build": "pnpm run build:nest && pnpm run build:openapi-json",
     "generate:openapi": "node --experimental-require-module dist/scripts/codegen-openapi-json",

@@ -1,0 +1,30 @@
+{
+  "tags": ["integrations", "integrations:npm"],
+  "root": "integrations/npm/api-client-fetch",
+  "namedInputs": {
+    "default": ["{projectRoot}/src/**/*", "{projectRoot}/{package.json,openapi-ts.config.mjs,tsconfig.json}"]
+  },
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "inputs": ["default"],
+      "options": {
+        "cwd": "{projectRoot}",
+        "command": "tsc -p tsconfig.json"
+      },
+      "outputs": ["{projectRoot}/dist/**/*"],
+      "dependsOn": ["generate"]
+    },
+    "generate:client": {
+      "cache": true,
+      "executor": "nx:run-commands",
+      "inputs": ["{workspaceRoot}/integrations/openapi-json/generated.json"],
+      "options": {
+        "cwd": "{projectRoot}",
+        "command": "pnpm run cleanup:generated && openapi-ts && pnpm run -w code-static:fix $(pwd)"
+      },
+      "outputs": ["{projectRoot}/src/http/generated/**/*"],
+      "dependsOn": ["@ladesa-ro/api.integrations.openapi-json:build"]
+    }
+  }
+}

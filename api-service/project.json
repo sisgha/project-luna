@@ -1,0 +1,30 @@
+{
+  "tags": ["services", "services:api"],
+  "root": "api-service",
+  "sourceRoot": "{projectRoot}/src",
+  "implicitDependencies": [],
+  "namedInputs": {
+    "default": ["{projectRoot}/**/*", "{projectRoot}/{package.json,tsconfig.json}"]
+  },
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "inputs": ["default"],
+      "options": {
+        "cwd": "{projectRoot}",
+        "command": "BUILD_TIME=${BUILD_TIME:-$(date -Ins)} nest build"
+      },
+      "outputs": ["{projectRoot}/dist"],
+      "dependsOn": []
+    },
+    "generate:openapi": {
+      "cache": false,
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "{projectRoot}",
+        "command": "node --experimental-require-module dist/scripts/codegen-openapi-json"
+      },
+      "dependsOn": ["build"]
+    }
+  }
+}

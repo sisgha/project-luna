@@ -9,46 +9,6 @@
     "build": "nx build",
     "serve": "nx serve"
   },
-  "nx": {
-    "tags": ["integrations", "integrations:npm"],
-    "root": "integrations/npm/api-client-fetch-docs",
-    "namedInputs": {
-      "default": ["{projectRoot}/.config/**/*"]
-    },
-    "targets": {
-      "serve": {
-        "cache": false,
-        "executor": "nx:run-commands",
-        "options": {
-          "cwd": "{projectRoot}",
-          "command": "serve dist"
-        },
-        "dependsOn": ["build"]
-      },
-      "build": {
-        "cache": false,
-        "executor": "nx:run-commands",
-        "inputs": [],
-        "options": {
-          "cwd": "{projectRoot}",
-          "command": "echo noop"
-        },
-        "outputs": [],
-        "dependsOn": ["generate"]
-      },
-      "generate": {
-        "cache": true,
-        "executor": "nx:run-commands",
-        "inputs": ["default", "^default"],
-        "options": {
-          "cwd": "{projectRoot}",
-          "command": "typedoc --options .config/typedoc.jsonc"
-        },
-        "outputs": [],
-        "dependsOn": ["@ladesa-ro/api-client-fetch:build"]
-      }
-    }
-  },
   "devDependencies": {
     "serve": "^14.2.4",
     "typedoc": "^0.27.6",
