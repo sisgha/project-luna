@@ -15,7 +15,7 @@ env:
   GENERATED_COMMIT_MESSAGE: "chore(integrations/openapi-json): automated update"
 
 jobs:
-  ci-generate-integratins:
+  ci-generate-integrations:
     runs-on: ubuntu-latest
 
     permissions:
