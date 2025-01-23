@@ -4,6 +4,10 @@ on:
   push:
     branches:
       - development
+    paths:
+      - .github/workflows/ci-generate-integrations.yml
+      - api-service/**/*
+      - pnpm-lock.yaml
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 

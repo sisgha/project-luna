@@ -24,7 +24,7 @@
         "command": "pnpm run cleanup:generated && openapi-ts && pnpm run -w code-static:fix $(pwd)"
       },
       "outputs": ["{projectRoot}/src/http/generated/**/*"],
-      "dependsOn": ["@ladesa-ro/api.integrations.openapi-json:build"]
+      "dependsOn": []
     }
   }
 }

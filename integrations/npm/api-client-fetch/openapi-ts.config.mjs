@@ -10,9 +10,11 @@ export default {
   client: "legacy/fetch",
 
   name: "LadesaApiClient",
+
   services: {
     asClass: true,
   },
+
   schemas: {
     name: (name) => `$${name}`,
   },

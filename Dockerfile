@@ -50,7 +50,7 @@ RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm deploy --prod --filter=@l
 # NPM / API-CLIENT-FETCH / DOCS -- BUILD
 # ========================================
 
-FROM build-api-service AS docs-npm-api-client-fetch-builder
+FROM build AS docs-npm-api-client-fetch-builder
 
 RUN pnpm run --filter "@ladesa-ro/api-client-fetch.docs" build
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm deploy --prod --filter=@ladesa-ro/api-client-fetch.docs "${PATH_BUILDER_OUTPUT}/npm-api-client-fetch.docs"
@@ -59,7 +59,7 @@ RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm deploy --prod --filter=@l
 # NPM / API-CLIENT-FETCH / DOCS -- RUNTIME
 # ========================================
 
-FROM nginx:alpine AS npm-api-client-fetch-docs
+FROM nginx:alpine AS docs-npm-api-client-fetch-runtime
 ARG PATH_BUILDER_OUTPUT
 ARG PATH_RUNTIME_OUTPUT
 
@@ -69,8 +69,6 @@ COPY \
 
 COPY --from=docs-npm-api-client-fetch-builder  "${PATH_BUILDER_OUTPUT}/npm-api-client-fetch.docs"  "${PATH_RUNTIME_OUTPUT}/npm-api-client-fetch-docs"
 EXPOSE 80
-
-
 
 # ========================================
 # API-SERVICE -- RUNTIME
