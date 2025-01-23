@@ -9,7 +9,9 @@ on:
       - api-service/**/*
       - pnpm-lock.yaml
 
-concurrency: ${{ github.workflow }}-${{ github.ref }}
+concurrency: 
+  cancel-in-progress: false
+  group: ${{ github.workflow }}-${{ github.ref }}
 
 env:
   PR_TARGET_BRANCH: development

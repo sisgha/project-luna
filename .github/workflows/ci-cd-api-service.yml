@@ -20,10 +20,6 @@ jobs:
     name: "Container Image - Build and Push"
     runs-on: ubuntu-latest
 
-    concurrency:
-      group: cd-${{ github.ref }}-build
-      cancel-in-progress: false
-
     steps:
       - name: determine infisical env-slug
         env:

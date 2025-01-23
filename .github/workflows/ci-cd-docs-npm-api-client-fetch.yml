@@ -13,8 +13,8 @@ on:
       - Dockerfile*
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: false
+  group: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
   ci-image:
@@ -23,10 +23,6 @@ jobs:
 
     environment:
       name: docs-npm-client-fetch
-
-    concurrency:
-      group: cd-${{ github.ref }}-build
-      cancel-in-progress: false
 
     steps:
       - name: determine infisical env-slug
