@@ -9,7 +9,7 @@ on:
       - api-service/**/*
       - pnpm-lock.yaml
 
-concurrency: 
+concurrency:
   cancel-in-progress: false
   group: ${{ github.workflow }}-${{ github.ref }}
 
@@ -64,18 +64,18 @@ jobs:
           git add ${INTEGRATIONS_PATH};
           git commit -m "${GENERATED_COMMIT_MESSAGE}";
 
-          if git show-ref --verify --quiet refs/heads/${BRANCH_GENERATED}; then
-            git branch -D ${BRANCH_GENERATED}
+          if git show-ref --verify --quiet refs/heads/${BRANCH_GENERATED_INTEGRATIONS}; then
+            git branch -D ${BRANCH_GENERATED_INTEGRATIONS}
           fi
 
-          git checkout -b ${BRANCH_GENERATED}
-          git push origin ${BRANCH_GENERATED} --force
+          git checkout -b ${BRANCH_GENERATED_INTEGRATIONS}
+          git push origin ${BRANCH_GENERATED_INTEGRATIONS} --force
 
       - name: Create or update pull request
         if: env.has_changes == 'true'
         run: |
           # source: https://github.com/cli/cli/discussions/5792#discussioncomment-10410197
-          PR_URL="$(gh pr list -B "${PR_TARGET_BRANCH}" -H "${BRANCH_GENERATED}" --state open --json url --jq .[].url)"
+          PR_URL="$(gh pr list -B "${PR_TARGET_BRANCH}" -H "${BRANCH_GENERATED_INTEGRATIONS}" --state open --json url --jq .[].url)"
 
           NOW=$(date +'%Y-%m-%dT%H:%M:%S')
 
@@ -108,7 +108,7 @@ jobs:
         if: env.has_changes == 'false'
         run: |
           # source: https://github.com/cli/cli/discussions/5792#discussioncomment-10410197
-          PR_URL="$(gh pr list -B "${PR_TARGET_BRANCH}" -H "${BRANCH_GENERATED}" --state open --json url --jq .[].url)"
+          PR_URL="$(gh pr list -B "${PR_TARGET_BRANCH}" -H "${BRANCH_GENERATED_INTEGRATIONS}" --state open --json url --jq .[].url)"
 
           if [[ -n "${PR_URL}" ]]; then
             gh pr close "${PR_URL}" -d;
