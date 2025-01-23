@@ -5,6 +5,11 @@ on:
   push:
     branches:
       - development
+    paths:
+      - integrations/npm/api-client-fetch/**/*
+      - integrations/npm/api-client-fetch-docs/**/*
+      - pnpm-lock.yaml
+      - Dockerfile*
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
