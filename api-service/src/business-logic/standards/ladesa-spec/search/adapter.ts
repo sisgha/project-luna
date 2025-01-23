@@ -1,4 +1,3 @@
-import { inspect } from "util";
 import * as LadesaTypings from "@ladesa-ro/especificacao";
 import { PaginateQuery } from "nestjs-paginate";
 import * as valibot from "valibot";
@@ -68,7 +67,7 @@ export class PaginateQueryAdapter {
 
     const parseResult = valibot.parse(paginateQueryValidation, inputQueries);
 
-    const parsedQueries = parseResult.output;
+    const parsedQueries = parseResult;
 
     const paginateQuery: PaginateQuery = {
       path,
