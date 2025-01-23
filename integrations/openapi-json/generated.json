@@ -15,12 +15,16 @@
                   "properties": {
                     "service": {
                       "type": "string",
-                      "enum": ["@ladesa-ro/api.service"],
+                      "enum": [
+                        "@ladesa-ro/api.service"
+                      ],
                       "description": "O nome desta aplicação."
                     },
                     "status": {
                       "type": "string",
-                      "enum": ["up"],
+                      "enum": [
+                        "up"
+                      ],
                       "description": "Status desta aplicação."
                     },
                     "prefix": {
@@ -63,13 +67,19 @@
                       ]
                     }
                   },
-                  "required": ["service", "status", "version"]
+                  "required": [
+                    "service",
+                    "status",
+                    "version"
+                  ]
                 }
               }
             }
           }
         },
-        "tags": ["base"]
+        "tags": [
+          "base"
+        ]
       }
     },
     "/arquivos/{id}": {
@@ -134,7 +144,9 @@
                   "description": "Binário do Arquivo.",
                   "type": "string",
                   "format": "binary",
-                  "mimeTypes": ["application/octet-stream"]
+                  "mimeTypes": [
+                    "application/octet-stream"
+                  ]
                 }
               }
             }
@@ -152,7 +164,9 @@
           }
         ],
         "summary": "",
-        "tags": ["arquivos"]
+        "tags": [
+          "arquivos"
+        ]
       }
     },
     "/base/estados": {
@@ -237,7 +251,9 @@
           }
         ],
         "summary": "",
-        "tags": ["estados"]
+        "tags": [
+          "estados"
+        ]
       }
     },
     "/base/estados/{id}": {
@@ -286,7 +302,9 @@
           }
         ],
         "summary": "",
-        "tags": ["estados"]
+        "tags": [
+          "estados"
+        ]
       }
     },
     "/base/cidades": {
@@ -385,7 +403,9 @@
           }
         ],
         "summary": "",
-        "tags": ["cidades"]
+        "tags": [
+          "cidades"
+        ]
       }
     },
     "/base/cidades/{id}": {
@@ -434,7 +454,9 @@
           }
         ],
         "summary": "",
-        "tags": ["cidades"]
+        "tags": [
+          "cidades"
+        ]
       }
     },
     "/autenticacao/quem-sou-eu": {
@@ -468,7 +490,9 @@
           }
         ],
         "summary": "",
-        "tags": ["autenticacao"]
+        "tags": [
+          "autenticacao"
+        ]
       }
     },
     "/autenticacao/login": {
@@ -514,7 +538,9 @@
           }
         ],
         "summary": "",
-        "tags": ["autenticacao"]
+        "tags": [
+          "autenticacao"
+        ]
       }
     },
     "/autenticacao/login/refresh": {
@@ -560,7 +586,9 @@
           }
         ],
         "summary": "",
-        "tags": ["autenticacao"]
+        "tags": [
+          "autenticacao"
+        ]
       }
     },
     "/autenticacao/definir-senha": {
@@ -606,7 +634,9 @@
           }
         ],
         "summary": "",
-        "tags": ["autenticacao"]
+        "tags": [
+          "autenticacao"
+        ]
       }
     },
     "/usuarios": {
@@ -691,7 +721,9 @@
           }
         ],
         "summary": "",
-        "tags": ["usuarios"]
+        "tags": [
+          "usuarios"
+        ]
       },
       "post": {
         "description": "Sem descrição.",
@@ -735,7 +767,9 @@
           }
         ],
         "summary": "",
-        "tags": ["usuarios"]
+        "tags": [
+          "usuarios"
+        ]
       }
     },
     "/usuarios/{id}": {
@@ -785,7 +819,9 @@
           }
         ],
         "summary": "",
-        "tags": ["usuarios"]
+        "tags": [
+          "usuarios"
+        ]
       },
       "patch": {
         "description": "Sem descrição.",
@@ -845,7 +881,9 @@
           }
         ],
         "summary": "",
-        "tags": ["usuarios"]
+        "tags": [
+          "usuarios"
+        ]
       },
       "delete": {
         "description": "Sem descrição.",
@@ -893,7 +931,9 @@
           }
         ],
         "summary": "",
-        "tags": ["usuarios"]
+        "tags": [
+          "usuarios"
+        ]
       }
     },
     "/usuarios/{id}/imagem/capa": {
@@ -927,7 +967,9 @@
                   "description": "Binário.",
                   "type": "string",
                   "format": "binary",
-                  "mimeTypes": ["image/jpeg"]
+                  "mimeTypes": [
+                    "image/jpeg"
+                  ]
                 }
               }
             }
@@ -945,7 +987,9 @@
           }
         ],
         "summary": "",
-        "tags": ["usuarios"]
+        "tags": [
+          "usuarios"
+        ]
       },
       "put": {
         "description": "Sem descrição.",
@@ -973,7 +1017,9 @@
             "multipart/form-data": {
               "schema": {
                 "type": "object",
-                "required": ["file"],
+                "required": [
+                  "file"
+                ],
                 "properties": {
                   "file": {
                     "format": "binary",
@@ -986,7 +1032,13 @@
                       "schema": {
                         "type": "string",
                         "description": "Binário da imagem.",
-                        "mimeTypes": ["image/jpeg", "image/png", "image/jpeg", "image/webp", "binary/octet-stream"],
+                        "mimeTypes": [
+                          "image/jpeg",
+                          "image/png",
+                          "image/jpeg",
+                          "image/webp",
+                          "binary/octet-stream"
+                        ],
                         "format": "binary"
                       }
                     }
@@ -1023,7 +1075,9 @@
           }
         ],
         "summary": "",
-        "tags": ["usuarios"]
+        "tags": [
+          "usuarios"
+        ]
       }
     },
     "/usuarios/{id}/imagem/perfil": {
@@ -1057,7 +1111,9 @@
                   "description": "Binário.",
                   "type": "string",
                   "format": "binary",
-                  "mimeTypes": ["image/jpeg"]
+                  "mimeTypes": [
+                    "image/jpeg"
+                  ]
                 }
               }
             }
@@ -1075,7 +1131,9 @@
           }
         ],
         "summary": "",
-        "tags": ["usuarios"]
+        "tags": [
+          "usuarios"
+        ]
       },
       "put": {
         "description": "Define a imagem de perfil.",
@@ -1103,7 +1161,9 @@
             "multipart/form-data": {
               "schema": {
                 "type": "object",
-                "required": ["file"],
+                "required": [
+                  "file"
+                ],
                 "properties": {
                   "file": {
                     "format": "binary",
@@ -1116,7 +1176,13 @@
                       "schema": {
                         "type": "string",
                         "description": "Binário da imagem.",
-                        "mimeTypes": ["image/jpeg", "image/png", "image/jpeg", "image/webp", "binary/octet-stream"],
+                        "mimeTypes": [
+                          "image/jpeg",
+                          "image/png",
+                          "image/jpeg",
+                          "image/webp",
+                          "binary/octet-stream"
+                        ],
                         "format": "binary"
                       }
                     }
@@ -1153,7 +1219,9 @@
           }
         ],
         "summary": "",
-        "tags": ["usuarios"]
+        "tags": [
+          "usuarios"
+        ]
       }
     },
     "/vinculos": {
@@ -1294,7 +1362,9 @@
           }
         ],
         "summary": "",
-        "tags": ["perfis"]
+        "tags": [
+          "perfis"
+        ]
       },
       "post": {
         "description": "Sem descrição.",
@@ -1338,7 +1408,9 @@
           }
         ],
         "summary": "",
-        "tags": ["perfis"]
+        "tags": [
+          "perfis"
+        ]
       }
     },
     "/campi": {
@@ -1451,7 +1523,9 @@
           }
         ],
         "summary": "",
-        "tags": ["campi"]
+        "tags": [
+          "campi"
+        ]
       },
       "post": {
         "description": "Operação de criação de um campus.",
@@ -1495,7 +1569,9 @@
           }
         ],
         "summary": "",
-        "tags": ["campi"]
+        "tags": [
+          "campi"
+        ]
       }
     },
     "/campi/{id}": {
@@ -1545,7 +1621,9 @@
           }
         ],
         "summary": "",
-        "tags": ["campi"]
+        "tags": [
+          "campi"
+        ]
       },
       "patch": {
         "description": "Operação de atualização de um campus.",
@@ -1605,7 +1683,9 @@
           }
         ],
         "summary": "",
-        "tags": ["campi"]
+        "tags": [
+          "campi"
+        ]
       },
       "delete": {
         "description": "Sem descrição.",
@@ -1653,7 +1733,9 @@
           }
         ],
         "summary": "",
-        "tags": ["campi"]
+        "tags": [
+          "campi"
+        ]
       }
     },
     "/blocos": {
@@ -1752,7 +1834,9 @@
           }
         ],
         "summary": "",
-        "tags": ["blocos"]
+        "tags": [
+          "blocos"
+        ]
       },
       "post": {
         "description": "Sem descrição.",
@@ -1796,7 +1880,9 @@
           }
         ],
         "summary": "",
-        "tags": ["blocos"]
+        "tags": [
+          "blocos"
+        ]
       }
     },
     "/blocos/{id}": {
@@ -1846,7 +1932,9 @@
           }
         ],
         "summary": "",
-        "tags": ["blocos"]
+        "tags": [
+          "blocos"
+        ]
       },
       "patch": {
         "description": "Sem descrição.",
@@ -1906,7 +1994,9 @@
           }
         ],
         "summary": "",
-        "tags": ["blocos"]
+        "tags": [
+          "blocos"
+        ]
       },
       "delete": {
         "description": "Sem descrição.",
@@ -1954,7 +2044,9 @@
           }
         ],
         "summary": "",
-        "tags": ["blocos"]
+        "tags": [
+          "blocos"
+        ]
       }
     },
     "/blocos/{id}/imagem/capa": {
@@ -1988,7 +2080,9 @@
                   "description": "Binário.",
                   "type": "string",
                   "format": "binary",
-                  "mimeTypes": ["image/jpeg"]
+                  "mimeTypes": [
+                    "image/jpeg"
+                  ]
                 }
               }
             }
@@ -2006,7 +2100,9 @@
           }
         ],
         "summary": "",
-        "tags": ["blocos"]
+        "tags": [
+          "blocos"
+        ]
       },
       "put": {
         "description": "Sem descrição.",
@@ -2034,7 +2130,9 @@
             "multipart/form-data": {
               "schema": {
                 "type": "object",
-                "required": ["file"],
+                "required": [
+                  "file"
+                ],
                 "properties": {
                   "file": {
                     "format": "binary",
@@ -2047,7 +2145,13 @@
                       "schema": {
                         "type": "string",
                         "description": "Binário da imagem.",
-                        "mimeTypes": ["image/jpeg", "image/png", "image/jpeg", "image/webp", "binary/octet-stream"],
+                        "mimeTypes": [
+                          "image/jpeg",
+                          "image/png",
+                          "image/jpeg",
+                          "image/webp",
+                          "binary/octet-stream"
+                        ],
                         "format": "binary"
                       }
                     }
@@ -2084,7 +2188,9 @@
           }
         ],
         "summary": "",
-        "tags": ["blocos"]
+        "tags": [
+          "blocos"
+        ]
       }
     },
     "/ambientes": {
@@ -2197,7 +2303,9 @@
           }
         ],
         "summary": "",
-        "tags": ["ambientes"]
+        "tags": [
+          "ambientes"
+        ]
       },
       "post": {
         "description": "Sem descrição.",
@@ -2241,7 +2349,9 @@
           }
         ],
         "summary": "",
-        "tags": ["ambientes"]
+        "tags": [
+          "ambientes"
+        ]
       }
     },
     "/ambientes/{id}": {
@@ -2291,7 +2401,9 @@
           }
         ],
         "summary": "",
-        "tags": ["ambientes"]
+        "tags": [
+          "ambientes"
+        ]
       },
       "patch": {
         "description": "Sem descrição.",
@@ -2351,7 +2463,9 @@
           }
         ],
         "summary": "",
-        "tags": ["ambientes"]
+        "tags": [
+          "ambientes"
+        ]
       },
       "delete": {
         "description": "Sem descrição.",
@@ -2399,7 +2513,9 @@
           }
         ],
         "summary": "",
-        "tags": ["ambientes"]
+        "tags": [
+          "ambientes"
+        ]
       }
     },
     "/ambientes/{id}/imagem/capa": {
@@ -2433,7 +2549,9 @@
                   "description": "Binário.",
                   "type": "string",
                   "format": "binary",
-                  "mimeTypes": ["image/jpeg"]
+                  "mimeTypes": [
+                    "image/jpeg"
+                  ]
                 }
               }
             }
@@ -2451,7 +2569,9 @@
           }
         ],
         "summary": "",
-        "tags": ["ambientes"]
+        "tags": [
+          "ambientes"
+        ]
       },
       "put": {
         "description": "Sem descrição.",
@@ -2479,7 +2599,9 @@
             "multipart/form-data": {
               "schema": {
                 "type": "object",
-                "required": ["file"],
+                "required": [
+                  "file"
+                ],
                 "properties": {
                   "file": {
                     "format": "binary",
@@ -2492,7 +2614,13 @@
                       "schema": {
                         "type": "string",
                         "description": "Binário da imagem.",
-                        "mimeTypes": ["image/jpeg", "image/png", "image/jpeg", "image/webp", "binary/octet-stream"],
+                        "mimeTypes": [
+                          "image/jpeg",
+                          "image/png",
+                          "image/jpeg",
+                          "image/webp",
+                          "binary/octet-stream"
+                        ],
                         "format": "binary"
                       }
                     }
@@ -2529,7 +2657,9 @@
           }
         ],
         "summary": "",
-        "tags": ["ambientes"]
+        "tags": [
+          "ambientes"
+        ]
       }
     },
     "/reservas": {
@@ -2670,7 +2800,9 @@
           }
         ],
         "summary": "",
-        "tags": ["reservas"]
+        "tags": [
+          "reservas"
+        ]
       },
       "post": {
         "description": "Sem descrição.",
@@ -2714,7 +2846,9 @@
           }
         ],
         "summary": "",
-        "tags": ["reservas"]
+        "tags": [
+          "reservas"
+        ]
       }
     },
     "/reservas/{id}": {
@@ -2764,7 +2898,9 @@
           }
         ],
         "summary": "",
-        "tags": ["reservas"]
+        "tags": [
+          "reservas"
+        ]
       },
       "patch": {
         "description": "Sem descrição.",
@@ -2824,7 +2960,9 @@
           }
         ],
         "summary": "",
-        "tags": ["reservas"]
+        "tags": [
+          "reservas"
+        ]
       },
       "delete": {
         "description": "Sem descrição.",
@@ -2872,7 +3010,9 @@
           }
         ],
         "summary": "",
-        "tags": ["reservas"]
+        "tags": [
+          "reservas"
+        ]
       }
     },
     "/niveis-formacoes": {
@@ -2957,7 +3097,9 @@
           }
         ],
         "summary": "",
-        "tags": ["niveis-formacoes"]
+        "tags": [
+          "niveis-formacoes"
+        ]
       },
       "post": {
         "description": "Sem descrição.",
@@ -3001,7 +3143,9 @@
           }
         ],
         "summary": "",
-        "tags": ["niveis-formacoes"]
+        "tags": [
+          "niveis-formacoes"
+        ]
       }
     },
     "/niveis-formacoes/{id}": {
@@ -3051,7 +3195,9 @@
           }
         ],
         "summary": "",
-        "tags": ["niveis-formacoes"]
+        "tags": [
+          "niveis-formacoes"
+        ]
       },
       "patch": {
         "description": "Sem descrição.",
@@ -3111,7 +3257,9 @@
           }
         ],
         "summary": "",
-        "tags": ["niveis-formacoes"]
+        "tags": [
+          "niveis-formacoes"
+        ]
       },
       "delete": {
         "description": "Sem descrição.",
@@ -3159,7 +3307,9 @@
           }
         ],
         "summary": "",
-        "tags": ["niveis-formacoes"]
+        "tags": [
+          "niveis-formacoes"
+        ]
       }
     },
     "/modalidades": {
@@ -3244,7 +3394,9 @@
           }
         ],
         "summary": "",
-        "tags": ["modalidades"]
+        "tags": [
+          "modalidades"
+        ]
       },
       "post": {
         "description": "Sem descrição.",
@@ -3288,7 +3440,9 @@
           }
         ],
         "summary": "",
-        "tags": ["modalidades"]
+        "tags": [
+          "modalidades"
+        ]
       }
     },
     "/modalidades/{id}": {
@@ -3338,7 +3492,9 @@
           }
         ],
         "summary": "",
-        "tags": ["modalidades"]
+        "tags": [
+          "modalidades"
+        ]
       },
       "patch": {
         "description": "Sem descrição.",
@@ -3398,7 +3554,9 @@
           }
         ],
         "summary": "",
-        "tags": ["modalidades"]
+        "tags": [
+          "modalidades"
+        ]
       },
       "delete": {
         "description": "Sem descrição.",
@@ -3446,7 +3604,9 @@
           }
         ],
         "summary": "",
-        "tags": ["modalidades"]
+        "tags": [
+          "modalidades"
+        ]
       }
     },
     "/ofertas-formacoes": {
@@ -3531,7 +3691,9 @@
           }
         ],
         "summary": "",
-        "tags": ["ofertas-formacoes"]
+        "tags": [
+          "ofertas-formacoes"
+        ]
       },
       "post": {
         "description": "Sem descrição.",
@@ -3575,7 +3737,9 @@
           }
         ],
         "summary": "",
-        "tags": ["ofertas-formacoes"]
+        "tags": [
+          "ofertas-formacoes"
+        ]
       }
     },
     "/ofertas-formacoes/{id}": {
@@ -3625,7 +3789,9 @@
           }
         ],
         "summary": "",
-        "tags": ["ofertas-formacoes"]
+        "tags": [
+          "ofertas-formacoes"
+        ]
       },
       "patch": {
         "description": "Sem descrição.",
@@ -3685,7 +3851,9 @@
           }
         ],
         "summary": "",
-        "tags": ["ofertas-formacoes"]
+        "tags": [
+          "ofertas-formacoes"
+        ]
       },
       "delete": {
         "description": "Sem descrição.",
@@ -3733,7 +3901,9 @@
           }
         ],
         "summary": "",
-        "tags": ["ofertas-formacoes"]
+        "tags": [
+          "ofertas-formacoes"
+        ]
       }
     },
     "/ofertas-formacoes-niveis-formacoes": {
@@ -3818,7 +3988,9 @@
           }
         ],
         "summary": "",
-        "tags": ["ofertas-formacoes-niveis-formacoes"]
+        "tags": [
+          "ofertas-formacoes-niveis-formacoes"
+        ]
       },
       "post": {
         "description": "Sem descrição.",
@@ -3862,7 +4034,9 @@
           }
         ],
         "summary": "",
-        "tags": ["ofertas-formacoes-niveis-formacoes"]
+        "tags": [
+          "ofertas-formacoes-niveis-formacoes"
+        ]
       }
     },
     "/ofertas-formacoes-niveis-formacoes/{id}": {
@@ -3912,7 +4086,9 @@
           }
         ],
         "summary": "",
-        "tags": ["ofertas-formacoes-niveis-formacoes"]
+        "tags": [
+          "ofertas-formacoes-niveis-formacoes"
+        ]
       },
       "patch": {
         "description": "Sem descrição.",
@@ -3972,7 +4148,9 @@
           }
         ],
         "summary": "",
-        "tags": ["ofertas-formacoes-niveis-formacoes"]
+        "tags": [
+          "ofertas-formacoes-niveis-formacoes"
+        ]
       },
       "delete": {
         "description": "Sem descrição.",
@@ -4020,7 +4198,9 @@
           }
         ],
         "summary": "",
-        "tags": ["ofertas-formacoes-niveis-formacoes"]
+        "tags": [
+          "ofertas-formacoes-niveis-formacoes"
+        ]
       }
     },
     "/cursos": {
@@ -4133,7 +4313,9 @@
           }
         ],
         "summary": "",
-        "tags": ["cursos"]
+        "tags": [
+          "cursos"
+        ]
       },
       "post": {
         "description": "Sem descrição.",
@@ -4177,7 +4359,9 @@
           }
         ],
         "summary": "",
-        "tags": ["cursos"]
+        "tags": [
+          "cursos"
+        ]
       }
     },
     "/cursos/{id}": {
@@ -4227,7 +4411,9 @@
           }
         ],
         "summary": "",
-        "tags": ["cursos"]
+        "tags": [
+          "cursos"
+        ]
       },
       "patch": {
         "description": "Sem descrição.",
@@ -4287,7 +4473,9 @@
           }
         ],
         "summary": "",
-        "tags": ["cursos"]
+        "tags": [
+          "cursos"
+        ]
       },
       "delete": {
         "description": "Sem descrição.",
@@ -4335,7 +4523,9 @@
           }
         ],
         "summary": "",
-        "tags": ["cursos"]
+        "tags": [
+          "cursos"
+        ]
       }
     },
     "/cursos/{id}/imagem/capa": {
@@ -4369,7 +4559,9 @@
                   "description": "Binário.",
                   "type": "string",
                   "format": "binary",
-                  "mimeTypes": ["image/jpeg"]
+                  "mimeTypes": [
+                    "image/jpeg"
+                  ]
                 }
               }
             }
@@ -4387,7 +4579,9 @@
           }
         ],
         "summary": "",
-        "tags": ["cursos"]
+        "tags": [
+          "cursos"
+        ]
       },
       "put": {
         "description": "Sem descrição.",
@@ -4415,7 +4609,9 @@
             "multipart/form-data": {
               "schema": {
                 "type": "object",
-                "required": ["file"],
+                "required": [
+                  "file"
+                ],
                 "properties": {
                   "file": {
                     "format": "binary",
@@ -4428,7 +4624,13 @@
                       "schema": {
                         "type": "string",
                         "description": "Binário da imagem.",
-                        "mimeTypes": ["image/jpeg", "image/png", "image/jpeg", "image/webp", "binary/octet-stream"],
+                        "mimeTypes": [
+                          "image/jpeg",
+                          "image/png",
+                          "image/jpeg",
+                          "image/webp",
+                          "binary/octet-stream"
+                        ],
                         "format": "binary"
                       }
                     }
@@ -4465,7 +4667,9 @@
           }
         ],
         "summary": "",
-        "tags": ["cursos"]
+        "tags": [
+          "cursos"
+        ]
       }
     },
     "/disciplinas": {
@@ -4564,7 +4768,9 @@
           }
         ],
         "summary": "",
-        "tags": ["disciplinas"]
+        "tags": [
+          "disciplinas"
+        ]
       },
       "post": {
         "description": "Sem descrição.",
@@ -4608,7 +4814,9 @@
           }
         ],
         "summary": "",
-        "tags": ["disciplinas"]
+        "tags": [
+          "disciplinas"
+        ]
       }
     },
     "/disciplinas/{id}": {
@@ -4658,7 +4866,9 @@
           }
         ],
         "summary": "",
-        "tags": ["disciplinas"]
+        "tags": [
+          "disciplinas"
+        ]
       },
       "patch": {
         "description": "Sem descrição.",
@@ -4718,7 +4928,9 @@
           }
         ],
         "summary": "",
-        "tags": ["disciplinas"]
+        "tags": [
+          "disciplinas"
+        ]
       },
       "delete": {
         "description": "Sem descrição.",
@@ -4766,7 +4978,9 @@
           }
         ],
         "summary": "",
-        "tags": ["disciplinas"]
+        "tags": [
+          "disciplinas"
+        ]
       }
     },
     "/disciplinas/{id}/imagem/capa": {
@@ -4800,7 +5014,9 @@
                   "description": "Binário.",
                   "type": "string",
                   "format": "binary",
-                  "mimeTypes": ["image/jpeg"]
+                  "mimeTypes": [
+                    "image/jpeg"
+                  ]
                 }
               }
             }
@@ -4818,7 +5034,9 @@
           }
         ],
         "summary": "",
-        "tags": ["disciplinas"]
+        "tags": [
+          "disciplinas"
+        ]
       },
       "put": {
         "description": "Sem descrição.",
@@ -4846,7 +5064,9 @@
             "multipart/form-data": {
               "schema": {
                 "type": "object",
-                "required": ["file"],
+                "required": [
+                  "file"
+                ],
                 "properties": {
                   "file": {
                     "format": "binary",
@@ -4859,7 +5079,13 @@
                       "schema": {
                         "type": "string",
                         "description": "Binário da imagem.",
-                        "mimeTypes": ["image/jpeg", "image/png", "image/jpeg", "image/webp", "binary/octet-stream"],
+                        "mimeTypes": [
+                          "image/jpeg",
+                          "image/png",
+                          "image/jpeg",
+                          "image/webp",
+                          "binary/octet-stream"
+                        ],
                         "format": "binary"
                       }
                     }
@@ -4896,7 +5122,9 @@
           }
         ],
         "summary": "",
-        "tags": ["disciplinas"]
+        "tags": [
+          "disciplinas"
+        ]
       }
     },
     "/calendarios-letivos": {
@@ -5009,7 +5237,9 @@
           }
         ],
         "summary": "",
-        "tags": ["calendarios-letivos"]
+        "tags": [
+          "calendarios-letivos"
+        ]
       },
       "post": {
         "description": "Sem descrição.",
@@ -5053,7 +5283,9 @@
           }
         ],
         "summary": "",
-        "tags": ["calendarios-letivos"]
+        "tags": [
+          "calendarios-letivos"
+        ]
       }
     },
     "/calendarios-letivos/{id}": {
@@ -5103,7 +5335,9 @@
           }
         ],
         "summary": "",
-        "tags": ["calendarios-letivos"]
+        "tags": [
+          "calendarios-letivos"
+        ]
       },
       "patch": {
         "description": "Sem descrição.",
@@ -5163,7 +5397,9 @@
           }
         ],
         "summary": "",
-        "tags": ["calendarios-letivos"]
+        "tags": [
+          "calendarios-letivos"
+        ]
       },
       "delete": {
         "description": "Sem descrição.",
@@ -5211,7 +5447,9 @@
           }
         ],
         "summary": "",
-        "tags": ["calendarios-letivos"]
+        "tags": [
+          "calendarios-letivos"
+        ]
       }
     },
     "/grades-horarios-ofertas-formacoes": {
@@ -5296,7 +5534,9 @@
           }
         ],
         "summary": "",
-        "tags": ["grades-horarios-ofertas-formacoes"]
+        "tags": [
+          "grades-horarios-ofertas-formacoes"
+        ]
       },
       "post": {
         "description": "Sem descrição.",
@@ -5340,7 +5580,9 @@
           }
         ],
         "summary": "",
-        "tags": ["grades-horarios-ofertas-formacoes"]
+        "tags": [
+          "grades-horarios-ofertas-formacoes"
+        ]
       }
     },
     "/grades-horarios-ofertas-formacoes/{id}": {
@@ -5390,7 +5632,9 @@
           }
         ],
         "summary": "",
-        "tags": ["grades-horarios-ofertas-formacoes"]
+        "tags": [
+          "grades-horarios-ofertas-formacoes"
+        ]
       },
       "patch": {
         "description": "Sem descrição.",
@@ -5450,7 +5694,9 @@
           }
         ],
         "summary": "",
-        "tags": ["grades-horarios-ofertas-formacoes"]
+        "tags": [
+          "grades-horarios-ofertas-formacoes"
+        ]
       },
       "delete": {
         "description": "Sem descrição.",
@@ -5498,7 +5744,9 @@
           }
         ],
         "summary": "",
-        "tags": ["grades-horarios-ofertas-formacoes"]
+        "tags": [
+          "grades-horarios-ofertas-formacoes"
+        ]
       }
     },
     "/grades-horarios-ofertas-formacoes-intervalos-de-tempo": {
@@ -5583,7 +5831,9 @@
           }
         ],
         "summary": "",
-        "tags": ["grades-horarios-ofertas-formacoes-intervalos-de-tempo"]
+        "tags": [
+          "grades-horarios-ofertas-formacoes-intervalos-de-tempo"
+        ]
       },
       "post": {
         "description": "Sem descrição.",
@@ -5627,7 +5877,9 @@
           }
         ],
         "summary": "",
-        "tags": ["grades-horarios-ofertas-formacoes-intervalos-de-tempo"]
+        "tags": [
+          "grades-horarios-ofertas-formacoes-intervalos-de-tempo"
+        ]
       }
     },
     "/grades-horarios-ofertas-formacoes-intervalos-de-tempo/{id}": {
@@ -5677,7 +5929,9 @@
           }
         ],
         "summary": "",
-        "tags": ["grades-horarios-ofertas-formacoes-intervalos-de-tempo"]
+        "tags": [
+          "grades-horarios-ofertas-formacoes-intervalos-de-tempo"
+        ]
       },
       "patch": {
         "description": "Sem descrição.",
@@ -5737,7 +5991,9 @@
           }
         ],
         "summary": "",
-        "tags": ["grades-horarios-ofertas-formacoes-intervalos-de-tempo"]
+        "tags": [
+          "grades-horarios-ofertas-formacoes-intervalos-de-tempo"
+        ]
       },
       "delete": {
         "description": "Sem descrição.",
@@ -5785,7 +6041,9 @@
           }
         ],
         "summary": "",
-        "tags": ["grades-horarios-ofertas-formacoes-intervalos-de-tempo"]
+        "tags": [
+          "grades-horarios-ofertas-formacoes-intervalos-de-tempo"
+        ]
       }
     },
     "/eventos": {
@@ -5884,7 +6142,9 @@
           }
         ],
         "summary": "",
-        "tags": ["eventos"]
+        "tags": [
+          "eventos"
+        ]
       },
       "post": {
         "description": "Sem descrição.",
@@ -5928,7 +6188,9 @@
           }
         ],
         "summary": "",
-        "tags": ["eventos"]
+        "tags": [
+          "eventos"
+        ]
       }
     },
     "/eventos/{id}": {
@@ -5978,7 +6240,9 @@
           }
         ],
         "summary": "",
-        "tags": ["eventos"]
+        "tags": [
+          "eventos"
+        ]
       },
       "patch": {
         "description": "Sem descrição.",
@@ -6038,7 +6302,9 @@
           }
         ],
         "summary": "",
-        "tags": ["eventos"]
+        "tags": [
+          "eventos"
+        ]
       },
       "delete": {
         "description": "Sem descrição.",
@@ -6086,7 +6352,9 @@
           }
         ],
         "summary": "",
-        "tags": ["eventos"]
+        "tags": [
+          "eventos"
+        ]
       }
     },
     "/dias-calendario": {
@@ -6185,7 +6453,9 @@
           }
         ],
         "summary": "",
-        "tags": ["dias-calendarios"]
+        "tags": [
+          "dias-calendarios"
+        ]
       },
       "post": {
         "description": "Sem descrição.",
@@ -6229,7 +6499,9 @@
           }
         ],
         "summary": "",
-        "tags": ["dias-calendarios"]
+        "tags": [
+          "dias-calendarios"
+        ]
       }
     },
     "/dias-calendario/{id}": {
@@ -6279,7 +6551,9 @@
           }
         ],
         "summary": "",
-        "tags": ["dias-calendarios"]
+        "tags": [
+          "dias-calendarios"
+        ]
       },
       "patch": {
         "description": "Sem descrição.",
@@ -6339,7 +6613,9 @@
           }
         ],
         "summary": "",
-        "tags": ["dias-calendarios"]
+        "tags": [
+          "dias-calendarios"
+        ]
       },
       "delete": {
         "description": "Sem descrição.",
@@ -6387,7 +6663,9 @@
           }
         ],
         "summary": "",
-        "tags": ["dias-calendarios"]
+        "tags": [
+          "dias-calendarios"
+        ]
       }
     },
     "/etapas": {
@@ -6486,7 +6764,9 @@
           }
         ],
         "summary": "",
-        "tags": ["etapas"]
+        "tags": [
+          "etapas"
+        ]
       },
       "post": {
         "description": "Sem descrição.",
@@ -6530,7 +6810,9 @@
           }
         ],
         "summary": "",
-        "tags": ["etapas"]
+        "tags": [
+          "etapas"
+        ]
       }
     },
     "/etapas/{id}": {
@@ -6580,7 +6862,9 @@
           }
         ],
         "summary": "",
-        "tags": ["etapas"]
+        "tags": [
+          "etapas"
+        ]
       },
       "patch": {
         "description": "Sem descrição.",
@@ -6640,7 +6924,9 @@
           }
         ],
         "summary": "",
-        "tags": ["etapas"]
+        "tags": [
+          "etapas"
+        ]
       },
       "delete": {
         "description": "Sem descrição.",
@@ -6688,7 +6974,9 @@
           }
         ],
         "summary": "",
-        "tags": ["etapas"]
+        "tags": [
+          "etapas"
+        ]
       }
     },
     "/turmas": {
@@ -6885,7 +7173,9 @@
           }
         ],
         "summary": "",
-        "tags": ["turmas"]
+        "tags": [
+          "turmas"
+        ]
       },
       "post": {
         "description": "Sem descrição.",
@@ -6929,7 +7219,9 @@
           }
         ],
         "summary": "",
-        "tags": ["turmas"]
+        "tags": [
+          "turmas"
+        ]
       }
     },
     "/turmas/{id}": {
@@ -6979,7 +7271,9 @@
           }
         ],
         "summary": "",
-        "tags": ["turmas"]
+        "tags": [
+          "turmas"
+        ]
       },
       "patch": {
         "description": "Sem descrição.",
@@ -7039,7 +7333,9 @@
           }
         ],
         "summary": "",
-        "tags": ["turmas"]
+        "tags": [
+          "turmas"
+        ]
       },
       "delete": {
         "description": "Sem descrição.",
@@ -7087,7 +7383,9 @@
           }
         ],
         "summary": "",
-        "tags": ["turmas"]
+        "tags": [
+          "turmas"
+        ]
       }
     },
     "/turmas/{id}/imagem/capa": {
@@ -7121,7 +7419,9 @@
                   "description": "Binário.",
                   "type": "string",
                   "format": "binary",
-                  "mimeTypes": ["image/jpeg"]
+                  "mimeTypes": [
+                    "image/jpeg"
+                  ]
                 }
               }
             }
@@ -7139,7 +7439,9 @@
           }
         ],
         "summary": "",
-        "tags": ["turmas"]
+        "tags": [
+          "turmas"
+        ]
       },
       "put": {
         "description": "Sem descrição.",
@@ -7167,7 +7469,9 @@
             "multipart/form-data": {
               "schema": {
                 "type": "object",
-                "required": ["file"],
+                "required": [
+                  "file"
+                ],
                 "properties": {
                   "file": {
                     "format": "binary",
@@ -7180,7 +7484,13 @@
                       "schema": {
                         "type": "string",
                         "description": "Binário da imagem.",
-                        "mimeTypes": ["image/jpeg", "image/png", "image/jpeg", "image/webp", "binary/octet-stream"],
+                        "mimeTypes": [
+                          "image/jpeg",
+                          "image/png",
+                          "image/jpeg",
+                          "image/webp",
+                          "binary/octet-stream"
+                        ],
                         "format": "binary"
                       }
                     }
@@ -7217,7 +7527,9 @@
           }
         ],
         "summary": "",
-        "tags": ["turmas"]
+        "tags": [
+          "turmas"
+        ]
       }
     },
     "/diarios": {
@@ -7358,7 +7670,9 @@
           }
         ],
         "summary": "",
-        "tags": ["diarios"]
+        "tags": [
+          "diarios"
+        ]
       },
       "post": {
         "description": "Sem descrição.",
@@ -7402,7 +7716,9 @@
           }
         ],
         "summary": "",
-        "tags": ["diarios"]
+        "tags": [
+          "diarios"
+        ]
       }
     },
     "/diarios/{id}": {
@@ -7452,7 +7768,9 @@
           }
         ],
         "summary": "",
-        "tags": ["diarios"]
+        "tags": [
+          "diarios"
+        ]
       },
       "patch": {
         "description": "Sem descrição.",
@@ -7512,7 +7830,9 @@
           }
         ],
         "summary": "",
-        "tags": ["diarios"]
+        "tags": [
+          "diarios"
+        ]
       },
       "delete": {
         "description": "Sem descrição.",
@@ -7560,7 +7880,9 @@
           }
         ],
         "summary": "",
-        "tags": ["diarios"]
+        "tags": [
+          "diarios"
+        ]
       }
     },
     "/diarios-professores": {
@@ -7673,7 +7995,9 @@
           }
         ],
         "summary": "",
-        "tags": ["diarios-professores"]
+        "tags": [
+          "diarios-professores"
+        ]
       },
       "post": {
         "description": "Sem descrição.",
@@ -7717,7 +8041,9 @@
           }
         ],
         "summary": "",
-        "tags": ["diarios-professores"]
+        "tags": [
+          "diarios-professores"
+        ]
       }
     },
     "/diarios-professores/{id}": {
@@ -7767,7 +8093,9 @@
           }
         ],
         "summary": "",
-        "tags": ["diarios-professores"]
+        "tags": [
+          "diarios-professores"
+        ]
       },
       "patch": {
         "description": "Sem descrição.",
@@ -7827,7 +8155,9 @@
           }
         ],
         "summary": "",
-        "tags": ["diarios-professores"]
+        "tags": [
+          "diarios-professores"
+        ]
       },
       "delete": {
         "description": "Sem descrição.",
@@ -7875,7 +8205,9 @@
           }
         ],
         "summary": "",
-        "tags": ["diarios-professores"]
+        "tags": [
+          "diarios-professores"
+        ]
       }
     },
     "/aulas": {
@@ -7988,7 +8320,9 @@
           }
         ],
         "summary": "",
-        "tags": ["aulas"]
+        "tags": [
+          "aulas"
+        ]
       },
       "post": {
         "description": "Sem descrição.",
@@ -8032,7 +8366,9 @@
           }
         ],
         "summary": "",
-        "tags": ["aulas"]
+        "tags": [
+          "aulas"
+        ]
       }
     },
     "/aulas/{id}": {
@@ -8082,7 +8418,9 @@
           }
         ],
         "summary": "",
-        "tags": ["aulas"]
+        "tags": [
+          "aulas"
+        ]
       },
       "patch": {
         "description": "Sem descrição.",
@@ -8142,7 +8480,9 @@
           }
         ],
         "summary": "",
-        "tags": ["aulas"]
+        "tags": [
+          "aulas"
+        ]
       },
       "delete": {
         "description": "Sem descrição.",
@@ -8190,7 +8530,9 @@
           }
         ],
         "summary": "",
-        "tags": ["aulas"]
+        "tags": [
+          "aulas"
+        ]
       }
     },
     "/disponibilidades": {
@@ -8275,7 +8617,9 @@
           }
         ],
         "summary": "",
-        "tags": ["disponibilidades"]
+        "tags": [
+          "disponibilidades"
+        ]
       },
       "post": {
         "description": "Sem descrição.",
@@ -8319,7 +8663,9 @@
           }
         ],
         "summary": "",
-        "tags": ["disponibilidades"]
+        "tags": [
+          "disponibilidades"
+        ]
       }
     },
     "/disponibilidades/{id}": {
@@ -8369,7 +8715,9 @@
           }
         ],
         "summary": "",
-        "tags": ["disponibilidades"]
+        "tags": [
+          "disponibilidades"
+        ]
       },
       "patch": {
         "description": "Sem descrição.",
@@ -8429,7 +8777,9 @@
           }
         ],
         "summary": "",
-        "tags": ["disponibilidades"]
+        "tags": [
+          "disponibilidades"
+        ]
       },
       "delete": {
         "description": "Sem descrição.",
@@ -8477,7 +8827,9 @@
           }
         ],
         "summary": "",
-        "tags": ["disponibilidades"]
+        "tags": [
+          "disponibilidades"
+        ]
       }
     },
     "/diarios-preferencia-agrupamento": {
@@ -8576,7 +8928,9 @@
           }
         ],
         "summary": "",
-        "tags": ["diarios-preferencia-agrupamento"]
+        "tags": [
+          "diarios-preferencia-agrupamento"
+        ]
       },
       "post": {
         "description": "Sem descrição.",
@@ -8620,7 +8974,9 @@
           }
         ],
         "summary": "",
-        "tags": ["diarios-preferencia-agrupamento"]
+        "tags": [
+          "diarios-preferencia-agrupamento"
+        ]
       }
     },
     "/diarios-preferencia-agrupamento/{id}": {
@@ -8670,7 +9026,9 @@
           }
         ],
         "summary": "",
-        "tags": ["diarios-preferencia-agrupamento"]
+        "tags": [
+          "diarios-preferencia-agrupamento"
+        ]
       },
       "patch": {
         "description": "Sem descrição.",
@@ -8730,7 +9088,9 @@
           }
         ],
         "summary": "",
-        "tags": ["diarios-preferencia-agrupamento"]
+        "tags": [
+          "diarios-preferencia-agrupamento"
+        ]
       },
       "delete": {
         "description": "Sem descrição.",
@@ -8778,7 +9138,9 @@
           }
         ],
         "summary": "",
-        "tags": ["diarios-preferencia-agrupamento"]
+        "tags": [
+          "diarios-preferencia-agrupamento"
+        ]
       }
     },
     "/turmas-disponibilidades": {
@@ -8877,7 +9239,9 @@
           }
         ],
         "summary": "",
-        "tags": ["turmas-disponibilidades"]
+        "tags": [
+          "turmas-disponibilidades"
+        ]
       },
       "post": {
         "description": "Sem descrição.",
@@ -8921,7 +9285,9 @@
           }
         ],
         "summary": "",
-        "tags": ["turmas-disponibilidades"]
+        "tags": [
+          "turmas-disponibilidades"
+        ]
       }
     },
     "/turmas-disponibilidades/{id}": {
@@ -8971,7 +9337,9 @@
           }
         ],
         "summary": "",
-        "tags": ["turmas-disponibilidades"]
+        "tags": [
+          "turmas-disponibilidades"
+        ]
       },
       "patch": {
         "description": "Sem descrição.",
@@ -9031,7 +9399,9 @@
           }
         ],
         "summary": "",
-        "tags": ["turmas-disponibilidades"]
+        "tags": [
+          "turmas-disponibilidades"
+        ]
       },
       "delete": {
         "description": "Sem descrição.",
@@ -9079,7 +9449,9 @@
           }
         ],
         "summary": "",
-        "tags": ["turmas-disponibilidades"]
+        "tags": [
+          "turmas-disponibilidades"
+        ]
       }
     },
     "/professores-disponibilidades": {
@@ -9178,7 +9550,9 @@
           }
         ],
         "summary": "",
-        "tags": ["professores-disponibilidades"]
+        "tags": [
+          "professores-disponibilidades"
+        ]
       },
       "post": {
         "description": "Sem descrição.",
@@ -9222,7 +9596,9 @@
           }
         ],
         "summary": "",
-        "tags": ["professores-disponibilidades"]
+        "tags": [
+          "professores-disponibilidades"
+        ]
       }
     },
     "/professores-disponibilidades/{id}": {
@@ -9272,7 +9648,9 @@
           }
         ],
         "summary": "",
-        "tags": ["professores-disponibilidades"]
+        "tags": [
+          "professores-disponibilidades"
+        ]
       },
       "patch": {
         "description": "Sem descrição.",
@@ -9332,7 +9710,9 @@
           }
         ],
         "summary": "",
-        "tags": ["professores-disponibilidades"]
+        "tags": [
+          "professores-disponibilidades"
+        ]
       },
       "delete": {
         "description": "Sem descrição.",
@@ -9380,7 +9760,9 @@
           }
         ],
         "summary": "",
-        "tags": ["professores-disponibilidades"]
+        "tags": [
+          "professores-disponibilidades"
+        ]
       }
     },
     "/horarios-gerados": {
@@ -9465,7 +9847,9 @@
           }
         ],
         "summary": "",
-        "tags": ["horarios-gerados"]
+        "tags": [
+          "horarios-gerados"
+        ]
       },
       "post": {
         "description": "Sem descrição.",
@@ -9509,7 +9893,9 @@
           }
         ],
         "summary": "",
-        "tags": ["horarios-gerados"]
+        "tags": [
+          "horarios-gerados"
+        ]
       }
     },
     "/horarios-gerados/{id}": {
@@ -9559,7 +9945,9 @@
           }
         ],
         "summary": "",
-        "tags": ["horarios-gerados"]
+        "tags": [
+          "horarios-gerados"
+        ]
       },
       "patch": {
         "description": "Sem descrição.",
@@ -9619,7 +10007,9 @@
           }
         ],
         "summary": "",
-        "tags": ["horarios-gerados"]
+        "tags": [
+          "horarios-gerados"
+        ]
       },
       "delete": {
         "description": "Sem descrição.",
@@ -9667,7 +10057,9 @@
           }
         ],
         "summary": "",
-        "tags": ["horarios-gerados"]
+        "tags": [
+          "horarios-gerados"
+        ]
       }
     },
     "/horarios-gerados-aula": {
@@ -9752,7 +10144,9 @@
           }
         ],
         "summary": "",
-        "tags": ["horarios-gerados-aula"]
+        "tags": [
+          "horarios-gerados-aula"
+        ]
       },
       "post": {
         "description": "Sem descrição.",
@@ -9796,7 +10190,9 @@
           }
         ],
         "summary": "",
-        "tags": ["horarios-gerados-aula"]
+        "tags": [
+          "horarios-gerados-aula"
+        ]
       }
     },
     "/horarios-gerados-aula/{id}": {
@@ -9846,7 +10242,9 @@
           }
         ],
         "summary": "",
-        "tags": ["horarios-gerados-aula"]
+        "tags": [
+          "horarios-gerados-aula"
+        ]
       },
       "patch": {
         "description": "Sem descrição.",
@@ -9906,7 +10304,9 @@
           }
         ],
         "summary": "",
-        "tags": ["horarios-gerados-aula"]
+        "tags": [
+          "horarios-gerados-aula"
+        ]
       },
       "delete": {
         "description": "Sem descrição.",
@@ -9954,7 +10354,9 @@
           }
         ],
         "summary": "",
-        "tags": ["horarios-gerados-aula"]
+        "tags": [
+          "horarios-gerados-aula"
+        ]
       }
     }
   },
@@ -10134,7 +10536,10 @@
                   "description": "Modo de ordenação."
                 }
               },
-              "required": ["property", "mode"],
+              "required": [
+                "property",
+                "mode"
+              ],
               "deprecated": true,
               "x-unispec-kind": "entity",
               "x-unispec-entity-id": "PaginatedSortByView",
@@ -10164,7 +10569,10 @@
                   "description": "Restrições de filtragem."
                 }
               },
-              "required": ["property", "restrictions"],
+              "required": [
+                "property",
+                "restrictions"
+              ],
               "deprecated": true,
               "x-unispec-kind": "entity",
               "x-unispec-entity-id": "PaginatedFilterView",
@@ -10172,7 +10580,15 @@
             }
           }
         },
-        "required": ["itemsPerPage", "totalItems", "currentPage", "totalPages", "search", "sortBy", "filter"]
+        "required": [
+          "itemsPerPage",
+          "totalItems",
+          "currentPage",
+          "totalPages",
+          "search",
+          "sortBy",
+          "filter"
+        ]
       },
       "EstadoFindOneResultView": {
         "type": "object",
@@ -10197,7 +10613,11 @@
             "x-unispec-constraint-estado-sigla": true
           }
         },
-        "required": ["id", "nome", "sigla"]
+        "required": [
+          "id",
+          "nome",
+          "sigla"
+        ]
       },
       "PaginatedResultLinksView": {
         "type": "object",
@@ -10223,7 +10643,13 @@
             "nullable": true
           }
         },
-        "required": ["first", "previous", "current", "next", "last"]
+        "required": [
+          "first",
+          "previous",
+          "current",
+          "next",
+          "last"
+        ]
       },
       "EstadoListResultView": {
         "type": "object",
@@ -10258,7 +10684,11 @@
             ]
           }
         },
-        "required": ["meta", "data", "links"]
+        "required": [
+          "meta",
+          "data",
+          "links"
+        ]
       },
       "CidadeFindOneResultView": {
         "type": "object",
@@ -10287,7 +10717,11 @@
             ]
           }
         },
-        "required": ["id", "nome", "estado"]
+        "required": [
+          "id",
+          "nome",
+          "estado"
+        ]
       },
       "CidadeListResultView": {
         "type": "object",
@@ -10322,7 +10756,11 @@
             ]
           }
         },
-        "required": ["meta", "data", "links"]
+        "required": [
+          "meta",
+          "data",
+          "links"
+        ]
       },
       "ArquivoFindOneResultView": {
         "type": "object",
@@ -10379,7 +10817,16 @@
             "format": "date-time"
           }
         },
-        "required": ["id", "name", "mimeType", "sizeBytes", "storageType", "dateCreated", "dateUpdated", "dateDeleted"]
+        "required": [
+          "id",
+          "name",
+          "mimeType",
+          "sizeBytes",
+          "storageType",
+          "dateCreated",
+          "dateUpdated",
+          "dateDeleted"
+        ]
       },
       "ImagemArquivoFindOneFromImagemResultView": {
         "type": "object",
@@ -10446,7 +10893,17 @@
             "format": "date-time"
           }
         },
-        "required": ["id", "largura", "altura", "formato", "mimeType", "arquivo", "dateCreated", "dateUpdated", "dateDeleted"]
+        "required": [
+          "id",
+          "largura",
+          "altura",
+          "formato",
+          "mimeType",
+          "arquivo",
+          "dateCreated",
+          "dateUpdated",
+          "dateDeleted"
+        ]
       },
       "ImagemFindOneResultView": {
         "type": "object",
@@ -10497,7 +10954,14 @@
             "format": "date-time"
           }
         },
-        "required": ["id", "descricao", "versoes", "dateCreated", "dateUpdated", "dateDeleted"]
+        "required": [
+          "id",
+          "descricao",
+          "versoes",
+          "dateCreated",
+          "dateUpdated",
+          "dateDeleted"
+        ]
       },
       "UsuarioFindOneResultView": {
         "type": "object",
@@ -10577,7 +11041,18 @@
             "format": "date-time"
           }
         },
-        "required": ["id", "nome", "matriculaSiape", "email", "isSuperUser", "imagemCapa", "imagemPerfil", "dateCreated", "dateUpdated", "dateDeleted"]
+        "required": [
+          "id",
+          "nome",
+          "matriculaSiape",
+          "email",
+          "isSuperUser",
+          "imagemCapa",
+          "imagemPerfil",
+          "dateCreated",
+          "dateUpdated",
+          "dateDeleted"
+        ]
       },
       "EnderecoFindOneResultView": {
         "type": "object",
@@ -10657,7 +11132,19 @@
             "format": "date-time"
           }
         },
-        "required": ["id", "cep", "logradouro", "numero", "bairro", "complemento", "pontoReferencia", "cidade", "dateCreated", "dateUpdated", "dateDeleted"]
+        "required": [
+          "id",
+          "cep",
+          "logradouro",
+          "numero",
+          "bairro",
+          "complemento",
+          "pontoReferencia",
+          "cidade",
+          "dateCreated",
+          "dateUpdated",
+          "dateDeleted"
+        ]
       },
       "CampusFindOneResultView": {
         "type": "object",
@@ -10728,7 +11215,17 @@
             "format": "date-time"
           }
         },
-        "required": ["id", "nomeFantasia", "razaoSocial", "apelido", "cnpj", "endereco", "dateCreated", "dateUpdated", "dateDeleted"]
+        "required": [
+          "id",
+          "nomeFantasia",
+          "razaoSocial",
+          "apelido",
+          "cnpj",
+          "endereco",
+          "dateCreated",
+          "dateUpdated",
+          "dateDeleted"
+        ]
       },
       "PerfilFindOneResultView": {
         "type": "object",
@@ -10795,7 +11292,16 @@
             "format": "date-time"
           }
         },
-        "required": ["id", "ativo", "cargo", "campus", "usuario", "dateCreated", "dateUpdated", "dateDeleted"]
+        "required": [
+          "id",
+          "ativo",
+          "cargo",
+          "campus",
+          "usuario",
+          "dateCreated",
+          "dateUpdated",
+          "dateDeleted"
+        ]
       },
       "AuthWhoAmIInputView": {
         "type": "object",
@@ -10820,7 +11326,10 @@
             }
           }
         },
-        "required": ["usuario", "perfisAtivos"]
+        "required": [
+          "usuario",
+          "perfisAtivos"
+        ]
       },
       "AuthLoginInputView": {
         "type": "object",
@@ -10836,7 +11345,10 @@
             "description": "Senha do usuário."
           }
         },
-        "required": ["matriculaSiape", "senha"]
+        "required": [
+          "matriculaSiape",
+          "senha"
+        ]
       },
       "AuthSessionCredentialsView": {
         "type": "object",
@@ -10882,7 +11394,16 @@
             "description": "Escopo da autenticação."
           }
         },
-        "required": ["access_token", "token_type", "id_token", "refresh_token", "expires_in", "expires_at", "session_state", "scope"]
+        "required": [
+          "access_token",
+          "token_type",
+          "id_token",
+          "refresh_token",
+          "expires_in",
+          "expires_at",
+          "session_state",
+          "scope"
+        ]
       },
       "AuthRefreshInputView": {
         "type": "object",
@@ -10893,7 +11414,9 @@
             "description": "Token de refresh."
           }
         },
-        "required": ["refreshToken"]
+        "required": [
+          "refreshToken"
+        ]
       },
       "AuthSetInitialPasswordInputView": {
         "type": "object",
@@ -10909,7 +11432,10 @@
             "description": "Nova senha."
           }
         },
-        "required": ["matriculaSiape", "senha"]
+        "required": [
+          "matriculaSiape",
+          "senha"
+        ]
       },
       "UsuarioListResultView": {
         "type": "object",
@@ -10944,7 +11470,11 @@
             ]
           }
         },
-        "required": ["meta", "data", "links"]
+        "required": [
+          "meta",
+          "data",
+          "links"
+        ]
       },
       "UsuarioInputCreateView": {
         "type": "object",
@@ -10968,7 +11498,11 @@
             "format": "email"
           }
         },
-        "required": ["nome", "matriculaSiape", "email"]
+        "required": [
+          "nome",
+          "matriculaSiape",
+          "email"
+        ]
       },
       "UsuarioInputUpdateView": {
         "type": "object",
@@ -11026,7 +11560,11 @@
             ]
           }
         },
-        "required": ["meta", "data", "links"]
+        "required": [
+          "meta",
+          "data",
+          "links"
+        ]
       },
       "CampusFindOneInputView": {
         "type": "object",
@@ -11041,7 +11579,9 @@
             "x-unispec-constraint-entity-exists": "Campus"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "UsuarioFindOneInputView": {
         "type": "object",
@@ -11056,7 +11596,9 @@
             "x-unispec-constraint-entity-exists": "Usuario"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "PerfilInputUpdateView": {
         "type": "object",
@@ -11091,7 +11633,11 @@
             ]
           }
         },
-        "required": ["cargos", "campus", "usuario"]
+        "required": [
+          "cargos",
+          "campus",
+          "usuario"
+        ]
       },
       "CampusListResultView": {
         "type": "object",
@@ -11126,7 +11672,11 @@
             ]
           }
         },
-        "required": ["meta", "data", "links"]
+        "required": [
+          "meta",
+          "data",
+          "links"
+        ]
       },
       "CidadeFindOneInputView": {
         "type": "object",
@@ -11140,7 +11690,9 @@
             "minimum": 1
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "EnderecoInputView": {
         "type": "object",
@@ -11189,7 +11741,15 @@
             ]
           }
         },
-        "required": ["cep", "logradouro", "numero", "bairro", "complemento", "pontoReferencia", "cidade"]
+        "required": [
+          "cep",
+          "logradouro",
+          "numero",
+          "bairro",
+          "complemento",
+          "pontoReferencia",
+          "cidade"
+        ]
       },
       "CampusInputCreateView": {
         "type": "object",
@@ -11229,7 +11789,13 @@
             ]
           }
         },
-        "required": ["nomeFantasia", "razaoSocial", "apelido", "cnpj", "endereco"]
+        "required": [
+          "nomeFantasia",
+          "razaoSocial",
+          "apelido",
+          "cnpj",
+          "endereco"
+        ]
       },
       "CampusInputUpdateView": {
         "type": "object",
@@ -11337,7 +11903,16 @@
             "format": "date-time"
           }
         },
-        "required": ["id", "nome", "codigo", "campus", "imagemCapa", "dateCreated", "dateUpdated", "dateDeleted"]
+        "required": [
+          "id",
+          "nome",
+          "codigo",
+          "campus",
+          "imagemCapa",
+          "dateCreated",
+          "dateUpdated",
+          "dateDeleted"
+        ]
       },
       "BlocoListResultView": {
         "type": "object",
@@ -11372,7 +11947,11 @@
             ]
           }
         },
-        "required": ["meta", "data", "links"]
+        "required": [
+          "meta",
+          "data",
+          "links"
+        ]
       },
       "BlocoInputCreateView": {
         "type": "object",
@@ -11400,7 +11979,11 @@
             ]
           }
         },
-        "required": ["nome", "codigo", "campus"]
+        "required": [
+          "nome",
+          "codigo",
+          "campus"
+        ]
       },
       "BlocoInputUpdateView": {
         "type": "object",
@@ -11511,7 +12094,19 @@
             "format": "date-time"
           }
         },
-        "required": ["id", "nome", "descricao", "codigo", "capacidade", "tipo", "bloco", "imagemCapa", "dateCreated", "dateUpdated", "dateDeleted"]
+        "required": [
+          "id",
+          "nome",
+          "descricao",
+          "codigo",
+          "capacidade",
+          "tipo",
+          "bloco",
+          "imagemCapa",
+          "dateCreated",
+          "dateUpdated",
+          "dateDeleted"
+        ]
       },
       "AmbienteListResultView": {
         "type": "object",
@@ -11546,7 +12141,11 @@
             ]
           }
         },
-        "required": ["meta", "data", "links"]
+        "required": [
+          "meta",
+          "data",
+          "links"
+        ]
       },
       "BlocoFindOneInputView": {
         "type": "object",
@@ -11561,7 +12160,9 @@
             "x-unispec-constraint-entity-exists": "Bloco"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "AmbienteInputCreateView": {
         "type": "object",
@@ -11604,7 +12205,14 @@
             ]
           }
         },
-        "required": ["nome", "descricao", "codigo", "capacidade", "tipo", "bloco"]
+        "required": [
+          "nome",
+          "descricao",
+          "codigo",
+          "capacidade",
+          "tipo",
+          "bloco"
+        ]
       },
       "AmbienteInputUpdateView": {
         "type": "object",
@@ -11726,7 +12334,18 @@
             "format": "date-time"
           }
         },
-        "required": ["id", "situacao", "motivo", "tipo", "rrule", "usuario", "ambiente", "dateCreated", "dateUpdated", "dateDeleted"]
+        "required": [
+          "id",
+          "situacao",
+          "motivo",
+          "tipo",
+          "rrule",
+          "usuario",
+          "ambiente",
+          "dateCreated",
+          "dateUpdated",
+          "dateDeleted"
+        ]
       },
       "ReservaListResultView": {
         "type": "object",
@@ -11761,7 +12380,11 @@
             ]
           }
         },
-        "required": ["meta", "data", "links"]
+        "required": [
+          "meta",
+          "data",
+          "links"
+        ]
       },
       "AmbienteFindOneInputView": {
         "type": "object",
@@ -11776,7 +12399,9 @@
             "x-unispec-constraint-entity-exists": "Ambiente"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "ReservaInputCreateView": {
         "type": "object",
@@ -11825,7 +12450,14 @@
             ]
           }
         },
-        "required": ["situacao", "motivo", "tipo", "rrule", "usuario", "ambiente"]
+        "required": [
+          "situacao",
+          "motivo",
+          "tipo",
+          "rrule",
+          "usuario",
+          "ambiente"
+        ]
       },
       "ReservaInputUpdateView": {
         "type": "object",
@@ -11916,7 +12548,13 @@
             "format": "date-time"
           }
         },
-        "required": ["id", "slug", "dateCreated", "dateUpdated", "dateDeleted"]
+        "required": [
+          "id",
+          "slug",
+          "dateCreated",
+          "dateUpdated",
+          "dateDeleted"
+        ]
       },
       "NivelFormacaoListResultView": {
         "type": "object",
@@ -11951,7 +12589,11 @@
             ]
           }
         },
-        "required": ["meta", "data", "links"]
+        "required": [
+          "meta",
+          "data",
+          "links"
+        ]
       },
       "NivelFormacaoInputCreateView": {
         "type": "object",
@@ -11963,7 +12605,9 @@
             "minLength": 1
           }
         },
-        "required": ["slug"]
+        "required": [
+          "slug"
+        ]
       },
       "NivelFormacaoInputUpdateView": {
         "type": "object",
@@ -12017,7 +12661,13 @@
             "format": "date-time"
           }
         },
-        "required": ["id", "slug", "dateCreated", "dateUpdated", "dateDeleted"]
+        "required": [
+          "id",
+          "slug",
+          "dateCreated",
+          "dateUpdated",
+          "dateDeleted"
+        ]
       },
       "ModalidadeListResultView": {
         "type": "object",
@@ -12052,7 +12702,11 @@
             ]
           }
         },
-        "required": ["meta", "data", "links"]
+        "required": [
+          "meta",
+          "data",
+          "links"
+        ]
       },
       "ModalidadeInputCreateView": {
         "type": "object",
@@ -12064,7 +12718,9 @@
             "minLength": 1
           }
         },
-        "required": ["slug"]
+        "required": [
+          "slug"
+        ]
       },
       "ModalidadeInputUpdateView": {
         "type": "object",
@@ -12134,7 +12790,15 @@
             "format": "date-time"
           }
         },
-        "required": ["id", "nome", "slug", "modalidade", "dateCreated", "dateUpdated", "dateDeleted"]
+        "required": [
+          "id",
+          "nome",
+          "slug",
+          "modalidade",
+          "dateCreated",
+          "dateUpdated",
+          "dateDeleted"
+        ]
       },
       "OfertaFormacaoListResultView": {
         "type": "object",
@@ -12169,7 +12833,11 @@
             ]
           }
         },
-        "required": ["meta", "data", "links"]
+        "required": [
+          "meta",
+          "data",
+          "links"
+        ]
       },
       "ModalidadeFindOneInputView": {
         "type": "object",
@@ -12184,7 +12852,9 @@
             "x-unispec-constraint-entity-exists": "Modalidade"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "OfertaFormacaoInputCreateView": {
         "type": "object",
@@ -12212,7 +12882,11 @@
             ]
           }
         },
-        "required": ["nome", "slug", "modalidade"]
+        "required": [
+          "nome",
+          "slug",
+          "modalidade"
+        ]
       },
       "OfertaFormacaoInputUpdateView": {
         "type": "object",
@@ -12296,7 +12970,14 @@
             "format": "date-time"
           }
         },
-        "required": ["id", "ofertaFormacao", "nivelFormacao", "dateCreated", "dateUpdated", "dateDeleted"]
+        "required": [
+          "id",
+          "ofertaFormacao",
+          "nivelFormacao",
+          "dateCreated",
+          "dateUpdated",
+          "dateDeleted"
+        ]
       },
       "OfertaFormacaoNivelFormacaoListResultView": {
         "type": "object",
@@ -12331,7 +13012,11 @@
             ]
           }
         },
-        "required": ["meta", "data", "links"]
+        "required": [
+          "meta",
+          "data",
+          "links"
+        ]
       },
       "OfertaFormacaoFindOneInputView": {
         "type": "object",
@@ -12346,7 +13031,9 @@
             "x-unispec-constraint-entity-exists": "OfertaFormacao"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "NivelFormacaoFindOneInputView": {
         "type": "object",
@@ -12361,7 +13048,9 @@
             "x-unispec-constraint-entity-exists": "NivelFormacao"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "OfertaFormacaoNivelFormacaoInputCreateView": {
         "type": "object",
@@ -12387,7 +13076,10 @@
             ]
           }
         },
-        "required": ["ofertaFormacao", "nivelFormacao"]
+        "required": [
+          "ofertaFormacao",
+          "nivelFormacao"
+        ]
       },
       "OfertaFormacaoNivelFormacaoInputUpdateView": {
         "type": "object",
@@ -12491,7 +13183,17 @@
             "format": "date-time"
           }
         },
-        "required": ["id", "nome", "nomeAbreviado", "campus", "ofertaFormacao", "imagemCapa", "dateCreated", "dateUpdated", "dateDeleted"]
+        "required": [
+          "id",
+          "nome",
+          "nomeAbreviado",
+          "campus",
+          "ofertaFormacao",
+          "imagemCapa",
+          "dateCreated",
+          "dateUpdated",
+          "dateDeleted"
+        ]
       },
       "CursoListResultView": {
         "type": "object",
@@ -12526,7 +13228,11 @@
             ]
           }
         },
-        "required": ["meta", "data", "links"]
+        "required": [
+          "meta",
+          "data",
+          "links"
+        ]
       },
       "CursoInputCreateView": {
         "type": "object",
@@ -12564,7 +13270,12 @@
             ]
           }
         },
-        "required": ["nome", "nomeAbreviado", "campus", "ofertaFormacao"]
+        "required": [
+          "nome",
+          "nomeAbreviado",
+          "campus",
+          "ofertaFormacao"
+        ]
       },
       "CursoInputUpdateView": {
         "type": "object",
@@ -12667,7 +13378,16 @@
             "format": "date-time"
           }
         },
-        "required": ["id", "nome", "nomeAbreviado", "cargaHoraria", "imagemCapa", "dateCreated", "dateUpdated", "dateDeleted"]
+        "required": [
+          "id",
+          "nome",
+          "nomeAbreviado",
+          "cargaHoraria",
+          "imagemCapa",
+          "dateCreated",
+          "dateUpdated",
+          "dateDeleted"
+        ]
       },
       "DisciplinaListResultView": {
         "type": "object",
@@ -12702,7 +13422,11 @@
             ]
           }
         },
-        "required": ["meta", "data", "links"]
+        "required": [
+          "meta",
+          "data",
+          "links"
+        ]
       },
       "DisciplinaInputCreateView": {
         "type": "object",
@@ -12727,7 +13451,11 @@
             "maximum": 65535
           }
         },
-        "required": ["nome", "nomeAbreviado", "cargaHoraria"]
+        "required": [
+          "nome",
+          "nomeAbreviado",
+          "cargaHoraria"
+        ]
       },
       "DisciplinaInputUpdateView": {
         "type": "object",
@@ -12820,7 +13548,16 @@
             "format": "date-time"
           }
         },
-        "required": ["id", "nome", "ano", "campus", "ofertaFormacao", "dateCreated", "dateUpdated", "dateDeleted"]
+        "required": [
+          "id",
+          "nome",
+          "ano",
+          "campus",
+          "ofertaFormacao",
+          "dateCreated",
+          "dateUpdated",
+          "dateDeleted"
+        ]
       },
       "CalendarioLetivoListResultView": {
         "type": "object",
@@ -12855,7 +13592,11 @@
             ]
           }
         },
-        "required": ["meta", "data", "links"]
+        "required": [
+          "meta",
+          "data",
+          "links"
+        ]
       },
       "CalendarioLetivoInputCreateView": {
         "type": "object",
@@ -12893,7 +13634,12 @@
             ]
           }
         },
-        "required": ["nome", "ano", "campus", "ofertaFormacao"]
+        "required": [
+          "nome",
+          "ano",
+          "campus",
+          "ofertaFormacao"
+        ]
       },
       "CalendarioLetivoInputUpdateView": {
         "type": "object",
@@ -12987,7 +13733,14 @@
             "format": "date-time"
           }
         },
-        "required": ["id", "campus", "ofertaFormacao", "dateCreated", "dateUpdated", "dateDeleted"]
+        "required": [
+          "id",
+          "campus",
+          "ofertaFormacao",
+          "dateCreated",
+          "dateUpdated",
+          "dateDeleted"
+        ]
       },
       "GradeHorarioOfertaFormacaoListResultView": {
         "type": "object",
@@ -13022,7 +13775,11 @@
             ]
           }
         },
-        "required": ["meta", "data", "links"]
+        "required": [
+          "meta",
+          "data",
+          "links"
+        ]
       },
       "GradeHorarioOfertaFormacaoInputCreateView": {
         "type": "object",
@@ -13048,7 +13805,10 @@
             ]
           }
         },
-        "required": ["campus", "ofertaFormacao"]
+        "required": [
+          "campus",
+          "ofertaFormacao"
+        ]
       },
       "GradeHorarioOfertaFormacaoInputUpdateView": {
         "type": "object",
@@ -13126,7 +13886,14 @@
             "format": "date-time"
           }
         },
-        "required": ["id", "periodoInicio", "periodoFim", "dateCreated", "dateUpdated", "dateDeleted"]
+        "required": [
+          "id",
+          "periodoInicio",
+          "periodoFim",
+          "dateCreated",
+          "dateUpdated",
+          "dateDeleted"
+        ]
       },
       "GradeHorarioOfertaFormacaoIntervaloDeTempoFindOneResultView": {
         "type": "object",
@@ -13183,7 +13950,14 @@
             "format": "date-time"
           }
         },
-        "required": ["id", "gradeHorarioOfertaFormacao", "intervaloDeTempo", "dateCreated", "dateUpdated", "dateDeleted"]
+        "required": [
+          "id",
+          "gradeHorarioOfertaFormacao",
+          "intervaloDeTempo",
+          "dateCreated",
+          "dateUpdated",
+          "dateDeleted"
+        ]
       },
       "GradeHorarioOfertaFormacaoIntervaloDeTempoListResultView": {
         "type": "object",
@@ -13218,7 +13992,11 @@
             ]
           }
         },
-        "required": ["meta", "data", "links"]
+        "required": [
+          "meta",
+          "data",
+          "links"
+        ]
       },
       "GradeHorarioOfertaFormacaoFindOneInputView": {
         "type": "object",
@@ -13233,7 +14011,9 @@
             "x-unispec-constraint-entity-exists": "GradeHorarioOfertaFormacao"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "IntervaloDeTempoInputView": {
         "type": "object",
@@ -13255,7 +14035,10 @@
             "format": "time"
           }
         },
-        "required": ["periodoInicio", "periodoFim"]
+        "required": [
+          "periodoInicio",
+          "periodoFim"
+        ]
       },
       "GradeHorarioOfertaFormacaoIntervaloDeTempoInputCreateView": {
         "type": "object",
@@ -13281,7 +14064,10 @@
             ]
           }
         },
-        "required": ["gradeHorarioOfertaFormacao", "intervaloDeTempo"]
+        "required": [
+          "gradeHorarioOfertaFormacao",
+          "intervaloDeTempo"
+        ]
       },
       "GradeHorarioOfertaFormacaoIntervaloDeTempoInputUpdateView": {
         "type": "object",
@@ -13368,7 +14154,16 @@
             "format": "date-time"
           }
         },
-        "required": ["id", "nome", "rrule", "cor", "calendario", "dateCreated", "dateUpdated", "dateDeleted"]
+        "required": [
+          "id",
+          "nome",
+          "rrule",
+          "cor",
+          "calendario",
+          "dateCreated",
+          "dateUpdated",
+          "dateDeleted"
+        ]
       },
       "EventoListResultView": {
         "type": "object",
@@ -13403,7 +14198,11 @@
             ]
           }
         },
-        "required": ["meta", "data", "links"]
+        "required": [
+          "meta",
+          "data",
+          "links"
+        ]
       },
       "CalendarioLetivoFindOneInputView": {
         "type": "object",
@@ -13418,7 +14217,9 @@
             "x-unispec-constraint-entity-exists": "CalendarioLetivo"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "EventoInputCreateView": {
         "type": "object",
@@ -13446,7 +14247,12 @@
             ]
           }
         },
-        "required": ["nome", "rrule", "cor", "calendario"]
+        "required": [
+          "nome",
+          "rrule",
+          "cor",
+          "calendario"
+        ]
       },
       "EventoInputUpdateView": {
         "type": "object",
@@ -13538,7 +14344,16 @@
             "format": "date-time"
           }
         },
-        "required": ["id", "data", "diaLetivo", "feriado", "calendario", "dateCreated", "dateUpdated", "dateDeleted"]
+        "required": [
+          "id",
+          "data",
+          "diaLetivo",
+          "feriado",
+          "calendario",
+          "dateCreated",
+          "dateUpdated",
+          "dateDeleted"
+        ]
       },
       "DiaCalendarioListResultView": {
         "type": "object",
@@ -13573,7 +14388,11 @@
             ]
           }
         },
-        "required": ["meta", "data", "links"]
+        "required": [
+          "meta",
+          "data",
+          "links"
+        ]
       },
       "DiaCalendarioInputCreateView": {
         "type": "object",
@@ -13605,7 +14424,12 @@
             ]
           }
         },
-        "required": ["data", "feriado", "diaLetivo", "calendario"]
+        "required": [
+          "data",
+          "feriado",
+          "diaLetivo",
+          "calendario"
+        ]
       },
       "DiaCalendarioInputUpdateView": {
         "type": "object",
@@ -13711,7 +14535,17 @@
             "format": "date-time"
           }
         },
-        "required": ["id", "numero", "dataInicio", "dataTermino", "cor", "calendario", "dateCreated", "dateUpdated", "dateDeleted"]
+        "required": [
+          "id",
+          "numero",
+          "dataInicio",
+          "dataTermino",
+          "cor",
+          "calendario",
+          "dateCreated",
+          "dateUpdated",
+          "dateDeleted"
+        ]
       },
       "EtapaListResultView": {
         "type": "object",
@@ -13746,7 +14580,11 @@
             ]
           }
         },
-        "required": ["meta", "data", "links"]
+        "required": [
+          "meta",
+          "data",
+          "links"
+        ]
       },
       "EtapaInputCreateView": {
         "type": "object",
@@ -13788,7 +14626,13 @@
             ]
           }
         },
-        "required": ["numero", "dataInicio", "dataTermino", "cor", "calendario"]
+        "required": [
+          "numero",
+          "dataInicio",
+          "dataTermino",
+          "cor",
+          "calendario"
+        ]
       },
       "EtapaInputUpdateView": {
         "type": "object",
@@ -13902,7 +14746,16 @@
             "format": "date-time"
           }
         },
-        "required": ["id", "periodo", "curso", "ambientePadraoAula", "imagemCapa", "dateCreated", "dateUpdated", "dateDeleted"]
+        "required": [
+          "id",
+          "periodo",
+          "curso",
+          "ambientePadraoAula",
+          "imagemCapa",
+          "dateCreated",
+          "dateUpdated",
+          "dateDeleted"
+        ]
       },
       "TurmaListResultView": {
         "type": "object",
@@ -13937,7 +14790,11 @@
             ]
           }
         },
-        "required": ["meta", "data", "links"]
+        "required": [
+          "meta",
+          "data",
+          "links"
+        ]
       },
       "CursoFindOneInputView": {
         "type": "object",
@@ -13952,7 +14809,9 @@
             "x-unispec-constraint-entity-exists": "Curso"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "TurmaInputCreateView": {
         "type": "object",
@@ -13984,7 +14843,11 @@
             ]
           }
         },
-        "required": ["periodo", "curso", "ambientePadraoAula"]
+        "required": [
+          "periodo",
+          "curso",
+          "ambientePadraoAula"
+        ]
       },
       "TurmaInputUpdateView": {
         "type": "object",
@@ -14107,7 +14970,18 @@
             "format": "date-time"
           }
         },
-        "required": ["id", "ativo", "calendarioLetivo", "turma", "disciplina", "ambientePadrao", "imagemCapa", "dateCreated", "dateUpdated", "dateDeleted"]
+        "required": [
+          "id",
+          "ativo",
+          "calendarioLetivo",
+          "turma",
+          "disciplina",
+          "ambientePadrao",
+          "imagemCapa",
+          "dateCreated",
+          "dateUpdated",
+          "dateDeleted"
+        ]
       },
       "DiarioListResultView": {
         "type": "object",
@@ -14142,7 +15016,11 @@
             ]
           }
         },
-        "required": ["meta", "data", "links"]
+        "required": [
+          "meta",
+          "data",
+          "links"
+        ]
       },
       "TurmaFindOneInputView": {
         "type": "object",
@@ -14157,7 +15035,9 @@
             "x-unispec-constraint-entity-exists": "Turma"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "DisciplinaFindOneInputView": {
         "type": "object",
@@ -14172,7 +15052,9 @@
             "x-unispec-constraint-entity-exists": "Disciplina"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "DiarioInputCreateView": {
         "type": "object",
@@ -14222,7 +15104,13 @@
             ]
           }
         },
-        "required": ["ativo", "calendarioLetivo", "turma", "disciplina", "ambientePadrao"]
+        "required": [
+          "ativo",
+          "calendarioLetivo",
+          "turma",
+          "disciplina",
+          "ambientePadrao"
+        ]
       },
       "DiarioInputUpdateView": {
         "type": "object",
@@ -14333,7 +15221,15 @@
             "format": "date-time"
           }
         },
-        "required": ["id", "situacao", "perfil", "diario", "dateCreated", "dateUpdated", "dateDeleted"]
+        "required": [
+          "id",
+          "situacao",
+          "perfil",
+          "diario",
+          "dateCreated",
+          "dateUpdated",
+          "dateDeleted"
+        ]
       },
       "DiarioProfessorListResultView": {
         "type": "object",
@@ -14368,7 +15264,11 @@
             ]
           }
         },
-        "required": ["meta", "data", "links"]
+        "required": [
+          "meta",
+          "data",
+          "links"
+        ]
       },
       "PerfilFindOneInputView": {
         "type": "object",
@@ -14383,7 +15283,9 @@
             "x-unispec-constraint-entity-exists": "Perfil"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "DiarioFindOneInputView": {
         "type": "object",
@@ -14398,7 +15300,9 @@
             "x-unispec-constraint-entity-exists": "Diario"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "DiarioProfessorInputCreateView": {
         "type": "object",
@@ -14428,7 +15332,11 @@
             ]
           }
         },
-        "required": ["situacao", "perfil", "diario"]
+        "required": [
+          "situacao",
+          "perfil",
+          "diario"
+        ]
       },
       "DiarioProfessorInputUpdateView": {
         "type": "object",
@@ -14537,7 +15445,17 @@
             "format": "date-time"
           }
         },
-        "required": ["id", "data", "modalidade", "intervaloDeTempo", "diario", "ambiente", "dateCreated", "dateUpdated", "dateDeleted"]
+        "required": [
+          "id",
+          "data",
+          "modalidade",
+          "intervaloDeTempo",
+          "diario",
+          "ambiente",
+          "dateCreated",
+          "dateUpdated",
+          "dateDeleted"
+        ]
       },
       "AulaListResultView": {
         "type": "object",
@@ -14572,7 +15490,11 @@
             ]
           }
         },
-        "required": ["meta", "data", "links"]
+        "required": [
+          "meta",
+          "data",
+          "links"
+        ]
       },
       "AulaInputCreateView": {
         "type": "object",
@@ -14620,7 +15542,13 @@
             ]
           }
         },
-        "required": ["data", "modalidade", "intervaloDeTempo", "diario", "ambiente"]
+        "required": [
+          "data",
+          "modalidade",
+          "intervaloDeTempo",
+          "diario",
+          "ambiente"
+        ]
       },
       "AulaInputUpdateView": {
         "type": "object",
@@ -14719,7 +15647,14 @@
             "format": "date-time"
           }
         },
-        "required": ["id", "dataInicio", "dataFim", "dateCreated", "dateUpdated", "dateDeleted"]
+        "required": [
+          "id",
+          "dataInicio",
+          "dataFim",
+          "dateCreated",
+          "dateUpdated",
+          "dateDeleted"
+        ]
       },
       "DisponibilidadeListResultView": {
         "type": "object",
@@ -14754,7 +15689,11 @@
             ]
           }
         },
-        "required": ["meta", "data", "links"]
+        "required": [
+          "meta",
+          "data",
+          "links"
+        ]
       },
       "DisponibilidadeInputCreateView": {
         "type": "object",
@@ -14775,7 +15714,10 @@
             "format": "date"
           }
         },
-        "required": ["dataInicio", "dataFim"]
+        "required": [
+          "dataInicio",
+          "dataFim"
+        ]
       },
       "DisponibilidadeInputUpdateView": {
         "type": "object",
@@ -14857,7 +15799,15 @@
             "format": "date-time"
           }
         },
-        "required": ["id", "rrule", "intervaloDeTempo", "disponibilidade", "dateCreated", "dateUpdated", "dateDeleted"]
+        "required": [
+          "id",
+          "rrule",
+          "intervaloDeTempo",
+          "disponibilidade",
+          "dateCreated",
+          "dateUpdated",
+          "dateDeleted"
+        ]
       },
       "DisponibilidadeDiaListResultView": {
         "type": "object",
@@ -14892,7 +15842,11 @@
             ]
           }
         },
-        "required": ["meta", "data", "links"]
+        "required": [
+          "meta",
+          "data",
+          "links"
+        ]
       },
       "DisponibilidadeFindOneInputView": {
         "type": "object",
@@ -14907,7 +15861,9 @@
             "x-unispec-constraint-entity-exists": "Disponibilidade"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "DisponibilidadeDiaInputCreateView": {
         "type": "object",
@@ -14938,7 +15894,11 @@
             ]
           }
         },
-        "required": ["rrule", "intervaloDeTempo", "disponibilidade"]
+        "required": [
+          "rrule",
+          "intervaloDeTempo",
+          "disponibilidade"
+        ]
       },
       "DisponibilidadeDiaInputUpdateView": {
         "type": "object",
@@ -15025,7 +15985,14 @@
             "format": "date-time"
           }
         },
-        "required": ["id", "disponibilidade", "turma", "dateCreated", "dateUpdated", "dateDeleted"]
+        "required": [
+          "id",
+          "disponibilidade",
+          "turma",
+          "dateCreated",
+          "dateUpdated",
+          "dateDeleted"
+        ]
       },
       "TurmaDisponibilidadeListResultView": {
         "type": "object",
@@ -15060,7 +16027,11 @@
             ]
           }
         },
-        "required": ["meta", "data", "links"]
+        "required": [
+          "meta",
+          "data",
+          "links"
+        ]
       },
       "TurmaDisponibilidadeInputCreateView": {
         "type": "object",
@@ -15086,7 +16057,10 @@
             ]
           }
         },
-        "required": ["disponibilidade", "turma"]
+        "required": [
+          "disponibilidade",
+          "turma"
+        ]
       },
       "TurmaDisponibilidadeInputUpdateView": {
         "type": "object",
@@ -15168,7 +16142,14 @@
             "format": "date-time"
           }
         },
-        "required": ["id", "disponibilidade", "perfil", "dateCreated", "dateUpdated", "dateDeleted"]
+        "required": [
+          "id",
+          "disponibilidade",
+          "perfil",
+          "dateCreated",
+          "dateUpdated",
+          "dateDeleted"
+        ]
       },
       "ProfessorDisponibilidadeListResultView": {
         "type": "object",
@@ -15203,7 +16184,11 @@
             ]
           }
         },
-        "required": ["meta", "data", "links"]
+        "required": [
+          "meta",
+          "data",
+          "links"
+        ]
       },
       "ProfessorDisponibilidadeInputCreateView": {
         "type": "object",
@@ -15229,7 +16214,10 @@
             ]
           }
         },
-        "required": ["disponibilidade", "perfil"]
+        "required": [
+          "disponibilidade",
+          "perfil"
+        ]
       },
       "ProfessorDisponibilidadeInputUpdateView": {
         "type": "object",
@@ -15340,7 +16328,18 @@
             "format": "date-time"
           }
         },
-        "required": ["id", "dataInicio", "dataFim", "diaSemanaIso", "aulasSeguidas", "intervaloDeTempo", "diario", "dateCreated", "dateUpdated", "dateDeleted"]
+        "required": [
+          "id",
+          "dataInicio",
+          "dataFim",
+          "diaSemanaIso",
+          "aulasSeguidas",
+          "intervaloDeTempo",
+          "diario",
+          "dateCreated",
+          "dateUpdated",
+          "dateDeleted"
+        ]
       },
       "DiarioPreferenciaAgrupamentoListResultView": {
         "type": "object",
@@ -15375,7 +16374,11 @@
             ]
           }
         },
-        "required": ["meta", "data", "links"]
+        "required": [
+          "meta",
+          "data",
+          "links"
+        ]
       },
       "DiarioPreferenciaAgrupamentoInputCreateView": {
         "type": "object",
@@ -15430,7 +16433,14 @@
             ]
           }
         },
-        "required": ["diaSemanaIso", "aulasSeguidas", "dataInicio", "dataFim", "intervaloDeTempo", "diario"]
+        "required": [
+          "diaSemanaIso",
+          "aulasSeguidas",
+          "dataInicio",
+          "dataFim",
+          "intervaloDeTempo",
+          "diario"
+        ]
       },
       "DiarioPreferenciaAgrupamentoInputUpdateView": {
         "type": "object",
@@ -15562,7 +16572,18 @@
             "format": "date-time"
           }
         },
-        "required": ["id", "status", "tipo", "dataGeracao", "vigenciaInicio", "vigenciaFim", "calendario", "dateCreated", "dateUpdated", "dateDeleted"]
+        "required": [
+          "id",
+          "status",
+          "tipo",
+          "dataGeracao",
+          "vigenciaInicio",
+          "vigenciaFim",
+          "calendario",
+          "dateCreated",
+          "dateUpdated",
+          "dateDeleted"
+        ]
       },
       "HorarioGeradoListResultView": {
         "type": "object",
@@ -15597,7 +16618,11 @@
             ]
           }
         },
-        "required": ["meta", "data", "links"]
+        "required": [
+          "meta",
+          "data",
+          "links"
+        ]
       },
       "HorarioGeradoInputCreateView": {
         "type": "object",
@@ -15644,7 +16669,14 @@
             ]
           }
         },
-        "required": ["status", "tipo", "dataGeracao", "vigenciaInicio", "vigenciaFim", "calendario"]
+        "required": [
+          "status",
+          "tipo",
+          "dataGeracao",
+          "vigenciaInicio",
+          "vigenciaFim",
+          "calendario"
+        ]
       },
       "HorarioGeradoInputUpdateView": {
         "type": "object",
@@ -15742,7 +16774,13 @@
             ]
           }
         },
-        "required": ["id", "data", "intervaloDeTempo", "diarioProfessor", "horarioGerado"]
+        "required": [
+          "id",
+          "data",
+          "intervaloDeTempo",
+          "diarioProfessor",
+          "horarioGerado"
+        ]
       },
       "HorarioGeradoAulaListResultView": {
         "type": "object",
@@ -15777,7 +16815,11 @@
             ]
           }
         },
-        "required": ["meta", "data", "links"]
+        "required": [
+          "meta",
+          "data",
+          "links"
+        ]
       },
       "DiarioProfessorFindOneInputView": {
         "type": "object",
@@ -15792,7 +16834,9 @@
             "x-unispec-constraint-entity-exists": "DiarioProfessor"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "HorarioGeradoFindOneInputView": {
         "type": "object",
@@ -15807,7 +16851,9 @@
             "x-unispec-constraint-entity-exists": "HorarioGerado"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "HorarioGeradoAulaInputCreateView": {
         "type": "object",
@@ -15851,7 +16897,12 @@
             ]
           }
         },
-        "required": ["data", "intervaloDeTempo", "diarioProfessor", "horarioGerado"]
+        "required": [
+          "data",
+          "intervaloDeTempo",
+          "diarioProfessor",
+          "horarioGerado"
+        ]
       },
       "HorarioGeradoAulaInputUpdateView": {
         "type": "object",
