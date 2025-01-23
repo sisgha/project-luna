@@ -52,7 +52,7 @@ jobs:
         uses: ladesa-ro/esteira-ci-cd/actions/image-build-push@main
         with:
           image-tag: ${{ github.ref_name }}
-          image-name: ${{ vars.IMAGE_NAME  }}
+          image-name: ${{ env.IMAGE_NAME  }}
 
           build-image: "true"
           build-target-tag: "docs-npm-api-client-fetch-runtime"
