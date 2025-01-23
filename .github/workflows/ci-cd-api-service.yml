@@ -5,6 +5,10 @@ on:
   push:
     branches:
       - development
+    paths:
+      - api-service/**/*
+      - pnpm-lock.yaml
+      - Dockerfile*
 
 concurrency:
   cancel-in-progress: false
