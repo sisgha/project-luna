@@ -58,7 +58,7 @@ jobs:
           build-target-tag: "docs-npm-api-client-fetch-runtime"
 
           push-image: "true"
-          push-image-registry-url: ${{ secrets.REGISTRY_URL }}
+          push-image-registry-url: ${{ env.REGISTRY_URL }}
 
   cd-cluster:
     name: Deploy to Cluster
