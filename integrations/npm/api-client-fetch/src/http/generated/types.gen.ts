@@ -457,6 +457,13 @@ export type AuthSetInitialPasswordInputView = {
   senha: string;
 };
 
+export type AuthRecoverPasswordInputView = {
+  /**
+   * E-mail.
+   */
+  email: string;
+};
+
 export type UsuarioListResultView = {
   /**
    * Metadados da busca.
@@ -3004,6 +3011,15 @@ export type AuthSetInitialPasswordData = {
 };
 
 export type AuthSetInitialPasswordResponse = boolean;
+
+export type AuthRecoverPasswordData = {
+  /**
+   * Dados de entrada para autenticação.
+   */
+  requestBody: AuthRecoverPasswordInputView;
+};
+
+export type AuthRecoverPasswordResponse = boolean;
 
 export type UsuarioListData = {
   /**

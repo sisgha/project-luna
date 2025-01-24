@@ -2,7 +2,9 @@
   "name": "@ladesa-ro/api.service",
   "version": "1.0.0-next.29",
   "private": true,
-  "files": ["**/*"],
+  "files": [
+    "**/*"
+  ],
   "scripts": {
     "build:nest": "nx build",
     "build:openapi-json": "OUT_FILE=./dist/generated.json pnpm run generate:openapi",
@@ -31,7 +33,7 @@
     "@apollo/utils.keyvaluecache": "^3.1.0",
     "@fastify/merge-json-schemas": "^0.2.1",
     "@keycloak/keycloak-admin-client": "^25.0.6",
-    "@ladesa-ro/especificacao": "^3.3.12",
+    "@ladesa-ro/especificacao": "^3.4.0",
     "@nestjs/apollo": "^13.0.2",
     "@nestjs/common": "^11.0.5",
     "@nestjs/config": "^4.0.0",

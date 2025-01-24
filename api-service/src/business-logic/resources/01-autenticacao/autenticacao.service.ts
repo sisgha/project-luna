@@ -1,8 +1,18 @@
 import type { AccessContext } from "@/infrastructure/access-context";
 import { DatabaseContextService } from "@/infrastructure/integrations/database";
-import { KeycloakService, OpenidConnectService } from "@/infrastructure/integrations/identity-provider";
+import {
+  KeycloakService,
+  OpenidConnectService,
+} from "@/infrastructure/integrations/identity-provider";
+import { RequiredActionAlias } from "@keycloak/keycloak-admin-client/lib/defs/requiredActionProviderRepresentation";
 import * as LadesaTypings from "@ladesa-ro/especificacao";
-import { BadRequestException, ForbiddenException, HttpException, Injectable, ServiceUnavailableException } from "@nestjs/common";
+import {
+  BadRequestException,
+  ForbiddenException,
+  HttpException,
+  Injectable,
+  ServiceUnavailableException,
+} from "@nestjs/common";
 import * as client from "openid-client";
 import { PerfilService } from "../03-autorizacao/perfil/perfil.service";
 import { UsuarioService } from "./usuario/usuario.service";
@@ -14,7 +24,7 @@ export class AutenticacaoService {
     private perfilService: PerfilService,
     private keycloakService: KeycloakService,
     private databaseContext: DatabaseContextService,
-    private openidConnectService: OpenidConnectService,
+    private openidConnectService: OpenidConnectService
   ) {}
 
   //
@@ -25,7 +35,9 @@ export class AutenticacaoService {
 
   //
 
-  async whoAmI(accessContext: AccessContext): Promise<LadesaTypings.AuthWhoAmIResultView> {
+  async whoAmI(
+    accessContext: AccessContext
+  ): Promise<LadesaTypings.AuthWhoAmIResultView> {
     const usuario = accessContext.requestActor
       ? await this.usuarioService.usuarioFindById(accessContext, {
           id: accessContext.requestActor.id,
@@ -33,7 +45,10 @@ export class AutenticacaoService {
       : null;
 
     if (usuario) {
-      const perfisAtivos = await this.perfilService.perfilGetAllActive(null, usuario.id);
+      const perfisAtivos = await this.perfilService.perfilGetAllActive(
+        null,
+        usuario.id
+      );
 
       return {
         usuario,
@@ -47,9 +62,14 @@ export class AutenticacaoService {
     };
   }
 
-  async login(accessContext: AccessContext, dto: LadesaTypings.AuthLoginOperationInput): Promise<LadesaTypings.AuthLoginOperationOutput["success"]> {
+  async login(
+    accessContext: AccessContext,
+    dto: LadesaTypings.AuthLoginOperationInput
+  ): Promise<LadesaTypings.AuthLoginOperationOutput["success"]> {
     if (accessContext.requestActor !== null) {
-      throw new BadRequestException("Você não pode usar a rota de login caso já esteja logado.");
+      throw new BadRequestException(
+        "Você não pode usar a rota de login caso já esteja logado."
+      );
     }
 
     let config: client.Configuration;
@@ -60,7 +80,9 @@ export class AutenticacaoService {
       throw new ServiceUnavailableException();
     }
 
-    const { usuario, userRepresentation } = await this.findByMatriculaSiape(dto.body.matriculaSiape);
+    const { usuario, userRepresentation } = await this.findByMatriculaSiape(
+      dto.body.matriculaSiape
+    );
 
     try {
       if (usuario && userRepresentation?.username) {
@@ -79,7 +101,10 @@ export class AutenticacaoService {
     throw new ForbiddenException("Credenciais inválidas.");
   }
 
-  async refresh(_: AccessContext, dto: LadesaTypings.AuthRefreshOperationInput): Promise<LadesaTypings.AuthLoginOperationOutput["success"]> {
+  async refresh(
+    _: AccessContext,
+    dto: LadesaTypings.AuthRefreshOperationInput
+  ): Promise<LadesaTypings.AuthLoginOperationOutput["success"]> {
     let config: client.Configuration;
 
     try {
@@ -103,12 +128,16 @@ export class AutenticacaoService {
 
   async definirSenha(
     _accessContext: AccessContext,
-    dto: LadesaTypings.AuthCredentialsSetInitialPasswordOperationInput,
-  ): Promise<LadesaTypings.AuthCredentialsSetInitialPasswordOperationOutput["success"]> {
+    dto: LadesaTypings.AuthCredentialsSetInitialPasswordOperationInput
+  ): Promise<
+    LadesaTypings.AuthCredentialsSetInitialPasswordOperationOutput["success"]
+  > {
     try {
       const kcAdminClient = await this.keycloakService.getAdminClient();
 
-      const { usuario, userRepresentation } = await this.findByMatriculaSiape(dto.body.matriculaSiape);
+      const { usuario, userRepresentation } = await this.findByMatriculaSiape(
+        dto.body.matriculaSiape
+      );
 
       if (!usuario || !userRepresentation) {
         throw new ForbiddenException("Usuário indisponível.");
@@ -118,7 +147,10 @@ export class AutenticacaoService {
         id: userRepresentation.id!,
       });
 
-      if (userRepresentation.requiredActions?.includes("UPDATE_PASSWORD") && userCredentials.length === 0) {
+      if (
+        userRepresentation.requiredActions?.includes("UPDATE_PASSWORD") &&
+        userCredentials.length === 0
+      ) {
         await kcAdminClient.users.resetPassword({
           id: userRepresentation.id!,
           credential: {
@@ -133,7 +165,7 @@ export class AutenticacaoService {
           },
           {
             enabled: true,
-          },
+          }
         );
 
         return true;
@@ -151,14 +183,18 @@ export class AutenticacaoService {
     }
   }
 
-  private formatTokenSet(tokenset: TokenSet) {
+  private formatTokenSet(
+    tokenset: client.TokenEndpointResponse & client.TokenEndpointResponseHelpers
+  ) {
     return {
       access_token: tokenset.access_token ?? null,
       token_type: tokenset.token_type ?? null,
       id_token: tokenset.id_token ?? null,
       refresh_token: tokenset.refresh_token ?? null,
       expires_in: tokenset.expires_in ?? null,
-      expires_at: tokenset.expires_at ?? null,
+      expires_at: tokenset.expires_in
+        ? new Date(Date.now() + tokenset.expires_in).getTime()
+        : null,
       session_state: tokenset.session_state ?? null,
       scope: tokenset.scope ?? null,
     };
@@ -175,11 +211,38 @@ export class AutenticacaoService {
 
     const usuario = await qb.getOne();
 
-    const userRepresentation = await this.keycloakService.findUserByMatriculaSiape(matriculaSiape);
+    const userRepresentation =
+      await this.keycloakService.findUserByMatriculaSiape(matriculaSiape);
 
     return {
       usuario,
       userRepresentation,
     };
+  }
+
+  async recoverPassword(
+    _accessContext: AccessContext | null,
+    dto: LadesaTypings.AuthRecoverPasswordOperationInput
+  ) {
+    const kcAdminClient = await this.keycloakService.getAdminClient();
+
+    const [user] = await kcAdminClient.users.find(
+      { email: dto.body.email },
+      { catchNotFound: true }
+    );
+
+    if (user && user.id) {
+      return kcAdminClient.users
+        .executeActionsEmail({
+          id: user.id,
+          redirectUri: "https://dev.ladesa.com.br",
+          clientId: this.keycloakService.keycloakConfigCredentials.clientId,
+          actions: [RequiredActionAlias.UPDATE_PASSWORD],
+        })
+        .then(() => true)
+        .catch(() => false);
+    }
+
+    return false;
   }
 }

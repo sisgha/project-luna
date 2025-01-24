@@ -32,6 +32,8 @@ import type {
   AulaUpdateOneByIdResponse,
   AuthLoginData,
   AuthLoginResponse,
+  AuthRecoverPasswordData,
+  AuthRecoverPasswordResponse,
   AuthRefreshData,
   AuthRefreshResponse,
   AuthSetInitialPasswordData,
@@ -551,6 +553,26 @@ export class AutenticacaoService {
     return this.httpRequest.request({
       method: "POST",
       url: "/autenticacao/definir-senha",
+      body: data.requestBody,
+      mediaType: "application/json",
+      errors: {
+        403: "O solicitante não tem permissão para executar esta ação.",
+        404: "Registro não encontrado.",
+      },
+    });
+  }
+
+  /**
+   * Operação de login.
+   * @param data The data for the request.
+   * @param data.requestBody Dados de entrada para autenticação.
+   * @returns boolean
+   * @throws ApiError
+   */
+  public authRecoverPassword(data: AuthRecoverPasswordData): CancelablePromise<AuthRecoverPasswordResponse> {
+    return this.httpRequest.request({
+      method: "POST",
+      url: "/autenticacao/redefinir-senha",
       body: data.requestBody,
       mediaType: "application/json",
       errors: {

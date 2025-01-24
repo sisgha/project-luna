@@ -609,6 +609,52 @@
         "tags": ["autenticacao"]
       }
     },
+    "/autenticacao/redefinir-senha": {
+      "post": {
+        "description": "Operação de login.",
+        "operationId": "AuthRecoverPassword",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "description": "Dados de entrada para autenticação.",
+          "kind": "type",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AuthRecoverPasswordInputView"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "nullable": false,
+            "description": "",
+            "kind": "schema",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "O solicitante não tem permissão para executar esta ação."
+          },
+          "404": {
+            "description": "Registro não encontrado."
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "",
+        "tags": ["autenticacao"]
+      }
+    },
     "/usuarios": {
       "get": {
         "description": "Sem descrição.",
@@ -10910,6 +10956,17 @@
           }
         },
         "required": ["matriculaSiape", "senha"]
+      },
+      "AuthRecoverPasswordInputView": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "nullable": false,
+            "description": "E-mail."
+          }
+        },
+        "required": ["email"]
       },
       "UsuarioListResultView": {
         "type": "object",

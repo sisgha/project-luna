@@ -845,6 +845,18 @@ export const $AuthSetInitialPasswordInputView = {
   required: ["matriculaSiape", "senha"],
 } as const;
 
+export const $AuthRecoverPasswordInputView = {
+  type: "object",
+  properties: {
+    email: {
+      type: "string",
+      nullable: false,
+      description: "E-mail.",
+    },
+  },
+  required: ["email"],
+} as const;
+
 export const $UsuarioListResultView = {
   type: "object",
   properties: {
