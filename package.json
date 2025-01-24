@@ -3,8 +3,6 @@
   "version": "1.0.0-next.29",
   "private": true,
   "scripts": {
-    "commit": "git-cz",
-    "prepare": "husky",
     "build": "nx run-many -t build --exclude @ladesa-ro/api",
     "start:dev": "pnpm run --filter @ladesa-ro/api.service start:dev",
     "lint:check": "biome lint --no-errors-on-unmatched",
