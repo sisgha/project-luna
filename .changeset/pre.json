@@ -8,5 +8,11 @@
     "@ladesa-ro/api-client-fetch.docs": "1.0.0-alpha.27",
     "@ladesa-ro/api.integrations.openapi-json": "1.0.0-alpha.27"
   },
-  "changesets": ["curly-seas-fix", "honest-drinks-visit", "olive-stingrays-camp", "silly-penguins-approve"]
+  "changesets": [
+    "curly-seas-fix",
+    "honest-drinks-visit",
+    "nasty-steaks-smoke",
+    "olive-stingrays-camp",
+    "silly-penguins-approve"
+  ]
 }

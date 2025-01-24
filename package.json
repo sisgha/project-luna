@@ -1,6 +1,6 @@
 {
   "name": "@ladesa-ro/api",
-  "version": "1.0.0-next.29",
+  "version": "1.0.0-next.30",
   "private": true,
   "scripts": {
     "build": "nx run-many -t build --exclude @ladesa-ro/api",

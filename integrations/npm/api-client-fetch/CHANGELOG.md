@@ -1,5 +1,11 @@
 # @ladesa-ro/api-client-fetch
 
+## 1.0.0-next.31
+
+### Minor Changes
+
+- 2e9a627: feat(autenticacao): recover password route
+
 ## 1.0.0-next.30
 
 ### Patch Changes
