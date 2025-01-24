@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-
-pnpm install --prefer-offline --ignore-scripts
-
-pnpm exec lint-staged
