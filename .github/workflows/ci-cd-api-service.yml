@@ -8,6 +8,7 @@ on:
     paths:
       - .github/workflows/ci-cd-api-service.yml
       - api-service/**/*
+      - package.json
       - pnpm-lock.yaml
       - Dockerfile*
 

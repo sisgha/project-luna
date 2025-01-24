@@ -10,6 +10,7 @@ on:
       - integrations/npm/api-client-fetch/**/*
       - integrations/npm/api-client-fetch-docs/**/*
       - pnpm-lock.yaml
+      - package.json
       - Dockerfile*
 
 concurrency:
