@@ -1,8 +1,10 @@
 {
   "name": "@ladesa-ro/api.integrations.openapi-json",
-  "version": "1.0.0-next.30",
+  "version": "1.0.0-next.31",
   "private": true,
-  "files": ["generated.json"],
+  "files": [
+    "generated.json"
+  ],
   "scripts": {
     "generate-json": "nx generate-json"
   },
@@ -12,7 +14,10 @@
     "typedoc-plugin-mdn-links": "^4.0.9"
   },
   "nx": {
-    "tags": ["integrations", "integrations:openapi-json"],
+    "tags": [
+      "integrations",
+      "integrations:openapi-json"
+    ],
     "root": "integrations/openapi-json",
     "namedInputs": {
       "default": []
@@ -20,13 +25,19 @@
     "targets": {
       "generate-json": {
         "executor": "nx:run-commands",
-        "inputs": ["default"],
+        "inputs": [
+          "default"
+        ],
         "options": {
           "cwd": "{projectRoot}",
           "command": "OUT_FILE=$(pwd)/generated.json pnpm run --filter '@ladesa-ro/api.service' generate:openapi && pnpm run -w code-static:fix $(pwd)/generated.json"
         },
-        "outputs": ["{projectRoot}/generated.json"],
-        "dependsOn": ["@ladesa-ro/api.service:build"]
+        "outputs": [
+          "{projectRoot}/generated.json"
+        ],
+        "dependsOn": [
+          "@ladesa-ro/api.service:build"
+        ]
       }
     }
   }
