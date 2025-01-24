@@ -22,10 +22,7 @@
     "provenance": true,
     "access": "public"
   },
-  "files": [
-    "*.md",
-    "dist/**/*.*"
-  ],
+  "files": ["*.md", "dist/**/*.*"],
   "homepage": "https://github.com/ladesa-ro/api/tree/development/integrations/npm/api-client-fetch#readme",
   "repository": {
     "type": "git",
@@ -35,12 +32,5 @@
   "bugs": {
     "url": "https://github.com/ladesa-ro/api/issues"
   },
-  "keywords": [
-    "ladesa-ro",
-    "api",
-    "api-client",
-    "fetch",
-    "sisgha",
-    "sisgea"
-  ]
+  "keywords": ["ladesa-ro", "api", "api-client", "fetch", "sisgha", "sisgea"]
 }
