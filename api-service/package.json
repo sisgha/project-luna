@@ -2,14 +2,12 @@
   "name": "@ladesa-ro/api.service",
   "version": "1.0.0-next.30",
   "private": true,
-  "files": [
-    "**/*"
-  ],
+  "files": ["**/*"],
   "scripts": {
     "build:nest": "nx build",
-    "build:openapi-json": "OUT_FILE=./dist/generated.json pnpm run generate:openapi",
+    "build:openapi-json": "OUT_FILE=./dist/generated.json pnpm run --silent generate:openapi",
     "build": "pnpm run build:nest && pnpm run build:openapi-json",
-    "generate:openapi": "node --experimental-require-module dist/scripts/codegen-openapi-json",
+    "generate:openapi": "node --experimental-require-module dist/scripts/codegen-openapi/main.js",
     "check:static": "tsc --noEmit",
     "start": "nest start -e 'node --experimental-require-module --trace-warnings'",
     "start:dev": "GIT_COMMIT_HASH=local nest start --watch -e 'node --experimental-require-module --trace-warnings'",
