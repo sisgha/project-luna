@@ -16,7 +16,7 @@ export class KeycloakService {
   constructor(
     //
     @Inject(AppConfigService)
-    readonly appConfigService: AppConfigService
+    readonly appConfigService: AppConfigService,
   ) {}
 
   get keycloakConfigCredentials() {
@@ -73,9 +73,7 @@ export class KeycloakService {
       try {
         await kcAdminClient.auth(credentials);
       } catch (e) {
-        console.error(
-          "[KeycloakAdminClientContainer::error] Can not connect to KeyCloak."
-        );
+        console.error("[KeycloakAdminClientContainer::error] Can not connect to KeyCloak.");
         throw e;
       } finally {
         kcAdminClient.setConfig({ realmName: currentRealm });
@@ -102,17 +100,12 @@ export class KeycloakService {
       return kcAdminClient;
     }
 
-    throw new Error(
-      "[KeycloakAdminClientContainer::error] kcAdminClient is null"
-    );
+    throw new Error("[KeycloakAdminClientContainer::error] kcAdminClient is null");
   }
 
   async findUserByMatriculaSiape(matriculaSiape: string) {
     const kcAdminClient = await this.getAdminClient();
-    const [userRepresentation] = await kcAdminClient.users.find(
-      { q: `usuario.matriculaSiape:${matriculaSiape}` },
-      { catchNotFound: true }
-    );
+    const [userRepresentation] = await kcAdminClient.users.find({ q: `usuario.matriculaSiape:${matriculaSiape}` }, { catchNotFound: true });
     return userRepresentation;
   }
 

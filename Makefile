@@ -10,7 +10,7 @@ setup:
 	$(shell (bash -c "docker network create $(d_network) &>/dev/null"))
 	
 	echo "baixando imagens base dos containers (node e postgres), isso pode levar alguns minutos..."
-	docker compose $(compose_options) build -q
+	docker compose $(compose_options) build
 
 prepare:
 	docker compose $(compose_options) exec $(d_container_app) bash -c "corepack install && pnpm install";

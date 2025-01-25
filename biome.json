@@ -7,7 +7,7 @@
   },
   "files": {
     "ignoreUnknown": false,
-    "ignore": [".pnpm-store"]
+    "ignore": [".pnpm-store", ".nx", "*/**/dist"]
   },
   "formatter": {
     "enabled": true,

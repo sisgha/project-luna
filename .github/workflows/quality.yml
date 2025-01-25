@@ -1,0 +1,49 @@
+name: Code Quality
+
+on:
+  pull_request:
+    branches: development
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Aknowledge about origin/development
+        run: git fetch -p origin development
+
+      - name: It must install the dependencies
+        uses: ./.github/actions/prepare/install
+        with:
+          install-node: "true"
+
+      - name: The build should work
+        run: pnpm run -w build;
+
+      - name: Require to pass static code check
+        run: |
+          git stash -u;
+
+          pnpm run -w code-static:check;
+
+          if [ `git stash list | wc -l` -gt 0 ]; then
+            git stash pop;
+          fi
+
+      - name: Require updated integrations
+        run: |
+          if [ `git status --porcelain=1 | wc -l` -ne 0 ]; then
+            git status --porcelain=1;
+            exit 1;
+          fi
+
+      - name: Require changesets
+        run: pnpm exec changeset status --since=origin/development
