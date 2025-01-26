@@ -9,6 +9,7 @@ on:
       - api-service/**/*
       - package.json
       - pnpm-lock.yaml
+  workflow_dispatch:
 
 concurrency:
   cancel-in-progress: false
