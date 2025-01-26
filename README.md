@@ -116,8 +116,8 @@ O projeto conta com um [arquivo make](./Makefile) que comporta scrips destinados
 
 <!-- Badges / Actions / Release  -->
 
-[action-release-src]: https://img.shields.io/github/actions/workflow/status/ladesa-ro/api/release.yml?style=flat&logo=github&logoColor=white&label=Release&branch=development&labelColor=18181B
-[action-release-href]: https://github.com/ladesa-ro/api/actions/workflows/release.yml?query=branch%3Adevelopment
+[action-release-src]: https://img.shields.io/github/actions/workflow/status/ladesa-ro/api/ci-release.yml?style=flat&logo=github&logoColor=white&label=Release&branch=development&labelColor=18181B
+[action-release-href]: https://github.com/ladesa-ro/api/actions/workflows/ci-release.yml?query=branch%3Adevelopment
 
 <!-- Badges / Actions / Autofix  -->
 
