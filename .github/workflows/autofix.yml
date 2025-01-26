@@ -12,8 +12,7 @@ on:
   workflow_dispatch:
 
 concurrency:
-  cancel-in-progress: false
-  group: ${{ github.workflow }}-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.sha }}
 
 env:
   has_changes: false

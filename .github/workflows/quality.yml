@@ -2,11 +2,11 @@ name: Check Code Quality
 
 on:
   workflow_call:
+  workflow_dispatch:
   pull_request:
     branches: development
   push:
     branches: development
-  workflow_dispatch:
   schedule:
     - cron: "0 9 * * 3"
 

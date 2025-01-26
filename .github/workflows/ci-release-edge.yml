@@ -1,9 +1,12 @@
-name: "CI - Edge"
+name: "CI - Release (Edge)"
 
 on:
   push:
     branches:
       - development
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref_name }}
 
 jobs:
   ci-edge-npm:

@@ -14,8 +14,7 @@ on:
       - Dockerfile*
 
 concurrency:
-  cancel-in-progress: false
-  group: ${{ github.workflow }}-${{ github.ref }}
+  group: ci-cd-${{ github.ref }}
 
 jobs:
   ci-image:
