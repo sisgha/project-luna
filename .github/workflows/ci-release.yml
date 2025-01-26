@@ -5,7 +5,8 @@ on:
     branches:
       - development
 
-concurrency: ${{ github.workflow }}-${{ github.ref }}
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref_name }}
 
 jobs:
   code-quality:
