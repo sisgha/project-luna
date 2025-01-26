@@ -9,7 +9,7 @@
     "build": "nx build",
     "test": "pnpm exec tsc --noEmit",
     "dev": "tsc -p tsconfig.json --watch",
-    "generate": "pnpm run generate:client",
+    "generate": "nx generate",
     "generate:client": "nx generate:client",
     "cleanup:generated": "rimraf ./src/http/generated"
   },

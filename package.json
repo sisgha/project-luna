@@ -3,7 +3,8 @@
   "version": "1.0.0-next.30",
   "private": true,
   "scripts": {
-    "build": "nx run-many -t build --exclude @ladesa-ro/api",
+    "build:all": "nx run-many -t build",
+    "generate:all": "nx run-many -t generate",
     "start:dev": "pnpm run --filter @ladesa-ro/api.service start:dev",
     "lint:check": "biome lint --no-errors-on-unmatched",
     "lint:fix": "biome lint --write --no-errors-on-unmatched",
@@ -18,8 +19,8 @@
   },
   "dependencies": {
     "@biomejs/biome": "1.9.4",
-    "@changesets/cli": "^2.27.11",
+    "@changesets/cli": "^2.27.12",
     "nx": "20.3.2"
   },
-  "packageManager": "pnpm@9.12.3+sha512.cce0f9de9c5a7c95bef944169cc5dfe8741abfb145078c0d508b868056848a87c81e626246cb60967cbd7fd29a6c062ef73ff840d96b3c86c40ac92cf4a813ee"
+  "packageManager": "pnpm@9.15.4+sha512.b2dc20e2fc72b3e18848459b37359a32064663e5627a51e4c74b2c29dd8e8e0491483c3abb40789cfd578bf362fb6ba8261b05f0387d76792ed6e23ea3b1b6a0"
 }

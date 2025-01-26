@@ -1,4 +1,5 @@
 {
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "tags": ["integrations", "integrations:npm"],
   "root": "integrations/npm/api-client-fetch",
   "namedInputs": {
@@ -12,19 +13,29 @@
         "cwd": "{projectRoot}",
         "command": "tsc -p tsconfig.json"
       },
-      "outputs": ["{projectRoot}/dist/**/*"],
-      "dependsOn": ["generate"]
+      "outputs": ["{projectRoot}/dist/**/*"]
     },
     "generate:client": {
       "cache": true,
       "executor": "nx:run-commands",
-      "inputs": ["{workspaceRoot}/integrations/openapi-json/generated.json"],
+      "inputs": ["{workspaceRoot}/integrations/openapi-json/json/openapi.v3.json"],
       "options": {
         "cwd": "{projectRoot}",
-        "command": "pnpm run cleanup:generated && openapi-ts && pnpm run -w code-static:fix $(pwd)"
+        "commands": ["pnpm run cleanup:generated", "pnpm exec openapi-ts", "pnpm run -w code-static:fix {projectRoot}"],
+        "parallel": false
       },
       "outputs": ["{projectRoot}/src/http/generated/**/*"],
-      "dependsOn": []
+      "dependsOn": ["@ladesa-ro/api.integrations.openapi-json:generate"]
+    },
+    "generate": {
+      "executor": "nx:run-commands",
+      "cache": false,
+      "inputs": [],
+      "options": {
+        "cwd": "{projectRoot}",
+        "command": "nx run-many --targets=generate:client"
+      },
+      "dependsOn": ["@ladesa-ro/api.integrations.openapi-json:generate"]
     }
   }
 }

@@ -21,7 +21,7 @@ export default {
 
   //
 
-  input: "../../openapi-json/generated.json",
+  input: "../../openapi-json/json/openapi.v3.json",
 
   output: {
     lint: "biome",

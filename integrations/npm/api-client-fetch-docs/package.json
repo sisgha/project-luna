@@ -4,14 +4,13 @@
   "files": ["dist/**/*.*"],
   "private": true,
   "scripts": {
-    "generate": "nx generate",
-    "generate:watch": "typedoc --options .config/typedoc.jsonc --watch --preserveWatchOutput",
+    "watch": "nx watch",
     "build": "nx build",
     "serve": "nx serve"
   },
   "devDependencies": {
     "serve": "^14.2.4",
     "typedoc": "^0.27.6",
-    "typedoc-plugin-mdn-links": "^4.0.9"
+    "typedoc-plugin-mdn-links": "^4.0.10"
   }
 }
