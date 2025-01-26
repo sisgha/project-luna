@@ -101,27 +101,3 @@ jobs:
         with:
           tag: "${{ steps.extract-tag.outputs.tag }}"
           npm-token: "${{ secrets.NPM_TOKEN }}"
-
-  ci_npm_edge:
-    name: Edge NPM package publish
-    runs-on: ubuntu-latest
-
-    needs: [release]
-    if: needs.release.outputs.published == 'false'
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Install
-        uses: ./.github/actions/prepare/install
-        with:
-          install-node: "true"
-
-      - name: Build
-        uses: ./.github/actions/prepare/build
-        with:
-          workspace-build: "true"
-
-      - name: "Continuos Release: publish to pkg.pr.new"
-        run: pnpx pkg-pr-new publish --comment=update './integrations/npm/api-client-fetch'

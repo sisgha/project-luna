@@ -1,0 +1,17 @@
+name: "Prepare: Generate"
+description: "Prepares the repo for a job by running the generate"
+
+inputs:
+  workspace-generate:
+    description: "workspace project generate"
+    required: false
+    default: "false"
+
+runs:
+  using: "composite"
+
+  steps:
+    - name: "Generate all"
+      if: ${{ inputs.workspace-generate == 'true' }}
+      shell: bash
+      run: pnpm run -w generate:all
