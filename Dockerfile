@@ -40,7 +40,7 @@ RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
 # API-SERVICE -- BUILD
 # ========================================
 
-FROM build AS api-service-builder
+FROM dev-dependencies AS api-service-builder
 
 RUN pnpm run --filter "@ladesa-ro/api.service" build
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm deploy --prod --filter=@ladesa-ro/api.service "${PATH_BUILDER_OUTPUT}/api-service"
@@ -49,7 +49,7 @@ RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm deploy --prod --filter=@l
 # NPM / API-CLIENT-FETCH / DOCS -- BUILD
 # ========================================
 
-FROM build AS docs-npm-api-client-fetch-builder
+FROM dev-dependencies AS docs-npm-api-client-fetch-builder
 
 RUN pnpm run --filter "@ladesa-ro/api-client-fetch.docs" build
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm deploy --prod --filter=@ladesa-ro/api-client-fetch.docs "${PATH_BUILDER_OUTPUT}/npm-api-client-fetch.docs"
