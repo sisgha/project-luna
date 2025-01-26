@@ -23,7 +23,7 @@
     "build:openapi-json": {
       "executor": "nx:run-commands",
       "cache": true,
-      "inputs": [],
+      "inputs": ["nestjs"],
       "options": {
         "cwd": "{projectRoot}",
         "command": "OUT_FILE=./generated/openapi.v3.json pnpm run --silent generate:openapi"
@@ -37,7 +37,7 @@
       "inputs": [],
       "options": {
         "cwd": "{projectRoot}",
-        "command": "nx run-many --targets=build:nest,build:openapi"
+        "command": "nx run-many --targets=build:nest,build:openapi-json"
       },
       "dependsOn": []
     }
