@@ -13,7 +13,7 @@ runs:
   using: "composite"
 
   steps:
-    - name: "Build: all build scripts"
+    - name: "Build all"
       if: ${{ inputs.workspace-build == 'true' }}
       shell: bash
-      run: pnpm run -w build
+      run: pnpm run -w build:all
