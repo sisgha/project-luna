@@ -1,4 +1,4 @@
-name: Release
+name: CI - Release
 
 on:
   push:
@@ -8,8 +8,12 @@ on:
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
+  code-quality:
+    uses: ./.github/workflows/quality.yml
+
   release:
     name: Release
+    needs: [code-quality]
 
     runs-on: ubuntu-latest
 
