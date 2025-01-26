@@ -1,9 +1,4 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
-  "targetDefaults": {
-    "build": {
-      "cache": true
-    }
-  },
   "defaultBase": "development"
 }

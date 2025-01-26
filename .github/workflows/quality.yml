@@ -25,8 +25,8 @@ jobs:
         with:
           install-node: "true"
 
-      - name: The build should work
-        run: pnpm run -w build;
+      - name: The generation and build should work
+        run: pnpm run -w generate:all && pnpm run -w build:all;
 
       - name: Require to pass static code check
         run: |

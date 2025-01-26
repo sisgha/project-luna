@@ -9,11 +9,11 @@ setup:
 	$(shell (cd .; find . -type f -name "*.example" -exec sh -c 'cp -n {} $$(basename {} .example)' \;))
 	$(shell (bash -c "docker network create $(d_network) &>/dev/null"))
 	
-	echo "baixando imagens base dos containers (node e postgres), isso pode levar alguns minutos..."
+	echo "baixando imagens base dos containers, isso pode levar alguns minutos..."
 	docker compose $(compose_options) build
 
 prepare:
-	docker compose $(compose_options) exec $(d_container_app) bash -c "corepack install && pnpm install";
+	docker compose $(compose_options) exec $(d_container_app) bash -c "corepack install && pnpm install && pnpm exec nx daemon --start";
 
 up:
 	make setup;

@@ -1,5 +1,3 @@
-ARG GIT_COMMIT_HASH
-
 ARG PATH_BUILDER_SOURCE=/tmp/ldsa/.source
 ARG PATH_BUILDER_OUTPUT=/tmp/ldsa/.builds
 
@@ -25,9 +23,10 @@ RUN corepack install
 # BUILD ASSETS
 # ========================================
 
-FROM base AS build
+FROM base AS dev-dependencies
 
 ARG GIT_COMMIT_HASH
+ARG PATH_BUILDER_SOURCE
 
 ARG PATH_BUILDER_OUTPUT
 

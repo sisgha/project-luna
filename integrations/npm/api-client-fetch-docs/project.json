@@ -5,6 +5,15 @@
     "default": ["{projectRoot}/.config/**/*"]
   },
   "targets": {
+    "watch": {
+      "cache": false,
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "{projectRoot}",
+        "command": "typedoc --options .config/typedoc.jsonc --watch --preserveWatchOutput"
+      },
+      "dependsOn": []
+    },
     "serve": {
       "cache": false,
       "executor": "nx:run-commands",
@@ -15,17 +24,6 @@
       "dependsOn": ["build"]
     },
     "build": {
-      "cache": false,
-      "executor": "nx:run-commands",
-      "inputs": [],
-      "options": {
-        "cwd": "{projectRoot}",
-        "command": "echo noop"
-      },
-      "outputs": [],
-      "dependsOn": ["generate"]
-    },
-    "generate": {
       "cache": true,
       "executor": "nx:run-commands",
       "inputs": ["default", "^default"],
@@ -34,7 +32,7 @@
         "command": "typedoc --options .config/typedoc.jsonc"
       },
       "outputs": [],
-      "dependsOn": ["@ladesa-ro/api-client-fetch:build"]
+      "dependsOn": ["@ladesa-ro/api-client-fetch:generate"]
     }
   }
 }

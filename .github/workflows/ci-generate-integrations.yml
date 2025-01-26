@@ -39,8 +39,8 @@ jobs:
         with:
           install-node: "true"
 
-      - name: Build integrations
-        run: pnpm exec nx run-many -t build --projects=tag:integrations;
+      - name: Generate integrations
+        run: pnpm exec nx run-many -t generate --projects=tag:integrations;
 
       - name: Format integrations
         run: pnpm run -w format:fix integrations;

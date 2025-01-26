@@ -2,7 +2,7 @@ services:
   ladesa-api:
     build:
       context: .
-      target: base
+      target: dev-dependencies
     user: node
     command: sh -c "corepack install; sleep infinity"
     container_name: ladesa-api
