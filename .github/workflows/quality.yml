@@ -27,8 +27,15 @@ jobs:
         with:
           install-node: "true"
 
-      - name: The generation and build should work
-        run: pnpm run -w generate:all && pnpm run -w build:all;
+      - name: "generate:all should work"
+        uses: ./.github/actions/prepare/generate
+        with:
+          workspace-generate: "true"
+
+      - name: "build:all should work"
+        uses: ./.github/actions/prepare/build
+        with:
+          workspace-build: "true"
 
       - name: Require to pass static code check
         run: |

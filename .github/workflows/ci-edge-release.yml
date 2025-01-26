@@ -1,0 +1,34 @@
+name: "CI - Edge"
+
+on:
+  push:
+    branches:
+      - development
+
+jobs:
+  ci-edge-npm:
+    name: npm packages publish
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install
+        uses: ./.github/actions/prepare/install
+        with:
+          install-node: "true"
+
+      - name: "generate:all"
+        uses: ./.github/actions/prepare/generate
+        with:
+          workspace-generate: "true"
+
+      - name: "build:all"
+        uses: ./.github/actions/prepare/build
+        with:
+          workspace-build: "true"
+
+      - name: "Continuos Release: publish to pkg.pr.new"
+        run: pnpx pkg-pr-new publish --comment=update './integrations/npm/api-client-fetch'
