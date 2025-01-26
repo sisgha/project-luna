@@ -3,6 +3,11 @@ name: Code Quality
 on:
   pull_request:
     branches: development
+  push:
+    branches: development
+  workflow_dispatch:
+  schedule:
+    - cron: "0 9 * * 3"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
