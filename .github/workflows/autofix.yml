@@ -1,11 +1,11 @@
-name: "CI: Generate Integrations"
+name: "Autofix: Integrations and Static Code Quality"
 
 on:
   push:
     branches:
       - development
     paths:
-      - .github/workflows/ci-generate-integrations.yml
+      - .github/workflows/automated-improvements.yml
       - api-service/**/*
       - package.json
       - pnpm-lock.yaml
@@ -15,14 +15,20 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
 
 env:
-  PR_TARGET_BRANCH: development
-  BRANCH_GENERATED_INTEGRATIONS: automated-ci/generate-integrations
+  has_changes: false
 
-  INTEGRATIONS_PATH: integrations
-  GENERATED_COMMIT_MESSAGE: "chore(integrations/openapi-json): automated update"
+  observe_path: .
+
+  commit_author_name: "github-actions[bot]"
+  commit_author_email: "41898282+github-actions[bot]@users.noreply.github.com"
+  commit_message: "chore: autofix code"
+
+  commit_branch: github-actions-bot/autofix-development
+
+  pr_target_branch: development
 
 jobs:
-  ci-generate-integrations:
+  job:
     runs-on: ubuntu-latest
 
     permissions:
@@ -39,48 +45,48 @@ jobs:
         with:
           install-node: "true"
 
-      - name: Generate integrations
+      - name: Generate Integrations
         run: pnpm exec nx run-many -t generate --projects=tag:integrations;
 
-      - name: Format integrations
-        run: pnpm run -w format:fix integrations;
+      - name: Format Everything
+        run: pnpm run -w format:fix ${observe_path};
 
       - name: Check if has changes
         run: |
-          if git status --porcelain | grep -q -E "^\?\? ${INTEGRATIONS_PATH}|^ M ${INTEGRATIONS_PATH}"; then
+          if git status --porcelain | grep -q -E "^\?\? ${observe_path}|^ M ${observe_path}"; then
             echo "has_changes=true" >> $GITHUB_ENV
           else
             echo "has_changes=false" >> $GITHUB_ENV
           fi
 
-      - name: Set up Git
+      - name: Autofix - Set up Git
         if: env.has_changes == 'true'
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "${commit_author_name}"
+          git config --global user.email "${commit_author_email}"
 
-      - name: Commit and push
+      - name: Autofix - Commit and Push
         if: env.has_changes == 'true'
         run: |
-          git add ${INTEGRATIONS_PATH};
-          git commit -m "${GENERATED_COMMIT_MESSAGE}";
+          git add -A ${observe_path};
+          git commit -m "${commit_message}";
 
-          if git show-ref --verify --quiet refs/heads/${BRANCH_GENERATED_INTEGRATIONS}; then
-            git branch -D ${BRANCH_GENERATED_INTEGRATIONS}
+          if git show-ref --verify --quiet refs/heads/${commit_branch}; then
+            git branch -D ${commit_branch}
           fi
 
-          git checkout -b ${BRANCH_GENERATED_INTEGRATIONS}
-          git push origin ${BRANCH_GENERATED_INTEGRATIONS} --force
+          git checkout -b ${commit_branch}
+          git push origin ${commit_branch} --force
 
       - name: Create or update pull request
         if: env.has_changes == 'true'
         run: |
           # source: https://github.com/cli/cli/discussions/5792#discussioncomment-10410197
-          PR_URL="$(gh pr list -B "${PR_TARGET_BRANCH}" -H "${BRANCH_GENERATED_INTEGRATIONS}" --state open --json url --jq .[].url)"
+          PR_URL="$(gh pr list -B "${pr_target_branch}" -H "${commit_branch}" --state open --json url --jq .[].url)"
 
           NOW=$(date +'%Y-%m-%dT%H:%M:%S')
 
-          PR_TITLE="${GENERATED_COMMIT_MESSAGE}"
+          PR_TITLE="${commit_message}"
           PR_BODY="**Workflow**: ${{ github.workflow }}\n**Job**: ${{ github.job }}.\n**Run number**: ${{ github.run_number }}.\nUpdated at: ${NOW}."
           PR_BODY_FILE="/tmp/pr-body.txt"
 
@@ -95,8 +101,8 @@ jobs:
               ;
           else
             gh pr create \
-              -B "${{ env.target-branch }}" \
-              -H "${{ env.generated-branch }}" \
+              -B "${{ env.pr_target_branch }}" \
+              -H "${{ env.commit_branch }}" \
               --title "${PR_TITLE}" \
               --body-file "${PR_BODY_FILE}" \
             ;
@@ -109,7 +115,7 @@ jobs:
         if: env.has_changes == 'false'
         run: |
           # source: https://github.com/cli/cli/discussions/5792#discussioncomment-10410197
-          PR_URL="$(gh pr list -B "${PR_TARGET_BRANCH}" -H "${BRANCH_GENERATED_INTEGRATIONS}" --state open --json url --jq .[].url)"
+          PR_URL="$(gh pr list -B "${pr_target_branch}" -H "${commit_branch}" --state open --json url --jq .[].url)"
 
           if [[ -n "${PR_URL}" ]]; then
             gh pr close "${PR_URL}" -d;

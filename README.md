@@ -1,7 +1,7 @@
 # Web API Integrada
 
 [![CI/CD - Release][action-release-src]][action-release-href]
-[![CI/CD - Generate Integrations][action-generate-integrations-src]][action-generate-integrations-href]
+[![Autofix][action-autofix-src]][action-autofix-href]
 
 ## Ambientes
 
@@ -119,10 +119,10 @@ O projeto conta com um [arquivo make](./Makefile) que comporta scrips destinados
 [action-release-src]: https://img.shields.io/github/actions/workflow/status/ladesa-ro/api/release.yml?style=flat&logo=github&logoColor=white&label=Release&branch=development&labelColor=18181B
 [action-release-href]: https://github.com/ladesa-ro/api/actions/workflows/release.yml?query=branch%3Adevelopment
 
-<!-- Badges / Actions / Generate Integrations  -->
+<!-- Badges / Actions / Autofix  -->
 
-[action-generate-integrations-src]: https://img.shields.io/github/actions/workflow/status/ladesa-ro/api/ci-generate-integrations.yml?style=flat&logo=github&logoColor=white&label=Generate%20Integrations&branch=development&labelColor=18181B
-[action-generate-integrations-href]: https://github.com/ladesa-ro/api/actions/workflows/ci-generate-integrations.yml?query=branch%3Adevelopment
+[action-autofix-src]: https://img.shields.io/github/actions/workflow/status/ladesa-ro/api/autofix.yml?style=flat&logo=github&logoColor=white&label=Generate%20Integrations&branch=development&labelColor=18181B
+[action-autofix-href]: https://github.com/ladesa-ro/api/actions/workflows/autofix.yml?query=branch%3Adevelopment
 
 <!-- Badges / Integrations / NPM -->
 
