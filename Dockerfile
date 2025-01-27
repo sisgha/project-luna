@@ -1,6 +1,5 @@
 ARG PATH_BUILDER_SOURCE=/tmp/ldsa/.source
 ARG PATH_BUILDER_OUTPUT=/tmp/ldsa/.builds
-
 ARG PATH_RUNTIME_OUTPUT=/usr/local/ladesa-ro/services
 
 # ========================================
@@ -25,12 +24,7 @@ RUN corepack install
 
 FROM base AS dev-dependencies
 
-ARG GIT_COMMIT_HASH
 ARG PATH_BUILDER_SOURCE
-
-ARG PATH_BUILDER_OUTPUT
-
-ENV GIT_COMMIT_HASH=${GIT_COMMIT_HASH}
 
 COPY . "${PATH_BUILDER_SOURCE}"
 
@@ -41,6 +35,7 @@ RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
 # ========================================
 
 FROM dev-dependencies AS api-service-builder
+ARG PATH_BUILDER_OUTPUT
 
 RUN pnpm run --filter "@ladesa-ro/api.service" build
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm deploy --prod --filter=@ladesa-ro/api.service "${PATH_BUILDER_OUTPUT}/api-service"
@@ -50,9 +45,10 @@ RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm deploy --prod --filter=@l
 # ========================================
 
 FROM dev-dependencies AS docs-npm-api-client-fetch-builder
+ARG PATH_BUILDER_OUTPUT
 
 RUN pnpm run --filter "@ladesa-ro/api-client-fetch.docs" build
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm deploy --prod --filter=@ladesa-ro/api-client-fetch.docs "${PATH_BUILDER_OUTPUT}/npm-api-client-fetch.docs"
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm deploy --prod --filter=@ladesa-ro/api-client-fetch.docs "${PATH_BUILDER_OUTPUT}/npm-api-client-fetch-docs"
 
 # ========================================
 # NPM / API-CLIENT-FETCH / DOCS -- RUNTIME
@@ -66,7 +62,7 @@ COPY \
   ./docs/docs-npm-api-client-fetch/nginx.conf \
   /etc/nginx/nginx.conf
 
-COPY --from=docs-npm-api-client-fetch-builder  "${PATH_BUILDER_OUTPUT}/npm-api-client-fetch.docs"  "${PATH_RUNTIME_OUTPUT}/npm-api-client-fetch-docs"
+COPY --from=docs-npm-api-client-fetch-builder  "${PATH_BUILDER_OUTPUT}/npm-api-client-fetch-docs"  "${PATH_RUNTIME_OUTPUT}/npm-api-client-fetch-docs"
 EXPOSE 80
 
 # ========================================
