@@ -21,7 +21,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: determine infisical env-slug
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Determine Infisical env-slug
         env:
           SLUG_DEV: ${{ secrets.INFISICAL_ENV_SLUG_DEV }}
           SLUG_PROD: ${{ secrets.INFISICAL_ENV_SLUG_PROD }}
@@ -76,7 +79,10 @@ jobs:
       url: ${{ vars.DEPLOY_URL }}
 
     steps:
-      - name: determine infisical env-slug
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Determine Infisical env-slug
         env:
           SLUG_DEV: ${{ secrets.INFISICAL_ENV_SLUG_DEV }}
           SLUG_PROD: ${{ secrets.INFISICAL_ENV_SLUG_PROD }}
