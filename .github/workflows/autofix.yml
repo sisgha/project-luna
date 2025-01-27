@@ -1,14 +1,9 @@
-name: "Autofix: Integrations and Static Code Quality"
+name: "Autofix"
 
 on:
   push:
     branches:
       - development
-    paths:
-      - .github/workflows/automated-improvements.yml
-      - api-service/**/*
-      - package.json
-      - pnpm-lock.yaml
   workflow_dispatch:
 
 concurrency:
