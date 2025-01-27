@@ -51,9 +51,9 @@ export class EventoService {
         "id",
         //
         "nome",
-        "dataInicio",
-        "dataTermino",
         "cor",
+        //
+        "rrule",
         //
         "calendario.id",
         "calendario.nome",
@@ -62,21 +62,18 @@ export class EventoService {
       sortableColumns: [
         //
         "nome",
-        "dataInicio",
-        "dataInicio",
         "cor",
         //
         "calendario.id",
         "calendario.nome",
         "calendario.ano",
+        //
       ],
       searchableColumns: [
         //
         "id",
         //
         "nome",
-        "dataInicio",
-        "dataTermino",
         "cor",
       ],
       relations: {
@@ -187,7 +184,7 @@ export class EventoService {
 
     // =========================================================
 
-    const dtoEvento = pick(dto.body, ["nome", "cor", "dataInicio", "dataTermino"]);
+    const dtoEvento = pick(dto.body, ["nome", "cor", "rrule"]);
 
     const evento = this.eventoRepository.create();
 
@@ -227,7 +224,7 @@ export class EventoService {
 
     await accessContext.ensurePermission("evento:update", { dto }, dto.params.id, this.eventoRepository.createQueryBuilder(aliasEvento));
 
-    const dtoEvento = pick(dto.body, ["nome", "cor", "dataInicio", "dataTermino"]);
+    const dtoEvento = pick(dto.body, ["nome", "cor", "rrule"]);
 
     const evento = {
       id: currentEvento.id,
