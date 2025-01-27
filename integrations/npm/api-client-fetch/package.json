@@ -6,11 +6,11 @@
   "description": "LADESA - Biblioteca de integração a API - Pacote NPM.",
   "scripts": {
     "prebuild": "rimraf dist",
-    "build": "nx build",
+    "build": "nx run build",
     "test": "pnpm exec tsc --noEmit",
     "dev": "tsc -p tsconfig.json --watch",
-    "generate": "nx generate",
-    "generate:client": "nx generate:client",
+    "generate": "nx run generate",
+    "generate:client": "nx run generate:client",
     "cleanup:generated": "rimraf ./src/http/generated"
   },
   "devDependencies": {
