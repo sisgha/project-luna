@@ -1,6 +1,10 @@
 name: "CI - Release (Edge)"
 
 on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - development
   push:
     branches:
       - development

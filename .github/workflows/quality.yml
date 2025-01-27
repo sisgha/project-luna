@@ -10,6 +10,9 @@ on:
   schedule:
     - cron: "0 9 * * 3"
 
+concurrency:
+  group: code-quality-${{ github.sha }}
+
 jobs:
   quality:
     runs-on: ubuntu-latest
