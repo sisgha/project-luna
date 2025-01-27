@@ -256,6 +256,18 @@ importers:
         specifier: ^3.0.4
         version: 3.0.4(@types/node@22.10.10)(jiti@2.4.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.7.0)
 
+  docs/docs-npm-api-client-fetch:
+    devDependencies:
+      serve:
+        specifier: ^14.2.4
+        version: 14.2.4
+      typedoc:
+        specifier: ^0.27.6
+        version: 0.27.6(typescript@5.7.3)
+      typedoc-plugin-mdn-links:
+        specifier: ^4.0.10
+        version: 4.0.10(typedoc@0.27.6(typescript@5.7.3))
+
   integrations/npm/api-client-fetch:
     devDependencies:
       '@hey-api/openapi-ts':
@@ -267,18 +279,6 @@ importers:
       typescript:
         specifier: ^5.7.3
         version: 5.7.3
-
-  integrations/npm/api-client-fetch-docs:
-    devDependencies:
-      serve:
-        specifier: ^14.2.4
-        version: 14.2.4
-      typedoc:
-        specifier: ^0.27.6
-        version: 0.27.6(typescript@5.7.3)
-      typedoc-plugin-mdn-links:
-        specifier: ^4.0.10
-        version: 4.0.10(typedoc@0.27.6(typescript@5.7.3))
 
   integrations/openapi-json: {}
 
@@ -9427,7 +9427,7 @@ snapshots:
 
   send@1.1.0:
     dependencies:
-      debug: 4.3.6
+      debug: 4.4.0
       destroy: 1.2.0
       encodeurl: 2.0.0
       escape-html: 1.0.3

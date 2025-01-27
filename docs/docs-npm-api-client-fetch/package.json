@@ -4,9 +4,10 @@
   "files": ["dist/**/*.*"],
   "private": true,
   "scripts": {
-    "watch": "nx watch",
-    "build": "nx build",
-    "serve": "nx serve"
+    "watch": "nx run watch",
+    "build": "nx run build",
+    "serve": "nx run serve",
+    "dev": "nx run dev"
   },
   "devDependencies": {
     "serve": "^14.2.4",

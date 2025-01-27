@@ -63,7 +63,7 @@ ARG PATH_BUILDER_OUTPUT
 ARG PATH_RUNTIME_OUTPUT
 
 COPY \
-  ./integrations/npm/api-client-fetch-docs/nginx.conf \
+  ./docs/docs-npm-api-client-fetch/nginx.conf \
   /etc/nginx/nginx.conf
 
 COPY --from=docs-npm-api-client-fetch-builder  "${PATH_BUILDER_OUTPUT}/npm-api-client-fetch.docs"  "${PATH_RUNTIME_OUTPUT}/npm-api-client-fetch-docs"
