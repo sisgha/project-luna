@@ -15,7 +15,7 @@
     "changeset:add": "changeset add",
     "changeset:tag": "changeset tag",
     "changeset:version": "changeset version",
-    "chore:update": "corepack use pnpm@latest && pnpm --filter=@ladesa-ro/api.service exec corepack use pnpm@latest && pnpm -r update"
+    "chore:update": "corepack use pnpm@latest && pnpm --filter=@ladesa-ro/api.service exec corepack use pnpm@latest && pnpm -r update && pnpm run -w code-static:fix"
   },
   "dependencies": {
     "@biomejs/biome": "1.9.4",
