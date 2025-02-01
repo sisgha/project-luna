@@ -39,7 +39,7 @@ async function setupApp() {
   const config = SetupSwaggerDocument(configService);
   const document = SwaggerModule.createDocument(app, config.build());
   //
-  SwaggerModule.setup(`${prefix ?? ""}doc-api`, app, document);
+  SwaggerModule.setup(`${prefix ?? ""}swagger`, app, document);
   //
 
   return app;
