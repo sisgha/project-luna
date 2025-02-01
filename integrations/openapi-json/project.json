@@ -9,7 +9,7 @@
     "generate": {
       "executor": "nx:run-commands",
       "cache": true,
-      "inputs": ["{projectRoot}/../../api-service/generated/openapi.v3.json"],
+      "inputs": ["{workspaceRoot}/api-service/generated/openapi.v3.json"],
       "options": {
         "cwd": "{projectRoot}",
         "commands": ["cp ../../api-service/generated/openapi.v3.json ./json/openapi.v3.json", "pnpm run -w code-static:fix {projectRoot}/json"],

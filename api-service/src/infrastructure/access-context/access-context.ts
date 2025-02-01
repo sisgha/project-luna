@@ -1,9 +1,9 @@
-import { createForbiddenExceptionForAction } from "@/business-logic/standards";
+import { AuthzPolicyPublic, type IAuthzStatement, type IAuthzStatementFilter, type IBaseAuthzFilterFn, type IBaseAuthzStatementContext } from "@/application/authorization";
+import { createForbiddenExceptionForAction } from "@/application/standards";
 import type { IRequestActor } from "@/infrastructure/authentication";
 import { DatabaseContextService } from "@/infrastructure/integrations/database";
 import { castArray } from "lodash";
 import type { SelectQueryBuilder } from "typeorm";
-import { AuthzPolicyPublic, type IAuthzStatement, type IAuthzStatementFilter, type IBaseAuthzFilterFn, type IBaseAuthzStatementContext } from "../../business-logic/authorization";
 import type { IAccessContext } from "./access-context.types";
 
 // TODO: fixme

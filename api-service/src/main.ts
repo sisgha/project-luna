@@ -5,7 +5,7 @@ import { SwaggerModule } from "@nestjs/swagger";
 import compression from "compression";
 import helmet from "helmet";
 import "reflect-metadata";
-import { AppModule } from "./app.module";
+import { AppModule } from "./application/app.module";
 
 async function setupApp() {
   const app = await NestFactory.create(AppModule);
@@ -39,7 +39,7 @@ async function setupApp() {
   const config = SetupSwaggerDocument(configService);
   const document = SwaggerModule.createDocument(app, config.build());
   //
-  SwaggerModule.setup(`${prefix ?? ""}doc-api`, app, document);
+  SwaggerModule.setup(`${prefix ?? ""}swagger`, app, document);
   //
 
   return app;

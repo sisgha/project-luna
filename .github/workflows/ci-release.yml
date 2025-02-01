@@ -48,7 +48,6 @@ jobs:
         uses: changesets/action@v1
         id: changesets
         with:
-          # setupGitUser: false
           setupGitUser: true
           createGithubReleases: false
           title: "chore: version packages"

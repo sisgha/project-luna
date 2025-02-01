@@ -1,6 +1,6 @@
 import { NestFactory } from "@nestjs/core";
 import { OpenAPIObject, SwaggerModule } from "@nestjs/swagger";
-import { AppModule } from "../../../app.module";
+import { AppModule } from "../../../application/app.module";
 import { SetupSwaggerDocument } from "../../../infrastructure/integrations";
 import { OptionsBuilder } from "../typings/options";
 

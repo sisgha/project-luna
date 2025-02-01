@@ -15,21 +15,14 @@ export class CreateTableEvento1710186006633 implements MigrationInterface {
             isPrimary: true,
             default: "gen_random_uuid()",
           },
-
           //
-
           {
             name: "nome",
             type: "text",
             isNullable: false,
           },
           {
-            name: "data_inicio",
-            type: "timestamptz",
-            isNullable: false,
-          },
-          {
-            name: "data_termino",
+            name: "rrule",
             type: "timestamptz",
             isNullable: false,
           },

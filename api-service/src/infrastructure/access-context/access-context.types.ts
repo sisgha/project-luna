@@ -1,4 +1,4 @@
-import type { IAuthzStatement, IAuthzStatementFilter } from "@/business-logic/authorization/rules";
+import type { IAuthzStatement, IAuthzStatementFilter } from "@/application/authorization/rules";
 import type { IRequestActor } from "@/infrastructure/authentication";
 import type { SelectQueryBuilder } from "typeorm";
 

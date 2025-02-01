@@ -1,4 +1,4 @@
-import { AppModule } from "@/app.module";
+import { AppModule } from "@/application/app.module";
 import { INestApplication } from "@nestjs/common";
 import { Test, TestingModule } from "@nestjs/testing";
 import request from "supertest";
