@@ -1,9 +1,6 @@
 import { CombinedInput } from "@/application/standards";
 import { Operation } from "@/application/standards/especificacao/business-logic";
-import {
-  type AccessContext,
-  AccessContextHttp,
-} from "@/infrastructure/access-context";
+import { type AccessContext, AccessContextHttp } from "@/infrastructure/access-context";
 import * as LadesaTypings from "@ladesa-ro/especificacao";
 import { Tokens } from "@ladesa-ro/especificacao";
 import { Controller, Delete, Get, Patch, Post } from "@nestjs/common";
@@ -13,9 +10,7 @@ import { GradeHorarioOfertaFormacaoService } from "./grade-horario-oferta-formac
 @ApiTags("grades-horarios-ofertas-formacoes")
 @Controller("/grades-horarios-ofertas-formacoes")
 export class GradeHorarioOfertaFormacaoController {
-  constructor(
-    private gradeHorarioOfertaFormacaoService: GradeHorarioOfertaFormacaoService
-  ) {}
+  constructor(private gradeHorarioOfertaFormacaoService: GradeHorarioOfertaFormacaoService) {}
 
   //
 
@@ -25,14 +20,9 @@ export class GradeHorarioOfertaFormacaoController {
     //
     @AccessContextHttp() accessContext: AccessContext,
     @CombinedInput()
-    dto: LadesaTypings.GradeHorarioOfertaFormacaoListOperationInput
-  ): Promise<
-    LadesaTypings.GradeHorarioOfertaFormacaoListOperationOutput["success"]
-  > {
-    return this.gradeHorarioOfertaFormacaoService.gradeHorarioOfertaFormacaoFindAll(
-      accessContext,
-      dto
-    );
+    dto: LadesaTypings.GradeHorarioOfertaFormacaoListOperationInput,
+  ): Promise<LadesaTypings.GradeHorarioOfertaFormacaoListOperationOutput["success"]> {
+    return this.gradeHorarioOfertaFormacaoService.gradeHorarioOfertaFormacaoFindAll(accessContext, dto);
   }
 
   //
@@ -43,14 +33,11 @@ export class GradeHorarioOfertaFormacaoController {
     //
     @AccessContextHttp() accessContext: AccessContext,
     @CombinedInput()
-    dto: LadesaTypings.GradeHorarioOfertaFormacaoFindOneByIdOperationOutput
+    dto: LadesaTypings.GradeHorarioOfertaFormacaoFindOneByIdOperationOutput,
   ) {
-    return this.gradeHorarioOfertaFormacaoService.gradeHorarioOfertaFormacaoFindByIdStrict(
-      accessContext,
-      {
-        id: dto.params.id,
-      }
-    );
+    return this.gradeHorarioOfertaFormacaoService.gradeHorarioOfertaFormacaoFindByIdStrict(accessContext, {
+      id: dto.params.id,
+    });
   }
 
   //
@@ -61,12 +48,9 @@ export class GradeHorarioOfertaFormacaoController {
     //
     @AccessContextHttp() accessContext: AccessContext,
     @CombinedInput()
-    dto: LadesaTypings.GradeHorarioOfertaFormacaoCreateOperationInput
+    dto: LadesaTypings.GradeHorarioOfertaFormacaoCreateOperationInput,
   ) {
-    return this.gradeHorarioOfertaFormacaoService.gradeHorarioOfertaFormacaoCreate(
-      accessContext,
-      dto
-    );
+    return this.gradeHorarioOfertaFormacaoService.gradeHorarioOfertaFormacaoCreate(accessContext, dto);
   }
 
   //
@@ -77,12 +61,9 @@ export class GradeHorarioOfertaFormacaoController {
     //
     @AccessContextHttp() accessContext: AccessContext,
     @CombinedInput()
-    dto: LadesaTypings.GradeHorarioOfertaFormacaoUpdateByIdOperationInput
+    dto: LadesaTypings.GradeHorarioOfertaFormacaoUpdateByIdOperationInput,
   ) {
-    return this.gradeHorarioOfertaFormacaoService.gradeHorarioOfertaFormacaoUpdate(
-      accessContext,
-      dto
-    );
+    return this.gradeHorarioOfertaFormacaoService.gradeHorarioOfertaFormacaoUpdate(accessContext, dto);
   }
 
   //
@@ -93,14 +74,11 @@ export class GradeHorarioOfertaFormacaoController {
     //
     @AccessContextHttp() accessContext: AccessContext,
     @CombinedInput()
-    dto: LadesaTypings.GradeHorarioOfertaFormacaoDeleteByIdOperationInput
+    dto: LadesaTypings.GradeHorarioOfertaFormacaoDeleteByIdOperationInput,
   ) {
-    return this.gradeHorarioOfertaFormacaoService.gradeHorarioOfertaFormacaoDeleteOneById(
-      accessContext,
-      {
-        id: dto.params.id,
-      }
-    );
+    return this.gradeHorarioOfertaFormacaoService.gradeHorarioOfertaFormacaoDeleteOneById(accessContext, {
+      id: dto.params.id,
+    });
   }
 
   //

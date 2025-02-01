@@ -1,22 +1,9 @@
 import { CombinedInput } from "@/application/standards";
 import { Operation } from "@/application/standards/especificacao/business-logic";
-import {
-  type AccessContext,
-  AccessContextHttp,
-} from "@/infrastructure/access-context";
+import { type AccessContext, AccessContextHttp } from "@/infrastructure/access-context";
 import * as LadesaTypings from "@ladesa-ro/especificacao";
 import { Tokens } from "@ladesa-ro/especificacao";
-import {
-  Controller,
-  Delete,
-  Get,
-  Param,
-  ParseUUIDPipe,
-  Patch,
-  Post,
-  Put,
-  UploadedFile,
-} from "@nestjs/common";
+import { Controller, Delete, Get, Param, ParseUUIDPipe, Patch, Post, Put, UploadedFile } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
 import { UsuarioService } from "./usuario.service";
 
@@ -32,7 +19,7 @@ export class UsuarioController {
   async usuarioFindAll(
     //
     @AccessContextHttp() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.UsuarioListOperationInput
+    @CombinedInput() dto: LadesaTypings.UsuarioListOperationInput,
   ): Promise<LadesaTypings.UsuarioListOperationOutput["success"]> {
     return this.usuarioService.usuarioFindAll(accessContext, dto);
   }
@@ -44,7 +31,7 @@ export class UsuarioController {
   async usuarioFindById(
     //
     @AccessContextHttp() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.UsuarioFindOneByIdOperationOutput
+    @CombinedInput() dto: LadesaTypings.UsuarioFindOneByIdOperationOutput,
   ) {
     return this.usuarioService.usuarioFindByIdStrict(accessContext, {
       id: dto.params.id,
@@ -58,7 +45,7 @@ export class UsuarioController {
   async usuarioCreate(
     //
     @AccessContextHttp() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.UsuarioCreateOperationInput
+    @CombinedInput() dto: LadesaTypings.UsuarioCreateOperationInput,
   ) {
     return this.usuarioService.usuarioCreate(accessContext, dto);
   }
@@ -67,10 +54,7 @@ export class UsuarioController {
 
   @Patch("/:id")
   @Operation(Tokens.UsuarioUpdateOneById)
-  async usuarioUpdate(
-    @AccessContextHttp() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.UsuarioUpdateByIdOperationInput
-  ) {
+  async usuarioUpdate(@AccessContextHttp() accessContext: AccessContext, @CombinedInput() dto: LadesaTypings.UsuarioUpdateByIdOperationInput) {
     return this.usuarioService.usuarioUpdate(accessContext, dto);
   }
 
@@ -81,12 +65,9 @@ export class UsuarioController {
   async usuarioGetImagemCapa(
     //
     @AccessContextHttp() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.UsuarioFindOneByIdOperationOutput
+    @CombinedInput() dto: LadesaTypings.UsuarioFindOneByIdOperationOutput,
   ) {
-    return this.usuarioService.usuarioGetImagemCapa(
-      accessContext,
-      dto.params.id
-    );
+    return this.usuarioService.usuarioGetImagemCapa(accessContext, dto.params.id);
   }
 
   @Put("/:id/imagem/capa")
@@ -95,13 +76,9 @@ export class UsuarioController {
     //
     @AccessContextHttp() accessContext: AccessContext,
     @UploadedFile() file: Express.Multer.File,
-    @Param("id", ParseUUIDPipe) id: string
+    @Param("id", ParseUUIDPipe) id: string,
   ) {
-    return this.usuarioService.usuarioUpdateImagemCapa(
-      accessContext,
-      { id },
-      file
-    );
+    return this.usuarioService.usuarioUpdateImagemCapa(accessContext, { id }, file);
   }
 
   //
@@ -111,12 +88,9 @@ export class UsuarioController {
   async usuarioGetImagemPerfil(
     //
     @AccessContextHttp() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.UsuarioFindOneByIdOperationOutput
+    @CombinedInput() dto: LadesaTypings.UsuarioFindOneByIdOperationOutput,
   ) {
-    return this.usuarioService.usuarioGetImagemPerfil(
-      accessContext,
-      dto.params.id
-    );
+    return this.usuarioService.usuarioGetImagemPerfil(accessContext, dto.params.id);
   }
 
   @Put("/:id/imagem/perfil")
@@ -125,13 +99,9 @@ export class UsuarioController {
     //
     @AccessContextHttp() accessContext: AccessContext,
     @UploadedFile() file: Express.Multer.File,
-    @Param("id", ParseUUIDPipe) id: string
+    @Param("id", ParseUUIDPipe) id: string,
   ) {
-    return this.usuarioService.usuarioUpdateImagemPerfil(
-      accessContext,
-      { id },
-      file
-    );
+    return this.usuarioService.usuarioUpdateImagemPerfil(accessContext, { id }, file);
   }
 
   //
@@ -141,7 +111,7 @@ export class UsuarioController {
   async usuarioDeleteOneById(
     //
     @AccessContextHttp() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.UsuarioDeleteByIdOperationInput
+    @CombinedInput() dto: LadesaTypings.UsuarioDeleteByIdOperationInput,
   ) {
     return this.usuarioService.usuarioDeleteOneById(accessContext, {
       id: dto.params.id,

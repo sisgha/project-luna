@@ -1,10 +1,7 @@
 import { IBaseAuthzFilterFn } from "@/application/authorization/rules/types";
 import { BaseAuthzPolicy } from "./BaseAuthzPolicy";
 
-const filterAllowNotDeleted: IBaseAuthzFilterFn<any, any> = (
-  _context,
-  alias = "row"
-) => {
+const filterAllowNotDeleted: IBaseAuthzFilterFn<any, any> = (_context, alias = "row") => {
   return (qb) => {
     qb.where(`${alias}.dateDeleted IS NULL`);
   };

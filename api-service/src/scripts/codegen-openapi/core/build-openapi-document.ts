@@ -4,9 +4,7 @@ import { AppModule } from "../../../application/app.module";
 import { SetupSwaggerDocument } from "../../../infrastructure/integrations";
 import { OptionsBuilder } from "../typings/options";
 
-export async function buildOpenApiDocument(
-  options: OptionsBuilder
-): Promise<OpenAPIObject> {
+export async function buildOpenApiDocument(options: OptionsBuilder): Promise<OpenAPIObject> {
   const app = await NestFactory.create(AppModule, {
     preview: true,
     logger: false,

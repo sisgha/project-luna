@@ -1,8 +1,5 @@
 import { QbEfficientLoad } from "@/application/standards/ladesa-spec/QbEfficientLoad";
-import {
-  LadesaPaginatedResultDto,
-  LadesaSearch,
-} from "@/application/standards/ladesa-spec/search/search-strategies";
+import { LadesaPaginatedResultDto, LadesaSearch } from "@/application/standards/ladesa-spec/search/search-strategies";
 import type { AccessContext } from "@/infrastructure/access-context";
 import { paginateConfig } from "@/infrastructure/fixtures";
 import { DatabaseContextService } from "@/infrastructure/integrations/database";
@@ -25,7 +22,7 @@ export class ReservaService {
   constructor(
     private databaseContext: DatabaseContextService,
     private usuarioService: UsuarioService,
-    private ambienteService: AmbienteService
+    private ambienteService: AmbienteService,
   ) {}
 
   get reservaRepository() {
@@ -37,7 +34,7 @@ export class ReservaService {
   async reservaFindAll(
     accessContext: AccessContext,
     dto: LadesaTypings.ReservaListOperationInput | null = null,
-    selection?: string[] | boolean
+    selection?: string[] | boolean,
   ): Promise<LadesaTypings.ReservaListOperationOutput["success"]> {
     // =========================================================
 
@@ -47,13 +44,7 @@ export class ReservaService {
 
     await accessContext.applyFilter("reserva:find", qb, aliasReserva, null);
 
-    const dateOperations = [
-      FilterOperator.EQ,
-      FilterOperator.GT,
-      FilterOperator.GTE,
-      FilterOperator.LT,
-      FilterOperator.LTE,
-    ] as const;
+    const dateOperations = [FilterOperator.EQ, FilterOperator.GT, FilterOperator.GTE, FilterOperator.LT, FilterOperator.LTE] as const;
 
     // =========================================================
 
@@ -118,32 +109,19 @@ export class ReservaService {
     // =========================================================
 
     qb.select([]);
-    QbEfficientLoad(
-      LadesaTypings.Tokens.ReservaFindOneResultView,
-      qb,
-      aliasReserva,
-      selection
-    );
+    QbEfficientLoad(LadesaTypings.Tokens.ReservaFindOneResultView, qb, aliasReserva, selection);
 
     // =========================================================
 
-    const pageItemsView = await qb
-      .andWhereInIds(map(paginated.data, "id"))
-      .getMany();
-    paginated.data = paginated.data.map(
-      (paginated) => pageItemsView.find((i) => i.id === paginated.id)!
-    );
+    const pageItemsView = await qb.andWhereInIds(map(paginated.data, "id")).getMany();
+    paginated.data = paginated.data.map((paginated) => pageItemsView.find((i) => i.id === paginated.id)!);
 
     // =========================================================
 
     return LadesaPaginatedResultDto(paginated);
   }
 
-  async reservaFindById(
-    accessContext: AccessContext,
-    dto: LadesaTypings.ReservaFindOneInputView,
-    selection?: string[] | boolean
-  ): Promise<LadesaTypings.ReservaFindOneResultView | null> {
+  async reservaFindById(accessContext: AccessContext, dto: LadesaTypings.ReservaFindOneInputView, selection?: string[] | boolean): Promise<LadesaTypings.ReservaFindOneResultView | null> {
     // =========================================================
 
     const qb = this.reservaRepository.createQueryBuilder(aliasReserva);
@@ -159,12 +137,7 @@ export class ReservaService {
     // =========================================================
 
     qb.select([]);
-    QbEfficientLoad(
-      LadesaTypings.Tokens.ReservaFindOneResultView,
-      qb,
-      aliasReserva,
-      selection
-    );
+    QbEfficientLoad(LadesaTypings.Tokens.ReservaFindOneResultView, qb, aliasReserva, selection);
 
     // =========================================================
 
@@ -175,11 +148,7 @@ export class ReservaService {
     return reserva;
   }
 
-  async reservaFindByIdStrict(
-    accessContext: AccessContext,
-    dto: LadesaTypings.ReservaFindOneInputView,
-    selection?: string[] | boolean
-  ) {
+  async reservaFindByIdStrict(accessContext: AccessContext, dto: LadesaTypings.ReservaFindOneInputView, selection?: string[] | boolean) {
     const reserva = await this.reservaFindById(accessContext, dto, selection);
 
     if (!reserva) {
@@ -189,11 +158,7 @@ export class ReservaService {
     return reserva;
   }
 
-  async reservaFindByIdSimple(
-    accessContext: AccessContext,
-    id: LadesaTypings.ReservaFindOneInputView["id"],
-    selection?: string[]
-  ): Promise<LadesaTypings.ReservaFindOneResultView | null> {
+  async reservaFindByIdSimple(accessContext: AccessContext, id: LadesaTypings.ReservaFindOneInputView["id"], selection?: string[]): Promise<LadesaTypings.ReservaFindOneResultView | null> {
     // =========================================================
 
     const qb = this.reservaRepository.createQueryBuilder(aliasReserva);
@@ -209,12 +174,7 @@ export class ReservaService {
     // =========================================================
 
     qb.select([]);
-    QbEfficientLoad(
-      LadesaTypings.Tokens.ReservaFindOneResultView,
-      qb,
-      aliasReserva,
-      selection
-    );
+    QbEfficientLoad(LadesaTypings.Tokens.ReservaFindOneResultView, qb, aliasReserva, selection);
 
     // =========================================================
 
@@ -225,16 +185,8 @@ export class ReservaService {
     return reserva;
   }
 
-  async reservaFindByIdSimpleStrict(
-    accessContext: AccessContext,
-    id: LadesaTypings.ReservaFindOneInputView["id"],
-    selection?: string[]
-  ) {
-    const reserva = await this.reservaFindByIdSimple(
-      accessContext,
-      id,
-      selection
-    );
+  async reservaFindByIdSimpleStrict(accessContext: AccessContext, id: LadesaTypings.ReservaFindOneInputView["id"], selection?: string[]) {
+    const reserva = await this.reservaFindByIdSimple(accessContext, id, selection);
 
     if (!reserva) {
       throw new NotFoundException();
@@ -245,10 +197,7 @@ export class ReservaService {
 
   //
 
-  async reservaCreate(
-    accessContext: AccessContext,
-    dto: LadesaTypings.ReservaCreateOperationInput
-  ) {
+  async reservaCreate(accessContext: AccessContext, dto: LadesaTypings.ReservaCreateOperationInput) {
     // =========================================================
 
     await accessContext.ensurePermission("reserva:create", { dto });
@@ -265,10 +214,7 @@ export class ReservaService {
 
     // =========================================================
 
-    const ambiente = await this.ambienteService.ambienteFindByIdStrict(
-      accessContext,
-      { id: dto.body.ambiente.id }
-    );
+    const ambiente = await this.ambienteService.ambienteFindByIdStrict(accessContext, { id: dto.body.ambiente.id });
 
     this.reservaRepository.merge(reserva, {
       ambiente: {
@@ -278,12 +224,9 @@ export class ReservaService {
 
     // =========================================================
 
-    const usuario = await this.usuarioService.usuarioFindByIdStrict(
-      accessContext,
-      {
-        id: dto.body.usuario.id,
-      }
-    );
+    const usuario = await this.usuarioService.usuarioFindByIdStrict(accessContext, {
+      id: dto.body.usuario.id,
+    });
 
     this.reservaRepository.merge(reserva, {
       usuario: {
@@ -300,10 +243,7 @@ export class ReservaService {
     return this.reservaFindByIdStrict(accessContext, { id: reserva.id });
   }
 
-  async reservaUpdate(
-    accessContext: AccessContext,
-    dto: LadesaTypings.ReservaUpdateByIdOperationInput
-  ) {
+  async reservaUpdate(accessContext: AccessContext, dto: LadesaTypings.ReservaUpdateByIdOperationInput) {
     // =========================================================
 
     const currentReserva = await this.reservaFindByIdStrict(accessContext, {
@@ -312,12 +252,7 @@ export class ReservaService {
 
     // =========================================================
 
-    await accessContext.ensurePermission(
-      "reserva:update",
-      { dto },
-      dto.params.id,
-      this.reservaRepository.createQueryBuilder(aliasReserva)
-    );
+    await accessContext.ensurePermission("reserva:update", { dto }, dto.params.id, this.reservaRepository.createQueryBuilder(aliasReserva));
 
     const dtoReserva = pick(dto.body, ["situacao", "motivo", "tipo", "rrule"]);
 
@@ -332,10 +267,7 @@ export class ReservaService {
     // =========================================================
 
     if (has(dto.body, "ambiente") && dto.body.ambiente !== undefined) {
-      const ambiente = await this.ambienteService.ambienteFindByIdStrict(
-        accessContext,
-        { id: dto.body.ambiente.id }
-      );
+      const ambiente = await this.ambienteService.ambienteFindByIdStrict(accessContext, { id: dto.body.ambiente.id });
 
       this.reservaRepository.merge(reserva, {
         ambiente: {
@@ -347,10 +279,7 @@ export class ReservaService {
     // =========================================================
 
     if (has(dto.body, "usuario") && dto.body.usuario !== undefined) {
-      const usuario = await this.usuarioService.usuarioFindByIdSimpleStrict(
-        accessContext,
-        dto.body.usuario.id
-      );
+      const usuario = await this.usuarioService.usuarioFindByIdSimpleStrict(accessContext, dto.body.usuario.id);
 
       this.reservaRepository.merge(reserva, {
         usuario: {
@@ -370,18 +299,10 @@ export class ReservaService {
 
   //
 
-  async reservaDeleteOneById(
-    accessContext: AccessContext,
-    dto: LadesaTypings.ReservaFindOneInputView
-  ) {
+  async reservaDeleteOneById(accessContext: AccessContext, dto: LadesaTypings.ReservaFindOneInputView) {
     // =========================================================
 
-    await accessContext.ensurePermission(
-      "reserva:delete",
-      { dto },
-      dto.id,
-      this.reservaRepository.createQueryBuilder(aliasReserva)
-    );
+    await accessContext.ensurePermission("reserva:delete", { dto }, dto.id, this.reservaRepository.createQueryBuilder(aliasReserva));
 
     // =========================================================
 

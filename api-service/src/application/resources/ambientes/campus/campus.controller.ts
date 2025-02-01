@@ -1,9 +1,6 @@
 import { CombinedInput } from "@/application/standards";
 import { Operation } from "@/application/standards/especificacao/business-logic";
-import {
-  type AccessContext,
-  AccessContextHttp,
-} from "@/infrastructure/access-context";
+import { type AccessContext, AccessContextHttp } from "@/infrastructure/access-context";
 import * as LadesaTypings from "@ladesa-ro/especificacao";
 import { Tokens } from "@ladesa-ro/especificacao";
 import { Controller, Delete, Get, Patch, Post } from "@nestjs/common";
@@ -22,7 +19,7 @@ export class CampusController {
   async campusFindAll(
     //
     @AccessContextHttp() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.CampusListOperationInput
+    @CombinedInput() dto: LadesaTypings.CampusListOperationInput,
   ): Promise<LadesaTypings.CampusListOperationOutput["success"]> {
     return this.campusService.campusFindAll(accessContext, dto);
   }
@@ -34,7 +31,7 @@ export class CampusController {
   async campusFindById(
     //
     @AccessContextHttp() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.CampusFindOneByIdOperationOutput
+    @CombinedInput() dto: LadesaTypings.CampusFindOneByIdOperationOutput,
   ) {
     return this.campusService.campusFindByIdStrict(accessContext, {
       id: dto.params.id,
@@ -48,7 +45,7 @@ export class CampusController {
   async campusCreate(
     //
     @AccessContextHttp() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.CampusCreateOperationInput
+    @CombinedInput() dto: LadesaTypings.CampusCreateOperationInput,
   ) {
     return this.campusService.campusCreate(accessContext, dto);
   }
@@ -60,7 +57,7 @@ export class CampusController {
   async campusUpdate(
     //
     @AccessContextHttp() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.CampusUpdateOperationInput
+    @CombinedInput() dto: LadesaTypings.CampusUpdateOperationInput,
   ) {
     return this.campusService.campusUpdate(accessContext, dto);
   }
@@ -72,7 +69,7 @@ export class CampusController {
   async campusDeleteOneById(
     //
     @AccessContextHttp() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.CampusDeleteOneByIdOperationInput
+    @CombinedInput() dto: LadesaTypings.CampusDeleteOneByIdOperationInput,
   ) {
     return this.campusService.campusDeleteOneById(accessContext, {
       id: dto.params.id,

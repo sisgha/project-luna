@@ -1,8 +1,5 @@
 import { QbEfficientLoad } from "@/application/standards/ladesa-spec/QbEfficientLoad";
-import {
-  LadesaPaginatedResultDto,
-  LadesaSearch,
-} from "@/application/standards/ladesa-spec/search/search-strategies";
+import { LadesaPaginatedResultDto, LadesaSearch } from "@/application/standards/ladesa-spec/search/search-strategies";
 import type { AccessContext } from "@/infrastructure/access-context";
 import { paginateConfig } from "@/infrastructure/fixtures";
 import { DatabaseContextService } from "@/infrastructure/integrations/database";
@@ -23,7 +20,7 @@ const aliasEvento = "evento";
 export class EventoService {
   constructor(
     private databaseContext: DatabaseContextService,
-    private calendarioLetivoService: CalendarioLetivoService
+    private calendarioLetivoService: CalendarioLetivoService,
   ) {}
 
   get eventoRepository() {
@@ -35,7 +32,7 @@ export class EventoService {
   async eventoFindAll(
     accessContext: AccessContext,
     dto: LadesaTypings.EventoListOperationInput | null = null,
-    selection?: string[] | boolean
+    selection?: string[] | boolean,
   ): Promise<LadesaTypings.EventoListOperationOutput["success"]> {
     // =========================================================
 
@@ -93,32 +90,19 @@ export class EventoService {
     // =========================================================
 
     qb.select([]);
-    QbEfficientLoad(
-      LadesaTypings.Tokens.EventoFindOneResultView,
-      qb,
-      aliasEvento,
-      selection
-    );
+    QbEfficientLoad(LadesaTypings.Tokens.EventoFindOneResultView, qb, aliasEvento, selection);
 
     // =========================================================
 
-    const pageItemsView = await qb
-      .andWhereInIds(map(paginated.data, "id"))
-      .getMany();
-    paginated.data = paginated.data.map(
-      (paginated) => pageItemsView.find((i) => i.id === paginated.id)!
-    );
+    const pageItemsView = await qb.andWhereInIds(map(paginated.data, "id")).getMany();
+    paginated.data = paginated.data.map((paginated) => pageItemsView.find((i) => i.id === paginated.id)!);
 
     // =========================================================
 
     return LadesaPaginatedResultDto(paginated);
   }
 
-  async eventoFindById(
-    accessContext: AccessContext,
-    dto: LadesaTypings.EventoFindOneInputView,
-    selection?: string[] | boolean
-  ): Promise<LadesaTypings.EventoFindOneResultView | null> {
+  async eventoFindById(accessContext: AccessContext, dto: LadesaTypings.EventoFindOneInputView, selection?: string[] | boolean): Promise<LadesaTypings.EventoFindOneResultView | null> {
     // =========================================================
 
     const qb = this.eventoRepository.createQueryBuilder(aliasEvento);
@@ -134,12 +118,7 @@ export class EventoService {
     // =========================================================
 
     qb.select([]);
-    QbEfficientLoad(
-      LadesaTypings.Tokens.EventoFindOneResultView,
-      qb,
-      aliasEvento,
-      selection
-    );
+    QbEfficientLoad(LadesaTypings.Tokens.EventoFindOneResultView, qb, aliasEvento, selection);
     // =========================================================
 
     const evento = await qb.getOne();
@@ -149,11 +128,7 @@ export class EventoService {
     return evento;
   }
 
-  async eventoFindByIdStrict(
-    accessContext: AccessContext,
-    dto: LadesaTypings.EventoFindOneInputView,
-    selection?: string[] | boolean
-  ) {
+  async eventoFindByIdStrict(accessContext: AccessContext, dto: LadesaTypings.EventoFindOneInputView, selection?: string[] | boolean) {
     const evento = await this.eventoFindById(accessContext, dto, selection);
 
     if (!evento) {
@@ -163,11 +138,7 @@ export class EventoService {
     return evento;
   }
 
-  async eventoFindByIdSimple(
-    accessContext: AccessContext,
-    id: LadesaTypings.EventoFindOneInputView["id"],
-    selection?: string[]
-  ): Promise<LadesaTypings.EventoFindOneResultView | null> {
+  async eventoFindByIdSimple(accessContext: AccessContext, id: LadesaTypings.EventoFindOneInputView["id"], selection?: string[]): Promise<LadesaTypings.EventoFindOneResultView | null> {
     // =========================================================
 
     const qb = this.eventoRepository.createQueryBuilder(aliasEvento);
@@ -183,12 +154,7 @@ export class EventoService {
     // =========================================================
 
     qb.select([]);
-    QbEfficientLoad(
-      LadesaTypings.Tokens.EventoFindOneResultView,
-      qb,
-      aliasEvento,
-      selection
-    );
+    QbEfficientLoad(LadesaTypings.Tokens.EventoFindOneResultView, qb, aliasEvento, selection);
 
     // =========================================================
 
@@ -199,16 +165,8 @@ export class EventoService {
     return evento;
   }
 
-  async EventoFindByIdSimpleStrict(
-    accessContext: AccessContext,
-    id: LadesaTypings.EventoFindOneInputView["id"],
-    selection?: string[]
-  ) {
-    const evento = await this.eventoFindByIdSimple(
-      accessContext,
-      id,
-      selection
-    );
+  async EventoFindByIdSimpleStrict(accessContext: AccessContext, id: LadesaTypings.EventoFindOneInputView["id"], selection?: string[]) {
+    const evento = await this.eventoFindByIdSimple(accessContext, id, selection);
 
     if (!evento) {
       throw new NotFoundException();
@@ -219,10 +177,7 @@ export class EventoService {
 
   //
 
-  async eventoCreate(
-    accessContext: AccessContext,
-    dto: LadesaTypings.EventoCreateOperationInput
-  ) {
+  async eventoCreate(accessContext: AccessContext, dto: LadesaTypings.EventoCreateOperationInput) {
     // =========================================================
 
     await accessContext.ensurePermission("evento:create", { dto });
@@ -240,11 +195,7 @@ export class EventoService {
     // =========================================================
 
     if (dto.body.calendario) {
-      const calendario =
-        await this.calendarioLetivoService.calendarioLetivoFindByIdSimpleStrict(
-          accessContext,
-          dto.body.calendario.id
-        );
+      const calendario = await this.calendarioLetivoService.calendarioLetivoFindByIdSimpleStrict(accessContext, dto.body.calendario.id);
 
       this.eventoRepository.merge(evento, {
         calendario: {
@@ -262,10 +213,7 @@ export class EventoService {
     return this.eventoFindByIdStrict(accessContext, { id: evento.id });
   }
 
-  async eventoUpdate(
-    accessContext: AccessContext,
-    dto: LadesaTypings.EventoUpdateByIdOperationInput
-  ) {
+  async eventoUpdate(accessContext: AccessContext, dto: LadesaTypings.EventoUpdateByIdOperationInput) {
     // =========================================================
 
     const currentEvento = await this.eventoFindByIdStrict(accessContext, {
@@ -274,12 +222,7 @@ export class EventoService {
 
     // =========================================================
 
-    await accessContext.ensurePermission(
-      "evento:update",
-      { dto },
-      dto.params.id,
-      this.eventoRepository.createQueryBuilder(aliasEvento)
-    );
+    await accessContext.ensurePermission("evento:update", { dto }, dto.params.id, this.eventoRepository.createQueryBuilder(aliasEvento));
 
     const dtoEvento = pick(dto.body, ["nome", "cor", "rrule"]);
 
@@ -294,11 +237,7 @@ export class EventoService {
     // =========================================================
 
     if (has(dto.body, "calendario") && dto.body.calendario !== undefined) {
-      const calendario =
-        await this.calendarioLetivoService.calendarioLetivoFindByIdSimpleStrict(
-          accessContext,
-          dto.body.calendario!.id
-        );
+      const calendario = await this.calendarioLetivoService.calendarioLetivoFindByIdSimpleStrict(accessContext, dto.body.calendario!.id);
 
       this.eventoRepository.merge(evento, {
         calendario: {
@@ -318,18 +257,10 @@ export class EventoService {
 
   //
 
-  async eventoDeleteOneById(
-    accessContext: AccessContext,
-    dto: LadesaTypings.EventoFindOneInputView
-  ) {
+  async eventoDeleteOneById(accessContext: AccessContext, dto: LadesaTypings.EventoFindOneInputView) {
     // =========================================================
 
-    await accessContext.ensurePermission(
-      "evento:delete",
-      { dto },
-      dto.id,
-      this.eventoRepository.createQueryBuilder(aliasEvento)
-    );
+    await accessContext.ensurePermission("evento:delete", { dto }, dto.id, this.eventoRepository.createQueryBuilder(aliasEvento));
 
     // =========================================================
 

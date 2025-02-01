@@ -1,9 +1,6 @@
 import { CombinedInput } from "@/application/standards";
 import { Operation } from "@/application/standards/especificacao/business-logic";
-import {
-  type AccessContext,
-  AccessContextGraphQl,
-} from "@/infrastructure/access-context";
+import { type AccessContext, AccessContextGraphQl } from "@/infrastructure/access-context";
 import * as LadesaTypings from "@ladesa-ro/especificacao";
 import { Tokens } from "@ladesa-ro/especificacao";
 import { Resolver } from "@nestjs/graphql";
@@ -17,7 +14,7 @@ export class HorarioGeradoResolver {
   async horarioGeradoFindAll(
     //
     @AccessContextGraphQl() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.HorarioGeradoListOperationInput
+    @CombinedInput() dto: LadesaTypings.HorarioGeradoListOperationInput,
   ) {
     return this.horarioGeradoService.horarioGeradoFindAll(accessContext, dto);
   }
@@ -26,19 +23,16 @@ export class HorarioGeradoResolver {
   async horarioGeradoFindOneById(
     //
     @AccessContextGraphQl() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.HorarioGeradoFindByIdOperationInput
+    @CombinedInput() dto: LadesaTypings.HorarioGeradoFindByIdOperationInput,
   ) {
-    return this.horarioGeradoService.horarioGeradoFindByIdStrict(
-      accessContext,
-      { id: dto.params.id }
-    );
+    return this.horarioGeradoService.horarioGeradoFindByIdStrict(accessContext, { id: dto.params.id });
   }
   //
   @Operation(Tokens.HorarioGeradoCreate)
   async horarioGeradoCreate(
     //
     @AccessContextGraphQl() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.HorarioGeradoCreateOperationInput
+    @CombinedInput() dto: LadesaTypings.HorarioGeradoCreateOperationInput,
   ) {
     return this.horarioGeradoService.horarioGeradoCreate(accessContext, dto);
   }
@@ -47,7 +41,7 @@ export class HorarioGeradoResolver {
   async horarioGeradoUpdate(
     //
     @AccessContextGraphQl() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.HorarioGeradoUpdateByIdOperationInput
+    @CombinedInput() dto: LadesaTypings.HorarioGeradoUpdateByIdOperationInput,
   ) {
     return this.horarioGeradoService.horarioGeradoUpdate(accessContext, dto);
   }
@@ -56,7 +50,7 @@ export class HorarioGeradoResolver {
   async horarioGeradoDeleteOneById(
     //
     @AccessContextGraphQl() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.HorarioGeradoDeleteByIdOperationInput
+    @CombinedInput() dto: LadesaTypings.HorarioGeradoDeleteByIdOperationInput,
   ) {
     return this.horarioGeradoService.horarioGeradoDeleteOneById(accessContext, {
       id: dto.params.id,

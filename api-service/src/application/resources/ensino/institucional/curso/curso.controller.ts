@@ -1,22 +1,9 @@
 import { CombinedInput } from "@/application/standards";
 import { Operation } from "@/application/standards/especificacao/business-logic";
-import {
-  type AccessContext,
-  AccessContextHttp,
-} from "@/infrastructure/access-context";
+import { type AccessContext, AccessContextHttp } from "@/infrastructure/access-context";
 import * as LadesaTypings from "@ladesa-ro/especificacao";
 import { Tokens } from "@ladesa-ro/especificacao";
-import {
-  Controller,
-  Delete,
-  Get,
-  Param,
-  ParseUUIDPipe,
-  Patch,
-  Post,
-  Put,
-  UploadedFile,
-} from "@nestjs/common";
+import { Controller, Delete, Get, Param, ParseUUIDPipe, Patch, Post, Put, UploadedFile } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
 import { CursoService } from "./curso.service";
 
@@ -32,7 +19,7 @@ export class CursoController {
   async cursoFindAll(
     //
     @AccessContextHttp() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.CursoListOperationInput
+    @CombinedInput() dto: LadesaTypings.CursoListOperationInput,
   ): Promise<LadesaTypings.CursoListOperationOutput["success"]> {
     return this.cursoService.cursoFindAll(accessContext, dto);
   }
@@ -44,7 +31,7 @@ export class CursoController {
   async cursoFindById(
     //
     @AccessContextHttp() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.CursoFindOneByIdOperationOutput
+    @CombinedInput() dto: LadesaTypings.CursoFindOneByIdOperationOutput,
   ) {
     return this.cursoService.cursoFindByIdStrict(accessContext, {
       id: dto.params.id,
@@ -58,7 +45,7 @@ export class CursoController {
   async cursoCreate(
     //
     @AccessContextHttp() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.CursoCreateOperationInput
+    @CombinedInput() dto: LadesaTypings.CursoCreateOperationInput,
   ) {
     return this.cursoService.cursoCreate(accessContext, dto);
   }
@@ -67,10 +54,7 @@ export class CursoController {
 
   @Patch("/:id")
   @Operation(Tokens.CursoUpdateOneById)
-  async cursoUpdate(
-    @AccessContextHttp() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.CursoUpdateByIdOperationInput
-  ) {
+  async cursoUpdate(@AccessContextHttp() accessContext: AccessContext, @CombinedInput() dto: LadesaTypings.CursoUpdateByIdOperationInput) {
     return this.cursoService.cursoUpdate(accessContext, dto);
   }
 
@@ -81,7 +65,7 @@ export class CursoController {
   async cursoGetImagemCapa(
     //
     @AccessContextHttp() accessContext: AccessContext,
-    @Param("id", ParseUUIDPipe) id: string
+    @Param("id", ParseUUIDPipe) id: string,
   ) {
     return this.cursoService.cursoGetImagemCapa(accessContext, id);
   }
@@ -92,7 +76,7 @@ export class CursoController {
     //
     @AccessContextHttp() accessContext: AccessContext,
     @UploadedFile() file: Express.Multer.File,
-    @Param("id", ParseUUIDPipe) id: string
+    @Param("id", ParseUUIDPipe) id: string,
   ) {
     return this.cursoService.cursoUpdateImagemCapa(accessContext, { id }, file);
   }
@@ -104,7 +88,7 @@ export class CursoController {
   async cursoDeleteOneById(
     //
     @AccessContextHttp() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.CursoFindOneByIdOperationOutput
+    @CombinedInput() dto: LadesaTypings.CursoFindOneByIdOperationOutput,
   ) {
     return this.cursoService.cursoDeleteOneById(accessContext, {
       id: dto.params.id,

@@ -1,9 +1,6 @@
 import { CombinedInput } from "@/application/standards";
 import { Operation } from "@/application/standards/especificacao/business-logic";
-import {
-  type AccessContext,
-  AccessContextGraphQl,
-} from "@/infrastructure/access-context";
+import { type AccessContext, AccessContextGraphQl } from "@/infrastructure/access-context";
 import * as LadesaTypings from "@ladesa-ro/especificacao";
 import { Tokens } from "@ladesa-ro/especificacao";
 import { Resolver } from "@nestjs/graphql";
@@ -17,7 +14,7 @@ export class EtapaResolver {
   async etapaFindAll(
     //
     @AccessContextGraphQl() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.EtapaListOperationInput
+    @CombinedInput() dto: LadesaTypings.EtapaListOperationInput,
   ) {
     return this.etapaService.etapaFindAll(accessContext, dto);
   }
@@ -26,7 +23,7 @@ export class EtapaResolver {
   async etapaFindOneById(
     //
     @AccessContextGraphQl() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.EtapaFindOneByIdOperationOutput
+    @CombinedInput() dto: LadesaTypings.EtapaFindOneByIdOperationOutput,
   ) {
     return this.etapaService.etapaFindByIdStrict(accessContext, {
       id: dto.params.id,
@@ -37,7 +34,7 @@ export class EtapaResolver {
   async etapaCreate(
     //
     @AccessContextGraphQl() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.EtapaCreateOperationInput
+    @CombinedInput() dto: LadesaTypings.EtapaCreateOperationInput,
   ) {
     return this.etapaService.etapaCreate(accessContext, dto);
   }
@@ -46,7 +43,7 @@ export class EtapaResolver {
   async etapaUpdate(
     //
     @AccessContextGraphQl() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.EtapaUpdateByIdOperationInput
+    @CombinedInput() dto: LadesaTypings.EtapaUpdateByIdOperationInput,
   ) {
     return this.etapaService.etapaUpdate(accessContext, dto);
   }
@@ -55,7 +52,7 @@ export class EtapaResolver {
   async etapaDeleteOneById(
     //
     @AccessContextGraphQl() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.EtapaDeleteByIdOperationInput
+    @CombinedInput() dto: LadesaTypings.EtapaDeleteByIdOperationInput,
   ) {
     return this.etapaService.etapaDeleteOneById(accessContext, {
       id: dto.params.id,

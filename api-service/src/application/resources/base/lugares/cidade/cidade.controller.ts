@@ -1,9 +1,6 @@
 import { CombinedInput } from "@/application/standards";
 import { Operation } from "@/application/standards/especificacao/business-logic";
-import {
-  type AccessContext,
-  AccessContextHttp,
-} from "@/infrastructure/access-context";
+import { type AccessContext, AccessContextHttp } from "@/infrastructure/access-context";
 import * as LadesaTypings from "@ladesa-ro/especificacao";
 import { Tokens } from "@ladesa-ro/especificacao";
 import { Controller, Get } from "@nestjs/common";
@@ -22,7 +19,7 @@ export class CidadeController {
   async findAll(
     //
     @AccessContextHttp() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.CidadeListOperationInput
+    @CombinedInput() dto: LadesaTypings.CidadeListOperationInput,
   ): Promise<LadesaTypings.CidadeListOperationOutput["success"]> {
     return this.cidadeService.findAll(accessContext, dto);
   }
@@ -34,7 +31,7 @@ export class CidadeController {
   async findById(
     //
     @AccessContextHttp() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.CidadeFindOneByIdOperationOutput
+    @CombinedInput() dto: LadesaTypings.CidadeFindOneByIdOperationOutput,
   ): Promise<LadesaTypings.CidadeFindOneResultView> {
     return this.cidadeService.findByIdStrict(accessContext, {
       id: dto.params.id,

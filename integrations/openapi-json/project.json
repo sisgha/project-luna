@@ -12,10 +12,7 @@
       "inputs": ["{workspaceRoot}/api-service/generated/openapi.v3.json"],
       "options": {
         "cwd": "{projectRoot}",
-        "commands": [
-          "cp ../../api-service/generated/openapi.v3.json ./json/openapi.v3.json",
-          "pnpm run -w code-static:fix {projectRoot}/json"
-        ],
+        "commands": ["cp ../../api-service/generated/openapi.v3.json ./json/openapi.v3.json", "pnpm run -w code-static:fix {projectRoot}/json"],
         "parallel": false
       },
       "outputs": ["{projectRoot}/json/openapi.v3.json"],

@@ -6,13 +6,7 @@ import { ImagemArquivoModule } from "./imagem-arquivo/imagem-arquivo.module";
 import { ImagemModule } from "./imagem/imagem.module";
 
 @Module({
-  imports: [
-    HealthModule,
-    ImagemModule,
-    ArquivoModule,
-    ImagemArquivoModule,
-    IntervaloDeTempoModule,
-  ],
+  imports: [HealthModule, ImagemModule, ArquivoModule, ImagemArquivoModule, IntervaloDeTempoModule],
   controllers: [],
   providers: [],
   exports: [],

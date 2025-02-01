@@ -35,10 +35,7 @@ export class NodeHandler<Out = unknown, Context = void> {
     return this.HandleDefault(node, context);
   }
 
-  HandleTypeObjectOperation(
-    node: INodeTypeObjectOperation,
-    context: Context
-  ): Out {
+  HandleTypeObjectOperation(node: INodeTypeObjectOperation, context: Context): Out {
     return this.HandleDefault(node, context);
   }
 

@@ -1,9 +1,6 @@
 import { CombinedInput } from "@/application/standards";
 import { Operation } from "@/application/standards/especificacao/business-logic";
-import {
-  type AccessContext,
-  AccessContextGraphQl,
-} from "@/infrastructure/access-context";
+import { type AccessContext, AccessContextGraphQl } from "@/infrastructure/access-context";
 import * as LadesaTypings from "@ladesa-ro/especificacao";
 import { Tokens } from "@ladesa-ro/especificacao";
 import { Resolver } from "@nestjs/graphql";
@@ -13,14 +10,14 @@ import { TurmaService } from "./turma.service";
 export class TurmaResolver {
   constructor(
     //
-    private turmaService: TurmaService
+    private turmaService: TurmaService,
   ) {}
   //
   @Operation(Tokens.TurmaList)
   async turmaFindAll(
     //
     @AccessContextGraphQl() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.TurmaListOperationInput
+    @CombinedInput() dto: LadesaTypings.TurmaListOperationInput,
   ) {
     return this.turmaService.turmaFindAll(accessContext, dto);
   }
@@ -29,7 +26,7 @@ export class TurmaResolver {
   async turmaFindOneById(
     //
     @AccessContextGraphQl() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.TurmaFindOneByIdOperationOutput
+    @CombinedInput() dto: LadesaTypings.TurmaFindOneByIdOperationOutput,
   ) {
     return this.turmaService.turmaFindByIdStrict(accessContext, {
       id: dto.params.id,
@@ -40,7 +37,7 @@ export class TurmaResolver {
   async turmaCreate(
     //
     @AccessContextGraphQl() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.TurmaCreateOperationInput
+    @CombinedInput() dto: LadesaTypings.TurmaCreateOperationInput,
   ) {
     return this.turmaService.turmaCreate(accessContext, dto);
   }
@@ -48,7 +45,7 @@ export class TurmaResolver {
   async turmaUpdate(
     //
     @AccessContextGraphQl() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.TurmaUpdateByIdOperationInput
+    @CombinedInput() dto: LadesaTypings.TurmaUpdateByIdOperationInput,
   ) {
     return this.turmaService.turmaUpdate(accessContext, dto);
   }
@@ -56,7 +53,7 @@ export class TurmaResolver {
   async turmaDeleteOneById(
     //
     @AccessContextGraphQl() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.TurmaFindOneByIdOperationOutput
+    @CombinedInput() dto: LadesaTypings.TurmaFindOneByIdOperationOutput,
   ) {
     return this.turmaService.turmaDeleteOneById(accessContext, {
       id: dto.params.id,

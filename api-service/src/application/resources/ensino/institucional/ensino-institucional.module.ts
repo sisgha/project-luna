@@ -7,13 +7,6 @@ import { DisciplinaModule } from "./disciplina/disciplina.module";
 import { ModalidadeModule } from "./modalidade/modalidade.module";
 
 @Module({
-  imports: [
-    NivelFormacaoModule,
-    ModalidadeModule,
-    OfertaFormacaoModule,
-    OfertaFormacaoNivelFormacaoModule,
-    CursoModule,
-    DisciplinaModule,
-  ],
+  imports: [NivelFormacaoModule, ModalidadeModule, OfertaFormacaoModule, OfertaFormacaoNivelFormacaoModule, CursoModule, DisciplinaModule],
 })
 export class EnsinoInstitucionalModule {}

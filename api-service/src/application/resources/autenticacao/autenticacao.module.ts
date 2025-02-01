@@ -1,8 +1,5 @@
 import { PerfilModule } from "@/application/resources/autorizacao/perfil/perfil.module";
-import {
-  KeycloakModule,
-  OpenidConnectModule,
-} from "@/infrastructure/integrations/identity-provider";
+import { KeycloakModule, OpenidConnectModule } from "@/infrastructure/integrations/identity-provider";
 import { Module } from "@nestjs/common";
 import { AutenticacaoController } from "./autenticacao.controller";
 import { AutenticacaoResolver } from "./autenticacao.resolver";

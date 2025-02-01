@@ -1,3 +1,4 @@
+import { inspect } from "node:util";
 import type { ISpecNodesStore } from "@/application/standards/especificacao/business-logic/SpecNodesStore/Types/ISpecNodesStore";
 import {
   CheckNodeCore,
@@ -17,7 +18,6 @@ import {
 import { Not } from "@/infrastructure/fixtures/utils/not";
 import { mergeSchemas } from "@fastify/merge-json-schemas";
 import defu from "defu";
-import { inspect } from "node:util";
 
 const strict = false;
 
@@ -50,10 +50,7 @@ export class SpecNodesStoreFromNpmPackage implements ISpecNodesStore {
     }
 
     for (const node of this.Nodes) {
-      if (
-        (!strict || CheckType(NodeTypeObjectEntity, node)) &&
-        node["$id"] === name
-      ) {
+      if ((!strict || CheckType(NodeTypeObjectEntity, node)) && node["$id"] === name) {
         this.#mapNodes.set(name, node);
         return node;
       }
@@ -69,10 +66,7 @@ export class SpecNodesStoreFromNpmPackage implements ISpecNodesStore {
     }
 
     for (const node of this.Nodes) {
-      if (
-        (!strict || CheckType(NodeTypeObjectEntity, node)) &&
-        node["x-unispec-entity-id"] === name
-      ) {
+      if ((!strict || CheckType(NodeTypeObjectEntity, node)) && node["x-unispec-entity-id"] === name) {
         this.#mapEntities.set(name, node);
         return node;
       }
@@ -88,10 +82,7 @@ export class SpecNodesStoreFromNpmPackage implements ISpecNodesStore {
     }
 
     for (const node of this.Nodes) {
-      if (
-        (!strict || CheckType(NodeTypeObjectOperation, node)) &&
-        node["x-unispec-operation-id"] === name
-      ) {
+      if ((!strict || CheckType(NodeTypeObjectOperation, node)) && node["x-unispec-operation-id"] === name) {
         this.#mapOperations.set(name, node);
         return node;
       }
@@ -102,9 +93,7 @@ export class SpecNodesStoreFromNpmPackage implements ISpecNodesStore {
 
   //
 
-  GetNestedRefs(
-    initialCursor: string | INodeRef | INodeCore
-  ): (INodeCore | INodeRef)[] {
+  GetNestedRefs(initialCursor: string | INodeRef | INodeCore): (INodeCore | INodeRef)[] {
     const composedNodeLayers: (INodeCore | INodeRef)[] = [];
 
     let cursor = initialCursor;
@@ -163,11 +152,7 @@ export class SpecNodesStoreFromNpmPackage implements ISpecNodesStore {
           };
         }
 
-        if (
-          anyOf.length === 2 &&
-          anyOf.some(Not(CheckNodeTypeNull)) &&
-          anyOf.some(CheckNodeTypeNull)
-        ) {
+        if (anyOf.length === 2 && anyOf.some(Not(CheckNodeTypeNull)) && anyOf.some(CheckNodeTypeNull)) {
           const otherNode = anyOf.find(Not(CheckNodeTypeNull));
 
           if (otherNode) {
@@ -183,13 +168,11 @@ export class SpecNodesStoreFromNpmPackage implements ISpecNodesStore {
             { rawAnyOf },
             {
               depth: Number.POSITIVE_INFINITY,
-            }
-          )
+            },
+          ),
         );
 
-        throw new TypeError(
-          `${SpecNodesStoreFromNpmPackage.name}#${this.ComposeAnyOf.name}: could not handle anyOf`
-        );
+        throw new TypeError(`${SpecNodesStoreFromNpmPackage.name}#${this.ComposeAnyOf.name}: could not handle anyOf`);
       }
     }
 
@@ -227,7 +210,7 @@ export class SpecNodesStoreFromNpmPackage implements ISpecNodesStore {
       ].filter(Boolean),
       {
         onConflict: "first",
-      }
+      },
     );
 
     return {

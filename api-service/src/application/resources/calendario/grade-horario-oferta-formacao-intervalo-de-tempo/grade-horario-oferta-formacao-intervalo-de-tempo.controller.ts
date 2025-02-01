@@ -1,9 +1,6 @@
 import { CombinedInput } from "@/application/standards";
 import { Operation } from "@/application/standards/especificacao/business-logic";
-import {
-  type AccessContext,
-  AccessContextHttp,
-} from "@/infrastructure/access-context";
+import { type AccessContext, AccessContextHttp } from "@/infrastructure/access-context";
 import * as LadesaTypings from "@ladesa-ro/especificacao";
 import { Tokens } from "@ladesa-ro/especificacao";
 import { Controller, Delete, Get, Patch, Post } from "@nestjs/common";
@@ -13,9 +10,7 @@ import { GradeHorarioOfertaFormacaoIntervaloDeTempoService } from "./grade-horar
 @ApiTags("grades-horarios-ofertas-formacoes-intervalos-de-tempo")
 @Controller("/grades-horarios-ofertas-formacoes-intervalos-de-tempo")
 export class GradeHorarioOfertaFormacaoIntervaloDeTempoController {
-  constructor(
-    private gradeHorarioOfertaFormacaoIntervaloDeTempoService: GradeHorarioOfertaFormacaoIntervaloDeTempoService
-  ) {}
+  constructor(private gradeHorarioOfertaFormacaoIntervaloDeTempoService: GradeHorarioOfertaFormacaoIntervaloDeTempoService) {}
 
   //
 
@@ -25,14 +20,9 @@ export class GradeHorarioOfertaFormacaoIntervaloDeTempoController {
     //
     @AccessContextHttp() accessContext: AccessContext,
     @CombinedInput()
-    dto: LadesaTypings.GradeHorarioOfertaFormacaoIntervaloDeTempoListOperationInput
-  ): Promise<
-    LadesaTypings.GradeHorarioOfertaFormacaoIntervaloDeTempoListOperationOutput["success"]
-  > {
-    return this.gradeHorarioOfertaFormacaoIntervaloDeTempoService.gradeHorarioOfertaFormacaoIntervaloDeTempoFindAll(
-      accessContext,
-      dto
-    );
+    dto: LadesaTypings.GradeHorarioOfertaFormacaoIntervaloDeTempoListOperationInput,
+  ): Promise<LadesaTypings.GradeHorarioOfertaFormacaoIntervaloDeTempoListOperationOutput["success"]> {
+    return this.gradeHorarioOfertaFormacaoIntervaloDeTempoService.gradeHorarioOfertaFormacaoIntervaloDeTempoFindAll(accessContext, dto);
   }
 
   //
@@ -43,14 +33,11 @@ export class GradeHorarioOfertaFormacaoIntervaloDeTempoController {
     //
     @AccessContextHttp() accessContext: AccessContext,
     @CombinedInput()
-    dto: LadesaTypings.GradeHorarioOfertaFormacaoIntervaloDeTempoFindOneByIdOperationOutput
+    dto: LadesaTypings.GradeHorarioOfertaFormacaoIntervaloDeTempoFindOneByIdOperationOutput,
   ) {
-    return this.gradeHorarioOfertaFormacaoIntervaloDeTempoService.gradeHorarioOfertaFormacaoIntervaloDeTempoFindByIdStrict(
-      accessContext,
-      {
-        id: dto.params.id,
-      }
-    );
+    return this.gradeHorarioOfertaFormacaoIntervaloDeTempoService.gradeHorarioOfertaFormacaoIntervaloDeTempoFindByIdStrict(accessContext, {
+      id: dto.params.id,
+    });
   }
 
   //
@@ -61,12 +48,9 @@ export class GradeHorarioOfertaFormacaoIntervaloDeTempoController {
     //
     @AccessContextHttp() accessContext: AccessContext,
     @CombinedInput()
-    dto: LadesaTypings.GradeHorarioOfertaFormacaoIntervaloDeTempoCreateOperationInput
+    dto: LadesaTypings.GradeHorarioOfertaFormacaoIntervaloDeTempoCreateOperationInput,
   ) {
-    return this.gradeHorarioOfertaFormacaoIntervaloDeTempoService.gradeHorarioOfertaFormacaoIntervaloDeTempoCreate(
-      accessContext,
-      dto
-    );
+    return this.gradeHorarioOfertaFormacaoIntervaloDeTempoService.gradeHorarioOfertaFormacaoIntervaloDeTempoCreate(accessContext, dto);
   }
 
   //
@@ -77,12 +61,9 @@ export class GradeHorarioOfertaFormacaoIntervaloDeTempoController {
     //
     @AccessContextHttp() accessContext: AccessContext,
     @CombinedInput()
-    dto: LadesaTypings.GradeHorarioOfertaFormacaoIntervaloDeTempoUpdateByIdOperationInput
+    dto: LadesaTypings.GradeHorarioOfertaFormacaoIntervaloDeTempoUpdateByIdOperationInput,
   ) {
-    return this.gradeHorarioOfertaFormacaoIntervaloDeTempoService.gradeHorarioOfertaFormacaoIntervaloDeTempoUpdate(
-      accessContext,
-      dto
-    );
+    return this.gradeHorarioOfertaFormacaoIntervaloDeTempoService.gradeHorarioOfertaFormacaoIntervaloDeTempoUpdate(accessContext, dto);
   }
 
   //
@@ -93,14 +74,11 @@ export class GradeHorarioOfertaFormacaoIntervaloDeTempoController {
     //
     @AccessContextHttp() accessContext: AccessContext,
     @CombinedInput()
-    dto: LadesaTypings.GradeHorarioOfertaFormacaoIntervaloDeTempoDeleteByIdOperationInput
+    dto: LadesaTypings.GradeHorarioOfertaFormacaoIntervaloDeTempoDeleteByIdOperationInput,
   ) {
-    return this.gradeHorarioOfertaFormacaoIntervaloDeTempoService.gradeHorarioOfertaFormacaoIntervaloDeTempoDeleteOneById(
-      accessContext,
-      {
-        id: dto.params.id,
-      }
-    );
+    return this.gradeHorarioOfertaFormacaoIntervaloDeTempoService.gradeHorarioOfertaFormacaoIntervaloDeTempoDeleteOneById(accessContext, {
+      id: dto.params.id,
+    });
   }
 
   //

@@ -1,12 +1,6 @@
-import {
-  CombinedInput,
-  graphqlExtractSelection,
-} from "@/application/standards";
+import { CombinedInput, graphqlExtractSelection } from "@/application/standards";
 import { Operation } from "@/application/standards/especificacao/business-logic";
-import {
-  type AccessContext,
-  AccessContextGraphQl,
-} from "@/infrastructure/access-context";
+import { type AccessContext, AccessContextGraphQl } from "@/infrastructure/access-context";
 import * as LadesaTypings from "@ladesa-ro/especificacao";
 import { Tokens } from "@ladesa-ro/especificacao";
 import { Info as GqlInfo, Resolver as GqlResolver } from "@nestjs/graphql";
@@ -17,7 +11,7 @@ import { GradeHorarioOfertaFormacaoIntervaloDeTempoService } from "./grade-horar
 export class GradeHorarioOfertaFormacaoIntervaloDeTempoResolver {
   constructor(
     //
-    private gradeHorarioOfertaFormacaoIntervaloDeTempoService: GradeHorarioOfertaFormacaoIntervaloDeTempoService
+    private gradeHorarioOfertaFormacaoIntervaloDeTempoService: GradeHorarioOfertaFormacaoIntervaloDeTempoService,
   ) {}
   //
   @Operation(Tokens.GradeHorarioOfertaFormacaoIntervaloDeTempoList)
@@ -26,13 +20,9 @@ export class GradeHorarioOfertaFormacaoIntervaloDeTempoResolver {
     @AccessContextGraphQl() accessContext: AccessContext,
     @CombinedInput()
     dto: LadesaTypings.GradeHorarioOfertaFormacaoIntervaloDeTempoListOperationInput,
-    @GqlInfo() info: GraphQLResolveInfo
+    @GqlInfo() info: GraphQLResolveInfo,
   ) {
-    return this.gradeHorarioOfertaFormacaoIntervaloDeTempoService.gradeHorarioOfertaFormacaoIntervaloDeTempoFindAll(
-      accessContext,
-      dto,
-      graphqlExtractSelection(info, "paginated")
-    );
+    return this.gradeHorarioOfertaFormacaoIntervaloDeTempoService.gradeHorarioOfertaFormacaoIntervaloDeTempoFindAll(accessContext, dto, graphqlExtractSelection(info, "paginated"));
   }
   //
   @Operation(Tokens.GradeHorarioOfertaFormacaoIntervaloDeTempoFindOneById)
@@ -41,14 +31,14 @@ export class GradeHorarioOfertaFormacaoIntervaloDeTempoResolver {
     @AccessContextGraphQl() accessContext: AccessContext,
     @CombinedInput()
     dto: LadesaTypings.GradeHorarioOfertaFormacaoIntervaloDeTempoFindOneByIdOperationOutput,
-    @GqlInfo() info: GraphQLResolveInfo
+    @GqlInfo() info: GraphQLResolveInfo,
   ) {
     return this.gradeHorarioOfertaFormacaoIntervaloDeTempoService.gradeHorarioOfertaFormacaoIntervaloDeTempoFindByIdStrict(
       accessContext,
       {
         id: dto.params.id,
       },
-      ["id", ...graphqlExtractSelection(info)]
+      ["id", ...graphqlExtractSelection(info)],
     );
   }
   //
@@ -57,12 +47,9 @@ export class GradeHorarioOfertaFormacaoIntervaloDeTempoResolver {
     //
     @AccessContextGraphQl() accessContext: AccessContext,
     @CombinedInput()
-    dto: LadesaTypings.GradeHorarioOfertaFormacaoIntervaloDeTempoCreateOperationInput
+    dto: LadesaTypings.GradeHorarioOfertaFormacaoIntervaloDeTempoCreateOperationInput,
   ) {
-    return this.gradeHorarioOfertaFormacaoIntervaloDeTempoService.gradeHorarioOfertaFormacaoIntervaloDeTempoCreate(
-      accessContext,
-      dto
-    );
+    return this.gradeHorarioOfertaFormacaoIntervaloDeTempoService.gradeHorarioOfertaFormacaoIntervaloDeTempoCreate(accessContext, dto);
   }
 
   @Operation(Tokens.GradeHorarioOfertaFormacaoIntervaloDeTempoUpdateOneById)
@@ -70,12 +57,9 @@ export class GradeHorarioOfertaFormacaoIntervaloDeTempoResolver {
     //
     @AccessContextGraphQl() accessContext: AccessContext,
     @CombinedInput()
-    dto: LadesaTypings.GradeHorarioOfertaFormacaoIntervaloDeTempoUpdateByIdOperationInput
+    dto: LadesaTypings.GradeHorarioOfertaFormacaoIntervaloDeTempoUpdateByIdOperationInput,
   ) {
-    return this.gradeHorarioOfertaFormacaoIntervaloDeTempoService.gradeHorarioOfertaFormacaoIntervaloDeTempoUpdate(
-      accessContext,
-      dto
-    );
+    return this.gradeHorarioOfertaFormacaoIntervaloDeTempoService.gradeHorarioOfertaFormacaoIntervaloDeTempoUpdate(accessContext, dto);
   }
 
   @Operation(Tokens.GradeHorarioOfertaFormacaoIntervaloDeTempoDeleteOneById)
@@ -83,13 +67,10 @@ export class GradeHorarioOfertaFormacaoIntervaloDeTempoResolver {
     //
     @AccessContextGraphQl() accessContext: AccessContext,
     @CombinedInput()
-    dto: LadesaTypings.GradeHorarioOfertaFormacaoIntervaloDeTempoDeleteByIdOperationInput
+    dto: LadesaTypings.GradeHorarioOfertaFormacaoIntervaloDeTempoDeleteByIdOperationInput,
   ) {
-    return this.gradeHorarioOfertaFormacaoIntervaloDeTempoService.gradeHorarioOfertaFormacaoIntervaloDeTempoDeleteOneById(
-      accessContext,
-      {
-        id: dto.params.id,
-      }
-    );
+    return this.gradeHorarioOfertaFormacaoIntervaloDeTempoService.gradeHorarioOfertaFormacaoIntervaloDeTempoDeleteOneById(accessContext, {
+      id: dto.params.id,
+    });
   }
 }

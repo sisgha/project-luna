@@ -8,12 +8,7 @@ import { DiarioResolver } from "./diario.resolver";
 import { DiarioService } from "./diario.service";
 
 @Module({
-  imports: [
-    CalendarioLetivoModule,
-    TurmaModule,
-    AmbienteModule,
-    DisciplinaModule,
-  ],
+  imports: [CalendarioLetivoModule, TurmaModule, AmbienteModule, DisciplinaModule],
   controllers: [DiarioController],
   providers: [DiarioService, DiarioResolver],
   exports: [DiarioService],

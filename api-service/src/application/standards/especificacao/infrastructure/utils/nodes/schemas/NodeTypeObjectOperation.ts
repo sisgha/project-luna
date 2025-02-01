@@ -1,15 +1,6 @@
-import {
-  INestedNode,
-  NestedNode,
-} from "@/application/standards/especificacao/infrastructure/utils/nodes/schemas/NestedNode";
-import {
-  INodeTypeObjectBase,
-  NodeTypeObjectBase,
-} from "@/application/standards/especificacao/infrastructure/utils/nodes/schemas/NodeTypeObjectBase";
-import {
-  BuildCheckType,
-  BuildParseType,
-} from "@/application/standards/especificacao/infrastructure/utils/nodes/schemas/helpers";
+import { INestedNode, NestedNode } from "@/application/standards/especificacao/infrastructure/utils/nodes/schemas/NestedNode";
+import { INodeTypeObjectBase, NodeTypeObjectBase } from "@/application/standards/especificacao/infrastructure/utils/nodes/schemas/NodeTypeObjectBase";
+import { BuildCheckType, BuildParseType } from "@/application/standards/especificacao/infrastructure/utils/nodes/schemas/helpers";
 import * as valibot from "valibot";
 
 export type INodeTypeObjectOperation = INodeTypeObjectBase & {
@@ -65,15 +56,10 @@ export const NodeTypeObjectOperation = valibot.strictObject({
     valibot.object({
       gql: valibot.optional(
         valibot.object({
-          kind: valibot.optional(
-            valibot.union([
-              valibot.literal("query"),
-              valibot.literal("mutation"),
-            ])
-          ),
-        })
+          kind: valibot.optional(valibot.union([valibot.literal("query"), valibot.literal("mutation")])),
+        }),
       ),
-    })
+    }),
   ),
 
   properties: valibot.object({
@@ -96,9 +82,9 @@ export const NodeTypeObjectOperation = valibot.strictObject({
                     valibot.object({
                       ["x-unispec-gql-key"]: valibot.optional(valibot.string()),
                     }),
-                  ])
+                  ]),
                 ),
-              })
+              }),
             ),
 
             params: valibot.optional(
@@ -112,13 +98,13 @@ export const NodeTypeObjectOperation = valibot.strictObject({
                     valibot.object({
                       ["x-unispec-gql-key"]: valibot.optional(valibot.string()),
                     }),
-                  ])
+                  ]),
                 ),
-              })
+              }),
             ),
-          })
+          }),
         ),
-      })
+      }),
     ),
 
     output: valibot.optional(
@@ -128,17 +114,12 @@ export const NodeTypeObjectOperation = valibot.strictObject({
         properties: valibot.optional(
           valibot.object({
             success: valibot.optional(valibot.lazy(() => NestedNode)),
-          })
+          }),
         ),
-      })
+      }),
     ),
   }),
 });
 
-export const CheckNodeTypeObjectOperation = BuildCheckType<
-  any,
-  INodeTypeObjectOperation
->(NodeTypeObjectOperation);
-export const ParseNodeTypeObjectOperation = BuildParseType(
-  NodeTypeObjectOperation
-);
+export const CheckNodeTypeObjectOperation = BuildCheckType<any, INodeTypeObjectOperation>(NodeTypeObjectOperation);
+export const ParseNodeTypeObjectOperation = BuildParseType(NodeTypeObjectOperation);

@@ -1,22 +1,9 @@
 import { CombinedInput } from "@/application/standards";
 import { Operation } from "@/application/standards/especificacao/business-logic";
-import {
-  type AccessContext,
-  AccessContextHttp,
-} from "@/infrastructure/access-context";
+import { type AccessContext, AccessContextHttp } from "@/infrastructure/access-context";
 import * as LadesaTypings from "@ladesa-ro/especificacao";
 import { Tokens } from "@ladesa-ro/especificacao";
-import {
-  Controller,
-  Delete,
-  Get,
-  Param,
-  ParseUUIDPipe,
-  Patch,
-  Post,
-  Put,
-  UploadedFile,
-} from "@nestjs/common";
+import { Controller, Delete, Get, Param, ParseUUIDPipe, Patch, Post, Put, UploadedFile } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
 import { DisciplinaService } from "./disciplina.service";
 
@@ -32,7 +19,7 @@ export class DisciplinaController {
   async disciplinaFindAll(
     //
     @AccessContextHttp() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.DisciplinaListOperationInput
+    @CombinedInput() dto: LadesaTypings.DisciplinaListOperationInput,
   ): Promise<LadesaTypings.DisciplinaListOperationOutput["success"]> {
     return this.disciplinaService.disciplinaFindAll(accessContext, dto);
   }
@@ -44,7 +31,7 @@ export class DisciplinaController {
   async disciplinaFindById(
     //
     @AccessContextHttp() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.DisciplinaFindOneByIdOperationOutput
+    @CombinedInput() dto: LadesaTypings.DisciplinaFindOneByIdOperationOutput,
   ) {
     return this.disciplinaService.disciplinaFindByIdStrict(accessContext, {
       id: dto.params.id,
@@ -58,7 +45,7 @@ export class DisciplinaController {
   async disciplinaCreate(
     //
     @AccessContextHttp() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.DisciplinaCreateOperationInput
+    @CombinedInput() dto: LadesaTypings.DisciplinaCreateOperationInput,
   ) {
     return this.disciplinaService.disciplinaCreate(accessContext, dto);
   }
@@ -70,7 +57,7 @@ export class DisciplinaController {
   async disciplinaUpdate(
     //
     @AccessContextHttp() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.DisciplinaUpdateByIdOperationInput
+    @CombinedInput() dto: LadesaTypings.DisciplinaUpdateByIdOperationInput,
   ) {
     return this.disciplinaService.disciplinaUpdate(accessContext, dto);
   }
@@ -82,7 +69,7 @@ export class DisciplinaController {
   async disciplinaGetImagemCapa(
     //
     @AccessContextHttp() accessContext: AccessContext,
-    @Param("id", ParseUUIDPipe) id: string
+    @Param("id", ParseUUIDPipe) id: string,
   ) {
     return this.disciplinaService.disciplinaGetImagemCapa(accessContext, id);
   }
@@ -93,13 +80,9 @@ export class DisciplinaController {
     //
     @AccessContextHttp() accessContext: AccessContext,
     @UploadedFile() file: Express.Multer.File,
-    @Param("id", ParseUUIDPipe) id: string
+    @Param("id", ParseUUIDPipe) id: string,
   ) {
-    return this.disciplinaService.disciplinaUpdateImagemCapa(
-      accessContext,
-      { id },
-      file
-    );
+    return this.disciplinaService.disciplinaUpdateImagemCapa(accessContext, { id }, file);
   }
 
   //
@@ -109,7 +92,7 @@ export class DisciplinaController {
   async disciplinaDeleteOneById(
     //
     @AccessContextHttp() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.DisciplinaDeleteByIdOperationInput
+    @CombinedInput() dto: LadesaTypings.DisciplinaDeleteByIdOperationInput,
   ) {
     return this.disciplinaService.disciplinaDeleteOneById(accessContext, {
       id: dto.params.id,

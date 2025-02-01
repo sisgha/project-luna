@@ -1,8 +1,5 @@
 import { QbEfficientLoad } from "@/application/standards/ladesa-spec/QbEfficientLoad";
-import {
-  LadesaPaginatedResultDto,
-  LadesaSearch,
-} from "@/application/standards/ladesa-spec/search/search-strategies";
+import { LadesaPaginatedResultDto, LadesaSearch } from "@/application/standards/ladesa-spec/search/search-strategies";
 import type { AccessContext } from "@/infrastructure/access-context";
 import { paginateConfig } from "@/infrastructure/fixtures/pagination/paginateConfig";
 import { DatabaseContextService } from "@/infrastructure/integrations/database";
@@ -27,7 +24,7 @@ export class AmbienteService {
     private blocoService: BlocoService,
     private databaseContext: DatabaseContextService,
     private imagemService: ImagemService,
-    private arquivoService: ArquivoService
+    private arquivoService: ArquivoService,
   ) {}
 
   get ambienteRepository() {
@@ -39,7 +36,7 @@ export class AmbienteService {
   async ambienteFindAll(
     accessContext: AccessContext,
     dto: LadesaTypings.AmbienteListOperationInput | null = null,
-    selection?: string[] | boolean
+    selection?: string[] | boolean,
   ): Promise<LadesaTypings.AmbienteListOperationOutput["success"]> {
     // =========================================================
 
@@ -110,32 +107,19 @@ export class AmbienteService {
 
     qb.select([]);
 
-    QbEfficientLoad(
-      LadesaTypings.Tokens.AmbienteFindOneResultView,
-      qb,
-      aliasAmbiente,
-      selection
-    );
+    QbEfficientLoad(LadesaTypings.Tokens.AmbienteFindOneResultView, qb, aliasAmbiente, selection);
 
     // =========================================================
 
-    const pageItemsView = await qb
-      .andWhereInIds(map(paginated.data, "id"))
-      .getMany();
-    paginated.data = paginated.data.map(
-      (paginated) => pageItemsView.find((i) => i.id === paginated.id)!
-    );
+    const pageItemsView = await qb.andWhereInIds(map(paginated.data, "id")).getMany();
+    paginated.data = paginated.data.map((paginated) => pageItemsView.find((i) => i.id === paginated.id)!);
 
     // =========================================================
 
     return LadesaPaginatedResultDto(paginated);
   }
 
-  async ambienteFindById(
-    accessContext: AccessContext | null,
-    dto: LadesaTypings.AmbienteFindOneInputView,
-    selection?: string[] | boolean
-  ): Promise<LadesaTypings.AmbienteFindOneResultView | null> {
+  async ambienteFindById(accessContext: AccessContext | null, dto: LadesaTypings.AmbienteFindOneInputView, selection?: string[] | boolean): Promise<LadesaTypings.AmbienteFindOneResultView | null> {
     // =========================================================
 
     const qb = this.ambienteRepository.createQueryBuilder(aliasAmbiente);
@@ -153,12 +137,7 @@ export class AmbienteService {
     // =========================================================
 
     qb.select([]);
-    QbEfficientLoad(
-      LadesaTypings.Tokens.AmbienteFindOneResultView,
-      qb,
-      aliasAmbiente,
-      selection
-    );
+    QbEfficientLoad(LadesaTypings.Tokens.AmbienteFindOneResultView, qb, aliasAmbiente, selection);
 
     // =========================================================
 
@@ -169,11 +148,7 @@ export class AmbienteService {
     return ambiente;
   }
 
-  async ambienteFindByIdStrict(
-    accessContext: AccessContext | null,
-    dto: LadesaTypings.AmbienteFindOneInputView,
-    selection?: string[] | boolean
-  ) {
+  async ambienteFindByIdStrict(accessContext: AccessContext | null, dto: LadesaTypings.AmbienteFindOneInputView, selection?: string[] | boolean) {
     const ambiente = await this.ambienteFindById(accessContext, dto, selection);
 
     if (!ambiente) {
@@ -185,23 +160,14 @@ export class AmbienteService {
 
   //
 
-  async ambienteCreate(
-    accessContext: AccessContext,
-    dto: LadesaTypings.AmbienteCreateOperationInput
-  ) {
+  async ambienteCreate(accessContext: AccessContext, dto: LadesaTypings.AmbienteCreateOperationInput) {
     // =========================================================
 
     await accessContext.ensurePermission("ambiente:create", { dto });
 
     // =========================================================
 
-    const dtoAmbiente = pick(dto.body, [
-      "nome",
-      "descricao",
-      "codigo",
-      "capacidade",
-      "tipo",
-    ]);
+    const dtoAmbiente = pick(dto.body, ["nome", "descricao", "codigo", "capacidade", "tipo"]);
 
     const ambiente = this.ambienteRepository.create();
 
@@ -211,10 +177,7 @@ export class AmbienteService {
 
     // =========================================================
 
-    const bloco = await this.blocoService.blocoFindByIdSimpleStrict(
-      accessContext,
-      dto.body.bloco.id
-    );
+    const bloco = await this.blocoService.blocoFindByIdSimpleStrict(accessContext, dto.body.bloco.id);
 
     this.ambienteRepository.merge(ambiente, {
       bloco: {
@@ -231,10 +194,7 @@ export class AmbienteService {
     return this.ambienteFindByIdStrict(accessContext, { id: ambiente.id });
   }
 
-  async ambienteUpdate(
-    accessContext: AccessContext,
-    dto: LadesaTypings.AmbienteUpdateByIdOperationInput
-  ) {
+  async ambienteUpdate(accessContext: AccessContext, dto: LadesaTypings.AmbienteUpdateByIdOperationInput) {
     // =========================================================
 
     const currentAmbiente = await this.ambienteFindByIdStrict(accessContext, {
@@ -243,20 +203,9 @@ export class AmbienteService {
 
     // =========================================================
 
-    await accessContext.ensurePermission(
-      "ambiente:update",
-      { dto },
-      dto.params.id,
-      this.ambienteRepository.createQueryBuilder(aliasAmbiente)
-    );
+    await accessContext.ensurePermission("ambiente:update", { dto }, dto.params.id, this.ambienteRepository.createQueryBuilder(aliasAmbiente));
 
-    const dtoAmbiente = pick(dto.body, [
-      "nome",
-      "descricao",
-      "codigo",
-      "capacidade",
-      "tipo",
-    ]);
+    const dtoAmbiente = pick(dto.body, ["nome", "descricao", "codigo", "capacidade", "tipo"]);
 
     const ambiente = {
       id: currentAmbiente.id,
@@ -294,11 +243,7 @@ export class AmbienteService {
     throw new NotFoundException();
   }
 
-  async ambienteUpdateImagemCapa(
-    accessContext: AccessContext,
-    dto: LadesaTypings.AmbienteFindOneInputView,
-    file: Express.Multer.File
-  ) {
+  async ambienteUpdateImagemCapa(accessContext: AccessContext, dto: LadesaTypings.AmbienteFindOneInputView, file: Express.Multer.File) {
     // =========================================================
 
     const currentAmbiente = await this.ambienteFindByIdStrict(accessContext, {
@@ -315,19 +260,16 @@ export class AmbienteService {
         },
       },
       currentAmbiente.id,
-      this.ambienteRepository.createQueryBuilder(aliasAmbiente)
+      this.ambienteRepository.createQueryBuilder(aliasAmbiente),
     );
 
     // =========================================================
 
     const { imagem } = await this.imagemService.saveAmbienteCapa(file);
 
-    const ambiente = this.ambienteRepository.merge(
-      this.ambienteRepository.create(),
-      {
-        id: currentAmbiente.id,
-      }
-    );
+    const ambiente = this.ambienteRepository.merge(this.ambienteRepository.create(), {
+      id: currentAmbiente.id,
+    });
 
     this.ambienteRepository.merge(ambiente, {
       imagemCapa: {
@@ -344,18 +286,10 @@ export class AmbienteService {
 
   //
 
-  async ambienteDeleteOneById(
-    accessContext: AccessContext,
-    dto: LadesaTypings.AmbienteFindOneInputView
-  ) {
+  async ambienteDeleteOneById(accessContext: AccessContext, dto: LadesaTypings.AmbienteFindOneInputView) {
     // =========================================================
 
-    await accessContext.ensurePermission(
-      "ambiente:delete",
-      { dto },
-      dto.id,
-      this.ambienteRepository.createQueryBuilder(aliasAmbiente)
-    );
+    await accessContext.ensurePermission("ambiente:delete", { dto }, dto.id, this.ambienteRepository.createQueryBuilder(aliasAmbiente));
 
     // =========================================================
 

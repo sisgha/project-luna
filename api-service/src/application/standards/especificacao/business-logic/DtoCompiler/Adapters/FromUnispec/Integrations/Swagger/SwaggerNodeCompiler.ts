@@ -1,11 +1,5 @@
 import type { IDtoCompilerContext } from "@/application/standards/especificacao/business-logic/DtoCompiler/typings";
-import {
-  type INode,
-  type INodeRef,
-  type INodeTypeArray,
-  type INodeTypeObjectEntity,
-  NodeHandler,
-} from "@/application/standards/especificacao/infrastructure";
+import { type INode, type INodeRef, type INodeTypeArray, type INodeTypeObjectEntity, NodeHandler } from "@/application/standards/especificacao/infrastructure";
 import { SchemaObject } from "@nestjs/swagger/dist/interfaces/open-api-spec.interface";
 
 export type ISwaggerResultType = {
@@ -27,19 +21,13 @@ export type ISwaggerResultType = {
       };
 };
 
-export class SwaggerNodeCompiler extends NodeHandler<
-  ISwaggerResultType,
-  IDtoCompilerContext
-> {
+export class SwaggerNodeCompiler extends NodeHandler<ISwaggerResultType, IDtoCompilerContext> {
   ComposeNode(node: INode, context: IDtoCompilerContext) {
     const composedResult = context.nodesStore.Compose(node);
     return composedResult;
   }
 
-  HandleTypeObjectEntity(
-    node: INodeTypeObjectEntity,
-    context: IDtoCompilerContext
-  ) {
+  HandleTypeObjectEntity(node: INodeTypeObjectEntity, context: IDtoCompilerContext) {
     const composed = this.ComposeNode(node, context);
 
     const dto = context.dtoCompiler.CompileNode(node);
@@ -57,10 +45,7 @@ export class SwaggerNodeCompiler extends NodeHandler<
     } satisfies ISwaggerResultType;
   }
 
-  HandleTypeArray(
-    node: INodeTypeArray,
-    context: IDtoCompilerContext
-  ): ISwaggerResultType {
+  HandleTypeArray(node: INodeTypeArray, context: IDtoCompilerContext): ISwaggerResultType {
     const itemsRepresentation = this.Handle(node.items, context);
 
     if (itemsRepresentation.representation.kind === "type") {
@@ -103,10 +88,7 @@ export class SwaggerNodeCompiler extends NodeHandler<
     return this.Handle(composed, context);
   }
 
-  HandleDefault(
-    node: Exclude<INode, INodeTypeObjectEntity | INodeTypeArray | INodeRef>,
-    context: IDtoCompilerContext
-  ): ISwaggerResultType {
+  HandleDefault(node: Exclude<INode, INodeTypeObjectEntity | INodeTypeArray | INodeRef>, context: IDtoCompilerContext): ISwaggerResultType {
     const composed = this.ComposeNode(node, context);
 
     if (node.anyOf || node.$ref) {

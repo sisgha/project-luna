@@ -1,12 +1,6 @@
-import {
-  CombinedInput,
-  graphqlExtractSelection,
-} from "@/application/standards";
+import { CombinedInput, graphqlExtractSelection } from "@/application/standards";
 import { Operation } from "@/application/standards/especificacao/business-logic";
-import {
-  type AccessContext,
-  AccessContextGraphQl,
-} from "@/infrastructure/access-context";
+import { type AccessContext, AccessContextGraphQl } from "@/infrastructure/access-context";
 import * as LadesaTypings from "@ladesa-ro/especificacao";
 import { Tokens } from "@ladesa-ro/especificacao";
 import { Info as GqlInfo, Resolver as GqlResolver } from "@nestjs/graphql";
@@ -17,7 +11,7 @@ import { TurmaDisponibilidadeService } from "./turma-disponibilidade.service";
 export class TurmaDisponibilidadeResolver {
   constructor(
     //
-    private turmaDisponibilidadeService: TurmaDisponibilidadeService
+    private turmaDisponibilidadeService: TurmaDisponibilidadeService,
   ) {}
   //
   @Operation(Tokens.TurmaDisponibilidadeList)
@@ -25,13 +19,9 @@ export class TurmaDisponibilidadeResolver {
     //
     @AccessContextGraphQl() accessContext: AccessContext,
     @CombinedInput() dto: LadesaTypings.TurmaDisponibilidadeListOperationInput,
-    @GqlInfo() info: GraphQLResolveInfo
+    @GqlInfo() info: GraphQLResolveInfo,
   ) {
-    return this.turmaDisponibilidadeService.turmaDisponibilidadeFindAll(
-      accessContext,
-      dto,
-      graphqlExtractSelection(info, "paginated")
-    );
+    return this.turmaDisponibilidadeService.turmaDisponibilidadeFindAll(accessContext, dto, graphqlExtractSelection(info, "paginated"));
   }
   //
   @Operation(Tokens.TurmaDisponibilidadeFindOneById)
@@ -40,14 +30,14 @@ export class TurmaDisponibilidadeResolver {
     @AccessContextGraphQl() accessContext: AccessContext,
     @CombinedInput()
     dto: LadesaTypings.TurmaDisponibilidadeFindOneByIdOperationOutput,
-    @GqlInfo() info: GraphQLResolveInfo
+    @GqlInfo() info: GraphQLResolveInfo,
   ) {
     return this.turmaDisponibilidadeService.turmaDisponibilidadeFindByIdStrict(
       accessContext,
       {
         id: dto.params.id,
       },
-      ["id", ...graphqlExtractSelection(info)]
+      ["id", ...graphqlExtractSelection(info)],
     );
   }
   //
@@ -55,12 +45,9 @@ export class TurmaDisponibilidadeResolver {
   async turmaDisponibilidadeCreate(
     //
     @AccessContextGraphQl() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.TurmaDisponibilidadeCreateOperationInput
+    @CombinedInput() dto: LadesaTypings.TurmaDisponibilidadeCreateOperationInput,
   ) {
-    return this.turmaDisponibilidadeService.turmaDisponibilidadeCreate(
-      accessContext,
-      dto
-    );
+    return this.turmaDisponibilidadeService.turmaDisponibilidadeCreate(accessContext, dto);
   }
 
   @Operation(Tokens.TurmaDisponibilidadeUpdateOneById)
@@ -68,12 +55,9 @@ export class TurmaDisponibilidadeResolver {
     //
     @AccessContextGraphQl() accessContext: AccessContext,
     @CombinedInput()
-    dto: LadesaTypings.TurmaDisponibilidadeUpdateByIdOperationInput
+    dto: LadesaTypings.TurmaDisponibilidadeUpdateByIdOperationInput,
   ) {
-    return this.turmaDisponibilidadeService.turmaDisponibilidadeUpdate(
-      accessContext,
-      dto
-    );
+    return this.turmaDisponibilidadeService.turmaDisponibilidadeUpdate(accessContext, dto);
   }
 
   @Operation(Tokens.TurmaDisponibilidadeDeleteOneById)
@@ -81,13 +65,10 @@ export class TurmaDisponibilidadeResolver {
     //
     @AccessContextGraphQl() accessContext: AccessContext,
     @CombinedInput()
-    dto: LadesaTypings.TurmaDisponibilidadeDeleteByIdOperationInput
+    dto: LadesaTypings.TurmaDisponibilidadeDeleteByIdOperationInput,
   ) {
-    return this.turmaDisponibilidadeService.turmaDisponibilidadeDeleteOneById(
-      accessContext,
-      {
-        id: dto.params.id,
-      }
-    );
+    return this.turmaDisponibilidadeService.turmaDisponibilidadeDeleteOneById(accessContext, {
+      id: dto.params.id,
+    });
   }
 }

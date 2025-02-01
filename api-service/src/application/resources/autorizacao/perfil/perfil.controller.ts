@@ -1,9 +1,6 @@
 import { CombinedInput } from "@/application/standards";
 import { Operation } from "@/application/standards/especificacao/business-logic";
-import {
-  type AccessContext,
-  AccessContextHttp,
-} from "@/infrastructure/access-context";
+import { type AccessContext, AccessContextHttp } from "@/infrastructure/access-context";
 import * as LadesaTypings from "@ladesa-ro/especificacao";
 import { Tokens } from "@ladesa-ro/especificacao";
 import { Controller, Get, Post } from "@nestjs/common";
@@ -20,7 +17,7 @@ export class PerfilController {
   async findAll(
     //
     @AccessContextHttp() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.PerfilListOperationInput
+    @CombinedInput() dto: LadesaTypings.PerfilListOperationInput,
   ) {
     return this.vinculoService.perfilFindAll(accessContext, dto);
   }
@@ -30,7 +27,7 @@ export class PerfilController {
   async vinculoSetVinculos(
     //
     @AccessContextHttp() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.PerfilUpdateOperationInput
+    @CombinedInput() dto: LadesaTypings.PerfilUpdateOperationInput,
   ) {
     return this.vinculoService.perfilSetVinculos(accessContext, dto);
   }

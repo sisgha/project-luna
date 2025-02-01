@@ -1,7 +1,4 @@
-import {
-  BuildCheckType,
-  BuildParseType,
-} from "@/application/standards/especificacao/infrastructure/utils/nodes/schemas/helpers";
+import { BuildCheckType, BuildParseType } from "@/application/standards/especificacao/infrastructure/utils/nodes/schemas/helpers";
 import * as valibot from "valibot";
 
 export type INodeRef = {

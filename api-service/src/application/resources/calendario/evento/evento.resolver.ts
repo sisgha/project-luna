@@ -1,9 +1,6 @@
 import { CombinedInput } from "@/application/standards";
 import { Operation } from "@/application/standards/especificacao/business-logic";
-import {
-  type AccessContext,
-  AccessContextGraphQl,
-} from "@/infrastructure/access-context";
+import { type AccessContext, AccessContextGraphQl } from "@/infrastructure/access-context";
 import * as LadesaTypings from "@ladesa-ro/especificacao";
 import { Tokens } from "@ladesa-ro/especificacao";
 import { Resolver } from "@nestjs/graphql";
@@ -17,7 +14,7 @@ export class EventoResolver {
   async eventoFindAll(
     //
     @AccessContextGraphQl() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.EventoListOperationInput
+    @CombinedInput() dto: LadesaTypings.EventoListOperationInput,
   ) {
     return this.eventoService.eventoFindAll(accessContext, dto);
   }
@@ -26,7 +23,7 @@ export class EventoResolver {
   async eventoFindOneById(
     //
     @AccessContextGraphQl() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.EventoFindOneByIdOperationOutput
+    @CombinedInput() dto: LadesaTypings.EventoFindOneByIdOperationOutput,
   ) {
     return this.eventoService.eventoFindByIdStrict(accessContext, {
       id: dto.params.id,
@@ -37,7 +34,7 @@ export class EventoResolver {
   async eventoCreate(
     //
     @AccessContextGraphQl() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.EventoCreateOperationInput
+    @CombinedInput() dto: LadesaTypings.EventoCreateOperationInput,
   ) {
     return this.eventoService.eventoCreate(accessContext, dto);
   }
@@ -46,7 +43,7 @@ export class EventoResolver {
   async eventoUpdate(
     //
     @AccessContextGraphQl() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.EventoUpdateByIdOperationInput
+    @CombinedInput() dto: LadesaTypings.EventoUpdateByIdOperationInput,
   ) {
     return this.eventoService.eventoUpdate(accessContext, dto);
   }
@@ -55,7 +52,7 @@ export class EventoResolver {
   async eventoDeleteOneById(
     //
     @AccessContextGraphQl() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.EventoDeleteByIdOperationInput
+    @CombinedInput() dto: LadesaTypings.EventoDeleteByIdOperationInput,
   ) {
     return this.eventoService.eventoDeleteOneById(accessContext, {
       id: dto.params.id,

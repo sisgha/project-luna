@@ -65,7 +65,7 @@ export class CreateTableEvento1710186006633 implements MigrationInterface {
             referencedTableName: "calendario_letivo",
           },
         ],
-      })
+      }),
     );
 
     await queryRunner.query(`

@@ -1,9 +1,6 @@
 import { CombinedInput } from "@/application/standards";
 import { Operation } from "@/application/standards/especificacao/business-logic";
-import {
-  type AccessContext,
-  AccessContextHttp,
-} from "@/infrastructure/access-context";
+import { type AccessContext, AccessContextHttp } from "@/infrastructure/access-context";
 import * as LadesaTypings from "@ladesa-ro/especificacao";
 import { Tokens } from "@ladesa-ro/especificacao";
 import { Controller, Delete, Get, Patch, Post } from "@nestjs/common";
@@ -22,12 +19,9 @@ export class DisponibilidadeController {
   async disponibilidadeFindAll(
     //
     @AccessContextHttp() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.DisponibilidadeListOperationInput
+    @CombinedInput() dto: LadesaTypings.DisponibilidadeListOperationInput,
   ): Promise<LadesaTypings.DisponibilidadeListOperationOutput["success"]> {
-    return this.disponibilidadeService.disponibilidadeFindAll(
-      accessContext,
-      dto
-    );
+    return this.disponibilidadeService.disponibilidadeFindAll(accessContext, dto);
   }
 
   //
@@ -38,14 +32,11 @@ export class DisponibilidadeController {
     //
     @AccessContextHttp() accessContext: AccessContext,
     @CombinedInput()
-    dto: LadesaTypings.DisponibilidadeFindOneByIdOperationOutput
+    dto: LadesaTypings.DisponibilidadeFindOneByIdOperationOutput,
   ) {
-    return this.disponibilidadeService.disponibilidadeFindByIdStrict(
-      accessContext,
-      {
-        id: dto.params.id,
-      }
-    );
+    return this.disponibilidadeService.disponibilidadeFindByIdStrict(accessContext, {
+      id: dto.params.id,
+    });
   }
 
   //
@@ -55,12 +46,9 @@ export class DisponibilidadeController {
   async disponibilidadeCreate(
     //
     @AccessContextHttp() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.DisponibilidadeCreateOperationInput
+    @CombinedInput() dto: LadesaTypings.DisponibilidadeCreateOperationInput,
   ) {
-    return this.disponibilidadeService.disponibilidadeCreate(
-      accessContext,
-      dto
-    );
+    return this.disponibilidadeService.disponibilidadeCreate(accessContext, dto);
   }
 
   //
@@ -70,12 +58,9 @@ export class DisponibilidadeController {
   async disponibilidadeUpdate(
     //
     @AccessContextHttp() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.DisponibilidadeUpdateByIdOperationInput
+    @CombinedInput() dto: LadesaTypings.DisponibilidadeUpdateByIdOperationInput,
   ) {
-    return this.disponibilidadeService.disponibilidadeUpdate(
-      accessContext,
-      dto
-    );
+    return this.disponibilidadeService.disponibilidadeUpdate(accessContext, dto);
   }
 
   //
@@ -85,14 +70,11 @@ export class DisponibilidadeController {
   async disponibilidadeDeleteOneById(
     //
     @AccessContextHttp() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.DisponibilidadeDeleteByIdOperationInput
+    @CombinedInput() dto: LadesaTypings.DisponibilidadeDeleteByIdOperationInput,
   ) {
-    return this.disponibilidadeService.disponibilidadeDeleteOneById(
-      accessContext,
-      {
-        id: dto.params.id,
-      }
-    );
+    return this.disponibilidadeService.disponibilidadeDeleteOneById(accessContext, {
+      id: dto.params.id,
+    });
   }
 
   //

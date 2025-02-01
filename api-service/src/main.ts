@@ -19,7 +19,7 @@ async function setupApp() {
   app.use(
     helmet({
       crossOriginResourcePolicy: false,
-    })
+    }),
   );
   app.enableCors();
 

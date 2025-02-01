@@ -1,11 +1,4 @@
-import {
-  CheckNodeTypeArray,
-  CheckNodeTypeObjectEntity,
-  INodeCore,
-  INodeTypeObjectEntity,
-  ISpecNodesStore,
-  getSpecNodesStore,
-} from "@/application/standards/especificacao";
+import { CheckNodeTypeArray, CheckNodeTypeObjectEntity, INodeCore, INodeTypeObjectEntity, ISpecNodesStore, getSpecNodesStore } from "@/application/standards/especificacao";
 import { uniq } from "lodash";
 import { SelectQueryBuilder } from "typeorm";
 
@@ -17,7 +10,7 @@ export const QbEfficientLoadForEntity = (
   qb: SelectQueryBuilder<any>,
   alias: string,
   selection: boolean | string[] = true,
-  parent: string[] = []
+  parent: string[] = [],
 ) => {
   let counter = 0;
 
@@ -33,9 +26,7 @@ export const QbEfficientLoadForEntity = (
 
   const propertiesMap = metadata.propertiesMap;
 
-  for (const [propertyKey, propertyNode] of Object.entries(
-    nodeEntity.properties
-  )) {
+  for (const [propertyKey, propertyNode] of Object.entries(nodeEntity.properties)) {
     counter++;
 
     if (!Object.hasOwn(propertiesMap, propertyKey)) {
@@ -47,9 +38,7 @@ export const QbEfficientLoadForEntity = (
       continue;
     }
 
-    const includeProperty = Array.isArray(rootSelection)
-      ? rootSelection.includes(propertyKey)
-      : rootSelection;
+    const includeProperty = Array.isArray(rootSelection) ? rootSelection.includes(propertyKey) : rootSelection;
 
     if (!includeProperty) {
       continue;
@@ -62,62 +51,36 @@ export const QbEfficientLoadForEntity = (
     propertyNodeComposed = repository.Compose(propertyNode).node;
 
     if (CheckNodeTypeArray(propertyNodeComposed)) {
-      propertyNodeComposed = repository.Compose(
-        propertyNodeComposed.items
-      ).node;
+      propertyNodeComposed = repository.Compose(propertyNodeComposed.items).node;
     }
 
     if (CheckNodeTypeObjectEntity(propertyNodeComposed)) {
       const propertyNodeEntityId = propertyNodeComposed["x-unispec-entity-id"];
 
       if (parent.includes(propertyNodeEntityId)) {
-        console.warn(
-          `${QbEfficientLoadForEntity.name}: detected infinite recursion for ${propertyNodeEntityId}`
-        );
+        console.warn(`${QbEfficientLoadForEntity.name}: detected infinite recursion for ${propertyNodeEntityId}`);
         console.debug({ propertyNodeEntityId, parent });
         continue;
       }
 
-      const childSelection =
-        rootSelection === true
-          ? true
-          : uniq(
-              rootSelection
-                .filter((i) => i.startsWith(`${propertyKey}.`))
-                .map((i) => i.slice(i.indexOf(".") + 1))
-            );
+      const childSelection = rootSelection === true ? true : uniq(rootSelection.filter((i) => i.startsWith(`${propertyKey}.`)).map((i) => i.slice(i.indexOf(".") + 1)));
 
       const childAlias = `${alias}_${propertyKey[0]}${counter}`;
 
       qb.leftJoin(subPath, childAlias);
-      QbEfficientLoad(
-        propertyNodeEntityId,
-        qb,
-        childAlias,
-        childSelection,
-        parent
-      );
+      QbEfficientLoad(propertyNodeEntityId, qb, childAlias, childSelection, parent);
     } else {
       qb.addSelect(subPath);
     }
   }
 };
 
-export const QbEfficientLoad = (
-  entityId: string,
-  qb: SelectQueryBuilder<any>,
-  alias: string,
-  selection: boolean | string[] = true,
-  parent: string[] = []
-) => {
+export const QbEfficientLoad = (entityId: string, qb: SelectQueryBuilder<any>, alias: string, selection: boolean | string[] = true, parent: string[] = []) => {
   const store = getSpecNodesStore();
 
   const targetEntity = store.GetEntityNode(entityId);
 
   if (CheckNodeTypeObjectEntity(targetEntity)) {
-    return QbEfficientLoadForEntity(store, targetEntity, qb, alias, selection, [
-      ...parent,
-      entityId,
-    ]);
+    return QbEfficientLoadForEntity(store, targetEntity, qb, alias, selection, [...parent, entityId]);
   }
 };

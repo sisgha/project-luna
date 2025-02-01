@@ -1,9 +1,6 @@
 import { CombinedInput } from "@/application/standards";
 import { Operation } from "@/application/standards/especificacao/business-logic";
-import {
-  type AccessContext,
-  AccessContextGraphQl,
-} from "@/infrastructure/access-context";
+import { type AccessContext, AccessContextGraphQl } from "@/infrastructure/access-context";
 import * as LadesaTypings from "@ladesa-ro/especificacao";
 import { Tokens } from "@ladesa-ro/especificacao";
 import { Resolver } from "@nestjs/graphql";
@@ -18,12 +15,9 @@ export class DisponibilidadeDiaResolver {
     //
     @AccessContextGraphQl() accessContext: AccessContext,
     @CombinedInput()
-    dto: LadesaTypings.DisponibilidadeDiaListOperationInput
+    dto: LadesaTypings.DisponibilidadeDiaListOperationInput,
   ) {
-    return this.disponibilidadeDiaService.disponibilidadeDiaFindAll(
-      accessContext,
-      dto
-    );
+    return this.disponibilidadeDiaService.disponibilidadeDiaFindAll(accessContext, dto);
   }
   //
   @Operation(Tokens.DisponibilidadeDiaFindOneById)
@@ -31,12 +25,9 @@ export class DisponibilidadeDiaResolver {
     //
     @AccessContextGraphQl() accessContext: AccessContext,
     @CombinedInput()
-    dto: LadesaTypings.DisponibilidadeDiaFindOneByIdOperationOutput
+    dto: LadesaTypings.DisponibilidadeDiaFindOneByIdOperationOutput,
   ) {
-    return this.disponibilidadeDiaService.disponibilidadeDiaFindByIdStrict(
-      accessContext,
-      { id: dto.params.id }
-    );
+    return this.disponibilidadeDiaService.disponibilidadeDiaFindByIdStrict(accessContext, { id: dto.params.id });
   }
   //
   @Operation(Tokens.DisponibilidadeDiaCreate)
@@ -44,12 +35,9 @@ export class DisponibilidadeDiaResolver {
     //
     @AccessContextGraphQl() accessContext: AccessContext,
     @CombinedInput()
-    dto: LadesaTypings.DisponibilidadeDiaCreateOperationInput
+    dto: LadesaTypings.DisponibilidadeDiaCreateOperationInput,
   ) {
-    return this.disponibilidadeDiaService.disponibilidadeDiaCreate(
-      accessContext,
-      dto
-    );
+    return this.disponibilidadeDiaService.disponibilidadeDiaCreate(accessContext, dto);
   }
   //
   @Operation(Tokens.DisponibilidadeDiaUpdateOneById)
@@ -57,12 +45,9 @@ export class DisponibilidadeDiaResolver {
     //
     @AccessContextGraphQl() accessContext: AccessContext,
     @CombinedInput()
-    dto: LadesaTypings.DisponibilidadeDiaUpdateByIdOperationInput
+    dto: LadesaTypings.DisponibilidadeDiaUpdateByIdOperationInput,
   ) {
-    return this.disponibilidadeDiaService.disponibilidadeDiaUpdate(
-      accessContext,
-      dto
-    );
+    return this.disponibilidadeDiaService.disponibilidadeDiaUpdate(accessContext, dto);
   }
   //
   @Operation(Tokens.DisponibilidadeDiaDeleteOneById)
@@ -70,11 +55,8 @@ export class DisponibilidadeDiaResolver {
     //
     @AccessContextGraphQl() accessContext: AccessContext,
     @CombinedInput()
-    dto: LadesaTypings.DisponibilidadeDiaDeleteByIdOperationInput
+    dto: LadesaTypings.DisponibilidadeDiaDeleteByIdOperationInput,
   ) {
-    return this.disponibilidadeDiaService.disponibilidadeDiaDeleteOneById(
-      accessContext,
-      { id: dto.params.id }
-    );
+    return this.disponibilidadeDiaService.disponibilidadeDiaDeleteOneById(accessContext, { id: dto.params.id });
   }
 }

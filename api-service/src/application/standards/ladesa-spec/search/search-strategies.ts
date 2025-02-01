@@ -1,7 +1,4 @@
-import {
-  GenericListInputView,
-  PaginateQueryAdapter,
-} from "@/application/standards/ladesa-spec/search/adapter";
+import { GenericListInputView, PaginateQueryAdapter } from "@/application/standards/ladesa-spec/search/adapter";
 import * as LadesaTypings from "@ladesa-ro/especificacao";
 import { castArray } from "lodash";
 import { PaginateConfig, Paginated, paginate } from "nestjs-paginate";
@@ -13,22 +10,12 @@ export type LadesaPaginatedResult<T> = {
   meta: LadesaTypings.PaginationResultMeta;
 };
 
-export const LadesaSearch = async <T extends ObjectLiteral>(
-  path: string,
-  dto: GenericListInputView | null,
-  qb: SelectQueryBuilder<T>,
-  config: PaginateConfig<T>
-) => {
-  const paginateQuery = PaginateQueryAdapter.FromGenericListInputView(
-    path,
-    dto
-  );
+export const LadesaSearch = async <T extends ObjectLiteral>(path: string, dto: GenericListInputView | null, qb: SelectQueryBuilder<T>, config: PaginateConfig<T>) => {
+  const paginateQuery = PaginateQueryAdapter.FromGenericListInputView(path, dto);
   return paginate(paginateQuery, qb.clone(), config);
 };
 
-export const LadesaPaginatedResultDto = <T>(
-  paginated: Paginated<T>
-): LadesaPaginatedResult<T> => {
+export const LadesaPaginatedResultDto = <T>(paginated: Paginated<T>): LadesaPaginatedResult<T> => {
   return {
     ...paginated,
     meta: {

@@ -1,8 +1,5 @@
 import { IDtoCompilerContext } from "@/application/standards/especificacao/business-logic/DtoCompiler/typings";
-import {
-  INode,
-  NodeHandler,
-} from "@/application/standards/especificacao/infrastructure";
+import { INode, NodeHandler } from "@/application/standards/especificacao/infrastructure";
 import { GqlTypeReference } from "@nestjs/graphql";
 
 export type IGraphQlRepresentation = {
@@ -10,10 +7,7 @@ export type IGraphQlRepresentation = {
   nullable: boolean;
 };
 
-export class GraphQlNodeCompiler extends NodeHandler<
-  IGraphQlRepresentation,
-  IDtoCompilerContext
-> {
+export class GraphQlNodeCompiler extends NodeHandler<IGraphQlRepresentation, IDtoCompilerContext> {
   Handle(node: INode, context: IDtoCompilerContext): IGraphQlRepresentation {
     const handled = super.Handle(node, context);
 

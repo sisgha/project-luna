@@ -6,12 +6,6 @@ import { CampusModule } from "./campus/campus.module";
 import { ReservaModule } from "./reserva/reserva.module";
 
 @Module({
-  imports: [
-    BaseLugaresModule,
-    CampusModule,
-    BlocoModule,
-    AmbienteModule,
-    ReservaModule,
-  ],
+  imports: [BaseLugaresModule, CampusModule, BlocoModule, AmbienteModule, ReservaModule],
 })
 export class AmbientesModule {}

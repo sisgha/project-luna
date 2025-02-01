@@ -8,10 +8,7 @@ import { ProfessorDisponibilidadeService } from "./professor-disponibilidade.ser
 @Module({
   imports: [PerfilModule, DisponibilidadeModule],
   controllers: [ProfessorDisponibilidadeController],
-  providers: [
-    ProfessorDisponibilidadeService,
-    ProfessorDisponibilidadeResolver,
-  ],
+  providers: [ProfessorDisponibilidadeService, ProfessorDisponibilidadeResolver],
   exports: [ProfessorDisponibilidadeService],
 })
 export class ProfessorDisponibilidadeModule {}

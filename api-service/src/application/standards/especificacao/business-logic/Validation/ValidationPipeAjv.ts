@@ -1,8 +1,4 @@
-import {
-  IValidator,
-  ensureValidResult,
-  makeValidator,
-} from "@/application/standards/especificacao/business-logic/Validation/ajv-validate";
+import { IValidator, ensureValidResult, makeValidator } from "@/application/standards/especificacao/business-logic/Validation/ajv-validate";
 import { Injectable, PipeTransform } from "@nestjs/common";
 
 @Injectable()

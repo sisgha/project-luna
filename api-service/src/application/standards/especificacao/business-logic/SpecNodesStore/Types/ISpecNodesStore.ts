@@ -1,11 +1,5 @@
 import { IComposedResult } from "@/application/standards/especificacao/business-logic/SpecNodesStore/Sources";
-import {
-  INode,
-  INodeCore,
-  INodeRef,
-  INodeTypeObjectEntity,
-  INodeTypeObjectOperation,
-} from "@/application/standards/especificacao/infrastructure";
+import { INode, INodeCore, INodeRef, INodeTypeObjectEntity, INodeTypeObjectOperation } from "@/application/standards/especificacao/infrastructure";
 
 export interface ISpecNodesStore {
   GetNodeWithId(name: string): INode;
@@ -26,7 +20,5 @@ export interface ISpecNodesStore {
         nullable: boolean;
       };
 
-  GetNestedRefs(
-    initialCursor: string | INodeRef | INodeCore
-  ): (INodeCore | INodeRef)[];
+  GetNestedRefs(initialCursor: string | INodeRef | INodeCore): (INodeCore | INodeRef)[];
 }

@@ -1,12 +1,6 @@
-import {
-  CombinedInput,
-  graphqlExtractSelection,
-} from "@/application/standards";
+import { CombinedInput, graphqlExtractSelection } from "@/application/standards";
 import { Operation } from "@/application/standards/especificacao/business-logic";
-import {
-  type AccessContext,
-  AccessContextGraphQl,
-} from "@/infrastructure/access-context";
+import { type AccessContext, AccessContextGraphQl } from "@/infrastructure/access-context";
 import * as LadesaTypings from "@ladesa-ro/especificacao";
 import { Tokens } from "@ladesa-ro/especificacao";
 import { Info as GqlInfo, Resolver as GqlResolver } from "@nestjs/graphql";
@@ -17,7 +11,7 @@ import { OfertaFormacaoService } from "./oferta-formacao.service";
 export class OfertaFormacaoResolver {
   constructor(
     //
-    private ofertaFormacaoService: OfertaFormacaoService
+    private ofertaFormacaoService: OfertaFormacaoService,
   ) {}
   //
   @Operation(Tokens.OfertaFormacaoList)
@@ -25,13 +19,9 @@ export class OfertaFormacaoResolver {
     //
     @AccessContextGraphQl() accessContext: AccessContext,
     @CombinedInput() dto: LadesaTypings.OfertaFormacaoListOperationInput,
-    @GqlInfo() info: GraphQLResolveInfo
+    @GqlInfo() info: GraphQLResolveInfo,
   ) {
-    return this.ofertaFormacaoService.ofertaFormacaoFindAll(
-      accessContext,
-      dto,
-      graphqlExtractSelection(info, "paginated")
-    );
+    return this.ofertaFormacaoService.ofertaFormacaoFindAll(accessContext, dto, graphqlExtractSelection(info, "paginated"));
   }
   //
   @Operation(Tokens.OfertaFormacaoFindOneById)
@@ -40,14 +30,14 @@ export class OfertaFormacaoResolver {
     @AccessContextGraphQl() accessContext: AccessContext,
     @CombinedInput()
     dto: LadesaTypings.OfertaFormacaoFindOneByIdOperationOutput,
-    @GqlInfo() info: GraphQLResolveInfo
+    @GqlInfo() info: GraphQLResolveInfo,
   ) {
     return this.ofertaFormacaoService.ofertaFormacaoFindByIdStrict(
       accessContext,
       {
         id: dto.params.id,
       },
-      ["id", ...graphqlExtractSelection(info)]
+      ["id", ...graphqlExtractSelection(info)],
     );
   }
   //
@@ -55,7 +45,7 @@ export class OfertaFormacaoResolver {
   async ofertaFormacaoCreate(
     //
     @AccessContextGraphQl() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.OfertaFormacaoCreateOperationInput
+    @CombinedInput() dto: LadesaTypings.OfertaFormacaoCreateOperationInput,
   ) {
     return this.ofertaFormacaoService.ofertaFormacaoCreate(accessContext, dto);
   }
@@ -64,7 +54,7 @@ export class OfertaFormacaoResolver {
   async ofertaFormacaoUpdate(
     //
     @AccessContextGraphQl() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.OfertaFormacaoUpdateByIdOperationInput
+    @CombinedInput() dto: LadesaTypings.OfertaFormacaoUpdateByIdOperationInput,
   ) {
     return this.ofertaFormacaoService.ofertaFormacaoUpdate(accessContext, dto);
   }
@@ -73,13 +63,10 @@ export class OfertaFormacaoResolver {
   async ofertaFormacaoDeleteOneById(
     //
     @AccessContextGraphQl() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.OfertaFormacaoDeleteByIdOperationInput
+    @CombinedInput() dto: LadesaTypings.OfertaFormacaoDeleteByIdOperationInput,
   ) {
-    return this.ofertaFormacaoService.ofertaFormacaoDeleteOneById(
-      accessContext,
-      {
-        id: dto.params.id,
-      }
-    );
+    return this.ofertaFormacaoService.ofertaFormacaoDeleteOneById(accessContext, {
+      id: dto.params.id,
+    });
   }
 }

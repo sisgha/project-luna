@@ -1,9 +1,6 @@
 import { CombinedInput } from "@/application/standards";
 import { Operation } from "@/application/standards/especificacao/business-logic";
-import {
-  type AccessContext,
-  AccessContextHttp,
-} from "@/infrastructure/access-context";
+import { type AccessContext, AccessContextHttp } from "@/infrastructure/access-context";
 import * as LadesaTypings from "@ladesa-ro/especificacao";
 import { Tokens } from "@ladesa-ro/especificacao";
 import { Controller, Delete, Get, Patch, Post } from "@nestjs/common";
@@ -17,10 +14,7 @@ export class EtapaController {
 
   @Get("/")
   @Operation(Tokens.EtapaList)
-  async etapaFindAll(
-    @AccessContextHttp() clientAccess: AccessContext,
-    @CombinedInput() dto: LadesaTypings.EtapaListOperationInput
-  ): Promise<LadesaTypings.EtapaListOperationOutput["success"]> {
+  async etapaFindAll(@AccessContextHttp() clientAccess: AccessContext, @CombinedInput() dto: LadesaTypings.EtapaListOperationInput): Promise<LadesaTypings.EtapaListOperationOutput["success"]> {
     return this.etapaService.etapaFindAll(clientAccess, dto);
   }
 
@@ -31,7 +25,7 @@ export class EtapaController {
   async etapaFindById(
     //
     @AccessContextHttp() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.EtapaFindOneByIdOperationOutput
+    @CombinedInput() dto: LadesaTypings.EtapaFindOneByIdOperationOutput,
   ) {
     return this.etapaService.etapaFindByIdStrict(accessContext, {
       id: dto.params.id,
@@ -45,7 +39,7 @@ export class EtapaController {
   async etapaCreate(
     //
     @AccessContextHttp() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.EtapaCreateOperationInput
+    @CombinedInput() dto: LadesaTypings.EtapaCreateOperationInput,
   ) {
     return this.etapaService.etapaCreate(accessContext, dto);
   }
@@ -57,7 +51,7 @@ export class EtapaController {
   async etapaUpdate(
     //
     @AccessContextHttp() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.EtapaUpdateByIdOperationInput
+    @CombinedInput() dto: LadesaTypings.EtapaUpdateByIdOperationInput,
   ) {
     return this.etapaService.etapaUpdate(accessContext, dto);
   }
@@ -69,7 +63,7 @@ export class EtapaController {
   async etapaDeleteOneById(
     //
     @AccessContextHttp() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.EtapaDeleteByIdOperationInput
+    @CombinedInput() dto: LadesaTypings.EtapaDeleteByIdOperationInput,
   ) {
     return this.etapaService.etapaDeleteOneById(accessContext, {
       id: dto.params.id,

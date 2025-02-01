@@ -1,14 +1,7 @@
 import { GraphQlOperationInputAdapter } from "@/application/standards/especificacao/business-logic/Decorators/Operation/Adapters/GraphQl/GraphQlOperationInputAdapter";
-import {
-  ISpecDecorateHandler,
-  ISpecDecorateOperationContext,
-} from "@/application/standards/especificacao/business-logic/Decorators/Operation/Core/ISpecDecorateHandler";
+import { ISpecDecorateHandler, ISpecDecorateOperationContext } from "@/application/standards/especificacao/business-logic/Decorators/Operation/Core/ISpecDecorateHandler";
 import { CheckNodeTypeString } from "@/application/standards/especificacao/infrastructure";
-import {
-  Args as GqlArgs,
-  Mutation as GqlMutation,
-  Query as GqlQuery,
-} from "@nestjs/graphql";
+import { Args as GqlArgs, Mutation as GqlMutation, Query as GqlQuery } from "@nestjs/graphql";
 
 export class GraphQlSpecDecorateHandler implements ISpecDecorateHandler {
   operationInputAdapter = new GraphQlOperationInputAdapter();
@@ -52,11 +45,7 @@ export class GraphQlSpecDecorateHandler implements ISpecDecorateHandler {
 
     const dtoCompilerContext = dtoCompiler.GetContext("output");
 
-    const graphQlRepresentation =
-      context.dtoCompiler.graphQlNodeCompiler.Handle(
-        outputs,
-        dtoCompilerContext
-      );
+    const graphQlRepresentation = context.dtoCompiler.graphQlNodeCompiler.Handle(outputs, dtoCompilerContext);
 
     const typeFactory = graphQlRepresentation.type;
 
@@ -73,7 +62,7 @@ export class GraphQlSpecDecorateHandler implements ISpecDecorateHandler {
             name: context.meta.operationId,
             description: context.meta.description,
             nullable: graphQlRepresentation.nullable,
-          })
+          }),
         );
 
         break;
@@ -85,7 +74,7 @@ export class GraphQlSpecDecorateHandler implements ISpecDecorateHandler {
             name: context.meta.operationId,
             description: context.meta.description,
             nullable: graphQlRepresentation.nullable,
-          })
+          }),
         );
 
         break;
@@ -98,10 +87,7 @@ export class GraphQlSpecDecorateHandler implements ISpecDecorateHandler {
   }
 
   private HandleInputs(context: ISpecDecorateOperationContext): void {
-    const graphQlRepresentation =
-      this.operationInputAdapter.BuildCombinedTypeForOperation(
-        context.operationNode
-      );
+    const graphQlRepresentation = this.operationInputAdapter.BuildCombinedTypeForOperation(context.operationNode);
 
     const typeFn = graphQlRepresentation?.type;
 
@@ -109,7 +95,7 @@ export class GraphQlSpecDecorateHandler implements ISpecDecorateHandler {
       context.AddCombinedInputDecorator(
         GqlArgs({
           type: typeFn,
-        })
+        }),
       );
     }
   }

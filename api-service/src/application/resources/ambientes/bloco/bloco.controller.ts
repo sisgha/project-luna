@@ -1,22 +1,9 @@
 import { CombinedInput } from "@/application/standards";
 import { Operation } from "@/application/standards/especificacao/business-logic";
-import {
-  type AccessContext,
-  AccessContextHttp,
-} from "@/infrastructure/access-context";
+import { type AccessContext, AccessContextHttp } from "@/infrastructure/access-context";
 import * as LadesaTypings from "@ladesa-ro/especificacao";
 import { Tokens } from "@ladesa-ro/especificacao";
-import {
-  Controller,
-  Delete,
-  Get,
-  Param,
-  ParseUUIDPipe,
-  Patch,
-  Post,
-  Put,
-  UploadedFile,
-} from "@nestjs/common";
+import { Controller, Delete, Get, Param, ParseUUIDPipe, Patch, Post, Put, UploadedFile } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
 import { BlocoService } from "./bloco.service";
 
@@ -32,7 +19,7 @@ export class BlocoController {
   async blocoFindAll(
     //
     @AccessContextHttp() accessContext: AccessContext,
-    @CombinedInput() combinedInput: LadesaTypings.BlocoListOperationInput
+    @CombinedInput() combinedInput: LadesaTypings.BlocoListOperationInput,
   ): Promise<LadesaTypings.BlocoListOperationOutput["success"]> {
     return this.blocoService.blocoFindAll(accessContext, combinedInput);
   }
@@ -44,7 +31,7 @@ export class BlocoController {
   async blocoFindById(
     //
     @AccessContextHttp() accessContext: AccessContext,
-    @Param("id", ParseUUIDPipe) id: string
+    @Param("id", ParseUUIDPipe) id: string,
   ) {
     return this.blocoService.blocoFindByIdStrict(accessContext, { id });
   }
@@ -56,7 +43,7 @@ export class BlocoController {
   async blocoCreate(
     //
     @AccessContextHttp() accessContext: AccessContext,
-    @CombinedInput() combinedInput: LadesaTypings.BlocoCreateOperationInput
+    @CombinedInput() combinedInput: LadesaTypings.BlocoCreateOperationInput,
   ) {
     return this.blocoService.blocoCreate(accessContext, combinedInput);
   }
@@ -68,7 +55,7 @@ export class BlocoController {
   async blocoUpdate(
     //
     @AccessContextHttp() accessContext: AccessContext,
-    @CombinedInput() combinedInput: LadesaTypings.BlocoUpdateByIdOperationInput
+    @CombinedInput() combinedInput: LadesaTypings.BlocoUpdateByIdOperationInput,
   ) {
     return this.blocoService.blocoUpdate(accessContext, combinedInput);
   }
@@ -80,7 +67,7 @@ export class BlocoController {
   async blocoGetImagemCapa(
     //
     @AccessContextHttp() accessContext: AccessContext,
-    @Param("id", ParseUUIDPipe) id: string
+    @Param("id", ParseUUIDPipe) id: string,
   ) {
     return this.blocoService.blocoGetImagemCapa(accessContext, id);
   }
@@ -91,7 +78,7 @@ export class BlocoController {
     //
     @AccessContextHttp() accessContext: AccessContext,
     @UploadedFile() file: Express.Multer.File,
-    @Param("id", ParseUUIDPipe) id: string
+    @Param("id", ParseUUIDPipe) id: string,
   ) {
     return this.blocoService.blocoUpdateImagemCapa(accessContext, { id }, file);
   }
@@ -103,7 +90,7 @@ export class BlocoController {
   async blocoDeleteOneById(
     //
     @AccessContextHttp() accessContext: AccessContext,
-    @CombinedInput() combinedInput: LadesaTypings.BlocoDeleteByIdOperationInput
+    @CombinedInput() combinedInput: LadesaTypings.BlocoDeleteByIdOperationInput,
   ) {
     return this.blocoService.blocoDeleteOneById(accessContext, {
       id: combinedInput.params.id,

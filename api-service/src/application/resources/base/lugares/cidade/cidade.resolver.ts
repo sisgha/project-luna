@@ -1,12 +1,6 @@
-import {
-  CombinedInput,
-  graphqlExtractSelection,
-} from "@/application/standards";
+import { CombinedInput, graphqlExtractSelection } from "@/application/standards";
 import { Operation } from "@/application/standards/especificacao/business-logic";
-import {
-  type AccessContext,
-  AccessContextGraphQl,
-} from "@/infrastructure/access-context";
+import { type AccessContext, AccessContextGraphQl } from "@/infrastructure/access-context";
 import * as LadesaTypings from "@ladesa-ro/especificacao";
 import { Tokens } from "@ladesa-ro/especificacao";
 import { Info, Resolver } from "@nestjs/graphql";
@@ -17,7 +11,7 @@ import { CidadeService } from "./cidade.service";
 export class CidadeResolver {
   constructor(
     //
-    private cidadeService: CidadeService
+    private cidadeService: CidadeService,
   ) {}
 
   // ========================================================
@@ -27,13 +21,9 @@ export class CidadeResolver {
     //
     @AccessContextGraphQl() accessContext: AccessContext,
     @CombinedInput() dto: LadesaTypings.CidadeListOperationInput,
-    @Info() info: GraphQLResolveInfo
+    @Info() info: GraphQLResolveInfo,
   ) {
-    return this.cidadeService.findAll(
-      accessContext,
-      dto,
-      graphqlExtractSelection(info, "paginated")
-    );
+    return this.cidadeService.findAll(accessContext, dto, graphqlExtractSelection(info, "paginated"));
   }
 
   // ========================================================
@@ -42,12 +32,8 @@ export class CidadeResolver {
     //
     @AccessContextGraphQl() accessContext: AccessContext,
     @CombinedInput() dto: LadesaTypings.CidadeFindOneByIdOperationOutput,
-    @Info() info: GraphQLResolveInfo
+    @Info() info: GraphQLResolveInfo,
   ) {
-    return this.cidadeService.findByIdStrict(
-      accessContext,
-      { id: dto.params.id },
-      graphqlExtractSelection(info)
-    );
+    return this.cidadeService.findByIdStrict(accessContext, { id: dto.params.id }, graphqlExtractSelection(info));
   }
 }

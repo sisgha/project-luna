@@ -1,8 +1,5 @@
 import { QbEfficientLoad } from "@/application/standards/ladesa-spec/QbEfficientLoad";
-import {
-  LadesaPaginatedResultDto,
-  LadesaSearch,
-} from "@/application/standards/ladesa-spec/search/search-strategies";
+import { LadesaPaginatedResultDto, LadesaSearch } from "@/application/standards/ladesa-spec/search/search-strategies";
 import type { AccessContext } from "@/infrastructure/access-context";
 import { paginateConfig } from "@/infrastructure/fixtures";
 import { DatabaseContextService } from "@/infrastructure/integrations/database";
@@ -30,21 +27,15 @@ export class DisponibilidadeService {
   async disponibilidadeFindAll(
     accessContext: AccessContext,
     dto: LadesaTypings.DisponibilidadeListOperationInput | null = null,
-    selection?: string[]
+    selection?: string[],
   ): Promise<LadesaTypings.DisponibilidadeListOperationOutput["success"]> {
     // =========================================================
 
-    const qb =
-      this.disponibilidadeRepository.createQueryBuilder(aliasDisponibilidade);
+    const qb = this.disponibilidadeRepository.createQueryBuilder(aliasDisponibilidade);
 
     // =========================================================
 
-    await accessContext.applyFilter(
-      "disponibilidade:find",
-      qb,
-      aliasDisponibilidade,
-      null
-    );
+    await accessContext.applyFilter("disponibilidade:find", qb, aliasDisponibilidade, null);
 
     // =========================================================
 
@@ -83,22 +74,13 @@ export class DisponibilidadeService {
     // =========================================================
 
     qb.select([]);
-    QbEfficientLoad(
-      LadesaTypings.Tokens.DisponibilidadeView,
-      qb,
-      aliasDisponibilidade,
-      selection
-    );
+    QbEfficientLoad(LadesaTypings.Tokens.DisponibilidadeView, qb, aliasDisponibilidade, selection);
 
     // =========================================================
 
-    const pageItemsView = await qb
-      .andWhereInIds(map(paginated.data, "id"))
-      .getMany();
+    const pageItemsView = await qb.andWhereInIds(map(paginated.data, "id")).getMany();
 
-    paginated.data = paginated.data.map(
-      (paginated) => pageItemsView.find((i) => i.id === paginated.id)!
-    );
+    paginated.data = paginated.data.map((paginated) => pageItemsView.find((i) => i.id === paginated.id)!);
 
     // =========================================================
 
@@ -108,22 +90,16 @@ export class DisponibilidadeService {
   async disponibilidadeFindById(
     accessContext: AccessContext | null,
     dto: LadesaTypings.DisponibilidadeFindOneInputView,
-    selection?: string[]
+    selection?: string[],
   ): Promise<LadesaTypings.DisponibilidadeFindOneResultView | null> {
     // =========================================================
 
-    const qb =
-      this.disponibilidadeRepository.createQueryBuilder(aliasDisponibilidade);
+    const qb = this.disponibilidadeRepository.createQueryBuilder(aliasDisponibilidade);
 
     // =========================================================
 
     if (accessContext) {
-      await accessContext.applyFilter(
-        "disponibilidade:find",
-        qb,
-        aliasDisponibilidade,
-        null
-      );
+      await accessContext.applyFilter("disponibilidade:find", qb, aliasDisponibilidade, null);
     }
 
     // =========================================================
@@ -133,12 +109,7 @@ export class DisponibilidadeService {
     // =========================================================
 
     qb.select([]);
-    QbEfficientLoad(
-      LadesaTypings.Tokens.DisponibilidadeView,
-      qb,
-      aliasDisponibilidade,
-      selection
-    );
+    QbEfficientLoad(LadesaTypings.Tokens.DisponibilidadeView, qb, aliasDisponibilidade, selection);
 
     // =========================================================
 
@@ -149,16 +120,8 @@ export class DisponibilidadeService {
     return disponibilidade;
   }
 
-  async disponibilidadeFindByIdStrict(
-    accessContext: AccessContext,
-    dto: LadesaTypings.DisponibilidadeFindOneInputView,
-    selection?: string[]
-  ) {
-    const disponibilidade = await this.disponibilidadeFindById(
-      accessContext,
-      dto,
-      selection
-    );
+  async disponibilidadeFindByIdStrict(accessContext: AccessContext, dto: LadesaTypings.DisponibilidadeFindOneInputView, selection?: string[]) {
+    const disponibilidade = await this.disponibilidadeFindById(accessContext, dto, selection);
 
     if (!disponibilidade) {
       throw new NotFoundException();
@@ -170,21 +133,15 @@ export class DisponibilidadeService {
   async disponibilidadeFindByIdSimple(
     accessContext: AccessContext,
     id: LadesaTypings.DisponibilidadeFindOneInputView["id"],
-    selection?: string[]
+    selection?: string[],
   ): Promise<LadesaTypings.DisponibilidadeFindOneResultView | null> {
     // =========================================================
 
-    const qb =
-      this.disponibilidadeRepository.createQueryBuilder(aliasDisponibilidade);
+    const qb = this.disponibilidadeRepository.createQueryBuilder(aliasDisponibilidade);
 
     // =========================================================
 
-    await accessContext.applyFilter(
-      "disponibilidade:find",
-      qb,
-      aliasDisponibilidade,
-      null
-    );
+    await accessContext.applyFilter("disponibilidade:find", qb, aliasDisponibilidade, null);
 
     // =========================================================
 
@@ -193,12 +150,7 @@ export class DisponibilidadeService {
     // =========================================================
 
     qb.select([]);
-    QbEfficientLoad(
-      LadesaTypings.Tokens.DisponibilidadeView,
-      qb,
-      aliasDisponibilidade,
-      selection
-    );
+    QbEfficientLoad(LadesaTypings.Tokens.DisponibilidadeView, qb, aliasDisponibilidade, selection);
 
     // =========================================================
 
@@ -209,16 +161,8 @@ export class DisponibilidadeService {
     return disponibilidade;
   }
 
-  async disponibilidadeFindByIdSimpleStrict(
-    accessContext: AccessContext,
-    id: LadesaTypings.DisponibilidadeFindOneInputView["id"],
-    selection?: string[]
-  ) {
-    const disponibilidade = await this.disponibilidadeFindByIdSimple(
-      accessContext,
-      id,
-      selection
-    );
+  async disponibilidadeFindByIdSimpleStrict(accessContext: AccessContext, id: LadesaTypings.DisponibilidadeFindOneInputView["id"], selection?: string[]) {
+    const disponibilidade = await this.disponibilidadeFindByIdSimple(accessContext, id, selection);
 
     if (!disponibilidade) {
       throw new NotFoundException();
@@ -229,10 +173,7 @@ export class DisponibilidadeService {
 
   //
 
-  async disponibilidadeCreate(
-    accessContext: AccessContext,
-    dto: LadesaTypings.DisponibilidadeCreateOperationInput
-  ) {
+  async disponibilidadeCreate(accessContext: AccessContext, dto: LadesaTypings.DisponibilidadeCreateOperationInput) {
     // =========================================================
 
     await accessContext.ensurePermission("disponibilidade:create", { dto });
@@ -258,27 +199,16 @@ export class DisponibilidadeService {
     });
   }
 
-  async disponibilidadeUpdate(
-    accessContext: AccessContext,
-    dto: LadesaTypings.DisponibilidadeUpdateByIdOperationInput
-  ) {
+  async disponibilidadeUpdate(accessContext: AccessContext, dto: LadesaTypings.DisponibilidadeUpdateByIdOperationInput) {
     // =========================================================
 
-    const currentDisponibilidade = await this.disponibilidadeFindByIdStrict(
-      accessContext,
-      {
-        id: dto.params.id,
-      }
-    );
+    const currentDisponibilidade = await this.disponibilidadeFindByIdStrict(accessContext, {
+      id: dto.params.id,
+    });
 
     // =========================================================
 
-    await accessContext.ensurePermission(
-      "disponibilidade:update",
-      { dto },
-      dto.params.id,
-      this.disponibilidadeRepository.createQueryBuilder(aliasDisponibilidade)
-    );
+    await accessContext.ensurePermission("disponibilidade:update", { dto }, dto.params.id, this.disponibilidadeRepository.createQueryBuilder(aliasDisponibilidade));
 
     const dtoDisponibilidade = pick(dto.body, ["dataInicio", "dataFim"]);
 
@@ -303,25 +233,14 @@ export class DisponibilidadeService {
 
   //
 
-  async disponibilidadeDeleteOneById(
-    accessContext: AccessContext,
-    dto: LadesaTypings.DisponibilidadeFindOneInputView
-  ) {
+  async disponibilidadeDeleteOneById(accessContext: AccessContext, dto: LadesaTypings.DisponibilidadeFindOneInputView) {
     // =========================================================
 
-    await accessContext.ensurePermission(
-      "disponibilidade:delete",
-      { dto },
-      dto.id,
-      this.disponibilidadeRepository.createQueryBuilder(aliasDisponibilidade)
-    );
+    await accessContext.ensurePermission("disponibilidade:delete", { dto }, dto.id, this.disponibilidadeRepository.createQueryBuilder(aliasDisponibilidade));
 
     // =========================================================
 
-    const disponibilidade = await this.disponibilidadeFindByIdStrict(
-      accessContext,
-      dto
-    );
+    const disponibilidade = await this.disponibilidadeFindByIdStrict(accessContext, dto);
 
     // =========================================================
 

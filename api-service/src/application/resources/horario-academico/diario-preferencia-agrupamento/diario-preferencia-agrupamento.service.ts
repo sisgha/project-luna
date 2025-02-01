@@ -1,10 +1,7 @@
 import { IntervaloDeTempoService } from "@/application/resources/base/intervalo-de-tempo/intervalo-de-tempo.service";
 import { DiarioService } from "@/application/resources/ensino/discente/diario/diario.service";
 import { QbEfficientLoad } from "@/application/standards/ladesa-spec/QbEfficientLoad";
-import {
-  LadesaPaginatedResultDto,
-  LadesaSearch,
-} from "@/application/standards/ladesa-spec/search/search-strategies";
+import { LadesaPaginatedResultDto, LadesaSearch } from "@/application/standards/ladesa-spec/search/search-strategies";
 import type { AccessContext } from "@/infrastructure/access-context";
 import { paginateConfig } from "@/infrastructure/fixtures";
 import { DatabaseContextService } from "@/infrastructure/integrations/database";
@@ -25,7 +22,7 @@ export class DiarioPreferenciaAgrupamentoService {
   constructor(
     private databaseContext: DatabaseContextService,
     private DiarioService: DiarioService,
-    private intervaloDeTempoService: IntervaloDeTempoService
+    private intervaloDeTempoService: IntervaloDeTempoService,
   ) {}
 
   get diarioPreferenciaAgrupamentoRepository() {
@@ -37,24 +34,15 @@ export class DiarioPreferenciaAgrupamentoService {
   async diarioPreferenciaAgrupamentoFindAll(
     accessContext: AccessContext,
     dto: LadesaTypings.DiarioPreferenciaAgrupamentoListOperationInput | null = null,
-    selection?: string[] | boolean
-  ): Promise<
-    LadesaTypings.DiarioPreferenciaAgrupamentoListOperationOutput["success"]
-  > {
+    selection?: string[] | boolean,
+  ): Promise<LadesaTypings.DiarioPreferenciaAgrupamentoListOperationOutput["success"]> {
     // =========================================================
 
-    const qb = this.diarioPreferenciaAgrupamentoRepository.createQueryBuilder(
-      aliasDiarioPreferenciaAgrupamento
-    );
+    const qb = this.diarioPreferenciaAgrupamentoRepository.createQueryBuilder(aliasDiarioPreferenciaAgrupamento);
 
     // =========================================================
 
-    await accessContext.applyFilter(
-      "diario_preferencia_agrupamento:find",
-      qb,
-      aliasDiarioPreferenciaAgrupamento,
-      null
-    );
+    await accessContext.applyFilter("diario_preferencia_agrupamento:find", qb, aliasDiarioPreferenciaAgrupamento, null);
 
     // =========================================================
 
@@ -113,21 +101,12 @@ export class DiarioPreferenciaAgrupamentoService {
     // =========================================================
 
     qb.select([]);
-    QbEfficientLoad(
-      LadesaTypings.Tokens.DiarioPreferenciaAgrupamentoFindOneResultView,
-      qb,
-      aliasDiarioPreferenciaAgrupamento,
-      selection
-    );
+    QbEfficientLoad(LadesaTypings.Tokens.DiarioPreferenciaAgrupamentoFindOneResultView, qb, aliasDiarioPreferenciaAgrupamento, selection);
 
     // =========================================================
 
-    const pageItemsView = await qb
-      .andWhereInIds(map(paginated.data, "id"))
-      .getMany();
-    paginated.data = paginated.data.map(
-      (paginated) => pageItemsView.find((i) => i.id === paginated.id)!
-    );
+    const pageItemsView = await qb.andWhereInIds(map(paginated.data, "id")).getMany();
+    paginated.data = paginated.data.map((paginated) => pageItemsView.find((i) => i.id === paginated.id)!);
 
     // =========================================================
 
@@ -137,22 +116,15 @@ export class DiarioPreferenciaAgrupamentoService {
   async diarioPreferenciaAgrupamentoFindById(
     accessContext: AccessContext,
     dto: LadesaTypings.DiarioPreferenciaAgrupamentoFindOneInputView,
-    selection?: string[] | boolean
+    selection?: string[] | boolean,
   ): Promise<LadesaTypings.DiarioPreferenciaAgrupamentoFindOneResultView | null> {
     // =========================================================
 
-    const qb = this.diarioPreferenciaAgrupamentoRepository.createQueryBuilder(
-      aliasDiarioPreferenciaAgrupamento
-    );
+    const qb = this.diarioPreferenciaAgrupamentoRepository.createQueryBuilder(aliasDiarioPreferenciaAgrupamento);
 
     // =========================================================
 
-    await accessContext.applyFilter(
-      "diario_preferencia_agrupamento:find",
-      qb,
-      aliasDiarioPreferenciaAgrupamento,
-      null
-    );
+    await accessContext.applyFilter("diario_preferencia_agrupamento:find", qb, aliasDiarioPreferenciaAgrupamento, null);
 
     // =========================================================
 
@@ -163,12 +135,7 @@ export class DiarioPreferenciaAgrupamentoService {
     // =========================================================
 
     qb.select([]);
-    QbEfficientLoad(
-      LadesaTypings.Tokens.DiarioPreferenciaAgrupamentoFindOneResultView,
-      qb,
-      aliasDiarioPreferenciaAgrupamento,
-      selection
-    );
+    QbEfficientLoad(LadesaTypings.Tokens.DiarioPreferenciaAgrupamentoFindOneResultView, qb, aliasDiarioPreferenciaAgrupamento, selection);
     // =========================================================
 
     const diarioPreferenciaAgrupamento = await qb.getOne();
@@ -178,17 +145,8 @@ export class DiarioPreferenciaAgrupamentoService {
     return diarioPreferenciaAgrupamento;
   }
 
-  async diarioPreferenciaAgrupamentoFindByIdStrict(
-    accessContext: AccessContext,
-    dto: LadesaTypings.DiarioPreferenciaAgrupamentoFindOneInputView,
-    selection?: string[] | boolean
-  ) {
-    const diarioPreferenciaAgrupamento =
-      await this.diarioPreferenciaAgrupamentoFindById(
-        accessContext,
-        dto,
-        selection
-      );
+  async diarioPreferenciaAgrupamentoFindByIdStrict(accessContext: AccessContext, dto: LadesaTypings.DiarioPreferenciaAgrupamentoFindOneInputView, selection?: string[] | boolean) {
+    const diarioPreferenciaAgrupamento = await this.diarioPreferenciaAgrupamentoFindById(accessContext, dto, selection);
 
     if (!diarioPreferenciaAgrupamento) {
       throw new NotFoundException();
@@ -200,22 +158,15 @@ export class DiarioPreferenciaAgrupamentoService {
   async diarioPreferenciaAgrupamentoFindByIdSimple(
     accessContext: AccessContext,
     id: LadesaTypings.DiarioPreferenciaAgrupamentoFindOneInputView["id"],
-    selection?: string[]
+    selection?: string[],
   ): Promise<LadesaTypings.DiarioPreferenciaAgrupamentoFindOneResultView | null> {
     // =========================================================
 
-    const qb = this.diarioPreferenciaAgrupamentoRepository.createQueryBuilder(
-      aliasDiarioPreferenciaAgrupamento
-    );
+    const qb = this.diarioPreferenciaAgrupamentoRepository.createQueryBuilder(aliasDiarioPreferenciaAgrupamento);
 
     // =========================================================
 
-    await accessContext.applyFilter(
-      "diario_preferencia_agrupamento:find",
-      qb,
-      aliasDiarioPreferenciaAgrupamento,
-      null
-    );
+    await accessContext.applyFilter("diario_preferencia_agrupamento:find", qb, aliasDiarioPreferenciaAgrupamento, null);
 
     // =========================================================
 
@@ -224,12 +175,7 @@ export class DiarioPreferenciaAgrupamentoService {
     // =========================================================
 
     qb.select([]);
-    QbEfficientLoad(
-      LadesaTypings.Tokens.DiarioPreferenciaAgrupamentoFindOneResultView,
-      qb,
-      aliasDiarioPreferenciaAgrupamento,
-      selection
-    );
+    QbEfficientLoad(LadesaTypings.Tokens.DiarioPreferenciaAgrupamentoFindOneResultView, qb, aliasDiarioPreferenciaAgrupamento, selection);
 
     // =========================================================
 
@@ -240,17 +186,8 @@ export class DiarioPreferenciaAgrupamentoService {
     return diarioPreferenciaAgrupamento;
   }
 
-  async diarioPreferenciaAgrupamentoFindByIdSimpleStrict(
-    accessContext: AccessContext,
-    id: LadesaTypings.DiarioPreferenciaAgrupamentoFindOneInputView["id"],
-    selection?: string[]
-  ) {
-    const diarioPreferenciaAgrupamento =
-      await this.diarioPreferenciaAgrupamentoFindByIdSimple(
-        accessContext,
-        id,
-        selection
-      );
+  async diarioPreferenciaAgrupamentoFindByIdSimpleStrict(accessContext: AccessContext, id: LadesaTypings.DiarioPreferenciaAgrupamentoFindOneInputView["id"], selection?: string[]) {
+    const diarioPreferenciaAgrupamento = await this.diarioPreferenciaAgrupamentoFindByIdSimple(accessContext, id, selection);
 
     if (!diarioPreferenciaAgrupamento) {
       throw new NotFoundException();
@@ -261,76 +198,46 @@ export class DiarioPreferenciaAgrupamentoService {
 
   //
 
-  async diarioPreferenciaAgrupamentoCreate(
-    accessContext: AccessContext,
-    dto: LadesaTypings.DiarioPreferenciaAgrupamentoCreateOperationInput
-  ) {
+  async diarioPreferenciaAgrupamentoCreate(accessContext: AccessContext, dto: LadesaTypings.DiarioPreferenciaAgrupamentoCreateOperationInput) {
     // =========================================================
 
-    await accessContext.ensurePermission(
-      "diario_preferencia_agrupamento:create",
-      { dto }
-    );
+    await accessContext.ensurePermission("diario_preferencia_agrupamento:create", { dto });
 
     // =========================================================
 
-    const dtoDiarioPreferenciaAgrupamento = pick(dto.body, [
-      "diaSemanaIso",
-      "aulasSeguidas",
-      "dataInicio",
-      "dataFim",
-    ]);
+    const dtoDiarioPreferenciaAgrupamento = pick(dto.body, ["diaSemanaIso", "aulasSeguidas", "dataInicio", "dataFim"]);
 
-    const diarioPreferenciaAgrupamento =
-      this.diarioPreferenciaAgrupamentoRepository.create();
+    const diarioPreferenciaAgrupamento = this.diarioPreferenciaAgrupamentoRepository.create();
 
-    this.diarioPreferenciaAgrupamentoRepository.merge(
-      diarioPreferenciaAgrupamento,
-      {
-        ...dtoDiarioPreferenciaAgrupamento,
-      }
-    );
+    this.diarioPreferenciaAgrupamentoRepository.merge(diarioPreferenciaAgrupamento, {
+      ...dtoDiarioPreferenciaAgrupamento,
+    });
 
     // =========================================================
 
     if (dto.body.diario) {
-      const diario = await this.DiarioService.diarioFindByIdStrict(
-        accessContext,
-        dto.body.diario
-      );
+      const diario = await this.DiarioService.diarioFindByIdStrict(accessContext, dto.body.diario);
 
-      this.diarioPreferenciaAgrupamentoRepository.merge(
-        diarioPreferenciaAgrupamento,
-        {
-          diario: {
-            id: diario.id,
-          },
-        }
-      );
+      this.diarioPreferenciaAgrupamentoRepository.merge(diarioPreferenciaAgrupamento, {
+        diario: {
+          id: diario.id,
+        },
+      });
     }
 
     if (dto.body.intervaloDeTempo) {
-      const intervalo =
-        await this.intervaloDeTempoService.intervaloCreateOrUpdate(
-          accessContext,
-          dto.body.intervaloDeTempo
-        );
+      const intervalo = await this.intervaloDeTempoService.intervaloCreateOrUpdate(accessContext, dto.body.intervaloDeTempo);
 
-      this.diarioPreferenciaAgrupamentoRepository.merge(
-        diarioPreferenciaAgrupamento,
-        {
-          intervaloDeTempo: {
-            id: intervalo!.id,
-          },
-        }
-      );
+      this.diarioPreferenciaAgrupamentoRepository.merge(diarioPreferenciaAgrupamento, {
+        intervaloDeTempo: {
+          id: intervalo!.id,
+        },
+      });
     }
 
     // =========================================================
 
-    await this.diarioPreferenciaAgrupamentoRepository.save(
-      diarioPreferenciaAgrupamento
-    );
+    await this.diarioPreferenciaAgrupamentoRepository.save(diarioPreferenciaAgrupamento);
 
     // =========================================================
 
@@ -339,16 +246,12 @@ export class DiarioPreferenciaAgrupamentoService {
     });
   }
 
-  async diarioPreferenciaAgrupamentoUpdate(
-    accessContext: AccessContext,
-    dto: LadesaTypings.DiarioPreferenciaAgrupamentoUpdateByIdOperationInput
-  ) {
+  async diarioPreferenciaAgrupamentoUpdate(accessContext: AccessContext, dto: LadesaTypings.DiarioPreferenciaAgrupamentoUpdateByIdOperationInput) {
     // =========================================================
 
-    const currentDiarioPreferenciaAgrupamento =
-      await this.diarioPreferenciaAgrupamentoFindByIdStrict(accessContext, {
-        id: dto.params.id,
-      });
+    const currentDiarioPreferenciaAgrupamento = await this.diarioPreferenciaAgrupamentoFindByIdStrict(accessContext, {
+      id: dto.params.id,
+    });
 
     // =========================================================
 
@@ -356,72 +259,44 @@ export class DiarioPreferenciaAgrupamentoService {
       "diario_preferencia_agrupamento:update",
       { dto },
       dto.params.id,
-      this.diarioPreferenciaAgrupamentoRepository.createQueryBuilder(
-        aliasDiarioPreferenciaAgrupamento
-      )
+      this.diarioPreferenciaAgrupamentoRepository.createQueryBuilder(aliasDiarioPreferenciaAgrupamento),
     );
 
-    const dtoDiarioPreferenciaAgrupamento = pick(dto.body, [
-      "diaSemanaIso",
-      "aulasSeguidas",
-      "dataInicio",
-      "dataFim",
-    ]);
+    const dtoDiarioPreferenciaAgrupamento = pick(dto.body, ["diaSemanaIso", "aulasSeguidas", "dataInicio", "dataFim"]);
 
     const diarioPreferenciaAgrupamento = {
       id: currentDiarioPreferenciaAgrupamento.id,
     } as DiarioPreferenciaAgrupamentoEntity;
 
-    this.diarioPreferenciaAgrupamentoRepository.merge(
-      diarioPreferenciaAgrupamento,
-      {
-        ...dtoDiarioPreferenciaAgrupamento,
-      }
-    );
+    this.diarioPreferenciaAgrupamentoRepository.merge(diarioPreferenciaAgrupamento, {
+      ...dtoDiarioPreferenciaAgrupamento,
+    });
 
     // =========================================================
 
     if (has(dto.body, "diario") && dto.body.diario !== undefined) {
-      const diario = await this.DiarioService.diarioFindByIdStrict(
-        accessContext,
-        dto.body.diario
-      );
+      const diario = await this.DiarioService.diarioFindByIdStrict(accessContext, dto.body.diario);
 
-      this.diarioPreferenciaAgrupamentoRepository.merge(
-        diarioPreferenciaAgrupamento,
-        {
-          diario: {
-            id: diario.id,
-          },
-        }
-      );
+      this.diarioPreferenciaAgrupamentoRepository.merge(diarioPreferenciaAgrupamento, {
+        diario: {
+          id: diario.id,
+        },
+      });
     }
 
-    if (
-      has(dto.body, "intervaloDeTempo") &&
-      dto.body.intervaloDeTempo !== undefined
-    ) {
-      const intervaloDeTempo =
-        await this.intervaloDeTempoService.intervaloCreateOrUpdate(
-          accessContext,
-          dto.body.intervaloDeTempo!
-        );
+    if (has(dto.body, "intervaloDeTempo") && dto.body.intervaloDeTempo !== undefined) {
+      const intervaloDeTempo = await this.intervaloDeTempoService.intervaloCreateOrUpdate(accessContext, dto.body.intervaloDeTempo!);
 
-      this.diarioPreferenciaAgrupamentoRepository.merge(
-        diarioPreferenciaAgrupamento,
-        {
-          intervaloDeTempo: {
-            id: intervaloDeTempo!.id,
-          },
-        }
-      );
+      this.diarioPreferenciaAgrupamentoRepository.merge(diarioPreferenciaAgrupamento, {
+        intervaloDeTempo: {
+          id: intervaloDeTempo!.id,
+        },
+      });
     }
 
     // =========================================================
 
-    await this.diarioPreferenciaAgrupamentoRepository.save(
-      diarioPreferenciaAgrupamento
-    );
+    await this.diarioPreferenciaAgrupamentoRepository.save(diarioPreferenciaAgrupamento);
 
     // =========================================================
 
@@ -432,25 +307,14 @@ export class DiarioPreferenciaAgrupamentoService {
 
   //
 
-  async diarioPreferenciaAgrupamentoDeleteOneById(
-    accessContext: AccessContext,
-    dto: LadesaTypings.DiarioPreferenciaAgrupamentoFindOneInputView
-  ) {
+  async diarioPreferenciaAgrupamentoDeleteOneById(accessContext: AccessContext, dto: LadesaTypings.DiarioPreferenciaAgrupamentoFindOneInputView) {
     // =========================================================
 
-    await accessContext.ensurePermission(
-      "diario_preferencia_agrupamento:delete",
-      { dto },
-      dto.id,
-      this.diarioPreferenciaAgrupamentoRepository.createQueryBuilder(
-        aliasDiarioPreferenciaAgrupamento
-      )
-    );
+    await accessContext.ensurePermission("diario_preferencia_agrupamento:delete", { dto }, dto.id, this.diarioPreferenciaAgrupamentoRepository.createQueryBuilder(aliasDiarioPreferenciaAgrupamento));
 
     // =========================================================
 
-    const diarioPreferenciaAgrupamento =
-      await this.diarioPreferenciaAgrupamentoFindByIdStrict(accessContext, dto);
+    const diarioPreferenciaAgrupamento = await this.diarioPreferenciaAgrupamentoFindByIdStrict(accessContext, dto);
 
     // =========================================================
 

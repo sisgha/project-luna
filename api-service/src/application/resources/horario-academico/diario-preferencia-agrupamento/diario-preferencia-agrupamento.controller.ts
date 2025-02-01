@@ -1,9 +1,6 @@
 import { CombinedInput } from "@/application/standards";
 import { Operation } from "@/application/standards/especificacao/business-logic";
-import {
-  type AccessContext,
-  AccessContextHttp,
-} from "@/infrastructure/access-context";
+import { type AccessContext, AccessContextHttp } from "@/infrastructure/access-context";
 import * as LadesaTypings from "@ladesa-ro/especificacao";
 import { Tokens } from "@ladesa-ro/especificacao";
 import { Controller, Delete, Get, Patch, Post } from "@nestjs/common";
@@ -13,23 +10,16 @@ import { DiarioPreferenciaAgrupamentoService } from "./diario-preferencia-agrupa
 @ApiTags("diarios-preferencia-agrupamento")
 @Controller("/diarios-preferencia-agrupamento")
 export class DiarioPreferenciaAgrupamentoController {
-  constructor(
-    private diarioPreferenciaAgrupamentoService: DiarioPreferenciaAgrupamentoService
-  ) {}
+  constructor(private diarioPreferenciaAgrupamentoService: DiarioPreferenciaAgrupamentoService) {}
 
   @Get("/")
   @Operation(Tokens.DiarioPreferenciaAgrupamentoList)
   async diarioPreferenciaAgrupamentoFindAll(
     @AccessContextHttp() clientAccess: AccessContext,
     @CombinedInput()
-    dto: LadesaTypings.DiarioPreferenciaAgrupamentoListOperationInput
-  ): Promise<
-    LadesaTypings.DiarioPreferenciaAgrupamentoListOperationOutput["success"]
-  > {
-    return this.diarioPreferenciaAgrupamentoService.diarioPreferenciaAgrupamentoFindAll(
-      clientAccess,
-      dto
-    );
+    dto: LadesaTypings.DiarioPreferenciaAgrupamentoListOperationInput,
+  ): Promise<LadesaTypings.DiarioPreferenciaAgrupamentoListOperationOutput["success"]> {
+    return this.diarioPreferenciaAgrupamentoService.diarioPreferenciaAgrupamentoFindAll(clientAccess, dto);
   }
 
   //
@@ -40,12 +30,9 @@ export class DiarioPreferenciaAgrupamentoController {
     //
     @AccessContextHttp() accessContext: AccessContext,
     @CombinedInput()
-    dto: LadesaTypings.DiarioPreferenciaAgrupamentoFindByIdOperationOutput
+    dto: LadesaTypings.DiarioPreferenciaAgrupamentoFindByIdOperationOutput,
   ) {
-    return this.diarioPreferenciaAgrupamentoService.diarioPreferenciaAgrupamentoFindByIdStrict(
-      accessContext,
-      { id: dto.params.id }
-    );
+    return this.diarioPreferenciaAgrupamentoService.diarioPreferenciaAgrupamentoFindByIdStrict(accessContext, { id: dto.params.id });
   }
 
   //
@@ -56,12 +43,9 @@ export class DiarioPreferenciaAgrupamentoController {
     //
     @AccessContextHttp() accessContext: AccessContext,
     @CombinedInput()
-    dto: LadesaTypings.DiarioPreferenciaAgrupamentoCreateOperationInput
+    dto: LadesaTypings.DiarioPreferenciaAgrupamentoCreateOperationInput,
   ) {
-    return this.diarioPreferenciaAgrupamentoService.diarioPreferenciaAgrupamentoCreate(
-      accessContext,
-      dto
-    );
+    return this.diarioPreferenciaAgrupamentoService.diarioPreferenciaAgrupamentoCreate(accessContext, dto);
   }
 
   //
@@ -72,12 +56,9 @@ export class DiarioPreferenciaAgrupamentoController {
     //
     @AccessContextHttp() accessContext: AccessContext,
     @CombinedInput()
-    dto: LadesaTypings.DiarioPreferenciaAgrupamentoUpdateByIdOperationInput
+    dto: LadesaTypings.DiarioPreferenciaAgrupamentoUpdateByIdOperationInput,
   ) {
-    return this.diarioPreferenciaAgrupamentoService.diarioPreferenciaAgrupamentoUpdate(
-      accessContext,
-      dto
-    );
+    return this.diarioPreferenciaAgrupamentoService.diarioPreferenciaAgrupamentoUpdate(accessContext, dto);
   }
 
   //
@@ -88,12 +69,9 @@ export class DiarioPreferenciaAgrupamentoController {
     //
     @AccessContextHttp() accessContext: AccessContext,
     @CombinedInput()
-    dto: LadesaTypings.DiarioPreferenciaAgrupamentoDeleteByIdOperationInput
+    dto: LadesaTypings.DiarioPreferenciaAgrupamentoDeleteByIdOperationInput,
   ) {
-    return this.diarioPreferenciaAgrupamentoService.diarioPreferenciaAgrupamentoDeleteOneById(
-      accessContext,
-      { id: dto.params.id }
-    );
+    return this.diarioPreferenciaAgrupamentoService.diarioPreferenciaAgrupamentoDeleteOneById(accessContext, { id: dto.params.id });
   }
 
   //

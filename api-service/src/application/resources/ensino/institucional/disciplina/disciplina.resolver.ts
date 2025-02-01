@@ -1,9 +1,6 @@
 import { CombinedInput } from "@/application/standards";
 import { Operation } from "@/application/standards/especificacao/business-logic";
-import {
-  type AccessContext,
-  AccessContextGraphQl,
-} from "@/infrastructure/access-context";
+import { type AccessContext, AccessContextGraphQl } from "@/infrastructure/access-context";
 import * as LadesaTypings from "@ladesa-ro/especificacao";
 import { Tokens } from "@ladesa-ro/especificacao";
 import { Resolver } from "@nestjs/graphql";
@@ -13,14 +10,14 @@ import { DisciplinaService } from "./disciplina.service";
 export class DisciplinaResolver {
   constructor(
     //
-    private disciplinaService: DisciplinaService
+    private disciplinaService: DisciplinaService,
   ) {}
   //
   @Operation(Tokens.DisciplinaList)
   async disciplinaFindAll(
     //
     @AccessContextGraphQl() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.DisciplinaListOperationInput
+    @CombinedInput() dto: LadesaTypings.DisciplinaListOperationInput,
   ) {
     return this.disciplinaService.disciplinaFindAll(accessContext, dto);
   }
@@ -29,7 +26,7 @@ export class DisciplinaResolver {
   async disciplinaFindOneById(
     //
     @AccessContextGraphQl() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.DisciplinaFindOneByIdOperationOutput
+    @CombinedInput() dto: LadesaTypings.DisciplinaFindOneByIdOperationOutput,
   ) {
     return this.disciplinaService.disciplinaFindByIdStrict(accessContext, {
       id: dto.params.id,
@@ -40,7 +37,7 @@ export class DisciplinaResolver {
   async disciplinaCreate(
     //
     @AccessContextGraphQl() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.DisciplinaCreateOperationInput
+    @CombinedInput() dto: LadesaTypings.DisciplinaCreateOperationInput,
   ) {
     return this.disciplinaService.disciplinaCreate(accessContext, dto);
   }
@@ -48,7 +45,7 @@ export class DisciplinaResolver {
   async disciplinaUpdate(
     //
     @AccessContextGraphQl() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.DisciplinaUpdateByIdOperationInput
+    @CombinedInput() dto: LadesaTypings.DisciplinaUpdateByIdOperationInput,
   ) {
     return this.disciplinaService.disciplinaUpdate(accessContext, dto);
   }
@@ -56,7 +53,7 @@ export class DisciplinaResolver {
   async disciplinaDeleteOneById(
     //
     @AccessContextGraphQl() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.DisciplinaDeleteByIdOperationInput
+    @CombinedInput() dto: LadesaTypings.DisciplinaDeleteByIdOperationInput,
   ) {
     return this.disciplinaService.disciplinaDeleteOneById(accessContext, {
       id: dto.params.id,

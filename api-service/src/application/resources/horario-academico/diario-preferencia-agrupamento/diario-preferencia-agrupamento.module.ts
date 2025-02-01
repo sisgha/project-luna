@@ -6,10 +6,7 @@ import { DiarioPreferenciaAgrupamentoService } from "./diario-preferencia-agrupa
 
 @Module({
   imports: [DiarioModule],
-  providers: [
-    DiarioPreferenciaAgrupamentoService,
-    DiarioPreferenciaAgrupamentoResolver,
-  ],
+  providers: [DiarioPreferenciaAgrupamentoService, DiarioPreferenciaAgrupamentoResolver],
   controllers: [DiarioPreferenciaAgrupamentoController],
   exports: [DiarioPreferenciaAgrupamentoService],
 })

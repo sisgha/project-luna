@@ -1,9 +1,6 @@
 import { CombinedInput } from "@/application/standards";
 import { Operation } from "@/application/standards/especificacao/business-logic";
-import {
-  type AccessContext,
-  AccessContextGraphQl,
-} from "@/infrastructure/access-context";
+import { type AccessContext, AccessContextGraphQl } from "@/infrastructure/access-context";
 import * as LadesaTypings from "@ladesa-ro/especificacao";
 import { Tokens } from "@ladesa-ro/especificacao";
 import { Resolver } from "@nestjs/graphql";
@@ -13,14 +10,14 @@ import { UsuarioService } from "./usuario.service";
 export class UsuarioResolver {
   constructor(
     //
-    private usuarioService: UsuarioService
+    private usuarioService: UsuarioService,
   ) {}
   //
   @Operation(Tokens.UsuarioList)
   async usuarioFindAll(
     //
     @AccessContextGraphQl() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.UsuarioListOperationInput
+    @CombinedInput() dto: LadesaTypings.UsuarioListOperationInput,
   ) {
     return this.usuarioService.usuarioFindAll(accessContext, dto);
   }
@@ -29,7 +26,7 @@ export class UsuarioResolver {
   async usuarioFindOneById(
     //
     @AccessContextGraphQl() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.UsuarioFindOneByIdOperationOutput
+    @CombinedInput() dto: LadesaTypings.UsuarioFindOneByIdOperationOutput,
   ) {
     return this.usuarioService.usuarioFindByIdStrict(accessContext, {
       id: dto.params.id,
@@ -40,7 +37,7 @@ export class UsuarioResolver {
   async usuarioCreate(
     //
     @AccessContextGraphQl() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.UsuarioCreateOperationInput
+    @CombinedInput() dto: LadesaTypings.UsuarioCreateOperationInput,
   ) {
     return this.usuarioService.usuarioCreate(accessContext, dto);
   }
@@ -48,7 +45,7 @@ export class UsuarioResolver {
   async usuarioUpdate(
     //
     @AccessContextGraphQl() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.UsuarioUpdateByIdOperationInput
+    @CombinedInput() dto: LadesaTypings.UsuarioUpdateByIdOperationInput,
   ) {
     return this.usuarioService.usuarioUpdate(accessContext, dto);
   }
@@ -56,7 +53,7 @@ export class UsuarioResolver {
   async usuarioDeleteOneById(
     //
     @AccessContextGraphQl() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.UsuarioDeleteByIdOperationInput
+    @CombinedInput() dto: LadesaTypings.UsuarioDeleteByIdOperationInput,
   ) {
     return this.usuarioService.usuarioDeleteOneById(accessContext, {
       id: dto.params.id,

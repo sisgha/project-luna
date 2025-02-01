@@ -1,12 +1,6 @@
-import {
-  CombinedInput,
-  graphqlExtractSelection,
-} from "@/application/standards";
+import { CombinedInput, graphqlExtractSelection } from "@/application/standards";
 import { Operation } from "@/application/standards/especificacao/business-logic";
-import {
-  type AccessContext,
-  AccessContextGraphQl,
-} from "@/infrastructure/access-context";
+import { type AccessContext, AccessContextGraphQl } from "@/infrastructure/access-context";
 import * as LadesaTypings from "@ladesa-ro/especificacao";
 import { Tokens } from "@ladesa-ro/especificacao";
 import { Info as GqlInfo, Resolver as GqlResolver } from "@nestjs/graphql";
@@ -17,7 +11,7 @@ import { OfertaFormacaoNivelFormacaoService } from "./oferta-formacao-nivel-form
 export class OfertaFormacaoNivelFormacaoResolver {
   constructor(
     //
-    private ofertaFormacaoNivelFormacaoService: OfertaFormacaoNivelFormacaoService
+    private ofertaFormacaoNivelFormacaoService: OfertaFormacaoNivelFormacaoService,
   ) {}
   //
   @Operation(Tokens.OfertaFormacaoNivelFormacaoList)
@@ -26,13 +20,9 @@ export class OfertaFormacaoNivelFormacaoResolver {
     @AccessContextGraphQl() accessContext: AccessContext,
     @CombinedInput()
     dto: LadesaTypings.OfertaFormacaoNivelFormacaoListOperationInput,
-    @GqlInfo() info: GraphQLResolveInfo
+    @GqlInfo() info: GraphQLResolveInfo,
   ) {
-    return this.ofertaFormacaoNivelFormacaoService.ofertaFormacaoNivelFormacaoFindAll(
-      accessContext,
-      dto,
-      graphqlExtractSelection(info, "paginated")
-    );
+    return this.ofertaFormacaoNivelFormacaoService.ofertaFormacaoNivelFormacaoFindAll(accessContext, dto, graphqlExtractSelection(info, "paginated"));
   }
   //
   @Operation(Tokens.OfertaFormacaoNivelFormacaoFindOneById)
@@ -41,14 +31,14 @@ export class OfertaFormacaoNivelFormacaoResolver {
     @AccessContextGraphQl() accessContext: AccessContext,
     @CombinedInput()
     dto: LadesaTypings.OfertaFormacaoNivelFormacaoFindOneByIdOperationOutput,
-    @GqlInfo() info: GraphQLResolveInfo
+    @GqlInfo() info: GraphQLResolveInfo,
   ) {
     return this.ofertaFormacaoNivelFormacaoService.ofertaFormacaoNivelFormacaoFindByIdStrict(
       accessContext,
       {
         id: dto.params.id,
       },
-      ["id", ...graphqlExtractSelection(info)]
+      ["id", ...graphqlExtractSelection(info)],
     );
   }
   //
@@ -57,12 +47,9 @@ export class OfertaFormacaoNivelFormacaoResolver {
     //
     @AccessContextGraphQl() accessContext: AccessContext,
     @CombinedInput()
-    dto: LadesaTypings.OfertaFormacaoNivelFormacaoCreateOperationInput
+    dto: LadesaTypings.OfertaFormacaoNivelFormacaoCreateOperationInput,
   ) {
-    return this.ofertaFormacaoNivelFormacaoService.ofertaFormacaoNivelFormacaoCreate(
-      accessContext,
-      dto
-    );
+    return this.ofertaFormacaoNivelFormacaoService.ofertaFormacaoNivelFormacaoCreate(accessContext, dto);
   }
 
   @Operation(Tokens.OfertaFormacaoNivelFormacaoUpdateOneById)
@@ -70,12 +57,9 @@ export class OfertaFormacaoNivelFormacaoResolver {
     //
     @AccessContextGraphQl() accessContext: AccessContext,
     @CombinedInput()
-    dto: LadesaTypings.OfertaFormacaoNivelFormacaoUpdateByIdOperationInput
+    dto: LadesaTypings.OfertaFormacaoNivelFormacaoUpdateByIdOperationInput,
   ) {
-    return this.ofertaFormacaoNivelFormacaoService.ofertaFormacaoNivelFormacaoUpdate(
-      accessContext,
-      dto
-    );
+    return this.ofertaFormacaoNivelFormacaoService.ofertaFormacaoNivelFormacaoUpdate(accessContext, dto);
   }
 
   @Operation(Tokens.OfertaFormacaoNivelFormacaoDeleteOneById)
@@ -83,13 +67,10 @@ export class OfertaFormacaoNivelFormacaoResolver {
     //
     @AccessContextGraphQl() accessContext: AccessContext,
     @CombinedInput()
-    dto: LadesaTypings.OfertaFormacaoNivelFormacaoDeleteByIdOperationInput
+    dto: LadesaTypings.OfertaFormacaoNivelFormacaoDeleteByIdOperationInput,
   ) {
-    return this.ofertaFormacaoNivelFormacaoService.ofertaFormacaoNivelFormacaoDeleteOneById(
-      accessContext,
-      {
-        id: dto.params.id,
-      }
-    );
+    return this.ofertaFormacaoNivelFormacaoService.ofertaFormacaoNivelFormacaoDeleteOneById(accessContext, {
+      id: dto.params.id,
+    });
   }
 }

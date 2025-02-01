@@ -1,12 +1,6 @@
-import {
-  CombinedInput,
-  graphqlExtractSelection,
-} from "@/application/standards";
+import { CombinedInput, graphqlExtractSelection } from "@/application/standards";
 import { Operation } from "@/application/standards/especificacao/business-logic";
-import {
-  type AccessContext,
-  AccessContextGraphQl,
-} from "@/infrastructure/access-context";
+import { type AccessContext, AccessContextGraphQl } from "@/infrastructure/access-context";
 import * as LadesaTypings from "@ladesa-ro/especificacao";
 import { Tokens } from "@ladesa-ro/especificacao";
 import { Info as GqlInfo, Resolver as GqlResolver } from "@nestjs/graphql";
@@ -17,7 +11,7 @@ import { ProfessorDisponibilidadeService } from "./professor-disponibilidade.ser
 export class ProfessorDisponibilidadeResolver {
   constructor(
     //
-    private professorDisponibilidadeService: ProfessorDisponibilidadeService
+    private professorDisponibilidadeService: ProfessorDisponibilidadeService,
   ) {}
   //
   @Operation(Tokens.ProfessorDisponibilidadeList)
@@ -26,13 +20,9 @@ export class ProfessorDisponibilidadeResolver {
     @AccessContextGraphQl() accessContext: AccessContext,
     @CombinedInput()
     dto: LadesaTypings.ProfessorDisponibilidadeListOperationInput,
-    @GqlInfo() info: GraphQLResolveInfo
+    @GqlInfo() info: GraphQLResolveInfo,
   ) {
-    return this.professorDisponibilidadeService.professorDisponibilidadeFindAll(
-      accessContext,
-      dto,
-      graphqlExtractSelection(info, "paginated")
-    );
+    return this.professorDisponibilidadeService.professorDisponibilidadeFindAll(accessContext, dto, graphqlExtractSelection(info, "paginated"));
   }
   //
   @Operation(Tokens.ProfessorDisponibilidadeFindOneById)
@@ -41,14 +31,14 @@ export class ProfessorDisponibilidadeResolver {
     @AccessContextGraphQl() accessContext: AccessContext,
     @CombinedInput()
     dto: LadesaTypings.ProfessorDisponibilidadeFindOneByIdOperationOutput,
-    @GqlInfo() info: GraphQLResolveInfo
+    @GqlInfo() info: GraphQLResolveInfo,
   ) {
     return this.professorDisponibilidadeService.professorDisponibilidadeFindByIdStrict(
       accessContext,
       {
         id: dto.params.id,
       },
-      ["id", ...graphqlExtractSelection(info)]
+      ["id", ...graphqlExtractSelection(info)],
     );
   }
   //
@@ -57,12 +47,9 @@ export class ProfessorDisponibilidadeResolver {
     //
     @AccessContextGraphQl() accessContext: AccessContext,
     @CombinedInput()
-    dto: LadesaTypings.ProfessorDisponibilidadeCreateOperationInput
+    dto: LadesaTypings.ProfessorDisponibilidadeCreateOperationInput,
   ) {
-    return this.professorDisponibilidadeService.professorDisponibilidadeCreate(
-      accessContext,
-      dto
-    );
+    return this.professorDisponibilidadeService.professorDisponibilidadeCreate(accessContext, dto);
   }
 
   @Operation(Tokens.ProfessorDisponibilidadeUpdateOneById)
@@ -70,12 +57,9 @@ export class ProfessorDisponibilidadeResolver {
     //
     @AccessContextGraphQl() accessContext: AccessContext,
     @CombinedInput()
-    dto: LadesaTypings.ProfessorDisponibilidadeUpdateByIdOperationInput
+    dto: LadesaTypings.ProfessorDisponibilidadeUpdateByIdOperationInput,
   ) {
-    return this.professorDisponibilidadeService.professorDisponibilidadeUpdate(
-      accessContext,
-      dto
-    );
+    return this.professorDisponibilidadeService.professorDisponibilidadeUpdate(accessContext, dto);
   }
 
   @Operation(Tokens.ProfessorDisponibilidadeDeleteOneById)
@@ -83,13 +67,10 @@ export class ProfessorDisponibilidadeResolver {
     //
     @AccessContextGraphQl() accessContext: AccessContext,
     @CombinedInput()
-    dto: LadesaTypings.ProfessorDisponibilidadeDeleteByIdOperationInput
+    dto: LadesaTypings.ProfessorDisponibilidadeDeleteByIdOperationInput,
   ) {
-    return this.professorDisponibilidadeService.professorDisponibilidadeDeleteOneById(
-      accessContext,
-      {
-        id: dto.params.id,
-      }
-    );
+    return this.professorDisponibilidadeService.professorDisponibilidadeDeleteOneById(accessContext, {
+      id: dto.params.id,
+    });
   }
 }

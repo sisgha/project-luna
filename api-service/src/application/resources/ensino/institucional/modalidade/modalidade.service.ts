@@ -1,8 +1,5 @@
 import { QbEfficientLoad } from "@/application/standards/ladesa-spec/QbEfficientLoad";
-import {
-  LadesaPaginatedResultDto,
-  LadesaSearch,
-} from "@/application/standards/ladesa-spec/search/search-strategies";
+import { LadesaPaginatedResultDto, LadesaSearch } from "@/application/standards/ladesa-spec/search/search-strategies";
 import type { AccessContext } from "@/infrastructure/access-context";
 import { paginateConfig } from "@/infrastructure/fixtures";
 import { DatabaseContextService } from "@/infrastructure/integrations/database";
@@ -30,7 +27,7 @@ export class ModalidadeService {
   async modalidadeFindAll(
     accessContext: AccessContext,
     dto: LadesaTypings.ModalidadeListOperationInput | null = null,
-    selection?: string[]
+    selection?: string[],
   ): Promise<LadesaTypings.ModalidadeListOperationOutput["success"]> {
     // =========================================================
 
@@ -38,12 +35,7 @@ export class ModalidadeService {
 
     // =========================================================
 
-    await accessContext.applyFilter(
-      "modalidade:find",
-      qb,
-      aliasModalidade,
-      null
-    );
+    await accessContext.applyFilter("modalidade:find", qb, aliasModalidade, null);
 
     // =========================================================
 
@@ -82,32 +74,19 @@ export class ModalidadeService {
     // =========================================================
 
     qb.select([]);
-    QbEfficientLoad(
-      LadesaTypings.Tokens.ModalidadeView,
-      qb,
-      aliasModalidade,
-      selection
-    );
+    QbEfficientLoad(LadesaTypings.Tokens.ModalidadeView, qb, aliasModalidade, selection);
 
     // =========================================================
 
-    const pageItemsView = await qb
-      .andWhereInIds(map(paginated.data, "id"))
-      .getMany();
-    paginated.data = paginated.data.map(
-      (paginated) => pageItemsView.find((i) => i.id === paginated.id)!
-    );
+    const pageItemsView = await qb.andWhereInIds(map(paginated.data, "id")).getMany();
+    paginated.data = paginated.data.map((paginated) => pageItemsView.find((i) => i.id === paginated.id)!);
 
     // =========================================================
 
     return LadesaPaginatedResultDto(paginated);
   }
 
-  async modalidadeFindById(
-    accessContext: AccessContext | null,
-    dto: LadesaTypings.ModalidadeFindOneInputView,
-    selection?: string[]
-  ): Promise<LadesaTypings.ModalidadeFindOneResultView | null> {
+  async modalidadeFindById(accessContext: AccessContext | null, dto: LadesaTypings.ModalidadeFindOneInputView, selection?: string[]): Promise<LadesaTypings.ModalidadeFindOneResultView | null> {
     // =========================================================
 
     const qb = this.modalidadeRepository.createQueryBuilder(aliasModalidade);
@@ -115,12 +94,7 @@ export class ModalidadeService {
     // =========================================================
 
     if (accessContext) {
-      await accessContext.applyFilter(
-        "modalidade:find",
-        qb,
-        aliasModalidade,
-        null
-      );
+      await accessContext.applyFilter("modalidade:find", qb, aliasModalidade, null);
     }
 
     // =========================================================
@@ -130,12 +104,7 @@ export class ModalidadeService {
     // =========================================================
 
     qb.select([]);
-    QbEfficientLoad(
-      LadesaTypings.Tokens.ModalidadeView,
-      qb,
-      aliasModalidade,
-      selection
-    );
+    QbEfficientLoad(LadesaTypings.Tokens.ModalidadeView, qb, aliasModalidade, selection);
 
     // =========================================================
 
@@ -146,16 +115,8 @@ export class ModalidadeService {
     return modalidade;
   }
 
-  async modalidadeFindByIdStrict(
-    accessContext: AccessContext,
-    dto: LadesaTypings.ModalidadeFindOneInputView,
-    selection?: string[]
-  ) {
-    const modalidade = await this.modalidadeFindById(
-      accessContext,
-      dto,
-      selection
-    );
+  async modalidadeFindByIdStrict(accessContext: AccessContext, dto: LadesaTypings.ModalidadeFindOneInputView, selection?: string[]) {
+    const modalidade = await this.modalidadeFindById(accessContext, dto, selection);
 
     if (!modalidade) {
       throw new NotFoundException();
@@ -164,23 +125,14 @@ export class ModalidadeService {
     return modalidade;
   }
 
-  async modalidadeFindByIdSimple(
-    accessContext: AccessContext,
-    id: LadesaTypings.ModalidadeFindOneInputView["id"],
-    selection?: string[]
-  ): Promise<LadesaTypings.ModalidadeFindOneResultView | null> {
+  async modalidadeFindByIdSimple(accessContext: AccessContext, id: LadesaTypings.ModalidadeFindOneInputView["id"], selection?: string[]): Promise<LadesaTypings.ModalidadeFindOneResultView | null> {
     // =========================================================
 
     const qb = this.modalidadeRepository.createQueryBuilder(aliasModalidade);
 
     // =========================================================
 
-    await accessContext.applyFilter(
-      "modalidade:find",
-      qb,
-      aliasModalidade,
-      null
-    );
+    await accessContext.applyFilter("modalidade:find", qb, aliasModalidade, null);
 
     // =========================================================
 
@@ -189,12 +141,7 @@ export class ModalidadeService {
     // =========================================================
 
     qb.select([]);
-    QbEfficientLoad(
-      LadesaTypings.Tokens.ModalidadeView,
-      qb,
-      aliasModalidade,
-      selection
-    );
+    QbEfficientLoad(LadesaTypings.Tokens.ModalidadeView, qb, aliasModalidade, selection);
 
     // =========================================================
 
@@ -205,16 +152,8 @@ export class ModalidadeService {
     return modalidade;
   }
 
-  async modalidadeFindByIdSimpleStrict(
-    accessContext: AccessContext,
-    id: LadesaTypings.ModalidadeFindOneInputView["id"],
-    selection?: string[]
-  ) {
-    const modalidade = await this.modalidadeFindByIdSimple(
-      accessContext,
-      id,
-      selection
-    );
+  async modalidadeFindByIdSimpleStrict(accessContext: AccessContext, id: LadesaTypings.ModalidadeFindOneInputView["id"], selection?: string[]) {
+    const modalidade = await this.modalidadeFindByIdSimple(accessContext, id, selection);
 
     if (!modalidade) {
       throw new NotFoundException();
@@ -225,10 +164,7 @@ export class ModalidadeService {
 
   //
 
-  async modalidadeCreate(
-    accessContext: AccessContext,
-    dto: LadesaTypings.ModalidadeCreateOperationInput
-  ) {
+  async modalidadeCreate(accessContext: AccessContext, dto: LadesaTypings.ModalidadeCreateOperationInput) {
     // =========================================================
 
     await accessContext.ensurePermission("modalidade:create", { dto });
@@ -252,27 +188,16 @@ export class ModalidadeService {
     return this.modalidadeFindByIdStrict(accessContext, { id: modalidade.id });
   }
 
-  async modalidadeUpdate(
-    accessContext: AccessContext,
-    dto: LadesaTypings.ModalidadeUpdateByIdOperationInput
-  ) {
+  async modalidadeUpdate(accessContext: AccessContext, dto: LadesaTypings.ModalidadeUpdateByIdOperationInput) {
     // =========================================================
 
-    const currentModalidade = await this.modalidadeFindByIdStrict(
-      accessContext,
-      {
-        id: dto.params.id,
-      }
-    );
+    const currentModalidade = await this.modalidadeFindByIdStrict(accessContext, {
+      id: dto.params.id,
+    });
 
     // =========================================================
 
-    await accessContext.ensurePermission(
-      "modalidade:update",
-      { dto },
-      dto.params.id,
-      this.modalidadeRepository.createQueryBuilder(aliasModalidade)
-    );
+    await accessContext.ensurePermission("modalidade:update", { dto }, dto.params.id, this.modalidadeRepository.createQueryBuilder(aliasModalidade));
 
     const dtoModalidade = pick(dto.body, ["nome", "slug"]);
 
@@ -295,18 +220,10 @@ export class ModalidadeService {
 
   //
 
-  async modalidadeDeleteOneById(
-    accessContext: AccessContext,
-    dto: LadesaTypings.ModalidadeFindOneInputView
-  ) {
+  async modalidadeDeleteOneById(accessContext: AccessContext, dto: LadesaTypings.ModalidadeFindOneInputView) {
     // =========================================================
 
-    await accessContext.ensurePermission(
-      "modalidade:delete",
-      { dto },
-      dto.id,
-      this.modalidadeRepository.createQueryBuilder(aliasModalidade)
-    );
+    await accessContext.ensurePermission("modalidade:delete", { dto }, dto.id, this.modalidadeRepository.createQueryBuilder(aliasModalidade));
 
     // =========================================================
 

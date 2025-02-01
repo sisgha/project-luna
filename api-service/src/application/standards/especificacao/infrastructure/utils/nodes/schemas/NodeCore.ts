@@ -1,11 +1,5 @@
-import {
-  INodeBase,
-  NodeBase,
-} from "@/application/standards/especificacao/infrastructure/utils/nodes/schemas/NodeBase";
-import {
-  INodeType,
-  NodeType,
-} from "@/application/standards/especificacao/infrastructure/utils/nodes/schemas/NodeType";
+import { INodeBase, NodeBase } from "@/application/standards/especificacao/infrastructure/utils/nodes/schemas/NodeBase";
+import { INodeType, NodeType } from "@/application/standards/especificacao/infrastructure/utils/nodes/schemas/NodeType";
 import { BuildCheckType } from "@/application/standards/especificacao/infrastructure/utils/nodes/schemas/helpers";
 import * as valibot from "valibot";
 

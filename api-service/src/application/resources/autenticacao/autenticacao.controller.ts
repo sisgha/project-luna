@@ -1,9 +1,6 @@
 import { CombinedInput } from "@/application/standards";
 import { Operation } from "@/application/standards/especificacao/business-logic";
-import {
-  type AccessContext,
-  AccessContextHttp,
-} from "@/infrastructure/access-context";
+import { type AccessContext, AccessContextHttp } from "@/infrastructure/access-context";
 import { Public } from "@/infrastructure/authentication";
 import * as LadesaTypings from "@ladesa-ro/especificacao";
 import { Tokens } from "@ladesa-ro/especificacao";
@@ -20,7 +17,7 @@ export class AutenticacaoController {
   @Operation(Tokens.AuthWhoAmI)
   whoAmI(
     //
-    @AccessContextHttp() accessContext: AccessContext
+    @AccessContextHttp() accessContext: AccessContext,
   ) {
     return this.autenticacaoService.whoAmI(accessContext);
   }
@@ -31,7 +28,7 @@ export class AutenticacaoController {
   login(
     //
     @AccessContextHttp() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.AuthLoginOperationInput
+    @CombinedInput() dto: LadesaTypings.AuthLoginOperationInput,
   ) {
     return this.autenticacaoService.login(accessContext, dto);
   }
@@ -42,7 +39,7 @@ export class AutenticacaoController {
   refresh(
     //
     @AccessContextHttp() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.AuthRefreshOperationInput
+    @CombinedInput() dto: LadesaTypings.AuthRefreshOperationInput,
   ) {
     return this.autenticacaoService.refresh(accessContext, dto);
   }
@@ -53,17 +50,14 @@ export class AutenticacaoController {
     //
     @AccessContextHttp() accessContext: AccessContext,
     @CombinedInput()
-    dto: LadesaTypings.AuthCredentialsSetInitialPasswordOperationInput
+    dto: LadesaTypings.AuthCredentialsSetInitialPasswordOperationInput,
   ) {
     return this.autenticacaoService.definirSenha(accessContext, dto);
   }
 
   @Post("/redefinir-senha")
   @Operation(Tokens.AuthRecoverPassword)
-  redefinirSenha(
-    @AccessContextHttp() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.AuthRecoverPasswordOperationInput
-  ) {
+  redefinirSenha(@AccessContextHttp() accessContext: AccessContext, @CombinedInput() dto: LadesaTypings.AuthRecoverPasswordOperationInput) {
     return this.autenticacaoService.recoverPassword(accessContext, dto);
   }
 }

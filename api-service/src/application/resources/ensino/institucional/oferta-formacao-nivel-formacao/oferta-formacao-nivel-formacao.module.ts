@@ -8,10 +8,7 @@ import { OfertaFormacaoNivelFormacaoService } from "./oferta-formacao-nivel-form
 @Module({
   imports: [OfertaFormacaoModule, NivelFormacaoModule],
   controllers: [OfertaFormacaoNivelFormacaoController],
-  providers: [
-    OfertaFormacaoNivelFormacaoService,
-    OfertaFormacaoNivelFormacaoResolver,
-  ],
+  providers: [OfertaFormacaoNivelFormacaoService, OfertaFormacaoNivelFormacaoResolver],
   exports: [OfertaFormacaoNivelFormacaoService],
 })
 export class OfertaFormacaoNivelFormacaoModule {}

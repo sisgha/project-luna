@@ -1,9 +1,6 @@
 import { CombinedInput } from "@/application/standards";
 import { Operation } from "@/application/standards/especificacao/business-logic";
-import {
-  type AccessContext,
-  AccessContextHttp,
-} from "@/infrastructure/access-context";
+import { type AccessContext, AccessContextHttp } from "@/infrastructure/access-context";
 import * as LadesaTypings from "@ladesa-ro/especificacao";
 import { Tokens } from "@ladesa-ro/especificacao";
 import { Controller, Delete, Get, Patch, Post } from "@nestjs/common";
@@ -22,7 +19,7 @@ export class AulaController {
   async aulaFindAll(
     //
     @AccessContextHttp() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.AulaListOperationInput
+    @CombinedInput() dto: LadesaTypings.AulaListOperationInput,
   ): Promise<LadesaTypings.AulaListOperationOutput["success"]> {
     return this.aulaService.aulaFindAll(accessContext, dto);
   }
@@ -34,7 +31,7 @@ export class AulaController {
   async aulaFindById(
     //
     @AccessContextHttp() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.AulaFindOneByIdOperationOutput
+    @CombinedInput() dto: LadesaTypings.AulaFindOneByIdOperationOutput,
   ) {
     return this.aulaService.aulaFindByIdStrict(accessContext, {
       id: dto.params.id,
@@ -48,7 +45,7 @@ export class AulaController {
   async aulaCreate(
     //
     @AccessContextHttp() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.AulaCreateOperationInput
+    @CombinedInput() dto: LadesaTypings.AulaCreateOperationInput,
   ) {
     return this.aulaService.aulaCreate(accessContext, dto);
   }
@@ -60,7 +57,7 @@ export class AulaController {
   async aulaUpdate(
     //
     @AccessContextHttp() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.AulaUpdateByIdOperationInput
+    @CombinedInput() dto: LadesaTypings.AulaUpdateByIdOperationInput,
   ) {
     return this.aulaService.aulaUpdate(accessContext, dto);
   }
@@ -72,7 +69,7 @@ export class AulaController {
   async aulaDeleteOneById(
     //
     @AccessContextHttp() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.AulaDeleteByIdOperationInput
+    @CombinedInput() dto: LadesaTypings.AulaDeleteByIdOperationInput,
   ) {
     return this.aulaService.aulaDeleteOneById(accessContext, {
       id: dto.params.id,

@@ -1,8 +1,5 @@
 import { QbEfficientLoad } from "@/application/standards/ladesa-spec/QbEfficientLoad";
-import {
-  LadesaPaginatedResultDto,
-  LadesaSearch,
-} from "@/application/standards/ladesa-spec/search/search-strategies";
+import { LadesaPaginatedResultDto, LadesaSearch } from "@/application/standards/ladesa-spec/search/search-strategies";
 import type { AccessContext } from "@/infrastructure/access-context";
 import { paginateConfig } from "@/infrastructure/fixtures";
 import { DatabaseContextService } from "@/infrastructure/integrations/database";
@@ -25,11 +22,7 @@ export class CidadeService {
 
   //
 
-  async findAll(
-    accessContext: AccessContext,
-    dto: LadesaTypings.CidadeListOperationInput | null = null,
-    selection?: string[]
-  ) {
+  async findAll(accessContext: AccessContext, dto: LadesaTypings.CidadeListOperationInput | null = null, selection?: string[]) {
     // =========================================================
 
     const qb = this.cidadeRepository.createQueryBuilder("cidade");
@@ -72,36 +65,22 @@ export class CidadeService {
     // =========================================================
 
     qb.select([]);
-    QbEfficientLoad(
-      LadesaTypings.Tokens.CidadeView,
-      qb,
-      aliasCidade,
-      selection
-    );
+    QbEfficientLoad(LadesaTypings.Tokens.CidadeView, qb, aliasCidade, selection);
 
     // =========================================================
 
-    const pageItemsView = await qb
-      .andWhereInIds(map(paginated.data, "id"))
-      .getMany();
-    paginated.data = paginated.data.map(
-      (paginated) => pageItemsView.find((i) => i.id === paginated.id)!
-    );
+    const pageItemsView = await qb.andWhereInIds(map(paginated.data, "id")).getMany();
+    paginated.data = paginated.data.map((paginated) => pageItemsView.find((i) => i.id === paginated.id)!);
 
     // =========================================================
 
     return LadesaPaginatedResultDto(paginated);
   }
 
-  async findById(
-    accessContext: AccessContext,
-    dto: LadesaTypings.CidadeFindOneInputView,
-    selection?: string[]
-  ) {
+  async findById(accessContext: AccessContext, dto: LadesaTypings.CidadeFindOneInputView, selection?: string[]) {
     // =========================================================
 
-    const { cidadeRepository: baseCidadeRepository } =
-      this.databaseContextService;
+    const { cidadeRepository: baseCidadeRepository } = this.databaseContextService;
 
     // =========================================================
 
@@ -118,12 +97,7 @@ export class CidadeService {
     // =========================================================
 
     qb.select([]);
-    QbEfficientLoad(
-      LadesaTypings.Tokens.CidadeView,
-      qb,
-      aliasCidade,
-      selection
-    );
+    QbEfficientLoad(LadesaTypings.Tokens.CidadeView, qb, aliasCidade, selection);
 
     // =========================================================
 
@@ -134,11 +108,7 @@ export class CidadeService {
     return cidade;
   }
 
-  async findByIdStrict(
-    accessContext: AccessContext,
-    dto: LadesaTypings.CidadeFindOneInputView,
-    selection?: string[]
-  ) {
+  async findByIdStrict(accessContext: AccessContext, dto: LadesaTypings.CidadeFindOneInputView, selection?: string[]) {
     const cidade = await this.findById(accessContext, dto, selection);
 
     if (!cidade) {

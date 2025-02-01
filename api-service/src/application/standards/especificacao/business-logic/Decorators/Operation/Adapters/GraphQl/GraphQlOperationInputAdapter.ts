@@ -1,9 +1,5 @@
 import type { IGraphQlRepresentation } from "@/application/standards/especificacao/business-logic/DtoCompiler/Adapters/FromUnispec/Integrations/GraphQl/GraphQlNodeCompiler";
-import {
-  type INestedNode,
-  type INodeTypeObjectOperation,
-  ParseNodeTypeObjectEntity,
-} from "@/application/standards/especificacao/infrastructure";
+import { type INestedNode, type INodeTypeObjectOperation, ParseNodeTypeObjectEntity } from "@/application/standards/especificacao/infrastructure";
 import * as ChangeCase from "change-case";
 
 export class GraphQlOperationInputAdapter {
@@ -16,8 +12,7 @@ export class GraphQlOperationInputAdapter {
 
     if (params) {
       for (const [key, node] of Object.entries(params)) {
-        const projectedKey =
-          node["x-unispec-gql-key"] ?? ChangeCase.camelCase(key);
+        const projectedKey = node["x-unispec-gql-key"] ?? ChangeCase.camelCase(key);
         combinedProperties[projectedKey] = node;
       }
     }
@@ -26,8 +21,7 @@ export class GraphQlOperationInputAdapter {
 
     if (queries) {
       for (const [key, node] of Object.entries(queries)) {
-        const projectedKey =
-          node["x-unispec-gql-key"] ?? ChangeCase.camelCase(key);
+        const projectedKey = node["x-unispec-gql-key"] ?? ChangeCase.camelCase(key);
         combinedProperties[projectedKey] = node;
       }
     }
@@ -47,11 +41,8 @@ export class GraphQlOperationInputAdapter {
     });
   }
 
-  BuildCombinedTypeForOperation(
-    operation: INodeTypeObjectOperation
-  ): IGraphQlRepresentation {
-    const combinedInputView =
-      this.BuildCombinedEntityForOperationInput(operation);
+  BuildCombinedTypeForOperation(operation: INodeTypeObjectOperation): IGraphQlRepresentation {
+    const combinedInputView = this.BuildCombinedEntityForOperationInput(operation);
 
     // TODO
 
@@ -72,10 +63,7 @@ export class GraphQlOperationInputAdapter {
     };
   }
 
-  static DecombineOperationInput(
-    operation: INodeTypeObjectOperation,
-    inputData: any
-  ) {
+  static DecombineOperationInput(operation: INodeTypeObjectOperation, inputData: any) {
     const operationInput = operation.properties.input;
 
     if (!operationInput || !inputData) {

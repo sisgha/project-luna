@@ -8,10 +8,7 @@ import { GradeHorarioOfertaFormacaoService } from "./grade-horario-oferta-formac
 @Module({
   imports: [OfertaFormacaoModule, CampusModule],
   controllers: [GradeHorarioOfertaFormacaoController],
-  providers: [
-    GradeHorarioOfertaFormacaoService,
-    GradeHorarioOfertaFormacaoResolver,
-  ],
+  providers: [GradeHorarioOfertaFormacaoService, GradeHorarioOfertaFormacaoResolver],
   exports: [GradeHorarioOfertaFormacaoService],
 })
 export class GradeHorarioOfertaFormacaoModule {}

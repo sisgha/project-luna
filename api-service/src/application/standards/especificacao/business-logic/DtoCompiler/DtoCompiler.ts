@@ -5,11 +5,7 @@ import { SwaggerClassCompilerFromUnispecEntityHandler } from "@/application/stan
 import { SwaggerNodeCompiler } from "@/application/standards/especificacao/business-logic/DtoCompiler/Adapters/FromUnispec/Integrations/Swagger/SwaggerNodeCompiler";
 import { IDtoCompilerContext } from "@/application/standards/especificacao/business-logic/DtoCompiler/typings";
 import { getSpecNodesStore } from "@/application/standards/especificacao/business-logic/SpecNodesStore";
-import {
-  CheckNodeTypeObjectEntity,
-  INode,
-  NodeTypeObjectEntity,
-} from "@/application/standards/especificacao/infrastructure";
+import { CheckNodeTypeObjectEntity, INode, NodeTypeObjectEntity } from "@/application/standards/especificacao/infrastructure";
 import * as valibot from "valibot";
 
 const CursorContractNode = valibot.union([
@@ -17,9 +13,7 @@ const CursorContractNode = valibot.union([
 
   valibot.object({
     $ref: valibot.optional(valibot.string()),
-    anyOf: valibot.optional(
-      valibot.union([valibot.tuple([]), valibot.never()])
-    ),
+    anyOf: valibot.optional(valibot.union([valibot.tuple([]), valibot.never()])),
   }),
 ]);
 
@@ -34,10 +28,7 @@ export interface IDtoCompiler extends GenericClassCompilerFromUnispecEntity {
   CompileNode(cursor: string | INode, classesMap?: Map<string, any>): any;
 }
 
-export class DtoCompiler
-  extends GenericClassCompilerFromUnispecEntity
-  implements IDtoCompiler
-{
+export class DtoCompiler extends GenericClassCompilerFromUnispecEntity implements IDtoCompiler {
   #store = getSpecNodesStore();
 
   #classesMap = new Map<string, any>();
@@ -68,10 +59,7 @@ export class DtoCompiler
     };
   }
 
-  CompileNode(
-    cursor: string | INode,
-    classesMap: Map<string, any> = this.#classesMap
-  ) {
+  CompileNode(cursor: string | INode, classesMap: Map<string, any> = this.#classesMap) {
     const { node } = this.#store.Compose(cursor);
 
     return this.CompileClass(node, classesMap);
@@ -84,9 +72,7 @@ export class DtoCompiler
       console.debug(node);
       debugger;
 
-      throw new Error(
-        "You must provide a NodeTypeObjectEntity to DtoCompiler#CompileClass"
-      );
+      throw new Error("You must provide a NodeTypeObjectEntity to DtoCompiler#CompileClass");
     }
 
     return super.CompileClass(node, classesMap);

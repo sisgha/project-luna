@@ -1,9 +1,6 @@
 import { CombinedInput } from "@/application/standards";
 import { Operation } from "@/application/standards/especificacao/business-logic";
-import {
-  type AccessContext,
-  AccessContextGraphQl,
-} from "@/infrastructure/access-context";
+import { type AccessContext, AccessContextGraphQl } from "@/infrastructure/access-context";
 import * as LadesaTypings from "@ladesa-ro/especificacao";
 import { Tokens } from "@ladesa-ro/especificacao";
 import { Resolver } from "@nestjs/graphql";
@@ -13,14 +10,14 @@ import { CursoService } from "./curso.service";
 export class CursoResolver {
   constructor(
     //
-    private cursoService: CursoService
+    private cursoService: CursoService,
   ) {}
   //
   @Operation(Tokens.CursoList)
   async cursoFindAll(
     //
     @AccessContextGraphQl() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.CursoListOperationInput
+    @CombinedInput() dto: LadesaTypings.CursoListOperationInput,
   ) {
     return this.cursoService.cursoFindAll(accessContext, dto);
   }
@@ -29,7 +26,7 @@ export class CursoResolver {
   async cursoFindOneById(
     //
     @AccessContextGraphQl() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.CursoFindOneByIdOperationOutput
+    @CombinedInput() dto: LadesaTypings.CursoFindOneByIdOperationOutput,
   ) {
     return this.cursoService.cursoFindByIdStrict(accessContext, {
       id: dto.params.id,
@@ -40,7 +37,7 @@ export class CursoResolver {
   async cursoCreate(
     //
     @AccessContextGraphQl() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.CursoCreateOperationInput
+    @CombinedInput() dto: LadesaTypings.CursoCreateOperationInput,
   ) {
     return this.cursoService.cursoCreate(accessContext, dto);
   }
@@ -48,7 +45,7 @@ export class CursoResolver {
   async cursoUpdate(
     //
     @AccessContextGraphQl() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.CursoUpdateByIdOperationInput
+    @CombinedInput() dto: LadesaTypings.CursoUpdateByIdOperationInput,
   ) {
     return this.cursoService.cursoUpdate(accessContext, dto);
   }
@@ -56,7 +53,7 @@ export class CursoResolver {
   async cursoDeleteOneById(
     //
     @AccessContextGraphQl() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.CursoDeleteByIdOperationInput
+    @CombinedInput() dto: LadesaTypings.CursoDeleteByIdOperationInput,
   ) {
     return this.cursoService.cursoDeleteOneById(accessContext, {
       id: dto.params.id,

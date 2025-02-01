@@ -1,11 +1,5 @@
-import {
-  INestedNode,
-  NestedNode,
-} from "@/application/standards/especificacao/infrastructure/utils/nodes/schemas/NestedNode";
-import {
-  INodeBase,
-  NodeBase,
-} from "@/application/standards/especificacao/infrastructure/utils/nodes/schemas/NodeBase";
+import { INestedNode, NestedNode } from "@/application/standards/especificacao/infrastructure/utils/nodes/schemas/NestedNode";
+import { INodeBase, NodeBase } from "@/application/standards/especificacao/infrastructure/utils/nodes/schemas/NodeBase";
 import { BuildCheckType } from "@/application/standards/especificacao/infrastructure/utils/nodes/schemas/helpers";
 import * as valibot from "valibot";
 
@@ -23,6 +17,4 @@ export const NodeTypeArray = valibot.intersect([
   }),
 ]);
 
-export const CheckNodeTypeArray = BuildCheckType<any, INodeTypeArray>(
-  NodeTypeArray
-);
+export const CheckNodeTypeArray = BuildCheckType<any, INodeTypeArray>(NodeTypeArray);

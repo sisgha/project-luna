@@ -1,12 +1,6 @@
-import {
-  CombinedInput,
-  graphqlExtractSelection,
-} from "@/application/standards";
+import { CombinedInput, graphqlExtractSelection } from "@/application/standards";
 import { Operation } from "@/application/standards/especificacao/business-logic";
-import {
-  type AccessContext,
-  AccessContextGraphQl,
-} from "@/infrastructure/access-context";
+import { type AccessContext, AccessContextGraphQl } from "@/infrastructure/access-context";
 import * as LadesaTypings from "@ladesa-ro/especificacao";
 import { Tokens } from "@ladesa-ro/especificacao";
 import { Info as GqlInfo, Resolver as GqlResolver } from "@nestjs/graphql";
@@ -17,7 +11,7 @@ import { GradeHorarioOfertaFormacaoService } from "./grade-horario-oferta-formac
 export class GradeHorarioOfertaFormacaoResolver {
   constructor(
     //
-    private gradeHorarioOfertaFormacaoService: GradeHorarioOfertaFormacaoService
+    private gradeHorarioOfertaFormacaoService: GradeHorarioOfertaFormacaoService,
   ) {}
   //
   @Operation(Tokens.GradeHorarioOfertaFormacaoList)
@@ -26,13 +20,9 @@ export class GradeHorarioOfertaFormacaoResolver {
     @AccessContextGraphQl() accessContext: AccessContext,
     @CombinedInput()
     dto: LadesaTypings.GradeHorarioOfertaFormacaoListOperationInput,
-    @GqlInfo() info: GraphQLResolveInfo
+    @GqlInfo() info: GraphQLResolveInfo,
   ) {
-    return this.gradeHorarioOfertaFormacaoService.gradeHorarioOfertaFormacaoFindAll(
-      accessContext,
-      dto,
-      graphqlExtractSelection(info, "paginated")
-    );
+    return this.gradeHorarioOfertaFormacaoService.gradeHorarioOfertaFormacaoFindAll(accessContext, dto, graphqlExtractSelection(info, "paginated"));
   }
   //
   @Operation(Tokens.GradeHorarioOfertaFormacaoFindOneById)
@@ -41,14 +31,14 @@ export class GradeHorarioOfertaFormacaoResolver {
     @AccessContextGraphQl() accessContext: AccessContext,
     @CombinedInput()
     dto: LadesaTypings.GradeHorarioOfertaFormacaoFindOneByIdOperationOutput,
-    @GqlInfo() info: GraphQLResolveInfo
+    @GqlInfo() info: GraphQLResolveInfo,
   ) {
     return this.gradeHorarioOfertaFormacaoService.gradeHorarioOfertaFormacaoFindByIdStrict(
       accessContext,
       {
         id: dto.params.id,
       },
-      ["id", ...graphqlExtractSelection(info)]
+      ["id", ...graphqlExtractSelection(info)],
     );
   }
   //
@@ -57,12 +47,9 @@ export class GradeHorarioOfertaFormacaoResolver {
     //
     @AccessContextGraphQl() accessContext: AccessContext,
     @CombinedInput()
-    dto: LadesaTypings.GradeHorarioOfertaFormacaoCreateOperationInput
+    dto: LadesaTypings.GradeHorarioOfertaFormacaoCreateOperationInput,
   ) {
-    return this.gradeHorarioOfertaFormacaoService.gradeHorarioOfertaFormacaoCreate(
-      accessContext,
-      dto
-    );
+    return this.gradeHorarioOfertaFormacaoService.gradeHorarioOfertaFormacaoCreate(accessContext, dto);
   }
 
   @Operation(Tokens.GradeHorarioOfertaFormacaoUpdateOneById)
@@ -70,12 +57,9 @@ export class GradeHorarioOfertaFormacaoResolver {
     //
     @AccessContextGraphQl() accessContext: AccessContext,
     @CombinedInput()
-    dto: LadesaTypings.GradeHorarioOfertaFormacaoUpdateByIdOperationInput
+    dto: LadesaTypings.GradeHorarioOfertaFormacaoUpdateByIdOperationInput,
   ) {
-    return this.gradeHorarioOfertaFormacaoService.gradeHorarioOfertaFormacaoUpdate(
-      accessContext,
-      dto
-    );
+    return this.gradeHorarioOfertaFormacaoService.gradeHorarioOfertaFormacaoUpdate(accessContext, dto);
   }
 
   @Operation(Tokens.GradeHorarioOfertaFormacaoDeleteOneById)
@@ -83,13 +67,10 @@ export class GradeHorarioOfertaFormacaoResolver {
     //
     @AccessContextGraphQl() accessContext: AccessContext,
     @CombinedInput()
-    dto: LadesaTypings.GradeHorarioOfertaFormacaoDeleteByIdOperationInput
+    dto: LadesaTypings.GradeHorarioOfertaFormacaoDeleteByIdOperationInput,
   ) {
-    return this.gradeHorarioOfertaFormacaoService.gradeHorarioOfertaFormacaoDeleteOneById(
-      accessContext,
-      {
-        id: dto.params.id,
-      }
-    );
+    return this.gradeHorarioOfertaFormacaoService.gradeHorarioOfertaFormacaoDeleteOneById(accessContext, {
+      id: dto.params.id,
+    });
   }
 }

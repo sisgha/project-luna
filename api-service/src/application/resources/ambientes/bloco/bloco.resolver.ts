@@ -1,9 +1,6 @@
 import { CombinedInput } from "@/application/standards";
 import { Operation } from "@/application/standards/especificacao/business-logic";
-import {
-  type AccessContext,
-  AccessContextGraphQl,
-} from "@/infrastructure/access-context";
+import { type AccessContext, AccessContextGraphQl } from "@/infrastructure/access-context";
 import * as LadesaTypings from "@ladesa-ro/especificacao";
 import { Tokens } from "@ladesa-ro/especificacao";
 import { Resolver } from "@nestjs/graphql";
@@ -13,7 +10,7 @@ import { BlocoService } from "./bloco.service";
 export class BlocoResolver {
   constructor(
     //
-    private blocoService: BlocoService
+    private blocoService: BlocoService,
   ) {}
 
   //
@@ -22,7 +19,7 @@ export class BlocoResolver {
   async blocoFindAll(
     //
     @AccessContextGraphQl() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.BlocoListOperationInput
+    @CombinedInput() dto: LadesaTypings.BlocoListOperationInput,
   ) {
     return this.blocoService.blocoFindAll(accessContext, dto);
   }
@@ -31,7 +28,7 @@ export class BlocoResolver {
   async blocoFindOneById(
     //
     @AccessContextGraphQl() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.BlocoFindOneByIdOperationOutput
+    @CombinedInput() dto: LadesaTypings.BlocoFindOneByIdOperationOutput,
   ) {
     return this.blocoService.blocoFindByIdStrict(accessContext, {
       id: dto.params.id,
@@ -42,7 +39,7 @@ export class BlocoResolver {
   async blocoCreate(
     //
     @AccessContextGraphQl() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.BlocoCreateOperationInput
+    @CombinedInput() dto: LadesaTypings.BlocoCreateOperationInput,
   ) {
     return this.blocoService.blocoCreate(accessContext, dto);
   }
@@ -50,7 +47,7 @@ export class BlocoResolver {
   async blocoUpdate(
     //
     @AccessContextGraphQl() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.BlocoUpdateByIdOperationInput
+    @CombinedInput() dto: LadesaTypings.BlocoUpdateByIdOperationInput,
   ) {
     return this.blocoService.blocoUpdate(accessContext, dto);
   }
@@ -58,7 +55,7 @@ export class BlocoResolver {
   async blocoDeleteOneById(
     //
     @AccessContextGraphQl() accessContext: AccessContext,
-    @CombinedInput() dto: LadesaTypings.BlocoDeleteByIdOperationInput
+    @CombinedInput() dto: LadesaTypings.BlocoDeleteByIdOperationInput,
   ) {
     return this.blocoService.blocoDeleteOneById(accessContext, {
       id: dto.params.id,

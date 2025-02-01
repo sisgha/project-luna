@@ -1,23 +1,7 @@
-import type {
-  ISpecDecorateHandler,
-  ISpecDecorateOperationContext,
-} from "@/application/standards/especificacao/business-logic/Decorators/Operation/Core/ISpecDecorateHandler";
-import {
-  Param as HttpParam,
-  Query as HttpQuery,
-  UseInterceptors,
-} from "@nestjs/common";
+import type { ISpecDecorateHandler, ISpecDecorateOperationContext } from "@/application/standards/especificacao/business-logic/Decorators/Operation/Core/ISpecDecorateHandler";
+import { Param as HttpParam, Query as HttpQuery, UseInterceptors } from "@nestjs/common";
 import { FileInterceptor } from "@nestjs/platform-express";
-import {
-  ApiBearerAuth,
-  ApiBody,
-  ApiConsumes,
-  ApiOperation,
-  ApiParam,
-  ApiProduces,
-  ApiQuery,
-  ApiResponse,
-} from "@nestjs/swagger";
+import { ApiBearerAuth, ApiBody, ApiConsumes, ApiOperation, ApiParam, ApiProduces, ApiQuery, ApiResponse } from "@nestjs/swagger";
 
 export class SwaggerSpecDecorateHandler implements ISpecDecorateHandler {
   HandleOperation(context: ISpecDecorateOperationContext): void {
@@ -31,7 +15,7 @@ export class SwaggerSpecDecorateHandler implements ISpecDecorateHandler {
       ApiOperation({
         description: context.meta.description,
         operationId: context.meta.operationId,
-      })
+      }),
     );
 
     context.AddMethodDecorator(ApiBearerAuth());
@@ -55,9 +39,7 @@ export class SwaggerSpecDecorateHandler implements ISpecDecorateHandler {
     if (!inputParams) return;
 
     const extractProperties = function* () {
-      for (const [key, schema] of Object.entries(
-        inputParams.properties ?? {}
-      )) {
+      for (const [key, schema] of Object.entries(inputParams.properties ?? {})) {
         const required = inputParams.required?.includes(key) ?? false;
 
         yield {
@@ -73,10 +55,7 @@ export class SwaggerSpecDecorateHandler implements ISpecDecorateHandler {
 
       const dtoCompilerContext = dtoCompiler.GetContext("input");
 
-      const swaggerTypings = dtoCompiler.swaggerNodeCompiler.Handle(
-        schema,
-        dtoCompilerContext
-      );
+      const swaggerTypings = dtoCompiler.swaggerNodeCompiler.Handle(schema, dtoCompilerContext);
 
       context.AddMethodDecorator(
         ApiParam({
@@ -84,7 +63,7 @@ export class SwaggerSpecDecorateHandler implements ISpecDecorateHandler {
           ...swaggerTypings.representation,
           name: name,
           required: required,
-        })
+        }),
       );
 
       context.AddCombinedInputDecorator(HttpParam(name));
@@ -103,9 +82,7 @@ export class SwaggerSpecDecorateHandler implements ISpecDecorateHandler {
     if (!inputQueries) return;
 
     const extractProperties = function* () {
-      for (const [key, schema] of Object.entries(
-        inputQueries.properties ?? {}
-      )) {
+      for (const [key, schema] of Object.entries(inputQueries.properties ?? {})) {
         const required = inputQueries.required?.includes(key) ?? false;
 
         yield {
@@ -121,10 +98,7 @@ export class SwaggerSpecDecorateHandler implements ISpecDecorateHandler {
 
       const dtoCompilerContext = dtoCompiler.GetContext("input");
 
-      const swaggerTypings = dtoCompiler.swaggerNodeCompiler.Handle(
-        schema,
-        dtoCompilerContext
-      );
+      const swaggerTypings = dtoCompiler.swaggerNodeCompiler.Handle(schema, dtoCompilerContext);
 
       context.AddMethodDecorator(
         ApiQuery({
@@ -132,7 +106,7 @@ export class SwaggerSpecDecorateHandler implements ISpecDecorateHandler {
           ...swaggerTypings.representation,
           name: name,
           required: required,
-        })
+        }),
       );
 
       context.AddCombinedInputDecorator(HttpQuery(name));
@@ -154,20 +128,14 @@ export class SwaggerSpecDecorateHandler implements ISpecDecorateHandler {
 
     const dtoCompilerContext = dtoCompiler.GetContext("input");
 
-    const swaggerTypings = dtoCompiler.swaggerNodeCompiler.Handle(
-      inputBody,
-      dtoCompilerContext
-    );
+    const swaggerTypings = dtoCompiler.swaggerNodeCompiler.Handle(inputBody, dtoCompilerContext);
 
     const representation = swaggerTypings.representation;
 
     if (representation.kind === "schema") {
       const schema = representation.schema;
 
-      if (
-        schema.type === "string" &&
-        (schema.format === "binary" || schema.mimeTypes !== undefined)
-      ) {
+      if (schema.type === "string" && (schema.format === "binary" || schema.mimeTypes !== undefined)) {
         context.AddMethodDecorator(ApiConsumes("multipart/form-data"));
 
         context.AddMethodDecorator(
@@ -182,7 +150,7 @@ export class SwaggerSpecDecorateHandler implements ISpecDecorateHandler {
                 },
               },
             },
-          })
+          }),
         );
 
         context.AddMethodDecorator(UseInterceptors(FileInterceptor("file")));
@@ -191,7 +159,7 @@ export class SwaggerSpecDecorateHandler implements ISpecDecorateHandler {
           ApiBody({
             ...swaggerTypings.metadata,
             ...swaggerTypings.representation,
-          })
+          }),
         );
       }
     } else {
@@ -199,7 +167,7 @@ export class SwaggerSpecDecorateHandler implements ISpecDecorateHandler {
         ApiBody({
           ...swaggerTypings.metadata,
           ...swaggerTypings.representation,
-        })
+        }),
       );
     }
   }
@@ -233,10 +201,7 @@ export class SwaggerSpecDecorateHandler implements ISpecDecorateHandler {
 
       const dtoCompilerContext = dtoCompiler.GetContext("output");
 
-      const swaggerTypings = dtoCompiler.swaggerNodeCompiler.Handle(
-        outputs,
-        dtoCompilerContext
-      );
+      const swaggerTypings = dtoCompiler.swaggerNodeCompiler.Handle(outputs, dtoCompilerContext);
 
       const representation = swaggerTypings.representation;
 
@@ -250,14 +215,13 @@ export class SwaggerSpecDecorateHandler implements ISpecDecorateHandler {
             ApiResponse({
               status,
 
-              description:
-                swaggerTypings.metadata.description ?? schema.description,
+              description: swaggerTypings.metadata.description ?? schema.description,
 
               schema: {
                 ...swaggerTypings.metadata,
                 ...schema,
               },
-            })
+            }),
           );
         } else {
           context.AddMethodDecorator(
@@ -265,7 +229,7 @@ export class SwaggerSpecDecorateHandler implements ISpecDecorateHandler {
               status,
               ...swaggerTypings.metadata,
               ...swaggerTypings.representation,
-            })
+            }),
           );
         }
       } else {
@@ -274,7 +238,7 @@ export class SwaggerSpecDecorateHandler implements ISpecDecorateHandler {
             status,
             ...swaggerTypings.metadata,
             ...swaggerTypings.representation,
-          })
+          }),
         );
       }
     }
@@ -285,7 +249,7 @@ export class SwaggerSpecDecorateHandler implements ISpecDecorateHandler {
       ApiResponse({
         status: 403,
         description: "O solicitante não tem permissão para executar esta ação.",
-      })
+      }),
     );
   }
 
@@ -294,7 +258,7 @@ export class SwaggerSpecDecorateHandler implements ISpecDecorateHandler {
       ApiResponse({
         status: 404,
         description: "Registro não encontrado.",
-      })
+      }),
     );
   }
 }

@@ -16,13 +16,9 @@ type IValidatorResult<Data = any> =
       errors: DefinedError[];
     };
 
-export type IValidator<Data = any> = (
-  data: any
-) => Promise<IValidatorResult<Data>>;
+export type IValidator<Data = any> = (data: any) => Promise<IValidatorResult<Data>>;
 
-export const makeValidator = async <Data = any>(
-  jsonSchema: JSONSchema7
-): Promise<IValidator<Data>> => {
+export const makeValidator = async <Data = any>(jsonSchema: JSONSchema7): Promise<IValidator<Data>> => {
   const ajvSpec = await getAjvSpec();
 
   const validate = ajvSpec.compile<Data>(jsonSchema);
@@ -52,10 +48,7 @@ export const makeValidator = async <Data = any>(
 
 const validatorsCache = new Map();
 
-export const makeCachedValidator = async <Data = any>(
-  key: string | Symbol,
-  jsonSchema: JSONSchema7
-): Promise<IValidator<Data>> => {
+export const makeCachedValidator = async <Data = any>(key: string | Symbol, jsonSchema: JSONSchema7): Promise<IValidator<Data>> => {
   if (!validatorsCache.has(key)) {
     const validator = await makeValidator(jsonSchema);
     validatorsCache.set(key, validator);

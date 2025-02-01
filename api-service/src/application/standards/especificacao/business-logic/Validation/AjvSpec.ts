@@ -21,12 +21,7 @@ const setupAjvSpec = async () => {
 
   addFormats(ajvSpec);
 
-  const ignoreds = [
-    "x-unispec-entity-id",
-    "x-unispec-kind",
-    "x-unispec-http-key",
-    "x-unispec-gql-key",
-  ];
+  const ignoreds = ["x-unispec-entity-id", "x-unispec-kind", "x-unispec-http-key", "x-unispec-gql-key"];
 
   for (const ignored of ignoreds) {
     ajvSpec.addKeyword({
@@ -36,10 +31,7 @@ const setupAjvSpec = async () => {
   }
 
   // TODO
-  const toImplement = [
-    "x-unispec-constraint-entity-exists",
-    "x-unispec-constraint-cep",
-  ];
+  const toImplement = ["x-unispec-constraint-entity-exists", "x-unispec-constraint-cep"];
 
   for (const keywork of toImplement) {
     ajvSpec.addKeyword({

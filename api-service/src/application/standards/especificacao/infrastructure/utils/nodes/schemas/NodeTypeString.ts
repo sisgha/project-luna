@@ -1,7 +1,4 @@
-import {
-  INodeBase,
-  NodeBase,
-} from "@/application/standards/especificacao/infrastructure/utils/nodes/schemas/NodeBase";
+import { INodeBase, NodeBase } from "@/application/standards/especificacao/infrastructure/utils/nodes/schemas/NodeBase";
 import { BuildCheckType } from "@/application/standards/especificacao/infrastructure/utils/nodes/schemas/helpers";
 import * as valibot from "valibot";
 
@@ -16,6 +13,4 @@ export const NodeTypeString = valibot.object({
   format: valibot.optional(valibot.string()),
 });
 
-export const CheckNodeTypeString = BuildCheckType<any, INodeTypeString>(
-  NodeTypeString
-);
+export const CheckNodeTypeString = BuildCheckType<any, INodeTypeString>(NodeTypeString);

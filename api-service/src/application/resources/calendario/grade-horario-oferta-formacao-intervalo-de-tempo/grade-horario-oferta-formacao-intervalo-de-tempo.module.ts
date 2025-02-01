@@ -7,10 +7,7 @@ import { GradeHorarioOfertaFormacaoIntervaloDeTempoService } from "./grade-horar
 @Module({
   imports: [GradeHorarioOfertaFormacaoModule],
   controllers: [GradeHorarioOfertaFormacaoIntervaloDeTempoController],
-  providers: [
-    GradeHorarioOfertaFormacaoIntervaloDeTempoService,
-    GradeHorarioOfertaFormacaoIntervaloDeTempoResolver,
-  ],
+  providers: [GradeHorarioOfertaFormacaoIntervaloDeTempoService, GradeHorarioOfertaFormacaoIntervaloDeTempoResolver],
   exports: [GradeHorarioOfertaFormacaoIntervaloDeTempoService],
 })
 export class GradeHorarioOfertaFormacaoIntervaloDeTempoModule {}

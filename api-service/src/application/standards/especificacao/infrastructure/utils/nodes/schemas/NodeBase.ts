@@ -1,7 +1,4 @@
-import {
-  INestedNode,
-  NestedNode,
-} from "@/application/standards/especificacao/infrastructure/utils/nodes/schemas/NestedNode";
+import { INestedNode, NestedNode } from "@/application/standards/especificacao/infrastructure/utils/nodes/schemas/NestedNode";
 import type { SchemaObject } from "@nestjs/swagger/dist/interfaces/open-api-spec.interface";
 import * as valibot from "valibot";
 
@@ -29,7 +26,5 @@ export const NodeBase = valibot.object({
 
   anyOf: valibot.optional(valibot.array(valibot.lazy(() => NestedNode))),
 
-  $ref: valibot.optional(
-    valibot.union([valibot.never("$ref is not allowed"), valibot.undefined()])
-  ),
+  $ref: valibot.optional(valibot.union([valibot.never("$ref is not allowed"), valibot.undefined()])),
 });

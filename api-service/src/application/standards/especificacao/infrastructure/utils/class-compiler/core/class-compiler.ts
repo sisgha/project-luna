@@ -17,10 +17,7 @@ const CreateEmptyClassWithName = (name: string) => {
   }[name];
 };
 
-export abstract class ClassCompiler<
-  ClassCompilerTypings extends IClassCompilerTypings<any, any>
-> implements IClassCompiler<ClassCompilerTypings>
-{
+export abstract class ClassCompiler<ClassCompilerTypings extends IClassCompilerTypings<any, any>> implements IClassCompiler<ClassCompilerTypings> {
   #handlers = new Set<IClassCompilerHandler<ClassCompilerTypings>>();
 
   *GetHandlers(): Iterable<IClassCompilerHandler<ClassCompilerTypings>> {
@@ -34,9 +31,7 @@ export abstract class ClassCompiler<
     return this;
   }
 
-  AddHandlers(
-    handlers?: Iterable<IClassCompilerHandler<ClassCompilerTypings>>
-  ) {
+  AddHandlers(handlers?: Iterable<IClassCompilerHandler<ClassCompilerTypings>>) {
     if (handlers) {
       for (const handler of handlers) {
         this.AddHandler(handler);
@@ -46,16 +41,11 @@ export abstract class ClassCompiler<
     return this;
   }
 
-  constructor(
-    handlers?: Iterable<IClassCompilerHandler<ClassCompilerTypings>>
-  ) {
+  constructor(handlers?: Iterable<IClassCompilerHandler<ClassCompilerTypings>>) {
     this.AddHandlers(handlers);
   }
 
-  CompileClass(
-    node: IClassCompilerTypingsInferNode<ClassCompilerTypings>,
-    classesMap: Map<string, any> = new Map()
-  ) {
+  CompileClass(node: IClassCompilerTypingsInferNode<ClassCompilerTypings>, classesMap: Map<string, any> = new Map()) {
     //
     const classContext = {
       node,
@@ -114,19 +104,8 @@ export abstract class ClassCompiler<
     this.CompileClassHandler(classContext);
     this.CompileClassHandleProperties(classContext);
 
-    for (const [
-      propertyKey,
-      propertyMetadata,
-    ] of classContext.classPropertiesMetadata.entries()) {
-      __decorate(
-        [
-          ...propertyMetadata.decorators,
-          __metadata("design:type", propertyMetadata.designType),
-        ],
-        CompiledClass.prototype,
-        propertyKey,
-        void 0
-      );
+    for (const [propertyKey, propertyMetadata] of classContext.classPropertiesMetadata.entries()) {
+      __decorate([...propertyMetadata.decorators, __metadata("design:type", propertyMetadata.designType)], CompiledClass.prototype, propertyKey, void 0);
     }
 
     __decorate(classContext.classDecorators, CompiledClass);
@@ -134,17 +113,13 @@ export abstract class ClassCompiler<
     return CompiledClass;
   }
 
-  CompileClassHandler(
-    classContext: ICompileClassContext<ClassCompilerTypings>
-  ): void {
+  CompileClassHandler(classContext: ICompileClassContext<ClassCompilerTypings>): void {
     for (const handler of this.GetHandlers()) {
       handler.HandleClass(classContext);
     }
   }
 
-  CompileClassHandleProperties(
-    classContext: ICompileClassContext<ClassCompilerTypings>
-  ): void {
+  CompileClassHandleProperties(classContext: ICompileClassContext<ClassCompilerTypings>): void {
     for (const nodeProperty of this.GetNodeProperties(classContext)) {
       const classPropertyContext = {
         classContext: classContext,
@@ -153,10 +128,7 @@ export abstract class ClassCompiler<
         propertyNode: nodeProperty.propertyNode,
 
         AddDecoratorsToCurrentProperty(decorators: Iterable<Function>) {
-          this.classContext.AddDecoratorsToProperty(
-            this.propertyKey,
-            decorators
-          );
+          this.classContext.AddDecoratorsToProperty(this.propertyKey, decorators);
           return this;
         },
 
@@ -170,19 +142,13 @@ export abstract class ClassCompiler<
     }
   }
 
-  CompileClassHandleProperty(
-    classPropertyContext: ICompileClassPropertyContext<ClassCompilerTypings>
-  ) {
+  CompileClassHandleProperty(classPropertyContext: ICompileClassPropertyContext<ClassCompilerTypings>) {
     for (const handler of this.GetHandlers()) {
       handler.HandleClassProperty(classPropertyContext);
     }
   }
 
-  abstract GetNodeProperties(
-    context: ICompileClassContext<ClassCompilerTypings>
-  ): Iterable<INodeProperty<ClassCompilerTypings>>;
+  abstract GetNodeProperties(context: ICompileClassContext<ClassCompilerTypings>): Iterable<INodeProperty<ClassCompilerTypings>>;
 
-  abstract GetNodeIdentifier(
-    classContext: ICompileClassContext<ClassCompilerTypings>
-  ): string;
+  abstract GetNodeIdentifier(classContext: ICompileClassContext<ClassCompilerTypings>): string;
 }

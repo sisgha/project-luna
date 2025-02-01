@@ -22,7 +22,7 @@ export class PerfilService {
   constructor(
     private databaseContext: DatabaseContextService,
     private campusService: CampusService,
-    private usuarioService: UsuarioService
+    private usuarioService: UsuarioService,
   ) {}
 
   //
@@ -37,10 +37,7 @@ export class PerfilService {
 
   //
 
-  async perfilGetAllActive(
-    accessContext: AccessContext | null,
-    usuarioId: UsuarioEntity["id"]
-  ) {
+  async perfilGetAllActive(accessContext: AccessContext | null, usuarioId: UsuarioEntity["id"]) {
     const qb = this.vinculoRepository.createQueryBuilder("vinculo");
 
     qb.innerJoin("vinculo.usuario", "usuario");
@@ -51,30 +48,17 @@ export class PerfilService {
       await accessContext.applyFilter("vinculo:find", qb, aliasVinculo, null);
     }
 
-    QbEfficientLoad(
-      LadesaTypings.Tokens.PerfilFindOneResultView,
-      qb,
-      "vinculo"
-    );
+    QbEfficientLoad(LadesaTypings.Tokens.PerfilFindOneResultView, qb, "vinculo");
 
     const vinculos = await qb.getMany();
 
     return vinculos;
   }
 
-  async perfilFindAll(
-    accessContext: AccessContext,
-    dto: LadesaTypings.PerfilListOperationInput | null = null,
-    selection?: string[] | boolean
-  ) {
+  async perfilFindAll(accessContext: AccessContext, dto: LadesaTypings.PerfilListOperationInput | null = null, selection?: string[] | boolean) {
     const qb = this.vinculoRepository.createQueryBuilder(aliasVinculo);
 
-    QbEfficientLoad(
-      LadesaTypings.Tokens.PerfilFindOneResultView,
-      qb,
-      aliasVinculo,
-      selection
-    );
+    QbEfficientLoad(LadesaTypings.Tokens.PerfilFindOneResultView, qb, aliasVinculo, selection);
 
     await accessContext.applyFilter("vinculo:find", qb, aliasVinculo, null);
 
@@ -114,11 +98,7 @@ export class PerfilService {
     return paginated;
   }
 
-  async perfilFindById(
-    accessContext: AccessContext,
-    dto: LadesaTypings.PerfilFindOneInputView,
-    selection?: string[] | boolean
-  ): Promise<LadesaTypings.PerfilFindOneResultView | null> {
+  async perfilFindById(accessContext: AccessContext, dto: LadesaTypings.PerfilFindOneInputView, selection?: string[] | boolean): Promise<LadesaTypings.PerfilFindOneResultView | null> {
     // =========================================================
 
     const qb = this.vinculoRepository.createQueryBuilder(aliasVinculo);
@@ -134,12 +114,7 @@ export class PerfilService {
     // =========================================================
 
     qb.select([]);
-    QbEfficientLoad(
-      LadesaTypings.Tokens.PerfilFindOneResultView,
-      qb,
-      aliasVinculo,
-      selection
-    );
+    QbEfficientLoad(LadesaTypings.Tokens.PerfilFindOneResultView, qb, aliasVinculo, selection);
 
     // =========================================================
 
@@ -150,11 +125,7 @@ export class PerfilService {
     return vinculo;
   }
 
-  async perfilFindByIdStrict(
-    accessContext: AccessContext,
-    dto: LadesaTypings.PerfilFindOneInputView,
-    selection?: string[] | boolean
-  ) {
+  async perfilFindByIdStrict(accessContext: AccessContext, dto: LadesaTypings.PerfilFindOneInputView, selection?: string[] | boolean) {
     const vinculo = await this.perfilFindById(accessContext, dto, selection);
 
     if (!vinculo) {
@@ -164,18 +135,9 @@ export class PerfilService {
     return vinculo;
   }
 
-  async perfilSetVinculos(
-    accessContext: AccessContext,
-    dto: LadesaTypings.PerfilUpdateOperationInput
-  ) {
-    const campus = await this.campusService.campusFindByIdSimpleStrict(
-      accessContext,
-      dto.body.campus.id
-    );
-    const usuario = await this.usuarioService.usuarioFindByIdSimpleStrict(
-      accessContext,
-      dto.body.usuario.id
-    );
+  async perfilSetVinculos(accessContext: AccessContext, dto: LadesaTypings.PerfilUpdateOperationInput) {
+    const campus = await this.campusService.campusFindByIdSimpleStrict(accessContext, dto.body.campus.id);
+    const usuario = await this.usuarioService.usuarioFindByIdSimpleStrict(accessContext, dto.body.usuario.id);
 
     const vinculosParaManter = new Set();
 
@@ -191,19 +153,13 @@ export class PerfilService {
       .getMany();
 
     for (const cargo of dto.body.cargos) {
-      const vinculoExistente = vinculosExistentesUsuarioCampus.find(
-        (vinculo) => vinculo.cargo === cargo
-      );
+      const vinculoExistente = vinculosExistentesUsuarioCampus.find((vinculo) => vinculo.cargo === cargo);
 
       if (vinculoExistente) {
         vinculosParaManter.add(vinculoExistente.id);
       }
 
-      if (
-        vinculoExistente &&
-        vinculoExistente.ativo === true &&
-        vinculoExistente.dateDeleted === null
-      ) {
+      if (vinculoExistente && vinculoExistente.ativo === true && vinculoExistente.dateDeleted === null) {
         continue;
       }
 
@@ -231,9 +187,7 @@ export class PerfilService {
       await this.vinculoRepository.save(vinculo);
     }
 
-    const vinculosParaDesativar = vinculosExistentesUsuarioCampus
-      .filter((vinculo) => vinculo.ativo)
-      .filter((vinculo) => !vinculosParaManter.has(vinculo.id));
+    const vinculosParaDesativar = vinculosExistentesUsuarioCampus.filter((vinculo) => vinculo.ativo).filter((vinculo) => !vinculosParaManter.has(vinculo.id));
 
     // DESATIVAR OUTROS VÍNCULOS
     await this.vinculoRepository
