@@ -40,8 +40,10 @@ jobs:
         with:
           install-node: "true"
 
-      - name: Generate Integrations
-        run: pnpm exec nx run-many -t generate --projects=tag:integrations;
+      - name: "Generate Integrations"
+        uses: ./.github/actions/prepare/generate
+        with:
+          workspace-generate: "true"
 
       - name: Format Everything
         run: pnpm run -w format:fix ${observe_path};
