@@ -5,7 +5,7 @@ import { SwaggerModule } from "@nestjs/swagger";
 import compression from "compression";
 import helmet from "helmet";
 import "reflect-metadata";
-import { AppModule } from "./app.module";
+import { AppModule } from "./application/app.module";
 
 async function setupApp() {
   const app = await NestFactory.create(AppModule);
@@ -19,7 +19,7 @@ async function setupApp() {
   app.use(
     helmet({
       crossOriginResourcePolicy: false,
-    }),
+    })
   );
   app.enableCors();
 

@@ -1,4 +1,4 @@
-import { ValidationFailedException } from "@/business-logic/standards";
+import { ValidationFailedException } from "@/application/standards";
 import { type ArgumentsHost, Catch, HttpException } from "@nestjs/common";
 import type { GqlExceptionFilter as NestGqlExceptionFilter } from "@nestjs/graphql";
 import type { Request, Response } from "express";

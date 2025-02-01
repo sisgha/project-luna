@@ -1,9 +1,15 @@
-import { createForbiddenExceptionForAction } from "@/business-logic/standards";
+import {
+  AuthzPolicyPublic,
+  type IAuthzStatement,
+  type IAuthzStatementFilter,
+  type IBaseAuthzFilterFn,
+  type IBaseAuthzStatementContext,
+} from "@/application/authorization";
+import { createForbiddenExceptionForAction } from "@/application/standards";
 import type { IRequestActor } from "@/infrastructure/authentication";
 import { DatabaseContextService } from "@/infrastructure/integrations/database";
 import { castArray } from "lodash";
 import type { SelectQueryBuilder } from "typeorm";
-import { AuthzPolicyPublic, type IAuthzStatement, type IAuthzStatementFilter, type IBaseAuthzFilterFn, type IBaseAuthzStatementContext } from "../../business-logic/authorization";
 import type { IAccessContext } from "./access-context.types";
 
 // TODO: fixme
@@ -14,7 +20,7 @@ export class AccessContext implements IAccessContext {
 
   constructor(
     readonly databaseContext: DatabaseContextService,
-    readonly requestActor: IRequestActor | null,
+    readonly requestActor: IRequestActor | null
   ) {
     //
   }
@@ -23,18 +29,28 @@ export class AccessContext implements IAccessContext {
     return this.#policy.statements;
   }
 
-  async applyFilter<Statement extends IAuthzStatementFilter, Action extends Statement["action"], Payload extends Statement["payload"]>(
+  async applyFilter<
+    Statement extends IAuthzStatementFilter,
+    Action extends Statement["action"],
+    Payload extends Statement["payload"]
+  >(
     action: Action,
     qb: SelectQueryBuilder<any>,
     alias?: string,
-    payload: Payload | null = null,
+    payload: Payload | null = null
   ): Promise<void> {
     const statement = this.getStatementForAction<Statement, Action>(action);
 
     if (statement) {
-      const context = this.createAuthzStatementContext<Statement, Action, Payload>(action, payload);
+      const context = this.createAuthzStatementContext<
+        Statement,
+        Action,
+        Payload
+      >(action, payload);
 
-      const filter = statement.filter as boolean | IBaseAuthzFilterFn<Action, Payload>;
+      const filter = statement.filter as
+        | boolean
+        | IBaseAuthzFilterFn<Action, Payload>;
 
       if (typeof filter === "boolean") {
         qb.andWhere(filter ? "TRUE" : "FALSE");
@@ -49,11 +65,15 @@ export class AccessContext implements IAccessContext {
     }
   }
 
-  async verifyPermission<Statement extends IAuthzStatement, Action extends Statement["action"], Payload extends Statement["payload"]>(
+  async verifyPermission<
+    Statement extends IAuthzStatement,
+    Action extends Statement["action"],
+    Payload extends Statement["payload"]
+  >(
     action: Action,
     payload: Payload,
     id: any = null,
-    qbInput: SelectQueryBuilder<any> | null = null,
+    qbInput: SelectQueryBuilder<any> | null = null
   ): Promise<boolean> {
     const statement = this.getStatementForAction<Statement, Action>(action);
 
@@ -92,24 +112,41 @@ export class AccessContext implements IAccessContext {
     return false;
   }
 
-  async ensurePermission<Statement extends IAuthzStatement, Action extends Statement["action"], Payload extends Statement["payload"]>(
+  async ensurePermission<
+    Statement extends IAuthzStatement,
+    Action extends Statement["action"],
+    Payload extends Statement["payload"]
+  >(
     action: Action,
     payload: Payload,
     id: (number | string) | null = null,
-    qb: SelectQueryBuilder<any> | null = null,
+    qb: SelectQueryBuilder<any> | null = null
   ): Promise<void> {
-    const can = await this.verifyPermission<Statement, Action, Payload>(action, payload, id, qb);
+    const can = await this.verifyPermission<Statement, Action, Payload>(
+      action,
+      payload,
+      id,
+      qb
+    );
 
     if (!can) {
       throw createForbiddenExceptionForAction<Statement, Action>(action);
     }
   }
 
-  private getStatementForAction<Statement extends IAuthzStatement, Action extends Statement["action"]>(action: Action) {
-    return (this.statements.find((statement) => statement.action === action) ?? null) as Statement | null;
+  private getStatementForAction<
+    Statement extends IAuthzStatement,
+    Action extends Statement["action"]
+  >(action: Action) {
+    return (this.statements.find((statement) => statement.action === action) ??
+      null) as Statement | null;
   }
 
-  private createAuthzStatementContext<Statement extends IAuthzStatement, Action extends Statement["action"], Payload extends Statement["payload"]>(action: Action, payload: Payload | null) {
+  private createAuthzStatementContext<
+    Statement extends IAuthzStatement,
+    Action extends Statement["action"],
+    Payload extends Statement["payload"]
+  >(action: Action, payload: Payload | null) {
     return {
       action,
       payload,
@@ -117,24 +154,34 @@ export class AccessContext implements IAccessContext {
     } as IBaseAuthzStatementContext<Action, Payload>;
   }
 
-  private getQueryBuilderForAction<Action extends IAuthzStatementFilter["action"]>(action: Action) {
+  private getQueryBuilderForAction<
+    Action extends IAuthzStatementFilter["action"]
+  >(action: Action) {
     switch (action) {
       case "estado:find": {
-        return this.databaseContext.estadoRepository.createQueryBuilder("estado");
+        return this.databaseContext.estadoRepository.createQueryBuilder(
+          "estado"
+        );
       }
 
       case "cidade:find": {
-        return this.databaseContext.cidadeRepository.createQueryBuilder("cidade");
+        return this.databaseContext.cidadeRepository.createQueryBuilder(
+          "cidade"
+        );
       }
 
       case "endereco:find": {
-        return this.databaseContext.enderecoRepository.createQueryBuilder("endereco");
+        return this.databaseContext.enderecoRepository.createQueryBuilder(
+          "endereco"
+        );
       }
 
       case "campus:find":
       case "campus:update":
       case "campus:delete": {
-        return this.databaseContext.campusRepository.createQueryBuilder("campus");
+        return this.databaseContext.campusRepository.createQueryBuilder(
+          "campus"
+        );
       }
 
       case "bloco:find":
@@ -146,23 +193,31 @@ export class AccessContext implements IAccessContext {
       case "ambiente:find":
       case "ambiente:update":
       case "ambiente:delete": {
-        return this.databaseContext.ambienteRepository.createQueryBuilder("ambiente");
+        return this.databaseContext.ambienteRepository.createQueryBuilder(
+          "ambiente"
+        );
       }
 
       case "usuario:find":
       case "usuario:update":
       case "usuario:delete": {
-        return this.databaseContext.usuarioRepository.createQueryBuilder("usuario");
+        return this.databaseContext.usuarioRepository.createQueryBuilder(
+          "usuario"
+        );
       }
 
       case "modalidade:find":
       case "modalidade:update":
       case "modalidade:delete": {
-        return this.databaseContext.modalidadeRepository.createQueryBuilder("modalidade");
+        return this.databaseContext.modalidadeRepository.createQueryBuilder(
+          "modalidade"
+        );
       }
 
       case "vinculo:find": {
-        return this.databaseContext.perfilRepository.createQueryBuilder("vinculo");
+        return this.databaseContext.perfilRepository.createQueryBuilder(
+          "vinculo"
+        );
       }
 
       case "curso:update":
@@ -174,7 +229,9 @@ export class AccessContext implements IAccessContext {
       case "disciplina:update":
       case "disciplina:delete":
       case "disciplina:find": {
-        return this.databaseContext.disciplinaRepository.createQueryBuilder("disciplina");
+        return this.databaseContext.disciplinaRepository.createQueryBuilder(
+          "disciplina"
+        );
       }
 
       case "turma:update":
@@ -185,19 +242,25 @@ export class AccessContext implements IAccessContext {
       case "diario:update":
       case "diario:delete":
       case "diario:find": {
-        return this.databaseContext.diarioRepository.createQueryBuilder("diario");
+        return this.databaseContext.diarioRepository.createQueryBuilder(
+          "diario"
+        );
       }
 
       case "reserva:update":
       case "reserva:delete":
       case "reserva:find": {
-        return this.databaseContext.reservaRepository.createQueryBuilder("reserva");
+        return this.databaseContext.reservaRepository.createQueryBuilder(
+          "reserva"
+        );
       }
 
       case "calendario_letivo:update":
       case "calendario_letivo:delete":
       case "calendario_letivo:find": {
-        return this.databaseContext.calendarioLetivoRepository.createQueryBuilder("calendarioLetivo");
+        return this.databaseContext.calendarioLetivoRepository.createQueryBuilder(
+          "calendarioLetivo"
+        );
       }
 
       case "aula:update":
@@ -209,31 +272,41 @@ export class AccessContext implements IAccessContext {
       case "dia_calendario:update":
       case "dia_calendario:delete":
       case "dia_calendario:find": {
-        return this.databaseContext.diaCalendarioRepository.createQueryBuilder("diaCalendario");
+        return this.databaseContext.diaCalendarioRepository.createQueryBuilder(
+          "diaCalendario"
+        );
       }
 
       case "disponibilidade:update":
       case "disponibilidade:delete":
       case "disponibilidade:find": {
-        return this.databaseContext.disponibilidadeRepository.createQueryBuilder("disponibilidade");
+        return this.databaseContext.disponibilidadeRepository.createQueryBuilder(
+          "disponibilidade"
+        );
       }
 
       case "diario_preferencia_agrupamento:update":
       case "diario_preferencia_agrupamento:delete":
       case "diario_preferencia_agrupamento:find": {
-        return this.databaseContext.diarioPreferenciaAgrupamentoRepository.createQueryBuilder("diario_preferencia_agrupamento");
+        return this.databaseContext.diarioPreferenciaAgrupamentoRepository.createQueryBuilder(
+          "diario_preferencia_agrupamento"
+        );
       }
 
       case "diario_professor:update":
       case "diario_professor:delete":
       case "diario_professor:find": {
-        return this.databaseContext.diarioProfessorRepository.createQueryBuilder("diario_professor");
+        return this.databaseContext.diarioProfessorRepository.createQueryBuilder(
+          "diario_professor"
+        );
       }
 
       case "disponibilidade_dia:update":
       case "disponibilidade_dia:delete":
       case "disponibilidade_dia:find": {
-        return this.databaseContext.disponibilidadeDiaRepository.createQueryBuilder("disponibilidade_dia");
+        return this.databaseContext.disponibilidadeDiaRepository.createQueryBuilder(
+          "disponibilidade_dia"
+        );
       }
 
       case "etapa:update":
@@ -245,65 +318,87 @@ export class AccessContext implements IAccessContext {
       case "evento:delete":
       case "evento:update":
       case "evento:find": {
-        return this.databaseContext.eventoRepository.createQueryBuilder("evento");
+        return this.databaseContext.eventoRepository.createQueryBuilder(
+          "evento"
+        );
       }
 
       case "grade_horario_oferta_formacao:delete":
       case "grade_horario_oferta_formacao:update":
       case "grade_horario_oferta_formacao:find": {
-        return this.databaseContext.gradeHorarioOfertaFormacaoRepository.createQueryBuilder("grade_horario_oferta_formacao");
+        return this.databaseContext.gradeHorarioOfertaFormacaoRepository.createQueryBuilder(
+          "grade_horario_oferta_formacao"
+        );
       }
 
       case "grade_horario_oferta_formacao_intervalo_de_tempo:delete":
       case "grade_horario_oferta_formacao_intervalo_de_tempo:update":
       case "grade_horario_oferta_formacao_intervalo_de_tempo:find": {
-        return this.databaseContext.gradeHorarioOfertaFormacaoIntervaloDeTempoRepository.createQueryBuilder("grade_horario_oferta_formacao_intervalo_de_tempo");
+        return this.databaseContext.gradeHorarioOfertaFormacaoIntervaloDeTempoRepository.createQueryBuilder(
+          "grade_horario_oferta_formacao_intervalo_de_tempo"
+        );
       }
 
       case "horario_gerado:delete":
       case "horario_gerado:update":
       case "horario_gerado:find": {
-        return this.databaseContext.horarioGeradoRepository.createQueryBuilder("horario_gerado");
+        return this.databaseContext.horarioGeradoRepository.createQueryBuilder(
+          "horario_gerado"
+        );
       }
 
       case "horario_gerado_aula:delete":
       case "horario_gerado_aula:update":
       case "horario_gerado_aula:find": {
-        return this.databaseContext.horarioGeradoAulaRepository.createQueryBuilder("horario_gerado_aula");
+        return this.databaseContext.horarioGeradoAulaRepository.createQueryBuilder(
+          "horario_gerado_aula"
+        );
       }
 
       case "nivel_formacao:delete":
       case "nivel_formacao:update":
       case "nivel_formacao:find": {
-        return this.databaseContext.nivelFormacaoRepository.createQueryBuilder("nivel_formacao");
+        return this.databaseContext.nivelFormacaoRepository.createQueryBuilder(
+          "nivel_formacao"
+        );
       }
 
       case "oferta_formacao:delete":
       case "oferta_formacao:update":
       case "oferta_formacao:find": {
-        return this.databaseContext.ofertaFormacaoRepository.createQueryBuilder("oferta_formacao");
+        return this.databaseContext.ofertaFormacaoRepository.createQueryBuilder(
+          "oferta_formacao"
+        );
       }
 
       case "oferta_formacao_nivel_formacao:delete":
       case "oferta_formacao_nivel_formacao:update":
       case "oferta_formacao_nivel_formacao:find": {
-        return this.databaseContext.ofertaFormacaoNivelFormacaoRepository.createQueryBuilder("oferta_formacao_nivel_formacao");
+        return this.databaseContext.ofertaFormacaoNivelFormacaoRepository.createQueryBuilder(
+          "oferta_formacao_nivel_formacao"
+        );
       }
 
       case "professor_disponibilidade:delete":
       case "professor_disponibilidade:update":
       case "professor_disponibilidade:find": {
-        return this.databaseContext.professorDisponibilidadeRepository.createQueryBuilder("professor_disponibilidade");
+        return this.databaseContext.professorDisponibilidadeRepository.createQueryBuilder(
+          "professor_disponibilidade"
+        );
       }
 
       case "turma_disponibilidade:delete":
       case "turma_disponibilidade:update":
       case "turma_disponibilidade:find": {
-        return this.databaseContext.turmaDisponibilidadeRepository.createQueryBuilder("turma_disponibilidade");
+        return this.databaseContext.turmaDisponibilidadeRepository.createQueryBuilder(
+          "turma_disponibilidade"
+        );
       }
 
       default: {
-        throw new TypeError(`getQueryBuilderForAction: dont have repository for action: ${action}`);
+        throw new TypeError(
+          `getQueryBuilderForAction: dont have repository for action: ${action}`
+        );
       }
     }
   }
