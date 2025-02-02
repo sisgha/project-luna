@@ -65,6 +65,7 @@ export class CidadeService {
     // =========================================================
 
     qb.select([]);
+
     QbEfficientLoad(LadesaTypings.Tokens.CidadeView, qb, aliasCidade, selection);
 
     // =========================================================

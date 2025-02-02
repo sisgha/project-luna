@@ -43,7 +43,7 @@ export function SetupSwaggerDocument(configService: IConfig | null = null) {
 
   config.addTag("turmas", "Ensino Discente / Turmas");
   config.addTag("diarios", "Ensino Discente / Diarios");
-  config.addTag("diarios-professor", "Ensino Discente / Professores em Diários");
+  config.addTag("diarios-professores", "Ensino Discente / Professores em Diários");
   config.addTag("aulas", "Ensino Discente / Aulas");
 
   if (configService) {
