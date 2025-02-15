@@ -1,5 +1,12 @@
 import * as LadesaTypings from "@ladesa-ro/especificacao";
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, Relation } from "typeorm";
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  type Relation,
+} from "typeorm";
 import { UsuarioEntity } from "../01-autenticacao/usuario.entity";
 import { CampusEntity } from "../02-ambientes/campus.entity";
 
@@ -18,17 +25,11 @@ export class PerfilEntity implements LadesaTypings.Perfil {
 
   //
 
-  @ManyToOne(
-    () => CampusEntity,
-    (campus) => campus.vinculos,
-  )
+  @ManyToOne(() => CampusEntity, (campus) => campus.vinculos)
   @JoinColumn({ name: "id_campus_fk" })
   campus!: Relation<CampusEntity>;
 
-  @ManyToOne(
-    () => UsuarioEntity,
-    (usuario) => usuario.vinculos,
-  )
+  @ManyToOne(() => UsuarioEntity, (usuario) => usuario.vinculos)
   @JoinColumn({ name: "id_usuario_fk" })
   usuario!: Relation<UsuarioEntity>;
 

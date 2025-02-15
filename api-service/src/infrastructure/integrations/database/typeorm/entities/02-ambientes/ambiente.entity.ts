@@ -1,5 +1,12 @@
 import * as LadesaTypings from "@ladesa-ro/especificacao";
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  type Relation,
+} from "typeorm";
 import { ImagemEntity } from "../00-00-base/imagem.entity";
 import { BlocoEntity } from "./bloco.entity";
 
@@ -33,7 +40,7 @@ export class AmbienteEntity implements LadesaTypings.Ambiente {
 
   @ManyToOne(() => ImagemEntity)
   @JoinColumn({ name: "id_imagem_capa_fk" })
-  imagemCapa!: ImagemEntity | null;
+  imagemCapa!: Relation<ImagemEntity> | null;
 
   //
 

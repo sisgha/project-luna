@@ -4,10 +4,8 @@
 
     "lib": ["esnext"],
     "target": "es2022",
-    "module": "CommonJS",
-
+    "module": "NodeNext",
     "resolveJsonModule": true,
-
     "removeComments": true,
 
     "strictNullChecks": true,
