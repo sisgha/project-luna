@@ -42,7 +42,7 @@ jobs:
       - name: Install
         uses: ./.github/actions/prepare/install
         with:
-          install-node: "true"
+          install-bun: "true"
 
       - name: Run changesets action
         uses: changesets/action@v1
@@ -52,8 +52,8 @@ jobs:
           createGithubReleases: false
           title: "chore: version packages"
           commit: "chore: version packages"
-          publish: pnpm run -w changeset:tag
-          version: pnpm run -w changeset:version
+          publish: bun run --filter '@ladesa-ro/api.root' changeset:tag
+          version: bun run --filter '@ladesa-ro/api.root' changeset:version
         env:
           NPM_CONFIG_PROVENANCE: true
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

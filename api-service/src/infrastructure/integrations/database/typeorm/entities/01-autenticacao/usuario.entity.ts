@@ -1,13 +1,5 @@
 import * as LadesaTypings from "@ladesa-ro/especificacao";
-import {
-  Column,
-  Entity,
-  JoinColumn,
-  ManyToOne,
-  OneToMany,
-  PrimaryGeneratedColumn,
-  type Relation,
-} from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, type Relation } from "typeorm";
 import { ImagemEntity } from "../00-00-base/imagem.entity";
 import { PerfilEntity } from "../03-autorizacao/perfil.entity";
 
@@ -42,7 +34,10 @@ export class UsuarioEntity implements LadesaTypings.Usuario {
 
   //
 
-  @OneToMany(() => PerfilEntity, (vinculo) => vinculo.usuario)
+  @OneToMany(
+    () => PerfilEntity,
+    (vinculo) => vinculo.usuario,
+  )
   vinculos!: PerfilEntity[];
 
   //

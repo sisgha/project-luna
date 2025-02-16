@@ -1,16 +1,7 @@
 import { ModalidadeEntity } from "@/infrastructure/integrations/database/typeorm/entities/04-ensino-institucional/modalidade.entity";
 import { OfertaFormacaoNivelFormacaoEntity } from "@/infrastructure/integrations/database/typeorm/entities/04-ensino-institucional/oferta-formacao-nivel-formacao.entity";
 import * as LadesaTypings from "@ladesa-ro/especificacao";
-import {
-  AfterLoad,
-  Column,
-  Entity,
-  JoinColumn,
-  ManyToOne,
-  OneToMany,
-  PrimaryGeneratedColumn,
-  type Relation,
-} from "typeorm";
+import { AfterLoad, Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, type Relation } from "typeorm";
 
 @Entity("oferta_formacao")
 export class OfertaFormacaoEntity implements LadesaTypings.OfertaFormacao {
@@ -31,7 +22,7 @@ export class OfertaFormacaoEntity implements LadesaTypings.OfertaFormacao {
 
   @OneToMany(
     () => OfertaFormacaoNivelFormacaoEntity,
-    (ofeForNivFor) => ofeForNivFor.ofertaFormacao
+    (ofeForNivFor) => ofeForNivFor.ofertaFormacao,
   )
   ofertaFormacaoNiveisFormacoes!: Relation<LadesaTypings.OfertaFormacaoNivelFormacao>[];
 
@@ -39,9 +30,7 @@ export class OfertaFormacaoEntity implements LadesaTypings.OfertaFormacao {
 
   @AfterLoad()
   updateNiveisFormacoes() {
-    this.niveisFormacoes = this.ofertaFormacaoNiveisFormacoes?.map(
-      ({ nivelFormacao }) => nivelFormacao
-    );
+    this.niveisFormacoes = this.ofertaFormacaoNiveisFormacoes?.map(({ nivelFormacao }) => nivelFormacao);
   }
 
   //

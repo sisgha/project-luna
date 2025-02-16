@@ -7,11 +7,12 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nx run build",
-    "test": "pnpm exec tsc --noEmit",
+    "test": "tsc --noEmit",
     "dev": "tsc -p tsconfig.json --watch",
     "generate": "nx run generate",
     "generate:client": "nx run generate:client",
-    "cleanup:generated": "rimraf ./src/http/generated"
+    "cleanup:generated": "rimraf ./src/http/generated",
+    "pkg:publish": "bun publish --auth-type legacy"
   },
   "devDependencies": {
     "@hey-api/openapi-ts": "^0.53.12",

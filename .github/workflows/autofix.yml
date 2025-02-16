@@ -38,7 +38,7 @@ jobs:
       - name: Install
         uses: ./.github/actions/prepare/install
         with:
-          install-node: "true"
+          install-bun: "true"
 
       - name: "Generate Integrations"
         uses: ./.github/actions/prepare/generate
@@ -46,7 +46,7 @@ jobs:
           workspace-generate: "true"
 
       - name: Format Everything
-        run: pnpm run -w format:fix ${observe_path};
+        run: bun run --filter '@ladesa-ro/api.root' format:fix ${observe_path};
 
       - name: Check if has changes
         run: |

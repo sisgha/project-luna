@@ -1,12 +1,5 @@
 import * as LadesaTypings from "@ladesa-ro/especificacao";
-import {
-  Column,
-  Entity,
-  JoinColumn,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-  type Relation,
-} from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, type Relation } from "typeorm";
 import { ImagemEntity } from "../00-00-base/imagem.entity";
 import { BlocoEntity } from "./bloco.entity";
 

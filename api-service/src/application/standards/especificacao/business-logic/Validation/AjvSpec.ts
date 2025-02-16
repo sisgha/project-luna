@@ -38,7 +38,7 @@ const setupAjvSpec = async () => {
       keyword: keywork,
       code() {
         if (!logKeywords.has(keywork)) {
-          console.warn(`TODO: validate keyword ${keywork}`);
+          console.error(`TODO: validate keyword ${keywork}`);
 
           logKeywords.add(keywork);
         }

@@ -14,4 +14,4 @@ runs:
     - name: "Generate all"
       if: ${{ inputs.workspace-generate == 'true' }}
       shell: bash
-      run: pnpm run -w generate:all
+      run: bun run --filter '@ladesa-ro/api.root' generate:all

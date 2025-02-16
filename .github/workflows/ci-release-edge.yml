@@ -25,7 +25,7 @@ jobs:
       - name: Install
         uses: ./.github/actions/prepare/install
         with:
-          install-node: "true"
+          install-bun: "true"
 
       - name: "generate:all"
         uses: ./.github/actions/prepare/generate
@@ -38,4 +38,4 @@ jobs:
           workspace-build: "true"
 
       - name: "Continuos Release: publish to pkg.pr.new"
-        run: pnpx pkg-pr-new publish --comment=update './integrations/npm/api-client-fetch'
+        run: bunx pkg-pr-new publish --comment=update './integrations/npm/api-client-fetch'

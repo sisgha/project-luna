@@ -14,4 +14,4 @@ runs:
     - name: "Build all"
       if: ${{ inputs.workspace-build == 'true' }}
       shell: bash
-      run: pnpm run -w build:all
+      run: bun run --filter '@ladesa-ro/api.root' build:all

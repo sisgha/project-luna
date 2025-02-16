@@ -28,7 +28,7 @@ jobs:
       - name: It must install the dependencies
         uses: ./.github/actions/prepare/install
         with:
-          install-node: "true"
+          install-bun: "true"
 
       - name: "generate:all should work"
         uses: ./.github/actions/prepare/generate
@@ -44,7 +44,7 @@ jobs:
         run: |
           git stash -u;
 
-          pnpm run -w code-static:check;
+          bun run --filter '@ladesa-ro/api.root' code-static:check;
 
           if [ `git stash list | wc -l` -gt 0 ]; then
             git stash pop;
@@ -58,4 +58,4 @@ jobs:
           fi
 
       - name: Require changesets
-        run: pnpm exec changeset status --since=origin/development
+        run: bunx changeset status --since=origin/development

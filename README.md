@@ -77,7 +77,7 @@ O projeto conta com um [arquivo make](./Makefile) que comporta scrips destinados
   - Após este processo, talvez você queira executar dentro do shell do container:
 
     ```sh
-    pnpm run start:dev;
+    bun run start:dev;
     ```
 
 - `down`

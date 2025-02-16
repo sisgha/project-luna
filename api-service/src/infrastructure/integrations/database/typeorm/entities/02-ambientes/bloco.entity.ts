@@ -1,13 +1,5 @@
 import * as LadesaTypings from "@ladesa-ro/especificacao";
-import {
-  Column,
-  Entity,
-  JoinColumn,
-  ManyToOne,
-  OneToMany,
-  PrimaryGeneratedColumn,
-  type Relation,
-} from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, type Relation } from "typeorm";
 import { ImagemEntity } from "../00-00-base/imagem.entity";
 import { AmbienteEntity } from "./ambiente.entity";
 import { CampusEntity } from "./campus.entity";
@@ -37,7 +29,10 @@ export class BlocoEntity implements LadesaTypings.Bloco {
 
   //
 
-  @OneToMany(() => AmbienteEntity, (ambiente) => ambiente.bloco)
+  @OneToMany(
+    () => AmbienteEntity,
+    (ambiente) => ambiente.bloco,
+  )
   ambientes!: AmbienteEntity[];
 
   //

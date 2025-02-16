@@ -7,22 +7,22 @@ inputs:
     required: false
     default: "."
 
-  node-version:
-    description: "The node version to setup"
+  bun-version:
+    description: "The bun version to setup"
     required: true
-    default: "23"
+    default: "latest"
 
   node-registry-url:
     description: "Define registry-url"
     required: false
 
-  install-node:
-    description: "node.js: install"
+  install-bun:
+    description: "bun.js: install"
     required: false
     default: "true"
 
-  install-node-dependencies:
-    description: "node.js: install all dependencies"
+  install-bun-dependencies:
+    description: "bun.js: install all dependencies"
     required: false
     default: "true"
 
@@ -45,27 +45,15 @@ runs:
           nx-${{ github.ref_name }}-
           nx-
 
-    - name: Install pnpm
-      uses: pnpm/action-setup@v4
-      if: ${{ inputs.install-node == 'true' }}
+    - uses: oven-sh/setup-bun@v2
       with:
-        run_install: false
+        bun-version: ${{ inputs.bun-version }}
 
-    - name: "node.js: use ${{ inputs.node-version }}"
-      if: ${{ inputs.install-node == 'true' }}
-      uses: actions/setup-node@v4
-      with:
-        cache: "pnpm"
-        node-version: ${{ inputs.node-version }}
-        registry-url: ${{ inputs.node-registry-url }}
-      env:
-        HUSKY: "0"
-
-    - name: "node.js: install dependencies"
-      if: ${{ inputs.install-node == 'true' }} && ${{ inputs.install-node-dependencies == 'true' }}
+    - name: "install dependencies"
+      if: ${{ inputs.install-bun == 'true' }} && ${{ inputs.install-bun-dependencies == 'true' }}
       working-directory: ${{ inputs.working-directory }}
       shell: bash
-      run: pnpm install --frozen-lockfile
+      run: bun install --frozen-lockfile
       env:
         HUSKY: "0"
 
