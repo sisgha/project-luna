@@ -13,7 +13,8 @@ setup:
 	docker compose $(compose_options) build
 
 prepare:
-	docker compose $(compose_options) exec $(d_container_app) bash -c "corepack install && pnpm install && pnpm exec nx daemon --start";
+	# docker compose $(compose_options) exec $(d_container_app) bash -c "bun install && bunx nx daemon --start";
+	docker compose $(compose_options) exec $(d_container_app) bash -c "ls -la";
 
 up:
 	make setup;
@@ -36,7 +37,7 @@ start:
 		-u node \
 		--no-TTY \
 		-d $(d_container_app) \
-			bash -c "pnpm install && pnpm run --filter @ladesa-ro/api.service migration:run && pnpm run --filter @ladesa-ro/api.service start:dev" \&;
+			bash -c "bun install && bun run --filter '@ladesa-ro/api.service' migration:run && bun run --filter @ladesa-ro/api.service start:dev" \&;
 
 logs:
 	make setup;

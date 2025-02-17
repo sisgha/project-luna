@@ -1,5 +1,5 @@
 import * as LadesaTypings from "@ladesa-ro/especificacao";
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, Relation } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, type Relation } from "typeorm";
 import { ImagemEntity } from "../00-00-base/imagem.entity";
 import { AmbienteEntity } from "../02-ambientes/ambiente.entity";
 import { DisciplinaEntity } from "../04-ensino-institucional/disciplina.entity";

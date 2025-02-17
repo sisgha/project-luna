@@ -4,42 +4,6 @@
   "root": "api-service",
   "sourceRoot": "{projectRoot}/src",
   "implicitDependencies": [],
-  "namedInputs": {
-    "default": ["{projectRoot}/src/**/*", "{projectRoot}/{package.json,tsconfig*.json}"],
-    "nestjs": ["default", "{projectRoot}/{nest-cli.json}"]
-  },
-  "targets": {
-    "build:nest": {
-      "executor": "nx:run-commands",
-      "cache": true,
-      "inputs": ["nestjs"],
-      "options": {
-        "cwd": "{projectRoot}",
-        "command": "nest build"
-      },
-      "outputs": ["{projectRoot}/dist"],
-      "dependsOn": []
-    },
-    "build:openapi-json": {
-      "executor": "nx:run-commands",
-      "cache": true,
-      "inputs": ["nestjs"],
-      "options": {
-        "cwd": "{projectRoot}",
-        "command": "OUT_FILE=./generated/openapi.v3.json pnpm run --silent generate:openapi"
-      },
-      "outputs": ["{projectRoot}/generated"],
-      "dependsOn": ["build:nest"]
-    },
-    "build": {
-      "executor": "nx:run-commands",
-      "cache": false,
-      "inputs": [],
-      "options": {
-        "cwd": "{projectRoot}",
-        "command": "nx run-many --targets=build:nest,build:openapi-json"
-      },
-      "dependsOn": []
-    }
-  }
+  "namedInputs": {},
+  "targets": {}
 }

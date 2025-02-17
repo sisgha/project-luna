@@ -21,7 +21,7 @@ runs:
     - name: Install
       uses: ./.github/actions/prepare/install
       with:
-        install-node: "true"
+        install-bun: "true"
 
     - name: Build
       uses: ./.github/actions/prepare/build
@@ -35,4 +35,4 @@ runs:
 
     - name: Publish
       shell: bash
-      run: pnpm publish -r --no-git-checks --tag ${{ inputs.tag }}
+      run: bun run --filter "*" --no-clear-screen --elide-lines 0 pkg:publish

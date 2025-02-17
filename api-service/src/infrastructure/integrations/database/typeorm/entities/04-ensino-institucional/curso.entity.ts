@@ -1,6 +1,6 @@
 import { OfertaFormacaoEntity } from "@/infrastructure/integrations/database/typeorm/entities/04-ensino-institucional/oferta-formacao.entity";
 import * as LadesaTypings from "@ladesa-ro/especificacao";
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, type Relation } from "typeorm";
 import { ImagemEntity } from "../00-00-base/imagem.entity";
 import { CampusEntity } from "../02-ambientes/campus.entity";
 
@@ -29,7 +29,7 @@ export class CursoEntity implements LadesaTypings.Curso {
 
   @ManyToOne(() => ImagemEntity)
   @JoinColumn({ name: "id_imagem_capa_fk" })
-  imagemCapa!: ImagemEntity | null;
+  imagemCapa!: Relation<ImagemEntity> | null;
 
   //
 

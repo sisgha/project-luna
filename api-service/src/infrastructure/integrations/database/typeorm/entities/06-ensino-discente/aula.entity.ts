@@ -1,6 +1,6 @@
 import { IntervaloDeTempoEntity } from "@/infrastructure/integrations/database/typeorm/entities/00-00-base";
 import * as LadesaTypings from "@ladesa-ro/especificacao";
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, type Relation } from "typeorm";
 import { DiarioEntity } from ".";
 import { AmbienteEntity } from "../02-ambientes/ambiente.entity";
 
@@ -27,7 +27,7 @@ export class AulaEntity implements LadesaTypings.Aula {
 
   @ManyToOne(() => DiarioEntity)
   @JoinColumn({ name: "id_diario_fk" })
-  diario!: DiarioEntity;
+  diario!: Relation<DiarioEntity>;
 
   @ManyToOne(() => AmbienteEntity)
   @JoinColumn({ name: "id_ambiente_fk" })

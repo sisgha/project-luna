@@ -1,11 +1,15 @@
 {
-  "name": "@ladesa-ro/api",
+  "name": "@ladesa-ro/api.root",
   "version": "1.0.0-next.30",
   "private": true,
+  "engines": {
+    "bun": "1"
+  },
+  "workspaces": [".", "api-service", "docs/*", "integrations/npm/*", "integrations/openapi-json"],
   "scripts": {
     "build:all": "nx run-many -t build",
     "generate:all": "nx run-many -t generate",
-    "start:dev": "pnpm run --filter @ladesa-ro/api.service start:dev",
+    "start:dev": "bun run --filter '@ladesa-ro/api.service' start:dev",
     "lint:check": "biome lint --no-errors-on-unmatched",
     "lint:fix": "biome lint --write --no-errors-on-unmatched",
     "format:check": "biome format --no-errors-on-unmatched",
@@ -15,12 +19,13 @@
     "changeset:add": "changeset add",
     "changeset:tag": "changeset tag",
     "changeset:version": "changeset version",
-    "chore:update": "corepack use pnpm@latest && pnpm --filter=@ladesa-ro/api.service exec corepack use pnpm@latest && pnpm -r update && pnpm run -w code-static:fix"
+    "chore:update": "bun update && bun run code-static:fix"
   },
   "dependencies": {
     "@biomejs/biome": "1.9.4",
     "@changesets/cli": "^2.27.12",
+    "@types/bun": "^1.2.2",
     "nx": "20.3.2"
   },
-  "packageManager": "pnpm@10.3.0+sha512.ee592eda8815a8a293c206bb0917c4bb0ff274c50def7cbc17be05ec641fc2d1b02490ce660061356bd0d126a4d7eb2ec8830e6959fb8a447571c631d5a2442d"
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }

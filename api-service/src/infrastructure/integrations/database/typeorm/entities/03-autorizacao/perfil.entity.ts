@@ -1,5 +1,5 @@
 import * as LadesaTypings from "@ladesa-ro/especificacao";
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, Relation } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, type Relation } from "typeorm";
 import { UsuarioEntity } from "../01-autenticacao/usuario.entity";
 import { CampusEntity } from "../02-ambientes/campus.entity";
 

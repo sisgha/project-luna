@@ -1,6 +1,0 @@
-packages:
-  - .
-  - api-service
-  - docs/*
-  - integrations/npm/*
-  - integrations/openapi-json

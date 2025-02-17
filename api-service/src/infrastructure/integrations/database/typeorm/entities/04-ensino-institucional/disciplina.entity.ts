@@ -1,7 +1,7 @@
 import { ImagemEntity } from "@/infrastructure/integrations/database/typeorm/entities/00-00-base";
 import { DiarioEntity } from "@/infrastructure/integrations/database/typeorm/entities/06-ensino-discente";
 import * as LadesaTypings from "@ladesa-ro/especificacao";
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, type Relation } from "typeorm";
 
 @Entity("disciplina")
 export class DisciplinaEntity implements LadesaTypings.Disciplina {
@@ -23,7 +23,7 @@ export class DisciplinaEntity implements LadesaTypings.Disciplina {
 
   @ManyToOne(() => ImagemEntity)
   @JoinColumn({ name: "id_imagem_capa_fk" })
-  imagemCapa!: ImagemEntity | null;
+  imagemCapa!: Relation<ImagemEntity> | null;
 
   @OneToMany(
     () => DiarioEntity,

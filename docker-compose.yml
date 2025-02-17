@@ -3,11 +3,11 @@ services:
     build:
       context: .
       target: base
-    user: node
-    command: sh -c "corepack install; sleep infinity"
+    user: root
+    command: sh -c "sleep infinity"
     container_name: ladesa-api
-    # working_dir: /workspaces/ldsa/api/api-service/
-    working_dir: /workspaces/ldsa/api/
+    # working_dir: /var/lib/ladesa/.sources/apiapi-service/
+    working_dir: /var/lib/ladesa/.sources/api
     depends_on:
       - ladesa-api-db
     networks:
@@ -16,7 +16,7 @@ services:
       - 3701:3701
       - 9229:9229
     volumes:
-      - ./:/workspaces/ldsa/api:cached
+      - ./:/var/lib/ladesa/.sources/api
       - ./api-service/volumes/uploaded:/container/uploaded
     environment:
       - STORAGE_PATH=/container/uploaded

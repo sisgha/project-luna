@@ -1,26 +1,35 @@
 #!/usr/bin/env tsx
+import { parseArgs } from "util";
 import { buildOpenApiFile } from "./core/build-openapi-file";
 import { Options } from "./typings/options";
 
-const logger = {
-  log: console.error.bind(console),
-};
+async function main() {
+  const { values } = parseArgs({
+    args: Bun.argv,
+    options: {
+      apiPrefix: {
+        type: "string",
+        default: "/",
+      },
+      outFile: {
+        type: "string",
+        default: `./generated-${Date.now()}.json`,
+      },
+    },
+    strict: true,
+    allowPositionals: true,
+  });
 
-async function main(options: Options) {
-  logger.log(`> Gerando JSON "${options.outFile}" com a especificação OpenAPI/Swagger.`);
+  const options: Options = {
+    apiPrefix: {
+      path: values.apiPrefix,
+      exclude: ["health"],
+    },
+
+    outFile: values.outFile,
+  };
 
   await buildOpenApiFile(options);
-
-  logger.log("> Gerado com sucesso.");
 }
 
-const options: Options = {
-  apiPrefix: {
-    path: process.env.API_PREFIX ?? "/",
-    exclude: ["health"],
-  },
-
-  outFile: process.env.OUT_FILE ?? "/tmp/generated.json",
-};
-
-main(options);
+main();

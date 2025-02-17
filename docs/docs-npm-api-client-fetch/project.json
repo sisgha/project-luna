@@ -46,7 +46,7 @@
 
       "options": {
         "cwd": "{projectRoot}",
-        "commands": ["pnpm run watch", "pnpm run serve"],
+        "commands": ["bun run watch", "bun run serve"],
         "parallel": true
       },
 
