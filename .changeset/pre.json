@@ -2,7 +2,7 @@
   "mode": "pre",
   "tag": "next",
   "initialVersions": {
-    "@ladesa-ro/api": "1.0.0-alpha.27",
+    "@ladesa-ro/api.root": "1.0.0-alpha.27",
     "@ladesa-ro/api.service": "1.0.0-alpha.27",
     "@ladesa-ro/api-client-fetch": "1.0.0-alpha.27",
     "@ladesa-ro/api-client-fetch.docs": "1.0.0-alpha.27",

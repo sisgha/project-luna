@@ -1,5 +1,5 @@
 ---
-"@ladesa-ro/api": minor
+"@ladesa-ro/api.root": minor
 "@ladesa-ro/api.service": minor
 "@ladesa-ro/api-client-fetch": minor
 "@ladesa-ro/api-client-fetch.docs": minor
