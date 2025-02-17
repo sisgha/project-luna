@@ -1,40 +1,32 @@
-name: "Publish to the NuGet registry"
+name: "publish packages to the npm registry"
 description: "This action builds and pushes the dotnet libraries to nuget regitry."
 
 inputs:
-  npm-token:
+  auth-token:
     required: true
-    description: "NPM API Token for publish packages."
+    description: "npm api token for publish packages."
   tag:
     required: true
-    description: "Publish tag."
+    description: "publish tag"
     default: latest
 
 runs:
   using: "composite"
 
   steps:
-    - name: Print Tag
-      shell: bash
-      run: echo ${{ github.ref_name }}
-
-    - name: Install
+    - name: install dependencies
       uses: ./.github/actions/prepare/install
       with:
         install-bun: "true"
 
-    - name: Build
+    - name: build
       uses: ./.github/actions/prepare/build
       with:
         workspace-build: "true"
 
-    - name: Prepare NPM token
-      uses: ./.github/actions/prepare/npm-token
-      with:
-        npm-token: ${{ inputs.npm-token }}
-
-    - name: Publish
+    - name: publish npm packages
       shell: bash
-      run: bun run --filter "*" --no-clear-screen --elide-lines 0 pkg:publish
+      run: bunx nx release publish --tag ${{ inputs.tag }}
       env:
-        PUBLISH_TAG: ${{ inputs.tag }}
+        NODE_AUTH_TOKEN: ${{ inputs.auth-token }}
+        NPM_CONFIG_PROVENANCE: true
