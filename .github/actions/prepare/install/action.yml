@@ -1,5 +1,5 @@
-name: "Prepare: Install"
-description: "Prepares the repo by installing dependencies"
+name: "prepare: install dependencies"
+description: "prepares the repo by installing dependencies"
 
 inputs:
   working-directory:
@@ -31,7 +31,7 @@ runs:
       working-directory: ${{ inputs.working-directory }}
       run: echo ${{ github.ref }}
 
-    - name: Nx Cache
+    - name: nx cache
       id: nx-cache
       uses: actions/cache@v4
       with:
@@ -43,7 +43,6 @@ runs:
 
     - uses: oven-sh/setup-bun@v2
       with:
-        # bun-version: ${{ inputs.bun-version }}
         bun-version-file: ".bun-version"
 
     - name: "install dependencies"

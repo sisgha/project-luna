@@ -1,5 +1,5 @@
-name: "Prepare: Build"
-description: "Prepares the repo for a job by running the build"
+name: "prepare: build"
+description: "prepares the repo for a job by running the build"
 
 inputs:
   workspace-build:
@@ -11,7 +11,7 @@ runs:
   using: "composite"
 
   steps:
-    - name: "Build all"
+    - name: "build:all"
       if: ${{ inputs.workspace-build == 'true' }}
       shell: bash
-      run: bun run --filter '@ladesa-ro/api.root' build:all
+      run: bunx nx run @ladesa-ro/api.root:build:all

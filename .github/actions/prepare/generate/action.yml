@@ -1,5 +1,5 @@
-name: "Prepare: Generate"
-description: "Prepares the repo for a job by running the generate"
+name: "prepare: generate"
+description: "prepares the repo for a job by running the generate"
 
 inputs:
   workspace-generate:
@@ -11,7 +11,7 @@ runs:
   using: "composite"
 
   steps:
-    - name: "Generate all"
+    - name: "generate all"
       if: ${{ inputs.workspace-generate == 'true' }}
       shell: bash
-      run: bun run --filter '@ladesa-ro/api.root' generate:all
+      run: bunx nx run @ladesa-ro/api.root:generate:all

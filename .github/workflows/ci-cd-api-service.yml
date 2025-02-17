@@ -79,10 +79,10 @@ jobs:
       url: ${{ vars.DEPLOY_URL }}
 
     steps:
-      - name: Checkout code
+      - name: checkout
         uses: actions/checkout@v4
 
-      - name: Determine Infisical env-slug
+      - name: determine infisical env-slug
         env:
           SLUG_DEV: ${{ secrets.INFISICAL_ENV_SLUG_DEV }}
           SLUG_PROD: ${{ secrets.INFISICAL_ENV_SLUG_PROD }}

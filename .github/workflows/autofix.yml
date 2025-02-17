@@ -1,4 +1,4 @@
-name: "Autofix"
+name: "autofix"
 
 on:
   push:
@@ -32,23 +32,23 @@ jobs:
       repository-projects: write
 
     steps:
-      - name: Checkout Repo
+      - name: checkout repo
         uses: actions/checkout@v4
 
-      - name: Install
+      - name: install
         uses: ./.github/actions/prepare/install
         with:
           install-bun: "true"
 
-      - name: "Generate Integrations"
+      - name: "generate integrations"
         uses: ./.github/actions/prepare/generate
         with:
           workspace-generate: "true"
 
-      - name: Format Everything
-        run: bun run --filter '@ladesa-ro/api.root' format:fix ${observe_path};
+      - name: format everything
+        run: bunx nx run @ladesa-ro/api.root:format:fix ${observe_path};
 
-      - name: Check if has changes
+      - name: check if has changes
         run: |
           if git status --porcelain | grep -q -E "^\?\? ${observe_path}|^ M ${observe_path}"; then
             echo "has_changes=true" >> $GITHUB_ENV
@@ -56,13 +56,13 @@ jobs:
             echo "has_changes=false" >> $GITHUB_ENV
           fi
 
-      - name: Autofix - Set up Git
+      - name: autofix - set up git
         if: env.has_changes == 'true'
         run: |
           git config --global user.name "${commit_author_name}"
           git config --global user.email "${commit_author_email}"
 
-      - name: Autofix - Commit and Push
+      - name: autofix - commit and push
         if: env.has_changes == 'true'
         run: |
           git add -A ${observe_path};
@@ -75,7 +75,7 @@ jobs:
           git checkout -b ${commit_branch}
           git push origin ${commit_branch} --force
 
-      - name: Create or update pull request
+      - name: autofix - has changes - create or update pull request
         if: env.has_changes == 'true'
         run: |
           # source: https://github.com/cli/cli/discussions/5792#discussioncomment-10410197
@@ -108,7 +108,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Delete branch and pull request if has no changes
+      - name: autofix - no changes - delete branch and pull request if has no changes
         if: env.has_changes == 'false'
         run: |
           # source: https://github.com/cli/cli/discussions/5792#discussioncomment-10410197

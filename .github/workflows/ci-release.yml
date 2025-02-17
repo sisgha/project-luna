@@ -14,7 +14,7 @@ jobs:
     uses: ./.github/workflows/quality.yml
 
   release:
-    name: Release
+    name: release
     needs: [code-quality]
 
     runs-on: ubuntu-latest

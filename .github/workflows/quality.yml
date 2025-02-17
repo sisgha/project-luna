@@ -17,15 +17,15 @@ jobs:
   quality:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Aknowledge about origin/development
+      - name: aknowledge about origin/development
         run: git fetch -p origin development
 
-      - name: It must install the dependencies
+      - name: it must install the dependencies
         uses: ./.github/actions/prepare/install
         with:
           install-bun: "true"
@@ -44,18 +44,18 @@ jobs:
         run: |
           git stash -u;
 
-          bun run --filter '@ladesa-ro/api.root' code-static:check;
+          bunx nx run @ladesa-ro/api.root:code-static:check;
 
           if [ `git stash list | wc -l` -gt 0 ]; then
             git stash pop;
           fi
 
-      - name: Require updated integrations
+      - name: require updated integrations
         run: |
           if [ `git status --porcelain=1 | wc -l` -ne 0 ]; then
             git status --porcelain=1;
             exit 1;
           fi
 
-      - name: Require changesets
+      - name: require changesets
         run: bunx changeset status --since=origin/development
