@@ -36,3 +36,5 @@ runs:
     - name: Publish
       shell: bash
       run: bun run --filter "*" --no-clear-screen --elide-lines 0 pkg:publish
+      env:
+        PUBLISH_TAG: ${{ inputs.tag }}
