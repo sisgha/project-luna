@@ -7,14 +7,10 @@ inputs:
     required: false
     default: "."
 
-  bun-version:
-    description: "The bun version to setup"
-    required: true
-    default: "latest"
-
-  node-registry-url:
-    description: "Define registry-url"
-    required: false
+  # bun-version:
+  #   description: "The bun version to setup"
+  #   required: true
+  #   default: "latest"
 
   install-bun:
     description: "bun.js: install"
@@ -47,7 +43,8 @@ runs:
 
     - uses: oven-sh/setup-bun@v2
       with:
-        bun-version: ${{ inputs.bun-version }}
+        # bun-version: ${{ inputs.bun-version }}
+        bun-version-file: ".bun-version"
 
     - name: "install dependencies"
       if: ${{ inputs.install-bun == 'true' }} && ${{ inputs.install-bun-dependencies == 'true' }}
