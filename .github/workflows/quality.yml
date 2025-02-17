@@ -40,7 +40,7 @@ jobs:
         with:
           workspace-build: "true"
 
-      - name: Require to pass static code check
+      - name: require to pass static code check
         run: |
           git stash -u;
 
