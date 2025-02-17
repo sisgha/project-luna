@@ -21,6 +21,8 @@ WORKDIR "/var/lib/ladesa/.sources/api/"
 # ========================================
 
 FROM base AS dev-dependencies
+RUN mkdir -p /var/lib/ladesa/.builds
+
 COPY . "/var/lib/ladesa/.sources/api"
 
 RUN --mount=type=cache,id=bun,target=/bun/install/cache bun install --frozen-lockfile 
@@ -30,8 +32,9 @@ RUN --mount=type=cache,id=bun,target=/bun/install/cache bun install --frozen-loc
 # ========================================
 
 FROM dev-dependencies AS api-service-builder
-RUN mkdir -p /var/lib/ladesa/.builds
 RUN cp -r /var/lib/ladesa/.sources/api/api-service /var/lib/ladesa/.builds/api-service
+WORKDIR /var/lib/ladesa/.builds/api-service
+RUN --mount=type=cache,id=bun,target=/bun/install/cache bun install
 
 # ========================================
 # NPM / API-CLIENT-FETCH / DOCS -- BUILD
@@ -40,7 +43,6 @@ RUN cp -r /var/lib/ladesa/.sources/api/api-service /var/lib/ladesa/.builds/api-s
 FROM dev-dependencies AS docs-npm-api-client-fetch-builder
 
 RUN bun run --filter "@ladesa-ro/api-client-fetch.docs" build
-RUN mkdir -p /var/lib/ladesa/.builds
 RUN cp -r /var/lib/ladesa/.sources/api/docs/docs-npm-api-client-fetch "/var/lib/ladesa/.builds/npm-api-client-fetch-docs"
 
 # ========================================
