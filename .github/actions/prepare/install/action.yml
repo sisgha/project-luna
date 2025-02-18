@@ -45,6 +45,14 @@ runs:
       with:
         bun-version-file: ".bun-version"
 
+    - name: use cached node_modules
+      uses: actions/cache@v4
+      with:
+        path: node_modules
+        key: node-modules-${{ hashFiles('**/bun.lock') }}
+        restore-keys: |
+          node-modules-
+
     - name: "install dependencies"
       if: ${{ inputs.install-bun == 'true' }} && ${{ inputs.install-bun-dependencies == 'true' }}
       working-directory: ${{ inputs.working-directory }}
