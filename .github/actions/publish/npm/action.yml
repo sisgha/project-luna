@@ -28,5 +28,8 @@ runs:
       shell: bash
       run: bunx nx release publish --tag ${{ inputs.tag }}
       env:
+        NPM_TOKEN: ${{ inputs.auth-token }}
+        BUN_AUTH_TOKEN: ${{ inputs.auth-token }}
         NODE_AUTH_TOKEN: ${{ inputs.auth-token }}
+        NPM_CONFIG_TOKEN: ${{ inputs.auth-token }}
         NPM_CONFIG_PROVENANCE: true
