@@ -1,5 +1,11 @@
 # @ladesa-ro/api.service
 
+## 1.0.0-next.34
+
+### Patch Changes
+
+- 0f05d21: chore: trigger ci
+
 ## 1.0.0-next.33
 
 ### Patch Changes
