@@ -1,6 +1,6 @@
 {
   "name": "@ladesa-ro/api.root",
-  "version": "1.0.0-next.31",
+  "version": "1.0.0-next.32",
   "private": true,
   "engines": {
     "bun": "1"
