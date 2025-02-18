@@ -1,9 +1,7 @@
 {
   "name": "@ladesa-ro/api-client-fetch.docs",
   "version": "1.0.0-next.31",
-  "files": [
-    "dist/**/*.*"
-  ],
+  "files": ["dist/**/*.*"],
   "private": true,
   "scripts": {
     "watch": "nx run watch",

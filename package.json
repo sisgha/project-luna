@@ -5,13 +5,7 @@
   "engines": {
     "bun": "1"
   },
-  "workspaces": [
-    ".",
-    "api-service",
-    "docs/*",
-    "integrations/npm/*",
-    "integrations/openapi-json"
-  ],
+  "workspaces": [".", "api-service", "docs/*", "integrations/npm/*", "integrations/openapi-json"],
   "scripts": {
     "build:all": "nx run-many -t build",
     "generate:all": "nx run-many -t generate",
