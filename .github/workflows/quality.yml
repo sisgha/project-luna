@@ -4,9 +4,11 @@ on:
   workflow_call:
   workflow_dispatch:
   pull_request:
-    branches: development
-  push:
-    branches: development
+    branches:
+      - development
+  # push:
+  #   branches:
+  #     - development
   schedule:
     - cron: "0 9 * * 3"
 
