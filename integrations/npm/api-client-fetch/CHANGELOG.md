@@ -1,5 +1,11 @@
 # @ladesa-ro/api-client-fetch
 
+## 1.0.0-next.33
+
+### Patch Changes
+
+- 8f570b9: chore: trigger ci
+
 ## 1.0.0-next.32
 
 ### Patch Changes
